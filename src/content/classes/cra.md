@@ -8,6 +8,7 @@ image:
   src: "/images/classes/cra.jpg"
   alt: "Illustration de la classe Cra"
 description: "Les Cras sont des archers experts qui excellent dans le combat à distance. Ils utilisent leurs flèches pour infliger des dégâts, entraver les ennemis et contrôler le champ de bataille."
+detailedDescription: Les Cras sont des maîtres incontestés du combat à distance. Leur précision légendaire et leur capacité à contrôler le champ de bataille en font des alliés redoutables. Grâce à leur arsenal de flèches aux effets variés, ils peuvent aussi bien infliger des dégâts considérables que ralentir ou repousser leurs adversaires.
 role: "DPT distance"
 difficulty: 1
 combatStyle: "Distance, Contrôle"

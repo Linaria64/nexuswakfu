@@ -8,6 +8,7 @@ image:
   src: "/images/classes/feca.jpg"
   alt: "Illustration de la classe Féca"
 description: "Les Fécas sont les maîtres de la protection, utilisant leurs glyphes et armures pour protéger leurs alliés et contrôler le champ de bataille."
+detailedDescription: "Les Fécas excellent dans l'art de la protection et du contrôle de zone. Grâce à leurs armures et leurs glyphes, ils peuvent non seulement protéger leurs alliés des dégâts, mais aussi créer des zones stratégiques sur le champ de bataille. Leur style de jeu repose sur une bonne anticipation et un placement tactique, permettant de maximiser l'efficacité de leurs sorts de protection. Bien que leurs dégâts soient modérés, leur capacité à soutenir une équipe et à contrôler le terrain en fait des alliés précieux dans toutes les situations."
 role: "Tank, Support"
 difficulty: 2
 combatStyle: "Protection et glyphes"

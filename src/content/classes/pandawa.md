@@ -8,6 +8,7 @@ image:
   src: "/images/classes/pandawa.jpg"
   alt: "Illustration de la classe Pandawa"
 description: "Les Pandawas sont des guerriers festifs qui tirent leur force de la boisson. Ils peuvent porter et lancer alliés et ennemis, et utilisent leur tonneau pour se renforcer."
+detailedDescription: "Les Pandawas sont des maîtres incontestés du positionnement et de la manipulation du champ de bataille. Leur capacité unique à porter et lancer aussi bien les alliés que les ennemis leur permet de contrôler totalement la disposition des combats. De plus, leur système d'états Sobre/Saoul leur offre une polyvalence remarquable, pouvant alterner entre un rôle de tank protecteur et de combattant agressif. Cette versatilité, combinée à leur excellente capacité de placement, en fait des alliés indispensables dans toute équipe bien coordonnée."
 role: "Placement, Tank, DPT"
 difficulty: 2
 combatStyle: "Placement, Mêlée/Distance, Tonneau"

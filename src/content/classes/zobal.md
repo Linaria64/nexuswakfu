@@ -8,6 +8,7 @@ image:
   src: "/images/classes/zobal.jpg"
   alt: "Illustration de la classe Zobal"
 description: "Les Zobals sont des maîtres des masques qui peuvent changer de rôle instantanément. Experts en positionnement, ils excellent tant en support qu'en combattant."
+detailedDescription: "Les Zobals sont des artistes du combat qui excellent dans l'art de l'adaptation grâce à leurs masques magiques. Chaque masque leur confère des capacités uniques, leur permettant de passer instantanément du rôle de support à celui de combattant. Leur maîtrise du positionnement et leur mobilité exceptionnelle leur permettent de maximiser l'efficacité de chaque masque, que ce soit pour soigner leurs alliés, affaiblir leurs ennemis ou infliger des dégâts dévastateurs. Cette polyvalence remarquable est équilibrée par la nécessité d'une gestion habile des masques et une consommation importante de Wakfu."
 role: "Support, DPT"
 difficulty: 3
 combatStyle: "Masques, Positionnement"

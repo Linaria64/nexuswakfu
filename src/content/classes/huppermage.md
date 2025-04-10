@@ -10,6 +10,7 @@ image: {
   alt: "Illustration de la classe Huppermage"
 }
 description: "L'Huppermage est une classe de dégâts extrêmement polyvalente. La classe peut jouer les 4 éléments (pour alterner selon les résistances ennemies), peut taper efficacement en monocible tout comme en zone, à distance comme au corps à corps !"
+detailedDescription: "Les Huppermages sont des maîtres des éléments qui excellent dans l'art de combiner le Feu, l'Eau, la Terre et l'Air pour créer des effets dévastateurs. Leur système unique de runes élémentaires leur permet de s'adapter à toutes les situations de combat, que ce soit en infligeant des dégâts massifs, en contrôlant le terrain ou en exploitant les faiblesses de leurs adversaires. Bien que leur courbe d'apprentissage soit exigeante, la maîtrise de leurs combinaisons élémentaires en fait l'une des classes les plus gratifiantes à jouer. Les Huppermages peuvent exceller aussi bien en combat rapproché qu'à distance, et leur capacité à alterner entre différents éléments leur permet de contourner les résistances ennemies."
 role: "DPS Polyvalent"
 difficulty: 3
 combatStyle: "Combinaisons élémentaires"

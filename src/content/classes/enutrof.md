@@ -7,46 +7,47 @@ icon:
 image:
   src: "/images/classes/enutrof.jpg"
   alt: "Illustration de la classe Enutrof"
-description: "Les Enutrofs sont des chasseurs de trésors avides. Ils utilisent leur pelle pour dénicher des richesses et manipuler le terrain, tout en affaiblissant leurs ennemis."
-role: "Support, Entrave, DPT distance"
+description: "Les Enutrofs sont des chercheurs de trésors qui excellent dans la manipulation de la terre et l'accumulation de richesses."
+detailedDescription: "Les Enutrofs sont des experts dans l'art de la prospection et du combat terrestre. Leur capacité à manipuler la terre leur permet de contrôler le champ de bataille tout en accumulant des bonus. Bien que leur style de combat puisse sembler lent, leur capacité à affaiblir les ennemis et à renforcer leur équipe en fait des alliés précieux."
+role: "DPT distance"
 difficulty: 2
-combatStyle: "Distance, Entrave, Invocation"
-strengths: "Retrait PM/PO, Contrôle de zone, Prospection"
-weaknesses: "Dégâts limités, Mobilité réduite"
+combatStyle: "Contrôle, Prospection"
+strengths: "Contrôle de zone, Bonus d'équipe"
+weaknesses: "Mobilité réduite, Setup long"
 mainSpells:
-  - name: "Pelle du Jugement"
-    description: "Attaque à distance qui retire des PM"
+  - name: "Pelle Animée"
+    description: "Attaque et déplace la terre"
     level: 1
     image:
-      src: "/images/spells/enutrof/pelle.png"
-      alt: "Sort Pelle du Jugement"
-  - name: "Maladresse"
-    description: "Réduit la portée de l'ennemi"
+      src: "/images/spells/enutrof/pelle-animee.png"
+      alt: "Sort Pelle Animée"
+  - name: "Cupidité"
+    description: "Augmente les gains de l'équipe"
     level: 3
     image:
-      src: "/images/spells/enutrof/maladresse.png"
-      alt: "Sort Maladresse"
-  - name: "Filouterie"
-    description: "Vole des kamas et des bonus"
+      src: "/images/spells/enutrof/cupidite.png"
+      alt: "Sort Cupidité"
+  - name: "Renforts Mineurs"
+    description: "Invoque des mines terrestres"
     level: 6
     image:
-      src: "/images/spells/enutrof/filouterie.png"
-      alt: "Sort Filouterie"
-  - name: "Phorzerker"
-    description: "Invoque un gardien puissant"
+      src: "/images/spells/enutrof/renforts-mineurs.png"
+      alt: "Sort Renforts Mineurs"
+  - name: "Coffre Fort"
+    description: "Crée une zone de protection"
     level: 9
     image:
-      src: "/images/spells/enutrof/phorzerker.png"
-      alt: "Sort Phorzerker"
+      src: "/images/spells/enutrof/coffre-fort.png"
+      alt: "Sort Coffre Fort"
 builds:
-  - name: "Enutrof Contrôle"
-    type: "Support/Entrave"
-    minLevel: 200
-    description: "Build focalisé sur le contrôle et le support"
-  - name: "Enutrof DPT"
-    type: "DPT distance"
-    minLevel: 200
-    description: "Build orienté dégâts et zone"
+  - name: "Enutrof Terre"
+    type: "DPT"
+    minLevel: 1
+    description: "Build focalisé sur le contrôle terrestre"
+  - name: "Enutrof Prospecteur"
+    type: "Support"
+    minLevel: 50
+    description: "Build optimisé pour la prospection"
 ---
 
 # Guide de l'Enutrof - Débutants

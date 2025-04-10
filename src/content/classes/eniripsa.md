@@ -8,6 +8,7 @@ image:
   src: "/images/classes/eniripsa.jpg"
   alt: "Illustration de la classe Eniripsa"
 description: "Les Eniripsas sont des guérisseurs dévoués qui utilisent le pouvoir des mots pour soigner leurs alliés et affaiblir leurs ennemis. Ils sont essentiels à la survie de tout groupe."
+detailedDescription: Les Eniripsas sont les maîtres incontestés de la guérison et du support. Grâce à leur maîtrise des mots curatifs, ils peuvent maintenir leur équipe en vie dans les situations les plus difficiles. Bien que leurs capacités offensives soient limitées, leur présence est souvent déterminante dans l'issue d'un combat.
 role: "Healer, Support"
 difficulty: 1
 combatStyle: "Soin, Support, Distance"

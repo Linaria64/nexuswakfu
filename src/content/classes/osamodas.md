@@ -8,6 +8,7 @@ image:
   src: "/images/classes/osamodas.jpg"
   alt: "Illustration de la classe Osamodas"
 description: "Les Osamodas sont les maîtres des invocations, capables de capturer et contrôler plus de 30 créatures différentes pour combattre à leurs côtés."
+detailedDescription: "Les Osamodas excellent dans l'art de l'invocation et du contrôle des créatures. Leur capacité unique à capturer, invoquer et diriger une grande variété de monstres leur permet d'adapter leur stratégie à chaque situation. En tant que maîtres des bêtes, ils peuvent non seulement invoquer des créatures pour le combat, mais aussi les renforcer et les soigner. Cette polyvalence, combinée à leurs capacités de support d'équipe, en fait des alliés précieux malgré la complexité de leur gameplay."
 role: "Invocateur, Support"
 difficulty: 2
 combatStyle: "Invocation, Contrôle"

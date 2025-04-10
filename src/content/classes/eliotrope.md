@@ -7,7 +7,8 @@ icon:
 image:
   src: "/images/classes/eliotrope.jpg"
   alt: "Illustration de la classe Eliotrope"
-description: "Les Eliotropes maîtrisent l'énergie Wakfu pour créer des portails de téléportation. Ils peuvent se déplacer rapidement sur le terrain et rediriger leurs sorts à travers les portails."
+description: "Les Eliotropes sont des maîtres des portails, capables de manipuler l'espace pour se déplacer et attaquer."
+detailedDescription: "Les Eliotropes excellent dans l'art de la manipulation spatiale. En créant des portails, ils peuvent non seulement se déplacer stratégiquement sur le champ de bataille, mais aussi multiplier leurs attaques en les faisant rebondir entre les portails. Cette maîtrise unique de l'espace en fait des combattants aussi imprévisibles que redoutables."
 role: "DPT distance, Placement"
 difficulty: 4
 combatStyle: "Portails, Distance, Mobilité"

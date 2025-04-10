@@ -8,6 +8,7 @@ image:
   src: "/images/classes/sadida.jpg"
   alt: "Illustration de la classe Sadida"
 description: "Les Sadidas sont des invocateurs liés à la nature. Ils invoquent des poupées pour les assister au combat, soigner leurs alliés ou entraver leurs ennemis."
+detailedDescription: "Les Sadidas sont les gardiens de la nature, maîtrisant l'art ancestral des poupées vaudou et de la magie végétale. Leur capacité à invoquer différents types de poupées leur permet d'adapter leur stratégie selon les besoins : des Bloqueuses pour la protection, des Folles pour les dégâts, des Gonflables pour le soin. Cette polyvalence, combinée à leur contrôle du terrain via les ronces et les poisons naturels, en fait des combattants redoutables capables de soutenir leur équipe tout en dominant leurs adversaires."
 role: "Invocateur, Support, Entrave" # Placeholder role
 difficulty: 2 # Placeholder difficulty
 combatStyle: "Invocation, Contrôle, Distance" # Placeholder style

@@ -74,8 +74,7 @@
 /* Common Components */
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 bg-wakfu-primary text-white font-medium rounded-lg 
-    hover:bg-wakfu-primary/90 transition-colors;
+    @apply bg-gradient-to-r from-wakfu-primary to-wakfu-secondary hover:from-wakfu-primary/90 hover:to-wakfu-secondary/90 text-white px-4 py-2 rounded-lg text-sm flex items-center justify-center gap-2 transition-all;
   }
   
   .btn-secondary {
@@ -89,9 +88,7 @@
   }
   
   .card {
-    @apply bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 
-    rounded-xl shadow-xl overflow-hidden hover:border-wakfu-secondary 
-    transition-all duration-300;
+    @apply bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl border border-gray-700;
   }
   
   .section-title {
@@ -100,5 +97,42 @@
   
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6;
+  }
+}
+
+/* Modal styles */
+.modal {
+  @apply fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 opacity-0 pointer-events-none transition-opacity duration-300;
+}
+
+.modal.is-open {
+  @apply opacity-100 pointer-events-auto;
+}
+
+.modal-content {
+  @apply bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-gray-700 shadow-xl transform scale-95 transition-transform duration-300;
+}
+
+.modal.is-open .modal-content {
+  @apply scale-100;
+}
+
+.modal-content.size-full {
+  @apply max-w-7xl;
+}
+
+/* Animation styles */
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 } 

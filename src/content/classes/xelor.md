@@ -8,6 +8,7 @@ image:
   src: "/images/classes/xelor.jpg"
   alt: "Illustration de la classe Xelor"
 description: "Les Xelors sont les maîtres du temps, capables de manipuler les tours de jeu et d'enchaîner des combos dévastateurs grâce à leurs horloges."
+detailedDescription: "Les Xelors sont les maîtres incontestés de la manipulation temporelle. Leur système unique d'horloges leur permet de créer des combos complexes et dévastateurs, tout en contrôlant le rythme du combat à travers la gestion des Points d'Action et des tours de jeu. Bien que leur courbe d'apprentissage soit l'une des plus exigeantes du jeu, la maîtrise de leurs mécaniques permet d'atteindre des sommets de puissance inégalés. Leur capacité à ralentir les ennemis, à se téléporter stratégiquement et à enchaîner des combinaisons d'horloges en fait des adversaires redoutables entre les mains d'un joueur expérimenté."
 role: "DPT distance"
 difficulty: 4
 combatStyle: "Manipulation du temps"

@@ -201,6 +201,42 @@ const formatStrategy = (strategy) => {
       </div>
     </div>
   </div>
+
+  <script>
+    // Récupérer les éléments du DOM
+    const searchInput = document.querySelector('input[type="text"]');
+    const levelSelect = document.querySelector('select[name="level"]');
+    const difficultySelect = document.querySelector('select[name="difficulty"]');
+    const dungeonCards = document.querySelectorAll('.dungeon-card');
+
+    // Fonction pour filtrer les donjons
+    function filterDungeons() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedLevel = levelSelect.value;
+      const selectedDifficulty = difficultySelect.value;
+
+      dungeonCards.forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        const level = card.querySelector('.text-gray-400.bg-purple-600').textContent.toLowerCase();
+        const difficulty = card.querySelector('.rounded-full').textContent.toLowerCase();
+
+        const matchesSearch = name.includes(searchTerm);
+        const matchesLevel = !selectedLevel || level.includes(selectedLevel);
+        const matchesDifficulty = !selectedDifficulty || difficulty.includes(selectedDifficulty.toLowerCase());
+
+        if (matchesSearch && matchesLevel && matchesDifficulty) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Ajouter les écouteurs d'événements
+    searchInput.addEventListener('input', filterDungeons);
+    levelSelect.addEventListener('change', filterDungeons);
+    difficultySelect.addEventListener('change', filterDungeons);
+  </script>
 </MainLayout>
 
 <style>
@@ -209,61 +245,4 @@ const formatStrategy = (strategy) => {
     transform: translateY(-4px);
     transition: all 0.3s ease;
   }
-</style>
-
-<script>
-  // Gestion des filtres
-  const searchInput = document.querySelector('input[type="text"]');
-  const levelFilter = document.querySelector('select[name="level"]');
-  const difficultyFilter = document.querySelector('select[name="difficulty"]');
-  const dungeonCards = document.querySelectorAll('.dungeon-card');
-
-  if (searchInput && levelFilter && difficultyFilter) {
-    const filterDungeons = () => {
-      const searchTerm = searchInput.value.toLowerCase();
-      const levelValue = levelFilter.value;
-      const difficultyValue = difficultyFilter.value;
-
-      dungeonCards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const levelText = card.querySelector('.bg-purple-600').textContent;
-        const level = parseInt(levelText.replace('Niveau ', ''));
-        const difficultyText = card.querySelector('.rounded-full').textContent.trim();
-        
-        let matchesLevel = true;
-        if (levelValue) {
-          const [min, max] = levelValue.split('-').map(num => parseInt(num));
-          matchesLevel = (max ? level >= min && level <= max : level >= min);
-        }
-        
-        let matchesDifficulty = true;
-        if (difficultyValue) {
-          const difficultyMap = {
-            'Facile': 'easy',
-            'Moyen': 'medium',
-            'Difficile': 'hard',
-            'Extrême': 'extreme'
-          };
-          
-          const normalizedDifficulty = Object.entries(difficultyMap).find(([key]) => 
-            difficultyText.includes(key)
-          )?.[1] || '';
-          
-          matchesDifficulty = normalizedDifficulty === difficultyValue;
-        }
-        
-        const matchesSearch = title.includes(searchTerm);
-        
-        if (matchesSearch && matchesLevel && matchesDifficulty) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    };
-
-    searchInput.addEventListener('input', filterDungeons);
-    levelFilter.addEventListener('change', filterDungeons);
-    difficultyFilter.addEventListener('change', filterDungeons);
-  }
-</script> 
+</style> 

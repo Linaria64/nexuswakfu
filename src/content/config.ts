@@ -15,6 +15,7 @@ const classesCollection = defineCollection({
     icon: imageSchema,
     image: imageSchema,
     description: z.string(),
+    detailedDescription: z.string(),
     role: z.string(),
     difficulty: z.number().min(1).max(5),
     combatStyle: z.string(),
@@ -81,14 +82,15 @@ const guideCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    category: z.enum(['debutant', 'combats', 'equipement', 'avance', 'economie']),
-    image: z.string(),
     description: z.string(),
+    category: z.enum(['debutant', 'combats', 'equipement', 'avance', 'economie', 'classes']).optional(),
+    image: z.string().optional(),
+    class: z.string().optional(),
     featured: z.boolean().optional().default(false),
     author: z.object({
       name: z.string(),
       avatar: z.string().optional(),
-    }),
+    }).optional(),
     toc: z.boolean().optional().default(true),
   }),
 });

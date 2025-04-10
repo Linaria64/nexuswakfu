@@ -1,7 +1,6 @@
-
 import { Book, Users, Map, Star } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Link } from 'react-router-dom';
+// import Button from './ui/Button.astro'; // Removed problematic import
+// import { Link } from 'react-router-dom'; // Removed react-router-dom import
 
 const FeaturedCard = ({ title, description, icon: Icon, link }: { 
   title: string;
@@ -15,11 +14,12 @@ const FeaturedCard = ({ title, description, icon: Icon, link }: {
       <h3 className="text-xl font-semibold text-wakfu-dark">{title}</h3>
     </div>
     <p className="text-gray-600 mb-4">{description}</p>
-    <Link to={link}>
-      <Button variant="outline" className="w-full text-wakfu-blue hover:bg-wakfu-blue hover:text-white">
-        Learn More
-      </Button>
-    </Link>
+    <a 
+      href={link}
+      className="block w-full text-center px-4 py-2 border border-wakfu-blue text-wakfu-blue rounded-md hover:bg-wakfu-blue hover:text-white transition-colors duration-200"
+    >
+      Learn More
+    </a>
   </div>
 );
 
@@ -35,11 +35,12 @@ const HomePage = () => {
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto animate-pulse-gentle">
             Your ultimate guide to mastering the World of Twelve
           </p>
-          <Link to="/classes">
-            <Button className="bg-wakfu-gold hover:bg-wakfu-teal text-wakfu-dark font-semibold text-lg px-8 py-3">
-              Explore Classes
-            </Button>
-          </Link>
+          <a 
+            href="/classes"
+            className="inline-block bg-wakfu-gold hover:bg-wakfu-teal text-wakfu-dark font-semibold text-lg px-8 py-3 rounded-md transition-colors duration-200"
+          >
+            Explore Classes
+          </a>
         </div>
       </section>
 

@@ -8,6 +8,7 @@ image:
   src: "/images/classes/sacrieur.jpg"
   alt: "Illustration de la classe Sacrieur"
 description: "Les Sacrieurs sont des berserkers qui puisent leur force dans la douleur. Plus ils subissent de dégâts, plus ils deviennent puissants et résistants."
+detailedDescription: "Les Sacrieurs incarnent le sacrifice et la résilience au combat. Leur capacité unique à transformer la douleur en puissance en fait des combattants redoutables qui deviennent plus dangereux au fur et à mesure qu'ils subissent des dégâts. Cette mécanique de jeu unique leur permet d'exceller aussi bien dans le rôle de tank que dans celui de combattant berserker. Grâce à leurs sorts de positionnement et leur capacité à protéger leurs alliés, ils peuvent rapidement passer d'une posture défensive à offensive, s'adaptant constamment aux besoins du combat."
 role: "Tank/DPT mêlée"
 difficulty: 1
 combatStyle: "Tanking, Mêlée, Sacrifice"

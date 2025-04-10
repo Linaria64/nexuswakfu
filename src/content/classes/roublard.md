@@ -8,6 +8,7 @@ image:
   src: "/images/classes/roublard.jpg"
   alt: "Illustration de la classe Roublard"
 description: "Les Roublards sont des experts en explosifs et en subterfuges. Ils posent des bombes, créent des murs et des combos dévastateurs pour contrôler le terrain et anéantir leurs ennemis."
+detailedDescription: "Les Roublards sont des maîtres de la stratégie explosive et du contrôle de zone. Leur capacité à poser des bombes et à créer des murs leur permet de façonner le champ de bataille à leur avantage. En combinant différents types de bombes et en maîtrisant l'art du timing des détonations, ils peuvent créer des réactions en chaîne dévastatrices. Bien que leur style de jeu nécessite une planification minutieuse et une bonne gestion des ressources, la satisfaction de voir leurs plans exploser à la perfection en fait une classe particulièrement gratifiante."
 role: "DPT distance, Contrôle, Placement"
 difficulty: 3
 combatStyle: "Bombes, Murs, Combos"

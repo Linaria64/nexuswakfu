@@ -7,41 +7,46 @@ icon:
 image:
   src: "/images/classes/ecaflip.jpg"
   alt: "Illustration de la classe Ecaflip"
-description: "Les Ecaflips sont des guerriers joueurs qui comptent sur la chance et le hasard. Leurs attaques peuvent avoir des effets imprévisibles, parfois bénéfiques, parfois dévastateurs."
-role: "DPT aléatoire"
+description: "Les Ecaflips sont des joueurs nés, utilisant la chance et le hasard pour vaincre leurs adversaires."
+detailedDescription: "Les Ecaflips sont des maîtres du hasard et de la fortune. Leurs attaques peuvent être imprévisibles, parfois dévastatrices, parfois moins efficaces, mais toujours excitantes. Cette classe unique combine des éléments de chance avec une stratégie solide, offrant un style de jeu dynamique et plein de surprises."
+role: "DPT mêlée"
 difficulty: 2
-combatStyle: "Mêlée/Distance, Aléatoire"
-strengths: "Dégâts critiques, Polyvalence, Chance"
-weaknesses: "Dépendant de l'aléatoire, Inconsistant"
+combatStyle: "Chance, Polyvalence"
+strengths: "Dégâts variables, Adaptabilité"
+weaknesses: "Imprévisibilité, Dépendant de la chance"
 mainSpells:
   - name: "Pile ou Face"
-    description: "Attaque avec effet aléatoire"
+    description: "Attaque avec des effets aléatoires"
     level: 1
     image:
       src: "/images/spells/ecaflip/pile-ou-face.png"
       alt: "Sort Pile ou Face"
   - name: "Roulette"
-    description: "Dégâts et effets aléatoires"
+    description: "Bonus aléatoire pour l'équipe"
     level: 3
     image:
       src: "/images/spells/ecaflip/roulette.png"
       alt: "Sort Roulette"
-  - name: "Griffe Joueuse"
-    description: "Attaque avec bonus critique"
+  - name: "Bluff"
+    description: "Augmente les chances de coups critiques"
     level: 6
     image:
-      src: "/images/spells/ecaflip/griffe-joueuse.png"
-      alt: "Sort Griffe Joueuse"
-  - name: "Chasseur"
-    description: "Invoque un compagnon félin"
+      src: "/images/spells/ecaflip/bluff.png"
+      alt: "Sort Bluff"
+  - name: "All-in"
+    description: "Attaque puissante avec risque"
     level: 9
     image:
-      src: "/images/spells/ecaflip/chasseur.png"
-      alt: "Sort Chasseur"
+      src: "/images/spells/ecaflip/all-in.png"
+      alt: "Sort All-in"
 builds:
+  - name: "Ecaflip Chance"
+    type: "DPT"
+    minLevel: 1
+    description: "Build basé sur la chance et les effets aléatoires"
   - name: "Ecaflip Critique"
-    type: "DPT mêlée"
-    minLevel: 200
+    type: "DPT"
+    minLevel: 50
     description: "Build focalisé sur les coups critiques"
   - name: "Ecaflip Hybride"
     type: "DPT/Soutien distance"

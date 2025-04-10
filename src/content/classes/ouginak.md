@@ -8,6 +8,7 @@ image:
   src: "/images/classes/ouginak.jpg"
   alt: "Illustration de la classe Ouginak"
 description: "Les Ouginaks sont des guerriers bestiaux qui peuvent se transformer pour déchaîner leur rage. Ils traquent leurs proies et les achèvent avec une férocité sans pareille."
+detailedDescription: "Les Ouginaks sont des maîtres de la traque et du combat bestial. Leur capacité unique à se transformer en créature féroce leur permet d'alterner entre une forme humaine tactique et une forme bestiale dévastatrice. En utilisant leur système de Rage et de marquage de Proie, ils peuvent traquer et éliminer leurs cibles avec une efficacité redoutable. Bien que leur style de combat puisse sembler agressif, il requiert une gestion habile des transformations et un timing précis pour maximiser leur potentiel."
 role: "DPT mêlée/Tank"
 difficulty: 2
 combatStyle: "Mêlée, Transformation, Traque"

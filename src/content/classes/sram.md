@@ -8,6 +8,7 @@ image:
   src: "/images/classes/sram.jpg"
   alt: "Illustration de la classe Sram"
 description: "Les Srams sont des assassins furtifs qui utilisent l'invisibilité et les pièges pour dominer leurs adversaires. Maîtres de l'embuscade, ils excellent dans l'élimination rapide de leurs cibles."
+detailedDescription: "Les Srams sont les maîtres incontestés de la furtivité et de la tromperie. Leur capacité à devenir invisibles leur permet de contrôler le rythme du combat, choisissant le moment parfait pour frapper leurs adversaires. En combinant pièges, poisons et doubles, ils peuvent créer des situations de combat complexes où leurs ennemis sont constamment sur la défensive. Bien que leur style de jeu demande une planification minutieuse et une bonne gestion des ressources, leur capacité à éliminer rapidement des cibles prioritaires et à contrôler le terrain en fait des alliés redoutables."
 role: "DPT mêlée/distance"
 difficulty: 2
 combatStyle: "Furtivité, Pièges, Poison"

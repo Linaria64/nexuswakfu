@@ -8,6 +8,7 @@ image:
   src: "/images/classes/steamer.jpg"
   alt: "Illustration de la classe Steamer"
 description: "Les Steamers sont des technomages qui utilisent des tourelles et des mécanismes pour combattre. Ils peuvent s'adapter à de nombreux rôles grâce à leurs invocations mécaniques."
+detailedDescription: "Les Steamers sont des maîtres de la technologie et de la Stasis, capables de déployer un arsenal complexe de tourelles et de mécanismes sur le champ de bataille. Leur système unique de rails et de Microbots leur permet de créer des réseaux tactiques pour contrôler le terrain et soutenir leur équipe. En combinant différents types de tourelles et en maîtrisant la puissance de la Stasis, ils peuvent s'adapter à presque tous les rôles, que ce soit en tant que DPT à distance, contrôleur de zone ou même tank. Cette polyvalence exceptionnelle est contrebalancée par la complexité de leur gameplay, qui nécessite une excellente gestion des ressources et un placement stratégique."
 role: "DPT distance/mêlée, Placement, Tank"
 difficulty: 4
 combatStyle: "Tourelles, Rails, Mécanismes"
