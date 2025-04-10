@@ -15,7 +15,7 @@ const pathname = Astro.url.pathname;
 import GlobalSearch from '../search/GlobalSearch.astro';
 ---
 
-<header class="sticky top-0 z-40 w-full backdrop-blur border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80">
+<header class="sticky top-0 z-40 w-full glass border-b border-[var(--color-border-muted)]">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-center">
       <!-- Navigation Desktop -->
@@ -24,23 +24,26 @@ import GlobalSearch from '../search/GlobalSearch.astro';
           if (item.isHome) {
             return (
               <a href={item.href} class="flex items-center mx-6">
-                <div class="flex items-center text-xl font-bold text-gray-900 dark:text-white">
-                  <span class="text-wakfu-primary dark:text-wakfu-secondary">Nexus</span>
+                <div class="flex items-center text-xl font-bold text-[var(--color-text-base)]">
+                  <span class="text-primary">Nexus</span>
                   <span class="ml-1">Wakfu</span>
                 </div>
               </a>
             );
           }
+          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
           return (
             <a 
               href={item.href} 
-              class={`text-sm font-medium transition-colors hover:text-wakfu-primary dark:hover:text-wakfu-secondary px-4 py-2 rounded-md mx-2
-                ${pathname === item.href || pathname.startsWith(item.href) && item.href !== '/' ? 
-                  'text-wakfu-primary dark:text-wakfu-secondary' : 
-                  'text-gray-700 dark:text-gray-300'}`
+              class={`text-sm font-medium transition-colors hover:text-primary px-4 py-2 rounded-md mx-2 relative group
+                ${isActive ? 
+                  'text-primary' : 
+                  'text-[var(--color-text-muted)] hover:text-[var(--color-text-base)]'}`
               }
             >
               {item.text}
+              {/* Underline effect for active/hover */}
+              <span class={`absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-transform duration-300 ease-out scale-x-0 group-hover:scale-x-100 ${isActive ? 'scale-x-100' : ''}`}></span>
             </a>
           );
         })}
@@ -48,14 +51,14 @@ import GlobalSearch from '../search/GlobalSearch.astro';
 
       <!-- Mobile menu button -->
       <div class="flex md:hidden justify-between items-center w-full">
-        <a href="/" class="flex items-center text-xl font-bold text-gray-900 dark:text-white">
-          <span class="text-wakfu-primary dark:text-wakfu-secondary">Nexus</span>
+        <a href="/" class="flex items-center text-xl font-bold text-[var(--color-text-base)]">
+          <span class="text-primary">Nexus</span>
           <span class="ml-1">Wakfu</span>
         </a>
         
         <button 
           type="button" 
-          class="mobile-menu-button text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-md"
+          class="mobile-menu-button text-[var(--color-text-muted)] hover:text-[var(--color-text-base)] hover:bg-white/10 p-2 rounded-md"
           aria-label="Ouvrir le menu"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,20 +70,23 @@ import GlobalSearch from '../search/GlobalSearch.astro';
   </div>
 
   <!-- Mobile menu -->
-  <div class="mobile-menu hidden md:hidden border-t border-gray-200 dark:border-gray-800">
+  <div class="mobile-menu hidden md:hidden border-t border-[var(--color-border-muted)] bg-[var(--color-bg-alt)]/90 backdrop-blur-md">
     <div class="container mx-auto px-4 py-3 space-y-1">
-      {navItems.filter(item => !item.isHome).map((item) => (
-        <a 
-          href={item.href} 
-          class={`block px-3 py-2 rounded-md text-base font-medium transition-colors
-            ${pathname === item.href || pathname.startsWith(item.href) && item.href !== '/' ? 
-              'bg-gray-100 dark:bg-gray-800 text-wakfu-primary dark:text-wakfu-secondary' : 
-              'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`
-          }
-        >
-          {item.text}
-        </a>
-      ))}
+      {navItems.filter(item => !item.isHome).map((item) => {
+         const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+         return (
+            <a 
+              href={item.href} 
+              class={`block px-3 py-2 rounded-md text-base font-medium transition-colors
+                ${isActive ? 
+                  'bg-primary/10 text-primary' : 
+                  'text-[var(--color-text-muted)] hover:bg-white/5 hover:text-[var(--color-text-base)]'}`
+              }
+            >
+              {item.text}
+            </a>
+          );
+        })}
     </div>
   </div>
 </header>

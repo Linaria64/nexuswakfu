@@ -21,8 +21,8 @@ const sizeClasses = {
   aria-labelledby={`${id}-title`}
   aria-hidden="true" 
 >
-  {/* Modal Content - Glassmorphism */}
-  <div class={`modal-content relative bg-black/50 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto transition-transform duration-300 ease-in-out scale-95 ${sizeClasses[size]}`}>
+  {/* Modal Content - Apply .glass class directly */}
+  <div class={`modal-content glass rounded-xl shadow-2xl relative max-h-[90vh] overflow-y-auto transition-transform duration-300 ease-in-out scale-95 p-6 sm:p-8 ${sizeClasses[size]}`}>
     {/* Modal Header */}
     <div class="absolute top-0 right-0 pt-4 pr-4">
       <button 
@@ -55,6 +55,22 @@ const sizeClasses = {
   .modal.is-open .modal-content {
     transform: scale(1);
   }
+
+  .modal-content {
+    /* @apply glass rounded-xl shadow-2xl relative max-h-[90vh] overflow-y-auto transition-transform duration-300 ease-in-out scale-95 p-6 sm:p-8; Removed @apply glass */
+  }
+  .modal.is-open .modal-content {
+    transform: scale(1);
+  }
+
+  .modal-content.size-full {
+    @apply max-w-6xl w-11/12; /* Kept size class separate */
+  }
+  
+  .close-modal {
+    @apply absolute top-3 right-3 rounded-md p-1 text-[var(--color-text-muted)] hover:text-[var(--color-text-base)] hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500/75 transition-all;
+  }
+
   /* Custom scrollbar for modal content */
   .modal-content::-webkit-scrollbar {
     width: 8px;

@@ -5,48 +5,131 @@
 
 @layer base {
   :root {
-    --wakfu-primary: #FF6B6B;
-    --wakfu-secondary: #4ECDC4;
-    --wakfu-accent: #45B7AF;
-    --wakfu-background: #1A1B1E;
-    --wakfu-foreground: #FFFFFF;
+    --color-primary: 199 100% 50%; /* Vibrant Cyan/Blue */
+    --color-secondary: 320 100% 55%; /* Vibrant Magenta/Pink */
+    --color-accent: 45 100% 50%; /* Vibrant Gold/Yellow */
+
+    --color-text-base: theme('colors.gray.100'); /* Brighter base text */
+    --color-text-muted: theme('colors.gray.400');
+    --color-text-inverted: theme('colors.gray.950');
+
+    --color-bg-base: 240 10% 5%; /* Slightly bluer deep dark */
+    --color-bg-alt: 240 5% 10%; /* Slightly lighter dark blue */
+    --color-bg-glass: theme('colors.black / 0.3'); /* Slightly less opaque glass */
+    --color-border-glass: theme('colors.white / 0.1');
+    --color-border-muted: theme('colors.gray.800');
+    --color-border-highlight: theme('colors.white / 0.2');
   }
 
-  html {
-    scrollbar-color: #4B5563 #1F2937;
+  html,
+  body {
+    @apply min-h-screen;
   }
 
   body {
-    font-feature-settings: 'kern';
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-/* Scrollbar styles */
-@layer utilities {
-  .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #4B5563 #1F2937;
+    /* Subtle noise background + refined gradient */
+    background-image: linear-gradient(to bottom right, hsl(var(--color-bg-base)), hsl(var(--color-bg-alt))), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.01' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    @apply text-[var(--color-text-base)] font-sans;
+    background-attachment: fixed; 
   }
 
-  .custom-scrollbar::-webkit-scrollbar {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-white; /* Ensure headings are white */
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900/50 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700/80 rounded-full border-2 border-transparent bg-clip-content;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600/80;
+  }
+}
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #1F2937;
+@layer utilities {
+  .text-primary {
+    color: hsl(var(--color-primary));
+  }
+  .bg-primary {
+    background-color: hsl(var(--color-primary));
+  }
+  .border-primary {
+     border-color: hsl(var(--color-primary));
+  }
+  
+  .text-secondary {
+    color: hsl(var(--color-secondary));
+  }
+  .bg-secondary {
+    background-color: hsl(var(--color-secondary));
+  }
+  .border-secondary {
+     border-color: hsl(var(--color-secondary));
+  }
+  
+  .text-accent {
+    color: hsl(var(--color-accent));
+  }
+  .bg-accent {
+    background-color: hsl(var(--color-accent));
+  }
+  .border-accent {
+     border-color: hsl(var(--color-accent));
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #4B5563;
-    border-radius: 4px;
+  .glass {
+    /* Add a subtle inner shadow for more depth */
+    @apply bg-[var(--color-bg-glass)] backdrop-blur-lg border border-[var(--color-border-glass)] shadow-lg shadow-black/20;
+  }
+  
+  /* Add Glow utilities */
+  .glow-primary {
+    --glow-color: hsl(var(--color-primary) / 0.5);
+    box-shadow: 0 0 12px -2px var(--glow-color), 0 0 5px -3px var(--glow-color);
+  }
+  .glow-secondary {
+    --glow-color: hsl(var(--color-secondary) / 0.5);
+    box-shadow: 0 0 12px -2px var(--glow-color), 0 0 5px -3px var(--glow-color);
+  }
+  .glow-accent {
+    --glow-color: hsl(var(--color-accent) / 0.5);
+    box-shadow: 0 0 12px -2px var(--glow-color), 0 0 5px -3px var(--glow-color);
+  }
+  
+  /* Example gradient text */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-[hsl(var(--color-primary))] to-[hsl(var(--color-secondary))] text-transparent bg-clip-text;
+  }
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-[hsl(var(--color-accent))] to-orange-400 text-transparent bg-clip-text;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #6B7280;
+  /* Add custom select arrow */
+  .custom-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
   }
 }
 
@@ -73,53 +156,56 @@
 
 /* Common Components */
 @layer components {
+  /* Themed Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--color-bg-base)];
+  }
   .btn-primary {
-    @apply bg-gradient-to-r from-wakfu-primary to-wakfu-secondary hover:from-wakfu-primary/90 hover:to-wakfu-secondary/90 text-white px-4 py-2 rounded-lg text-sm flex items-center justify-center gap-2 transition-all;
+    @apply btn bg-gradient-to-r from-[hsl(var(--color-primary)/0.8)] to-[hsl(var(--color-secondary)/0.8)] text-white border border-transparent hover:from-[hsl(var(--color-primary))] hover:to-[hsl(var(--color-secondary))] hover:shadow-lg hover:glow-primary focus:ring-cyan-500/50;
   }
-  
   .btn-secondary {
-    @apply px-4 py-2 bg-wakfu-secondary text-white font-medium rounded-lg 
-    hover:bg-wakfu-secondary/90 transition-colors;
+    @apply btn bg-[hsl(var(--color-accent)/0.8)] text-black hover:bg-accent hover:shadow-md hover:glow-accent focus:ring-yellow-500/50;
   }
-  
   .btn-outline {
-    @apply px-4 py-2 border border-gray-700 text-gray-300 font-medium rounded-lg 
-    hover:bg-gray-800 transition-colors;
+    @apply btn border border-[var(--color-border-muted)] text-[var(--color-text-muted)] hover:border-[var(--color-border-highlight)] hover:text-[var(--color-text-base)] hover:bg-white/5 focus:ring-gray-500/50;
+  }
+  .btn-ghost {
+     @apply btn text-[var(--color-text-muted)] hover:bg-white/5 hover:text-[var(--color-text-base)] focus:ring-gray-500/50;
+  }
+
+  /* Themed Inputs */
+  .input-glass {
+    @apply w-full p-3 rounded-lg glass border-[var(--color-border-highlight)] focus:border-primary focus:ring-1 focus:ring-cyan-500/50 outline-none transition-all placeholder-gray-500 text-[var(--color-text-base)];
+  }
+  .select-glass {
+     @apply input-glass appearance-none custom-select; /* Assumes .custom-select adds the arrow */
   }
   
-  .card {
-    @apply bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl border border-gray-700;
-  }
+  /* Other common components can be added here */
   
-  .section-title {
-    @apply text-2xl font-bold mb-6 text-wakfu-secondary;
-  }
-  
-  .container {
+  .container { /* Keep container as it's structural */
     @apply max-w-7xl mx-auto px-4 sm:px-6;
   }
 }
 
-/* Modal styles */
+/* Modal styles - REMOVING as Modal.astro handles its styling */
+/*
 .modal {
-  @apply fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 opacity-0 pointer-events-none transition-opacity duration-300;
+  ...
 }
-
 .modal.is-open {
-  @apply opacity-100 pointer-events-auto;
+  ...
 }
-
 .modal-content {
-  @apply bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-gray-700 shadow-xl transform scale-95 transition-transform duration-300;
+  ...
 }
-
 .modal.is-open .modal-content {
-  @apply scale-100;
+  ...
 }
-
 .modal-content.size-full {
-  @apply max-w-7xl;
+  ...
 }
+*/
 
 /* Animation styles */
 .animate-fade-up {

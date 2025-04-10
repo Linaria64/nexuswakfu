@@ -66,44 +66,44 @@ const spellsAndPassives = {
 
 <MainLayout title="Classes de Wakfu" description="Découvrez toutes les classes jouables dans Wakfu, leurs caractéristiques, spécialités et guides">
   <div class="container mx-auto px-4 py-12">
-    <h1 class="text-5xl font-bold mb-4 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Les Classes de Wakfu</h1>
+    <h1 class="text-5xl font-bold mb-4 text-center text-gradient-primary">Les Classes de Wakfu</h1>
     
-    <p class="text-lg mb-10 max-w-3xl mx-auto text-center text-gray-300">
+    <p class="text-lg mb-10 max-w-3xl mx-auto text-center text-[var(--color-text-muted)]">
       Explorez les 18 classes uniques de Wakfu. Découvrez leurs sorts, passifs et styles de jeu pour trouver celle qui vous correspond.
     </p>
 
-    <!-- Filtres de classes - Glassmorphism -->
-    <div class="mb-10 p-6 rounded-xl bg-black/30 backdrop-blur-lg border border-white/10 shadow-lg">
+    <!-- Filtres de classes - Using new component styles -->
+    <div class="mb-10 p-6 rounded-xl glass shadow-lg">
       <h2 class="text-2xl font-semibold mb-5 text-white">Filtrer les classes</h2>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <label class="block mb-2 text-sky-300 font-medium">Recherche par nom</label>
+          <label class="block mb-2 text-primary font-medium">Recherche par nom</label>
           <div class="relative">
-            <input type="text" id="search-input" placeholder="Ex: Iop, Cra..." class="w-full p-3 pl-10 rounded-lg bg-white/10 text-white border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400 outline-none transition-all placeholder-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <input type="text" id="search-input" placeholder="Ex: Iop, Cra..." class="input-glass pl-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-3.5 text-gray-500 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
         </div>
         
         <div>
-          <label class="block mb-2 text-sky-300 font-medium">Rôle</label>
-          <select id="role-filter" class="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400 outline-none appearance-none custom-select">
-            <option value="" class="bg-gray-800">Tous les rôles</option>
-            {uniqueRoles.map(role => <option value={role} class="bg-gray-800">{role}</option>)}
+          <label class="block mb-2 text-primary font-medium">Rôle</label>
+          <select id="role-filter" class="select-glass">
+            <option value="" class="bg-gray-900">Tous les rôles</option>
+            {uniqueRoles.map(role => <option value={role} class="bg-gray-900">{role}</option>)}
           </select>
         </div>
         
         <div>
-          <label class="block mb-2 text-sky-300 font-medium">Difficulté</label>
-          <select id="difficulty-filter" class="w-full p-3 rounded-lg bg-white/10 text-white border border-white/20 focus:border-sky-400 focus:ring-1 focus:ring-sky-400 outline-none appearance-none custom-select">
-            <option value="" class="bg-gray-800">Toutes</option>
-            <option value="1" class="bg-gray-800">★☆☆ (Facile)</option>
-            <option value="2" class="bg-gray-800">★★☆ (Moyenne)</option>
-            <option value="3" class="bg-gray-800">★★★ (Difficile)</option>
-             <option value="4" class="bg-gray-800">★★★★ (Très Difficile)</option>
-              <option value="5" class="bg-gray-800">★★★★★ (Expert)</option>
+          <label class="block mb-2 text-primary font-medium">Difficulté</label>
+          <select id="difficulty-filter" class="select-glass">
+            <option value="" class="bg-gray-900">Toutes</option>
+            <option value="1" class="bg-gray-900">★☆☆☆☆ (Facile)</option>
+            <option value="2" class="bg-gray-900">★★☆☆☆ (Moyenne)</option>
+            <option value="3" class="bg-gray-900">★★★☆☆ (Difficile)</option>
+             <option value="4" class="bg-gray-900">★★★★☆ (Très Difficile)</option>
+              <option value="5" class="bg-gray-900">★★★★★ (Expert)</option>
           </select>
         </div>
       </div>
@@ -114,28 +114,28 @@ const spellsAndPassives = {
       {classes.map((clazz, index) => {
         const difficultyStars = '★'.repeat(clazz.data.difficulty) + '☆'.repeat(5 - clazz.data.difficulty);
         const roleStyle = roleColors[clazz.data.role] || 'text-gray-300 bg-gray-700/50 border-gray-500/50';
-        const animationDelay = `${index * 0.07}s`; // Calculate delay
+        const animationDelay = `${index * 0.07}s`;
         return (
           <div 
-            class="class-card bg-black/20 backdrop-blur-md rounded-xl border border-white/10 overflow-hidden shadow-lg transition-all duration-300 hover:shadow-cyan-500/20 hover:border-white/20 hover:-translate-y-1 animate-fade-up"
+            class="class-card glass rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] hover:-translate-y-1 animate-fade-up"
             style={`animation-delay: ${animationDelay};`}
           >
-            <div class="p-6">
+            <div class="p-6 relative z-10">
               {/* En-tête */}
               <div class="flex items-center gap-4 mb-4">
                 <img 
                   src={clazz.data.icon.src} 
                   alt={clazz.data.icon.alt}
-                  class="w-16 h-16 rounded-lg border-2 border-white/20"
+                  class="w-16 h-16 rounded-lg border-2 border-[var(--color-border-highlight)]"
                   loading="lazy"
                 />
                 <div>
-                  <h3 class="text-2xl font-bold text-white">{clazz.data.name}</h3>
-                  <div class="flex flex-wrap gap-2 mt-2">
+                  <h3 class="text-2xl font-bold text-white mb-1">{clazz.data.name}</h3>
+                  <div class="flex flex-wrap gap-2 mt-1">
                     <span class={`text-xs px-2.5 py-1 rounded-full border ${roleStyle} role-tag`}>
                       {clazz.data.role}
                     </span>
-                    <span class="text-xs px-2.5 py-1 rounded-full border text-yellow-300 bg-yellow-900/50 border-yellow-500/50 difficulty-tag" data-difficulty={clazz.data.difficulty}>
+                    <span class="text-xs px-2.5 py-1 rounded-full border text-accent bg-accent/20 border-accent/50 difficulty-tag" data-difficulty={clazz.data.difficulty}>
                       {difficultyStars}
                     </span>
                   </div>
@@ -143,13 +143,13 @@ const spellsAndPassives = {
               </div>
 
               {/* Description courte */}
-              <p class="text-gray-300 mb-5 text-sm line-clamp-3">
+              <p class="text-[var(--color-text-muted)] mb-5 text-sm line-clamp-3">
                 {clazz.data.description}
               </p>
 
-              {/* Bouton voir plus - Glassmorphism */}
+              {/* Bouton voir plus - Using new btn-primary */}
               <button
-                class="w-full px-4 py-2.5 bg-gradient-to-r from-cyan-500/80 to-blue-600/80 hover:from-cyan-500 hover:to-blue-600 text-white rounded-lg transition-all duration-300 flex items-center justify-center gap-2 group font-semibold border border-white/10 hover:border-white/30 hover:shadow-lg"
+                class="btn btn-primary w-full group"
                 data-modal-target={`modal-${clazz.data.id}`}
               >
                 En savoir plus
@@ -174,22 +174,22 @@ const spellsAndPassives = {
       {/* Content is now more detailed and styled within Modal.astro */}
       <div class="space-y-6">
         {/* En-tête dans la modale */}
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 pb-6 border-b border-white/10">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 pb-6 border-b border-[var(--color-border-muted)]">
           <img 
             src={clazz.data.image.src} 
             alt={clazz.data.image.alt}
-            class="w-24 h-24 rounded-lg border-2 border-white/20 flex-shrink-0"
+            class="w-24 h-24 rounded-lg border-2 border-[var(--color-border-highlight)] flex-shrink-0 shadow-lg"
           />
           <div class="flex-grow">
-            <h2 class="text-3xl font-bold text-white mb-2">{clazz.data.name}</h2>
+            <h2 class="text-3xl font-bold text-gradient-primary mb-2">{clazz.data.name}</h2>
             <div class="flex flex-wrap gap-3">
               <span class={`px-3 py-1 rounded-full border text-sm ${roleColors[clazz.data.role] || 'text-gray-300 bg-gray-700/50 border-gray-500/50'}`}>
                 {clazz.data.role}
               </span>
-              <span class="px-3 py-1 rounded-full border text-sm text-yellow-300 bg-yellow-900/50 border-yellow-500/50">
+              <span class="px-3 py-1 rounded-full border text-sm text-accent bg-accent/20 border-accent/50">
                  {'★'.repeat(clazz.data.difficulty) + '☆'.repeat(5 - clazz.data.difficulty)} ({clazz.data.difficulty}/5)
               </span>
-               <span class="px-3 py-1 rounded-full border text-sm text-purple-300 bg-purple-900/50 border-purple-500/50">
+               <span class="px-3 py-1 rounded-full border text-sm text-secondary bg-secondary/20 border-secondary/50">
                  {clazz.data.combatStyle}
               </span>
             </div>
@@ -197,22 +197,22 @@ const spellsAndPassives = {
         </div>
 
         {/* Description détaillée */}
-        <div class="prose prose-invert max-w-none prose-p:text-gray-300 prose-headings:text-cyan-300">
-          <h3 class="!text-2xl !mb-3">À propos du {clazz.data.name}</h3>
+        <div class="prose prose-invert max-w-none prose-p:text-[var(--color-text-muted)] prose-headings:text-primary prose-a:text-primary hover:prose-a:text-primary/80 prose-strong:text-white">
+          <h3 class="!text-2xl !mb-3 !text-primary">À propos du {clazz.data.name}</h3>
           <p>{clazz.data.detailedDescription}</p>
         </div>
 
         {/* Forces et Faiblesses */}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-black/20 p-5 rounded-lg border border-white/10">
+          <div class="glass p-5 rounded-lg border-[var(--color-border-highlight)]">
             <h4 class="text-xl font-semibold mb-3 text-green-400">Points Forts</h4>
-            <ul class="list-disc list-inside text-gray-300 space-y-1">
+            <ul class="list-disc list-inside text-[var(--color-text-muted)] space-y-1 pl-2">
               {clazz.data.strengths.split(',').map(s => s.trim()).map(strength => <li>{strength}</li>)}
             </ul>
           </div>
-          <div class="bg-black/20 p-5 rounded-lg border border-white/10">
+          <div class="glass p-5 rounded-lg border-[var(--color-border-highlight)]">
             <h4 class="text-xl font-semibold mb-3 text-red-400">Points Faibles</h4>
-             <ul class="list-disc list-inside text-gray-300 space-y-1">
+             <ul class="list-disc list-inside text-[var(--color-text-muted)] space-y-1 pl-2">
               {clazz.data.weaknesses.split(',').map(s => s.trim()).map(weakness => <li>{weakness}</li>)}
             </ul>
           </div>
@@ -220,19 +220,19 @@ const spellsAndPassives = {
 
         {/* Sorts Principaux */}
         <div>
-          <h3 class="text-2xl font-semibold mb-4 text-cyan-300">Sorts Emblématiques</h3>
+          <h3 class="text-2xl font-semibold mb-4 text-primary">Sorts Emblématiques</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {clazz.data.mainSpells.map((spell) => (
-              <div class="bg-black/20 rounded-lg p-4 border border-white/10 flex items-start gap-4">
+              <div class="glass rounded-lg p-4 border-[var(--color-border-highlight)] flex items-start gap-4 transition-all hover:border-primary/50 hover:shadow-primary/10">
                 <img 
                   src={spell.image.src} 
                   alt={spell.image.alt}
-                  class="w-14 h-14 rounded-md border border-white/10 flex-shrink-0 mt-1"
+                  class="w-14 h-14 rounded-md border border-[var(--color-border-muted)] flex-shrink-0 mt-1"
                 />
                 <div>
                   <h5 class="font-semibold text-white">{spell.name}</h5>
-                  <span class="text-xs text-gray-400 block mb-1">Niveau {spell.level}</span>
-                  <p class="text-sm text-gray-300">{spell.description}</p>
+                  <span class="text-xs text-gray-500 block mb-1">Niveau {spell.level}</span>
+                  <p class="text-sm text-[var(--color-text-muted)]">{spell.description}</p>
                 </div>
               </div>
             ))}
@@ -241,16 +241,16 @@ const spellsAndPassives = {
 
         {/* Builds Recommandés */}
         <div>
-           <h3 class="text-2xl font-semibold mb-4 text-cyan-300">Builds Recommandés</h3>
+           <h3 class="text-2xl font-semibold mb-4 text-primary">Builds Recommandés</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {clazz.data.builds.map((build) => (
-              <div class="bg-black/20 rounded-lg p-5 border border-white/10">
+              <div class="glass rounded-lg p-5 border-[var(--color-border-highlight)] transition-all hover:border-secondary/50 hover:shadow-secondary/10">
                 <h4 class="text-lg font-semibold text-white mb-2">{build.name}</h4>
                 <div class="flex flex-wrap items-center gap-3 mb-3">
-                  <span class="px-2.5 py-0.5 rounded-full bg-gray-600/50 text-gray-300 text-xs border border-gray-500">{build.type}</span>
-                  <span class="text-xs text-gray-400">Niveau Min. {build.minLevel}</span>
+                  <span class="px-2.5 py-0.5 rounded-full bg-gray-600/50 text-gray-300 text-xs border border-[var(--color-border-muted)]">{build.type}</span>
+                  <span class="text-xs text-gray-500">Niveau Min. {build.minLevel}</span>
                 </div>
-                <p class="text-sm text-gray-300">{build.description}</p>
+                <p class="text-sm text-[var(--color-text-muted)]">{build.description}</p>
               </div>
             ))}
           </div>
@@ -261,14 +261,6 @@ const spellsAndPassives = {
 </MainLayout>
 
 <style>
-  .custom-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right 0.75rem center;
-    background-repeat: no-repeat;
-    background-size: 1.5em 1.5em;
-    padding-right: 2.5rem;
-  }
-
   .animate-fade-up {
     opacity: 0;
     transform: translateY(20px);
