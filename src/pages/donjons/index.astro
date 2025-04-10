@@ -1,0 +1,495 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Récupérer les donjons depuis la collection
+const donjons = await getCollection('donjons');
+
+// Trier les donjons par niveau
+const donjonsTries = donjons
+  .filter(donjon => donjon.data && donjon.data.name)
+  .sort((a, b) => (a.data.level || 0) - (b.data.level || 0));
+
+// Définir les niveaux de difficulté pour l'affichage
+const difficultyLabels = {
+  'easy': { label: 'Facile', color: 'bg-green-500 text-white' },
+  'medium': { label: 'Moyen', color: 'bg-yellow-500 text-white' },
+  'hard': { label: 'Difficile', color: 'bg-orange-500 text-white' },
+  'extreme': { label: 'Extrême', color: 'bg-red-500 text-white' }
+};
+
+// Définir les drops importants pour chaque donjon (simulés pour l'exemple)
+const donjonDrops = {
+  "mere-michou": [
+    { name: "Louche Légendaire", rate: 2, important: true },
+    { name: "Recette secrète", rate: 5, important: true },
+    { name: "Tablier de cuisinier", rate: 10, important: false },
+    { name: "Ingrédients de base", rate: 85, important: false }
+  ],
+  "paturages-bouftous": [
+    { name: "Corne du Bouftou Royal", rate: 3, important: true },
+    { name: "Cuir de Bouftou Premium", rate: 7, important: true },
+    { name: "Laine de Bouftou", rate: 30, important: false },
+    { name: "Sabot de Bouftou", rate: 60, important: false }
+  ],
+  "papaturage-royal": [
+    { name: "Corne du Moogrr Royal", rate: 5, important: true },
+    { name: "Cuir de Moogrr", rate: 15, important: true },
+    { name: "Laine de Moogrr", rate: 30, important: false }
+  ],
+  "montagne-adezieu": [
+    { name: "Coiffe de granit", rate: 3, important: true },
+    { name: "Fragments de Craqueleur", rate: 12, important: true },
+    { name: "Pierre précieuse", rate: 8, important: true }
+  ],
+  "champs-pourchlan": [
+    { name: "Graines carnivores", rate: 7, important: true },
+    { name: "Pétales vénéneux", rate: 10, important: true },
+    { name: "Sève mystérieuse", rate: 15, important: false }
+  ],
+  "equipage-poulpe": [
+    { name: "Tentacule de Poulpe", rate: 8, important: true },
+    { name: "Encre de Cire Momore", rate: 4, important: true },
+    { name: "Ventouses collantes", rate: 12, important: false }
+  ]
+};
+
+// Formater les stratégies pour qu'elles soient plus lisibles
+const formatStrategy = (strategy) => {
+  if (!strategy) return "Stratégie à venir...";
+  
+  // Diviser la stratégie en phrases
+  const sentences = strategy.split(/\.\s+/);
+  
+  // Filtrer les phrases vides
+  const validSentences = sentences.filter(s => s.trim().length > 0);
+  
+  // Si une phrase se termine sans point, ajouter un point
+  const formattedSentences = validSentences.map(s => {
+    let sentence = s.trim();
+    if (!sentence.endsWith('.')) {
+      sentence += '.';
+    }
+    return sentence;
+  });
+  
+  return formattedSentences;
+};
+
+// Ajouter les nouveaux donjons fournis par l'utilisateur
+const nouveauxDonjons = [
+  {
+    slug: "papaturage-royal",
+    data: {
+      name: "Le Pâpaturage Royal",
+      level: "36-50",
+      difficulty: "medium",
+      description: "Un vaste champ où règne le puissant Moogrr Royal, dont les charges dévastatrices et explosions en chaîne font trembler le sol d'Amakna.",
+      location: "Amakna - Champs qui Chantent",
+      bosses: [
+        { name: "Moogrr Royal", level: 45 }
+      ],
+      strategy: "Le boss gagne 1 PW au début de chaque tour et 1 PW par ennemi tué. À 5 PW, il déclenche 'Bombouzament en chaîne', qui fait exploser toutes les bouses, infligeant de lourds dégâts. Utilisez des invocations pour marcher sur les boubouxes et limiter le retrait PM. Concentrez-vous sur les Moomouches pour simplifier le combat."
+    }
+  },
+  {
+    slug: "montagne-adezieu",
+    data: {
+      name: "La Montagne Adezieu",
+      level: "36-50",
+      difficulty: "hard",
+      description: "Une montagne escarpée où le Craqueleur Royal vous attend, protégé par son impénétrable armure de granit.",
+      location: "Amakna - Forêt d'Enutrof",
+      bosses: [
+        { name: "Craqueleur Royal", level: 47 }
+      ],
+      strategy: "Le boss possède 'Coiffe de granit', lui donnant 400 résistances élémentaires au début du combat. Lorsqu'il perd toutes ses résistances, il déclenche 'Rage' et devient vulnérable. Utilisez des attaques en PA minimale pour réduire ses résistances rapidement. Une fois vulnérable, infligez des dégâts massifs pour réduire significativement sa vie."
+    }
+  },
+  {
+    slug: "champs-pourchlan",
+    data: {
+      name: "Les Champs Pourchlan",
+      level: "36-50",
+      difficulty: "medium",
+      description: "Des champs autrefois paisibles maintenant envahis par une végétation hostile et une plante carnivore géante.",
+      location: "Amakna - Campagne de Chibbrout",
+      bosses: [
+        { name: "Plante Carnivore", level: 45 }
+      ],
+      strategy: "La Plante Carnivore laisse des graines douloureuses sur le terrain. Nettoyez les lieux avec des invocations ou utilisez les croix disponibles pour désactiver les graines avant qu'elles ne se transforment en fleurs dangereuses. Attention à son attaque ultime lorsqu'elle atteint son maximum de PWs."
+    }
+  },
+  {
+    slug: "equipage-poulpe",
+    data: {
+      name: "Équipage du Poulpe",
+      level: "36-50",
+      difficulty: "hard",
+      description: "Une bataille navale contre Poh! Le Poulpe et son redoutable acolyte Cire Momore, maîtres des eaux de Sufokia.",
+      location: "Sufokia - Rivage Stimulant",
+      bosses: [
+        { name: "Poh! Le Poulpe", level: 47 },
+        { name: "Cire Momore", level: 48 }
+      ],
+      strategy: "Le Poulpe gagne 1 PW à chaque tour et 3 PWs si vous êtes hors de portée. À son maximum, il inflige une attaque puissante en zone. Restez proche du boss tout en utilisant vos supports pour éviter ses attaques directes. Tous les monstres tapent dans l'élément 'Stasis', donc adaptez vos résistances en conséquence. Suite à l'intervention, Cire Momore apparaît comme deuxième boss, infligeant d'importants dégâts à distance et possédant un sort monocible puissant."
+    }
+  }
+];
+
+// Combiner les données existantes avec les nouveaux donjons
+const tousDonjons = [...donjonsTries, ...nouveauxDonjons];
+---
+
+<MainLayout title="Donjons de Wakfu" description="Guides et stratégies pour tous les donjons de Wakfu, du niveau 1 à 230">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6 text-center">Les Donjons de Wakfu</h1>
+    
+    <p class="text-lg mb-8 max-w-3xl mx-auto text-center">
+      Explorez tous les donjons du monde de Wakfu, découvrez les stratégies optimales et consultez les taux de drop des objets les plus convoités.
+    </p>
+
+    <!-- Filtres de donjons -->
+    <div class="mb-8 bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-gray-700">
+      <h2 class="text-xl font-semibold mb-4">Filtrer les donjons</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <label class="block mb-2 text-wakfu-secondary font-medium">Recherche</label>
+          <div class="relative">
+            <input type="text" id="search-input" placeholder="Nom du donjon..." class="w-full p-3 pl-10 rounded-lg bg-gray-700/70 text-white border border-gray-600 focus:border-wakfu-secondary focus:ring-1 focus:ring-wakfu-secondary outline-none transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+        
+        <div>
+          <label class="block mb-2 text-wakfu-secondary font-medium">Niveau</label>
+          <select id="level-filter" class="w-full p-3 rounded-lg bg-gray-700/70 text-white border border-gray-600 focus:border-wakfu-secondary focus:ring-1 focus:ring-wakfu-secondary outline-none">
+            <option value="">Tous les niveaux</option>
+            <option value="1-50">Niveau 1-50</option>
+            <option value="51-100">Niveau 51-100</option>
+            <option value="101-150">Niveau 101-150</option>
+            <option value="151-200">Niveau 151-200</option>
+            <option value="201+">Niveau 201+</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block mb-2 text-wakfu-secondary font-medium">Difficulté</label>
+          <select id="difficulty-filter" class="w-full p-3 rounded-lg bg-gray-700/70 text-white border border-gray-600 focus:border-wakfu-secondary focus:ring-1 focus:ring-wakfu-secondary outline-none">
+            <option value="">Toutes les difficultés</option>
+            <option value="easy">Facile</option>
+            <option value="medium">Moyen</option>
+            <option value="hard">Difficile</option>
+            <option value="extreme">Extrême</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liste des donjons -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      {tousDonjons.map((donjon) => {
+        const slugNoExtension = donjon.slug;
+        const drops = donjonDrops[slugNoExtension] || [];
+        const importantDrops = drops.filter(drop => drop.important);
+        const difficulty = difficultyLabels[donjon.data.difficulty] || difficultyLabels.medium;
+        const strategyPoints = formatStrategy(donjon.data.strategy);
+        
+        return (
+          <div class="dungeon-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl border border-gray-700 hover:border-wakfu-secondary transition-all duration-300 transform hover:-translate-y-1">
+            <div class="p-0">
+              {/* Header avec bannière colorée */}
+              <div class="bg-gradient-to-r from-wakfu-primary/80 to-wakfu-secondary/80 p-4">
+                <div class="flex justify-between items-center">
+                  <h3 class="text-2xl font-bold text-white">{donjon.data.name}</h3>
+                  <div class="flex gap-2">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-purple-600 text-white">
+                      Niv. {donjon.data.level}
+                    </span>
+                    <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium ${difficulty.color}`}>
+                      {difficulty.label}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <div class="flex items-center gap-2 text-gray-400 mb-4 text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span>{donjon.data.location || "Inconnu"}</span>
+                </div>
+                
+                <p class="text-gray-300 mb-6 text-lg">
+                  {donjon.data.description?.substring(0, 120)}...
+                </p>
+                
+                <div class="mb-6">
+                  <h4 class="font-semibold mb-3 flex items-center text-wakfu-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    Boss principaux
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    {donjon.data.bosses.map(boss => (
+                      <div class="bg-gray-700 px-3 py-1.5 rounded-lg flex items-center">
+                        <span class="text-sm font-medium">{boss.name}</span>
+                        <span class="ml-2 bg-purple-600/60 text-white text-xs px-2 py-0.5 rounded-full">Niv. {boss.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div class="mb-6">
+                  <h4 class="font-semibold mb-3 flex items-center text-wakfu-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                    </svg>
+                    Drops importants
+                  </h4>
+                  <div class="space-y-3">
+                    {importantDrops.length > 0 ? (
+                      importantDrops.map(drop => (
+                        <div class="bg-gray-700/70 p-3 rounded-lg">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium">{drop.name}</span>
+                            <div class="flex items-center">
+                              <div class="w-24 h-2 bg-gray-600 rounded-full mr-2 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-yellow-500 to-yellow-300" style={`width: ${Math.min(drop.rate * 5, 100)}%`}></div>
+                              </div>
+                              <span class="text-yellow-400 font-bold">{drop.rate}%</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div class="text-gray-400 italic bg-gray-700/30 p-3 rounded-lg text-center">Informations à venir</div>
+                    )}
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold mb-3 flex items-center text-wakfu-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                    </svg>
+                    Stratégie
+                  </h4>
+                  <div class="bg-gray-700/50 p-4 rounded-lg">
+                    {Array.isArray(strategyPoints) ? (
+                      <ul class="list-none space-y-2 text-gray-300 text-sm">
+                        {strategyPoints.map((point) => (
+                          <li class="flex items-start">
+                            <span class="text-wakfu-secondary mr-2 mt-1">•</span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p class="text-gray-300 text-sm">{strategyPoints}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+    
+    <!-- Guide des donjons -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 shadow-lg border border-gray-700">
+        <h2 class="text-2xl font-bold mb-4 border-b border-gray-700 pb-2 text-wakfu-secondary">Préparation des Donjons</h2>
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-xl font-semibold mb-2 flex items-center">
+              <span class="text-wakfu-secondary mr-2">⚔️</span>
+              Composition d'équipe
+            </h3>
+            <p class="text-gray-300 mb-2">La composition idéale pour la plupart des donjons inclut:</p>
+            <ul class="list-none pl-0 space-y-2 text-gray-300">
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold mr-2">T</span>
+                <span>1 Tank (Feca, Sacrieur, Ouginak)</span>
+              </li>
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold mr-2">D</span>
+                <span>1-2 DPS (Iop, Cra, Xelor, Sram)</span>
+              </li>
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold mr-2">H</span>
+                <span>1 Support/Healer (Eniripsa, Osamodas, Pandawa)</span>
+              </li>
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-2">U</span>
+                <span>1 Utilitaire (Zobal, Enutrof, Sadida)</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-semibold mb-2 flex items-center">
+              <span class="text-wakfu-secondary mr-2">🧪</span>
+              Consommables recommandés
+            </h3>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-gray-700/50 p-3 rounded-lg hover:bg-gray-700 transition-colors">
+                <span class="font-medium block">Potions de Vie</span>
+                <p class="text-sm text-gray-400">Restaure 500-1000 PV</p>
+              </div>
+              <div class="bg-gray-700/50 p-3 rounded-lg hover:bg-gray-700 transition-colors">
+                <span class="font-medium block">Pain du Boulanger</span>
+                <p class="text-sm text-gray-400">+15% Dégâts pendant 30 min</p>
+              </div>
+              <div class="bg-gray-700/50 p-3 rounded-lg hover:bg-gray-700 transition-colors">
+                <span class="font-medium block">Potion de Sagesse</span>
+                <p class="text-sm text-gray-400">+25% XP pendant 1h</p>
+              </div>
+              <div class="bg-gray-700/50 p-3 rounded-lg hover:bg-gray-700 transition-colors">
+                <span class="font-medium block">Poudre de Rappel</span>
+                <p class="text-sm text-gray-400">Téléportation d'urgence</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 shadow-lg border border-gray-700">
+        <h2 class="text-2xl font-bold mb-4 border-b border-gray-700 pb-2 text-wakfu-secondary">Progression Recommandée</h2>
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-xl font-semibold mb-3 flex items-center">
+              <span class="text-wakfu-secondary mr-2">🗺️</span>
+              Parcours pour débutants (Niv. 1-50)
+            </h3>
+            <ol class="list-none pl-0 space-y-2 text-gray-300 counter-reset">
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-wakfu-primary rounded-full flex items-center justify-center text-white font-bold mr-2">1</span>
+                <span>Chez la Mère Michou (Niv. 5)</span>
+              </li>
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-wakfu-primary rounded-full flex items-center justify-center text-white font-bold mr-2">2</span>
+                <span>Pâturages des Bouftous (Niv. 10)</span>
+              </li>
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-wakfu-primary rounded-full flex items-center justify-center text-white font-bold mr-2">3</span>
+                <span>Goulet du Rasboul (Niv. 20)</span>
+              </li>
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-wakfu-primary rounded-full flex items-center justify-center text-white font-bold mr-2">4</span>
+                <span>Le Pâpaturage Royal (Niv. 36-50)</span>
+              </li>
+              <li class="flex items-center bg-gray-700/50 p-2 rounded-lg">
+                <span class="w-8 h-8 bg-wakfu-primary rounded-full flex items-center justify-center text-white font-bold mr-2">5</span>
+                <span>La Montagne Adezieu (Niv. 36-50)</span>
+              </li>
+            </ol>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-semibold mb-3 flex items-center">
+              <span class="text-wakfu-secondary mr-2">💰</span>
+              Conseils pour maximiser les drops
+            </h3>
+            <div class="bg-gray-700/30 p-4 rounded-lg">
+              <ul class="list-none pl-0 space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <span class="text-wakfu-secondary mr-2">✦</span>
+                  <span>Augmentez votre prospection avec des équipements spécialisés</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-wakfu-secondary mr-2">✦</span>
+                  <span>Utilisez des consommables augmentant le taux de drop (Potion de Chance)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-wakfu-secondary mr-2">✦</span>
+                  <span>Jouez en groupe pour augmenter les chances d'obtenir des objets rares</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-wakfu-secondary mr-2">✦</span>
+                  <span>Répétez les donjons plusieurs fois — certains items ont un taux de drop très faible</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<script>
+  // Gestion des filtres
+  const searchInput = document.getElementById('search-input');
+  const levelFilter = document.getElementById('level-filter');
+  const difficultyFilter = document.getElementById('difficulty-filter');
+  const dungeonCards = document.querySelectorAll('.dungeon-card');
+
+  function filterDungeons() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const levelValue = levelFilter.value;
+    const difficultyValue = difficultyFilter.value;
+
+    dungeonCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const levelText = card.querySelector('.bg-purple-600').textContent;
+      const level = parseInt(levelText.replace('Niv. ', ''));
+      const difficultyText = card.querySelectorAll('.rounded-full')[1].textContent.trim();
+      
+      let matchesLevel = true;
+      if (levelValue) {
+        const [min, max] = levelValue.split('-').map(num => parseInt(num));
+        matchesLevel = (max ? level >= min && level <= max : level >= min);
+      }
+      
+      let matchesDifficulty = true;
+      if (difficultyValue) {
+        const difficultyMap = {
+          'Facile': 'easy',
+          'Moyen': 'medium',
+          'Difficile': 'hard',
+          'Extrême': 'extreme'
+        };
+        
+        const normalizedDifficulty = Object.entries(difficultyMap).find(([key]) => 
+          difficultyText.includes(key)
+        )?.[1] || '';
+        
+        matchesDifficulty = normalizedDifficulty === difficultyValue;
+      }
+      
+      const matchesSearch = title.includes(searchTerm);
+      
+      if (matchesSearch && matchesLevel && matchesDifficulty) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  if (searchInput && levelFilter && difficultyFilter) {
+    searchInput.addEventListener('input', filterDungeons);
+    levelFilter.addEventListener('change', filterDungeons);
+    difficultyFilter.addEventListener('change', filterDungeons);
+  }
+
+  // Animation des cartes
+  dungeonCards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+      card.style.transition = 'all 0.5s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, 50 * index);
+  });
+</script> 

@@ -1,0 +1,51 @@
+  <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
+    <h2 class="text-2xl font-wakfu font-bold mb-6 text-wakfu-primary dark:text-wakfu-secondary">
+      Partagez ce guide
+    </h2>
+    <div class="flex space-x-4">
+      <button class="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        Twitter
+      </button>
+      <button class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Facebook
+      </button>
+      <button class="flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+        </svg>
+        Partager
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="lg:col-span-1">
+  {guide.data.toc && <TableOfContents headings={headings} />}
+  
+  <div class="mt-8 bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+    <h3 class="text-lg font-bold mb-4 text-wakfu-primary dark:text-wakfu-secondary">
+      Guides connexes
+    </h3>
+    <ul class="space-y-4">
+      <li>
+        <a href="#" class="flex items-start hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-lg transition-colors">
+          <img src="/images/guides/thumbnail-1.jpg" alt="" class="w-16 h-16 rounded object-cover mr-3" />
+          <div>
+            <h4 class="font-medium text-gray-900 dark:text-gray-100 line-clamp-2">Guide du débutant</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Les bases pour bien commencer</p>
+          </div>
+        </a>
+      </li>
+      <!-- Ajouter d'autres guides connexes -->
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+</MainLayout> 

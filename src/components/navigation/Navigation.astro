@@ -1,0 +1,112 @@
+---
+// Définir les liens de navigation - Réorganisés selon la demande
+const navItems = [
+  { text: 'Classes', href: '/classes/' },
+  { text: 'Quêtes', href: '/quetes/' },
+  { text: 'Accueil', href: '/', isHome: true },
+  { text: 'Donjons', href: '/donjons/' },
+  { text: 'Métiers', href: '/metiers/' }
+];
+
+// Récupérer le chemin actuel pour marquer l'élément actif
+const pathname = Astro.url.pathname;
+
+// Import GlobalSearch
+import GlobalSearch from '../search/GlobalSearch.astro';
+---
+
+<header class="sticky top-0 z-40 w-full backdrop-blur border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-center">
+      <!-- Navigation Desktop -->
+      <nav class="hidden md:flex items-center justify-center">
+        {navItems.map((item) => {
+          if (item.isHome) {
+            return (
+              <a href={item.href} class="flex items-center mx-6">
+                <div class="flex items-center text-xl font-bold text-gray-900 dark:text-white">
+                  <span class="text-wakfu-primary dark:text-wakfu-secondary">Nexus</span>
+                  <span class="ml-1">Wakfu</span>
+                </div>
+              </a>
+            );
+          }
+          return (
+            <a 
+              href={item.href} 
+              class={`text-sm font-medium transition-colors hover:text-wakfu-primary dark:hover:text-wakfu-secondary px-4 py-2 rounded-md mx-2
+                ${pathname === item.href || pathname.startsWith(item.href) && item.href !== '/' ? 
+                  'text-wakfu-primary dark:text-wakfu-secondary' : 
+                  'text-gray-700 dark:text-gray-300'}`
+              }
+            >
+              {item.text}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- Mobile menu button -->
+      <div class="flex md:hidden justify-between items-center w-full">
+        <a href="/" class="flex items-center text-xl font-bold text-gray-900 dark:text-white">
+          <span class="text-wakfu-primary dark:text-wakfu-secondary">Nexus</span>
+          <span class="ml-1">Wakfu</span>
+        </a>
+        
+        <button 
+          type="button" 
+          class="mobile-menu-button text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-md"
+          aria-label="Ouvrir le menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu hidden md:hidden border-t border-gray-200 dark:border-gray-800">
+    <div class="container mx-auto px-4 py-3 space-y-1">
+      {navItems.filter(item => !item.isHome).map((item) => (
+        <a 
+          href={item.href} 
+          class={`block px-3 py-2 rounded-md text-base font-medium transition-colors
+            ${pathname === item.href || pathname.startsWith(item.href) && item.href !== '/' ? 
+              'bg-gray-100 dark:bg-gray-800 text-wakfu-primary dark:text-wakfu-secondary' : 
+              'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`
+          }
+        >
+          {item.text}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<!-- Include the GlobalSearch component -->
+<GlobalSearch />
+
+<script>
+  // Javascript pour gérer le menu mobile
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    mobileMenuButton?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+
+    // Fermer le menu quand on clique en dehors
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const isMenuButtonClick = target.closest('.mobile-menu-button');
+      const isMenuClick = target.closest('.mobile-menu');
+      
+      if (!isMenuButtonClick && !isMenuClick && !mobileMenu?.classList.contains('hidden')) {
+        mobileMenu?.classList.add('hidden');
+      }
+    });
+  });
+</script> 

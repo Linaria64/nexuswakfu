@@ -1,0 +1,98 @@
+---
+// Theme toggle button to switch between light and dark mode
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="fixed bottom-4 right-4 p-2 z-50 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary"
+  aria-label="Changer de thème"
+>
+  <!-- Icône soleil (affiché en mode sombre) -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-5 w-5 dark:hidden"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+    />
+  </svg>
+  
+  <!-- Icône lune (affiché en mode clair) -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-5 w-5 hidden dark:block"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+    />
+  </svg>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Définir le thème sombre par défaut
+    function setDarkMode() {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    
+    // Définir le thème clair
+    function setLightMode() {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+    
+    // Vérifier le thème actuel
+    function checkTheme() {
+      const theme = localStorage.getItem('theme');
+      
+      if (theme === 'light') {
+        setLightMode();
+      } else {
+        setDarkMode();
+      }
+    }
+    
+    // Initialiser le thème
+    checkTheme();
+    
+    // Basculer le thème quand on clique sur le bouton
+    themeToggle?.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark')) {
+        setLightMode();
+      } else {
+        setDarkMode();
+      }
+    });
+  });
+</script>
+
+<style>
+  #themeToggle {
+    transform: scale(1);
+    transition: transform 0.2s ease;
+  }
+  
+  #themeToggle:hover {
+    transform: scale(1.1);
+  }
+  
+  .theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+</style> 

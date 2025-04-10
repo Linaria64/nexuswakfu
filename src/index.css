@@ -1,0 +1,76 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 38% 95%;
+    --foreground: 210 40% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 4.9%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 160 59% 50%;
+    --secondary-foreground: 222 47.4% 11.2%;
+
+    --muted: 210 40% 90%;
+    --muted-foreground: 215 16.3% 46.9%;
+
+    --accent: 45 100% 50%;
+    --accent-foreground: 222 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 85%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 210 100% 50%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-wakfu;
+  }
+}
+
+.hero-section {
+  @apply relative min-h-[600px] flex items-center justify-center text-white bg-wakfu-dark overflow-hidden;
+  background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), var(--hero-bg, url('/hero-background.jpg'));
+  background-size: cover;
+  background-position: center;
+}
+
+.navigation-item {
+  @apply px-4 py-2 text-wakfu-light hover:text-wakfu-gold transition-colors duration-200;
+}
+
+.card-hover {
+  @apply transform transition-all duration-300 hover:scale-105 hover:shadow-xl;
+}
+
+.content-section {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+}
+
+.section-title {
+  @apply text-3xl font-bold text-wakfu-dark mb-8 text-center;
+}
+
+.guide-card {
+  @apply bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300;
+}

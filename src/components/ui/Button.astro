@@ -1,0 +1,151 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'danger';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  href?: string;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  loading?: boolean;
+  leadingIcon?: string;
+  trailingIcon?: string;
+  target?: string;
+  rel?: string;
+  className?: string;
+  ariaLabel?: string;
+  id?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  disabled = false,
+  fullWidth = false,
+  type = 'button',
+  loading = false,
+  leadingIcon,
+  trailingIcon,
+  target,
+  rel,
+  className = '',
+  ariaLabel,
+  id,
+} = Astro.props;
+
+// Définir les classes de variante
+const variantClasses = {
+  primary: 'bg-wakfu-primary hover:bg-wakfu-primary-dark text-white dark:bg-wakfu-secondary dark:hover:bg-wakfu-secondary-dark shadow-sm',
+  secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200',
+  outline: 'border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300',
+  ghost: 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800',
+  link: 'text-wakfu-primary dark:text-wakfu-secondary hover:underline p-0 h-auto shadow-none',
+  danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm',
+};
+
+// Définir les classes de taille
+const sizeClasses = {
+  xs: 'px-2 py-1 text-xs',
+  sm: 'px-2.5 py-1.5 text-sm',
+  md: 'px-4 py-2 text-sm',
+  lg: 'px-5 py-2.5 text-base',
+  xl: 'px-6 py-3 text-lg',
+};
+
+// Classes pour l'état de chargement et l'état désactivé
+const loadingClass = loading ? 'opacity-80 pointer-events-none' : '';
+const disabledClass = disabled ? 'opacity-60 cursor-not-allowed pointer-events-none' : '';
+const widthClass = fullWidth ? 'w-full' : '';
+
+// Classes icônes
+const iconSizeClasses = {
+  xs: 'w-3 h-3',
+  sm: 'w-4 h-4',
+  md: 'w-4 h-4',
+  lg: 'w-5 h-5',
+  xl: 'w-5 h-5',
+};
+
+// Classes de base
+const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary dark:focus:ring-offset-gray-900';
+
+// Assembler toutes les classes
+const classes = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  loadingClass,
+  disabledClass,
+  widthClass,
+  className,
+].filter(Boolean).join(' ');
+
+// Déterminer le type d'élément (a ou button)
+const Element = href && !disabled ? 'a' : 'button';
+
+// Configurer les props pour le bouton ou le lien
+const elementProps = Element === 'a' 
+  ? { href, target, rel: rel || (target === '_blank' ? 'noopener noreferrer' : undefined) }
+  : { type, disabled };
+
+// Spinner pour l'état de chargement
+const spinnerSize = iconSizeClasses[size];
+---
+
+<Element 
+  id={id} 
+  class={classes} 
+  aria-label={ariaLabel} 
+  aria-disabled={disabled}
+  aria-busy={loading}
+  {...elementProps}
+>
+  {loading && (
+    <svg 
+      class={`animate-spin -ml-1 mr-2 ${spinnerSize}`} 
+      xmlns="http://www.w3.org/2000/svg" 
+      fill="none" 
+      viewBox="0 0 24 24"
+    >
+      <circle 
+        class="opacity-25" 
+        cx="12" 
+        cy="12" 
+        r="10" 
+        stroke="currentColor" 
+        stroke-width="4"
+      ></circle>
+      <path 
+        class="opacity-75" 
+        fill="currentColor" 
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      ></path>
+    </svg>
+  )}
+  
+  {!loading && leadingIcon && (
+    <span class={`mr-2 ${iconSizeClasses[size]}`} set:html={leadingIcon} />
+  )}
+  
+  <slot />
+  
+  {!loading && trailingIcon && (
+    <span class={`ml-2 ${iconSizeClasses[size]}`} set:html={trailingIcon} />
+  )}
+</Element>
+
+<style>
+  /* Ajouter une animation de pulsation pour l'état hover des boutons primaires */
+  .bg-wakfu-primary:hover:not([aria-disabled="true"]):not([aria-busy="true"]) {
+    animation: button-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes button-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+</style> 

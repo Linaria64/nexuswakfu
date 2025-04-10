@@ -1,0 +1,280 @@
+---
+// Global search component for the site
+import { getCollection } from 'astro:content';
+
+// Récupérer les données pour le moteur de recherche
+const classes = await getCollection('classes');
+const metiers = await getCollection('metiers');
+const guides = await getCollection('guides', ({ data }) => {
+  return !!data.title; // Only include guides with titles
+}).catch(() => []);
+const donjons = await getCollection('donjons').catch(() => []);
+
+// Préparer les données de recherche
+const searchData = [
+  ...classes.map(item => ({
+    id: `class-${item.id}`,
+    title: item.data.name,
+    description: item.data.description,
+    url: `/classes/${item.slug}/`,
+    type: 'class',
+    icon: item.data.icon?.src || '/images/ui/class-icon.svg'
+  })),
+  ...metiers.map(item => ({
+    id: `metier-${item.id}`,
+    title: item.data.name,
+    description: item.data.description,
+    url: `/metiers/${item.id}/`,
+    type: 'metier',
+    icon: item.data.icon || '/images/ui/job-icon.svg'
+  })),
+  ...guides.map(item => ({
+    id: `guide-${item.id}`,
+    title: item.data.title,
+    description: item.data.description,
+    url: `/guides/${item.slug}/`,
+    type: 'guide',
+    icon: '/images/ui/guide-icon.svg'
+  })),
+  ...donjons.map(item => ({
+    id: `donjon-${item.id}`,
+    title: item.data.name,
+    description: item.data.description,
+    url: `/donjons/${item.id}/`,
+    type: 'donjon',
+    icon: item.data.image?.src || '/images/ui/dungeon-icon.svg'
+  }))
+];
+
+// Labels pour les types de contenu
+const typeLabels = {
+  class: "Classe",
+  metier: "Métier",
+  guide: "Guide",
+  donjon: "Donjon"
+};
+---
+
+<div id="global-search" class="z-50 hidden">
+  <div class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm transition-opacity" id="search-backdrop"></div>
+  
+  <div class="fixed top-20 inset-x-0 mx-auto max-w-3xl w-full px-4">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden transition-all">
+      <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 dark:text-gray-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input 
+          id="search-input" 
+          type="text" 
+          placeholder="Rechercher dans tout le site..." 
+          class="flex-1 bg-transparent border-none focus:ring-0 focus:outline-none text-gray-900 dark:text-gray-100 placeholder-gray-500"
+          autofocus
+        />
+        <button id="close-search" class="ml-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          <span class="sr-only">Fermer</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2">
+        <div id="empty-state" class="py-12 text-center text-gray-500 dark:text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-4 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <p class="text-lg font-medium">Commencez à taper pour rechercher</p>
+          <p class="text-sm mt-1">Recherchez des classes, métiers, donjons et guides</p>
+        </div>
+        
+        <div id="no-results" class="py-12 text-center text-gray-500 dark:text-gray-400 hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-4 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="text-lg font-medium">Aucun résultat trouvé</p>
+          <p class="text-sm mt-1">Essayez d'autres termes de recherche</p>
+        </div>
+        
+        <div id="results-container" class="hidden">
+          <!-- Les résultats seront injectés ici par JavaScript -->
+        </div>
+      </div>
+      
+      <div class="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+        <div class="text-xs text-gray-500 dark:text-gray-400 flex items-center justify-between">
+          <span>
+            <span class="font-medium">Esc</span> pour fermer
+          </span>
+          <span>
+            <span class="font-medium">↑↓</span> pour naviguer • 
+            <span class="font-medium">Enter</span> pour sélectionner
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ searchData, typeLabels }}>
+  // Accès aux éléments DOM
+  const globalSearch = document.getElementById('global-search');
+  const searchBackdrop = document.getElementById('search-backdrop');
+  const searchInput = document.getElementById('search-input');
+  const closeButton = document.getElementById('close-search');
+  const resultsContainer = document.getElementById('results-container');
+  const emptyState = document.getElementById('empty-state');
+  const noResults = document.getElementById('no-results');
+  
+  // État du résultat sélectionné
+  let selectedResultIndex = -1;
+  let visibleResults = [];
+  
+  // Fonction pour ouvrir la recherche
+  function openSearch() {
+    globalSearch.classList.remove('hidden');
+    setTimeout(() => {
+      searchInput.focus();
+    }, 100);
+    document.body.classList.add('overflow-hidden');
+  }
+  
+  // Fonction pour fermer la recherche
+  function closeSearch() {
+    globalSearch.classList.add('hidden');
+    searchInput.value = '';
+    document.body.classList.remove('overflow-hidden');
+    resetResults();
+  }
+  
+  // Réinitialiser les résultats
+  function resetResults() {
+    resultsContainer.classList.add('hidden');
+    emptyState.classList.remove('hidden');
+    noResults.classList.add('hidden');
+    selectedResultIndex = -1;
+    visibleResults = [];
+  }
+  
+  // Recherche dans les données
+  function performSearch(query) {
+    if (!query || query.length < 2) {
+      resetResults();
+      return;
+    }
+    
+    const lowerQuery = query.toLowerCase();
+    visibleResults = searchData.filter(item => 
+      item.title.toLowerCase().includes(lowerQuery) || 
+      item.description.toLowerCase().includes(lowerQuery)
+    );
+    
+    if (visibleResults.length === 0) {
+      resultsContainer.classList.add('hidden');
+      emptyState.classList.add('hidden');
+      noResults.classList.remove('hidden');
+      return;
+    }
+    
+    // Afficher les résultats
+    resultsContainer.innerHTML = '';
+    resultsContainer.classList.remove('hidden');
+    emptyState.classList.add('hidden');
+    noResults.classList.add('hidden');
+    
+    visibleResults.forEach((result, index) => {
+      const resultElement = document.createElement('a');
+      resultElement.href = result.url;
+      resultElement.className = `block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${index === selectedResultIndex ? 'bg-gray-100 dark:bg-gray-700' : ''}`;
+      resultElement.dataset.index = index;
+      
+      resultElement.innerHTML = `
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img src="${result.icon}" alt="" class="w-10 h-10 rounded">
+          </div>
+          <div class="ml-3 flex-1">
+            <p class="text-sm font-medium text-gray-900 dark:text-gray-100">${result.title}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-1">${result.description}</p>
+          </div>
+          <div class="ml-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+              ${typeLabels[result.type]}
+            </span>
+          </div>
+        </div>
+      `;
+      
+      resultElement.addEventListener('mouseenter', () => {
+        selectedResultIndex = index;
+        updateSelectedResult();
+      });
+      
+      resultsContainer.appendChild(resultElement);
+    });
+  }
+  
+  // Mettre à jour le résultat sélectionné
+  function updateSelectedResult() {
+    const results = resultsContainer.querySelectorAll('a');
+    results.forEach((result, index) => {
+      if (index === selectedResultIndex) {
+        result.classList.add('bg-gray-100', 'dark:bg-gray-700');
+        result.scrollIntoView({ block: 'nearest' });
+      } else {
+        result.classList.remove('bg-gray-100', 'dark:bg-gray-700');
+      }
+    });
+  }
+  
+  // Navigation avec les touches
+  function handleKeyNavigation(e) {
+    if (!visibleResults.length) return;
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedResultIndex = (selectedResultIndex + 1) % visibleResults.length;
+      updateSelectedResult();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedResultIndex = selectedResultIndex <= 0 ? visibleResults.length - 1 : selectedResultIndex - 1;
+      updateSelectedResult();
+    } else if (e.key === 'Enter' && selectedResultIndex >= 0) {
+      e.preventDefault();
+      window.location.href = visibleResults[selectedResultIndex].url;
+    }
+  }
+  
+  // Écouteurs d'événements
+  // Ouvrir la recherche avec Ctrl+K ou Cmd+K
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    } else if (e.key === 'Escape') {
+      closeSearch();
+    }
+  });
+  
+  // Recherche quand on tape
+  searchInput?.addEventListener('input', (e) => {
+    performSearch(e.target.value);
+  });
+  
+  // Navigation avec les flèches
+  searchInput?.addEventListener('keydown', handleKeyNavigation);
+  
+  // Cliquer sur le backdrop pour fermer
+  searchBackdrop?.addEventListener('click', closeSearch);
+  
+  // Bouton de fermeture
+  closeButton?.addEventListener('click', closeSearch);
+  
+  // Écouter les clics sur les icônes de recherche dans la navigation
+  document.querySelectorAll('.search-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openSearch();
+    });
+  });
+</script> 

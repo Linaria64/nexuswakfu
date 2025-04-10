@@ -1,0 +1,89 @@
+/* Base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --wakfu-primary: #3B82F6;
+  --wakfu-primary-dark: #2563EB;
+  --wakfu-secondary: #8B5CF6;
+  --wakfu-secondary-dark: #7C3AED;
+}
+
+html {
+  scrollbar-color: #4B5563 #1F2937;
+}
+
+body {
+  font-feature-settings: 'kern';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styles for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1F2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4B5563;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B7280;
+}
+
+/* Dark mode optimizations */
+.dark {
+  color-scheme: dark;
+}
+
+/* Transitions */
+.page-transition {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Common Components */
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-wakfu-primary text-white font-medium rounded-lg hover:bg-wakfu-primary-dark transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply px-4 py-2 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors;
+  }
+  
+  .btn-outline {
+    @apply px-4 py-2 border border-gray-700 text-gray-300 font-medium rounded-lg hover:bg-gray-800 transition-colors;
+  }
+  
+  .card {
+    @apply bg-gray-900 border border-gray-800 rounded-xl shadow-sm overflow-hidden;
+  }
+  
+  .section-title {
+    @apply text-2xl font-bold mb-6 text-wakfu-secondary;
+  }
+  
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6;
+  }
+} 

@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, subtitle, description, image = "/images/hero-bg.jpg" } = Astro.props;
+---
+
+<section class="relative py-20">
+  <div class="absolute inset-0">
+    <img src={image} alt={title} class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-black/50"></div>
+  </div>
+  
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-2xl text-center mx-auto">
+      {subtitle && <p class="text-wakfu-secondary font-semibold uppercase">{subtitle}</p>}
+      <h1 class="text-4xl font-bold text-white">{title}</h1>
+      {description && <p class="text-lg text-gray-200 mt-4">{description}</p>}
+      <div class="mt-6">
+        <slot />
+      </div>
+    </div>
+  </div>
+</section> 

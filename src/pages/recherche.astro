@@ -1,0 +1,60 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import SearchBar from '../components/ui/SearchBar.astro';
+import { getCollection } from 'astro:content';
+
+// Récupérer les paramètres de recherche
+const { q } = Astro.url.searchParams;
+const query = q?.toLowerCase() || '';
+
+// Fonction pour vérifier si un contenu correspond à la recherche
+function matchesSearch(item, searchQuery) {
+  if (!searchQuery) return false;
+  
+  const searchableText = `
+    ${item.data.name || item.data.title || ''}
+    ${item.data.description || ''}
+    ${item.body || ''}
+  `.toLowerCase();
+  
+  return searchableText.includes(searchQuery);
+}
+
+// Si une recherche est effectuée, chercher dans toutes les collections
+let results = {
+  classes: [],
+  donjons: [],
+  metiers: [],
+  guides: []
+};
+
+if (query) {
+  // Récupérer et filtrer les collections
+  const classes = await getCollection('classes');
+  const donjons = await getCollection('donjons');
+  const metiers = await getCollection('metiers');
+  const guides = await getCollection('guides');
+  
+  results = {
+    classes: classes.filter(item => matchesSearch(item, query)),
+    donjons: donjons.filter(item => matchesSearch(item, query)),
+    metiers: metiers.filter(item => matchesSearch(item, query)),
+    guides: guides.filter(item => matchesSearch(item, query))
+  };
+}
+
+// Total des résultats
+const totalResults = Object.values(results).reduce((sum, arr) => sum + arr.length, 0);
+---
+
+<MainLayout 
+  title={query ? `Recherche: ${query}` : "Recherche"} 
+  description="Rechercher des guides, classes, donjons et métiers dans le Guide Wakfu"
+>
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl font-wakfu font-bold mb-8 text-wakfu-primary dark:text-wakfu-secondary">
+        Recherche
+      </h1>
+      
+      <SearchBar full 

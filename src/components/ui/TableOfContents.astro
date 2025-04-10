@@ -1,0 +1,45 @@
+---
+export interface Props {
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+}
+
+const { headings } = Astro.props;
+
+// Filtrer pour n'inclure que les h2 et h3
+const filteredHeadings = headings.filter(
+  (heading) => heading.depth >= 2 && heading.depth <= 3
+);
+---
+
+{filteredHeadings.length > 0 && (
+  <div class="toc bg-gray-50 dark:bg-gray-800 rounded-lg p-6 sticky top-24">
+    <h2 class="text-lg font-bold mb-4 text-wakfu-primary dark:text-wakfu-secondary">
+      Table des matières
+    </h2>
+    <nav class="toc-list">
+      <ul class="space-y-2">
+        {filteredHeadings.map((heading) => (
+          <li class={`${heading.depth === 3 ? "ml-4" : ""}`}>
+            <a
+              href={`#${heading.slug}`}
+              class="text-gray-700 dark:text-gray-300 hover:text-wakfu-primary dark:hover:text-wakfu-secondary transition-colors inline-flex items-center"
+            >
+              {heading.depth === 3 && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              )}
+              <span class={`${heading.depth === 2 ? "font-medium" : ""}`}>
+                {heading.text}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+)} 

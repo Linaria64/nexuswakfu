@@ -1,0 +1,88 @@
+---
+import "../styles/global.css";
+import Navigation from "../components/navigation/Navigation.astro";
+import ThemeToggle from "../components/ui/ThemeToggle.astro";
+import Footer from "../components/Footer.astro";
+import AnnouncementBanner from "../components/ui/AnnouncementBanner.astro";
+
+// Définir les propriétés pour le layout
+interface Props {
+  title: string;
+  description?: string;
+  showAnnouncement?: boolean;
+}
+
+const { 
+  title, 
+  description = "The Wakfu Sage - Ressources et guides pour Wakfu",
+  showAnnouncement = false
+} = Astro.props;
+
+// Information pour l'annonce si activée
+const latestUpdate = {
+  title: "Mise à jour du site",
+  message: "Nous avons simplifié le design de notre site pour une meilleure expérience en mode sombre.",
+  type: "info"
+};
+---
+
+<!DOCTYPE html>
+<html lang="fr" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} | The Wakfu Sage</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#121212" />
+  </head>
+  <body class="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col">
+    <!-- Bannière d'annonce si activée -->
+    {showAnnouncement && (
+      <AnnouncementBanner 
+        title={latestUpdate.title}
+        message={latestUpdate.message}
+        type={latestUpdate.type}
+      />
+    )}
+    
+    <!-- Navigation -->
+    <Navigation />
+    
+    <!-- Contenu principal -->
+    <main class="flex-1">
+      <slot />
+    </main>
+    
+    <!-- Pied de page -->
+    <Footer />
+    
+    <!-- Bouton de changement de thème -->
+    <ThemeToggle />
+
+    <!-- Raccourcis clavier -->
+    <script>
+      document.addEventListener('keydown', (e) => {
+        // Alt + / pour ouvrir la recherche
+        if (e.altKey && e.key === '/') {
+          const searchContainer = document.querySelector('.global-search-container');
+          if (searchContainer) {
+            searchContainer.classList.remove('hidden');
+            const searchInput = searchContainer.querySelector('input');
+            if (searchInput) {
+              searchInput.focus();
+            }
+          }
+        }
+        
+        // Échap pour fermer les modales
+        if (e.key === 'Escape') {
+          const modals = document.querySelectorAll('.modal-container:not(.hidden)');
+          modals.forEach(modal => {
+            modal.classList.add('hidden');
+          });
+        }
+      });
+    </script>
+  </body>
+</html> 

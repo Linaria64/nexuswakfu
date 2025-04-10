@@ -1,0 +1,261 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Récupérer tous les métiers
+const allMetiers = await getCollection('metiers');
+
+// Séparer les métiers de récolte et d'artisanat
+const metiersRecolte = allMetiers.filter(metier => metier.data.category === 'récolte');
+const metiersArtisanat = allMetiers.filter(metier => metier.data.category === 'artisanat');
+
+// Options de filtres
+const difficultyOptions = [
+  { value: 1, label: 'Facile' },
+  { value: 2, label: 'Moyen' },
+  { value: 3, label: 'Difficile' },
+  { value: 4, label: 'Très difficile' },
+  { value: 5, label: 'Expert' },
+];
+
+const profitabilityOptions = [
+  { value: 1, label: 'Faible' },
+  { value: 2, label: 'Modérée' },
+  { value: 3, label: 'Bonne' },
+  { value: 4, label: 'Très bonne' },
+  { value: 5, label: 'Excellente' },
+];
+---
+
+<MainLayout title="Métiers de Wakfu" description="Découvrez tous les métiers de Wakfu - Guide complet des métiers de récolte et d'artisanat">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6 text-center">Les Métiers de Wakfu</h1>
+    
+    <p class="text-lg mb-8 max-w-3xl mx-auto text-center">
+      Les métiers dans Wakfu sont divisés en deux catégories principales : les métiers de récolte qui permettent d'obtenir des ressources, et les métiers d'artisanat qui transforment ces ressources en objets utiles.
+    </p>
+
+    <!-- Filtres -->
+    <div class="mb-8 bg-gray-800 p-4 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4">Filtrer les métiers</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block mb-2">Recherche</label>
+          <input type="text" id="search-input" placeholder="Nom du métier..." class="w-full p-2 rounded bg-gray-700 text-white">
+        </div>
+        
+        <div>
+          <label class="block mb-2">Difficulté</label>
+          <select id="difficulty-filter" class="w-full p-2 rounded bg-gray-700 text-white">
+            <option value="">Toutes les difficultés</option>
+            {difficultyOptions.map(option => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
+        </div>
+        
+        <div>
+          <label class="block mb-2">Rentabilité</label>
+          <select id="profitability-filter" class="w-full p-2 rounded bg-gray-700 text-white">
+            <option value="">Toutes les rentabilités</option>
+            {profitabilityOptions.map(option => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Métiers de Récolte -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 border-b border-blue-500 pb-2">Métiers de Récolte</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 metiers-grid" data-category="récolte">
+        {metiersRecolte.map((metier) => (
+          <a href={`/metiers/${metier.slug}`} class="metier-card relative overflow-hidden rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-300" data-difficulty={metier.data.difficulty} data-profitability={metier.data.profitability}>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">{metier.data.title}</h3>
+              
+              <div class="flex justify-between mb-4">
+                <div>
+                  <span class="text-sm">Difficulté:</span>
+                  <div class="flex mt-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span class={`h-3 w-3 rounded-full mr-1 ${i < metier.data.difficulty ? 'bg-yellow-400' : 'bg-gray-600'}`}></span>
+                    ))}
+                  </div>
+                </div>
+                
+                <div>
+                  <span class="text-sm">Rentabilité:</span>
+                  <div class="flex mt-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span class={`h-3 w-3 rounded-full mr-1 ${i < metier.data.profitability ? 'bg-green-400' : 'bg-gray-600'}`}></span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              <div class="absolute bottom-0 left-0 w-full h-1" style={`background-color: ${metier.data.profitability >= 4 ? '#10B981' : metier.data.profitability >= 3 ? '#6366F1' : '#F97316'}`}></div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Métiers d'Artisanat -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 border-b border-purple-500 pb-2">Métiers d'Artisanat</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 metiers-grid" data-category="artisanat">
+        {metiersArtisanat.length > 0 ? (
+          metiersArtisanat.map((metier) => (
+            <a href={`/metiers/${metier.slug}`} class="metier-card relative overflow-hidden rounded-lg bg-gray-800 hover:bg-gray-700 transition-all duration-300" data-difficulty={metier.data.difficulty} data-profitability={metier.data.profitability}>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">{metier.data.title}</h3>
+                
+                <div class="flex justify-between mb-4">
+                  <div>
+                    <span class="text-sm">Difficulté:</span>
+                    <div class="flex mt-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <span class={`h-3 w-3 rounded-full mr-1 ${i < metier.data.difficulty ? 'bg-yellow-400' : 'bg-gray-600'}`}></span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <span class="text-sm">Rentabilité:</span>
+                    <div class="flex mt-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <span class={`h-3 w-3 rounded-full mr-1 ${i < metier.data.profitability ? 'bg-green-400' : 'bg-gray-600'}`}></span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="absolute bottom-0 left-0 w-full h-1" style={`background-color: ${metier.data.profitability >= 4 ? '#10B981' : metier.data.profitability >= 3 ? '#6366F1' : '#F97316'}`}></div>
+              </div>
+            </a>
+          ))
+        ) : (
+          <div class="col-span-3 bg-gray-800 rounded-lg p-6 text-center">
+            <p class="text-lg">Les métiers d'artisanat seront disponibles prochainement !</p>
+            <p class="mt-2 text-blue-400">Revenez plus tard pour découvrir les guides détaillés sur l'artisanat dans Wakfu.</p>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Guide des métiers -->
+    <section class="bg-gray-800 rounded-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold mb-4">Comment choisir vos métiers ?</h2>
+      
+      <div class="space-y-4">
+        <p>Dans Wakfu, vous pouvez apprendre tous les métiers sur un même personnage, mais voici quelques conseils pour bien débuter :</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+          <div>
+            <h3 class="font-bold text-lg mb-2">Pour les débutants</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>Commencez par 1-2 métiers de récolte maximum</li>
+              <li>Le <span class="text-blue-400">Forestier</span> est généralement le plus facile à débuter</li>
+              <li>Associez vos métiers de récolte à des métiers d'artisanat complémentaires</li>
+              <li>Concentrez-vous sur la progression avant la rentabilité</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="font-bold text-lg mb-2">Pour la rentabilité</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>Le <span class="text-blue-400">Trappeur</span> est le métier potentiellement le plus rentable</li>
+              <li>L'<span class="text-blue-400">Herboriste</span> et le <span class="text-blue-400">Mineur</span> offrent un bon équilibre entre difficulté et profits</li>
+              <li>Privilégiez les ressources de haut niveau pour maximiser vos gains</li>
+              <li>Investissez dans les meilleurs outils pour optimiser vos récoltes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Le saviez-vous -->
+    <section class="bg-indigo-900 bg-opacity-50 rounded-lg p-6">
+      <h2 class="text-2xl font-bold mb-4">Le saviez-vous ?</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-bold text-lg mb-2">Écosystème et récolte</h3>
+          <p>Dans Wakfu, les ressources ne sont pas infinies : un écosystème dynamique régit la régénération des plantes, minerais et autres ressources naturelles. Surexploiter une zone peut entraîner la diminution temporaire des ressources disponibles.</p>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-lg mb-2">Bonus de nation</h3>
+          <p>Chaque nation peut offrir des bonus spécifiques aux métiers selon les décisions des gouverneurs. Renseignez-vous sur les bonus actifs dans votre nation pour optimiser votre progression !</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<script>
+  // Gestion des filtres
+  const searchInput = document.getElementById('search-input');
+  const difficultyFilter = document.getElementById('difficulty-filter');
+  const profitabilityFilter = document.getElementById('profitability-filter');
+  const metierCards = document.querySelectorAll('.metier-card');
+
+  function filterMetiers() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const difficultyValue = difficultyFilter.value;
+    const profitabilityValue = profitabilityFilter.value;
+
+    metierCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const difficulty = card.getAttribute('data-difficulty');
+      const profitability = card.getAttribute('data-profitability');
+      
+      const matchesSearch = title.includes(searchTerm);
+      const matchesDifficulty = difficultyValue === '' || difficulty === difficultyValue;
+      const matchesProfitability = profitabilityValue === '' || profitability === profitabilityValue;
+      
+      if (matchesSearch && matchesDifficulty && matchesProfitability) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  searchInput.addEventListener('input', filterMetiers);
+  difficultyFilter.addEventListener('change', filterMetiers);
+  profitabilityFilter.addEventListener('change', filterMetiers);
+
+  // Animation des cartes de métiers
+  metierCards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add('animate-fade-in');
+    }, 100 * index);
+  });
+</script>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .metier-card {
+    opacity: 0;
+  }
+</style> 

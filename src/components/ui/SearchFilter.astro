@@ -1,0 +1,298 @@
+---
+interface Props {
+  title?: string;
+  filters: {
+    id: string;
+    label: string;
+    options: { value: string; label: string; count?: number }[];
+    type?: 'checkbox' | 'radio' | 'select' | 'tag';
+    defaultValue?: string | string[];
+  }[];
+  showReset?: boolean;
+  showCount?: boolean;
+  compact?: boolean;
+  className?: string;
+}
+
+const { 
+  title = "Filtres", 
+  filters, 
+  showReset = true, 
+  showCount = true, 
+  compact = false,
+  className = ""
+} = Astro.props;
+
+// Générer un ID unique pour ce composant
+const componentId = `filter-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div id={componentId} class={`search-filter ${compact ? 'search-filter-compact' : ''} ${className}`}>
+  {title && <h3 class="text-lg font-semibold mb-4">{title}</h3>}
+  
+  <div class="filter-container space-y-6">
+    {filters.map((filter) => (
+      <div class="filter-group" data-filter-id={filter.id}>
+        <h4 class="text-sm font-medium mb-3 text-gray-700 dark:text-gray-300">{filter.label}</h4>
+        
+        {filter.type === 'select' && (
+          <div class="relative">
+            <select 
+              id={`filter-${filter.id}`} 
+              class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md shadow-sm focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary focus:border-wakfu-primary dark:focus:border-wakfu-secondary sm:text-sm"
+              data-filter-select={filter.id}
+            >
+              {filter.options.map((option) => (
+                <option value={option.value} selected={filter.defaultValue === option.value}>
+                  {option.label}
+                  {showCount && option.count !== undefined && ` (${option.count})`}
+                </option>
+              ))}
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500 dark:text-gray-400">
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+        )}
+        
+        {filter.type === 'tag' && (
+          <div class="flex flex-wrap gap-2">
+            {filter.options.map((option) => (
+              <button 
+                type="button" 
+                class="tag-filter px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                data-filter-tag={filter.id}
+                data-value={option.value}
+                data-active="false"
+              >
+                {option.label}
+                {showCount && option.count !== undefined && <span class="ml-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700 px-1.5">{option.count}</span>}
+              </button>
+            ))}
+          </div>
+        )}
+        
+        {filter.type === 'checkbox' && (
+          <div class="space-y-2">
+            {filter.options.map((option) => (
+              <div class="flex items-center">
+                <input 
+                  id={`filter-${filter.id}-${option.value}`} 
+                  type="checkbox"
+                  name={filter.id}
+                  value={option.value}
+                  class="h-4 w-4 rounded border-gray-300 dark:border-gray-700 text-wakfu-primary dark:text-wakfu-secondary focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary"
+                  data-filter-checkbox={filter.id}
+                  checked={Array.isArray(filter.defaultValue) && filter.defaultValue.includes(option.value)}
+                />
+                <label for={`filter-${filter.id}-${option.value}`} class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                  {option.label}
+                  {showCount && option.count !== undefined && <span class="ml-1 text-xs text-gray-500 dark:text-gray-400">({option.count})</span>}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+        
+        {filter.type === 'radio' && (
+          <div class="space-y-2">
+            {filter.options.map((option) => (
+              <div class="flex items-center">
+                <input 
+                  id={`filter-${filter.id}-${option.value}`} 
+                  type="radio"
+                  name={filter.id}
+                  value={option.value}
+                  class="h-4 w-4 border-gray-300 dark:border-gray-700 text-wakfu-primary dark:text-wakfu-secondary focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary"
+                  data-filter-radio={filter.id}
+                  checked={filter.defaultValue === option.value}
+                />
+                <label for={`filter-${filter.id}-${option.value}`} class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                  {option.label}
+                  {showCount && option.count !== undefined && <span class="ml-1 text-xs text-gray-500 dark:text-gray-400">({option.count})</span>}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+  
+  {showReset && (
+    <button 
+      type="button" 
+      class="reset-filters mt-6 text-sm font-medium text-wakfu-primary dark:text-wakfu-secondary hover:underline"
+    >
+      Réinitialiser les filtres
+    </button>
+  )}
+</div>
+
+<script define:vars={{ componentId, filters }}>
+document.addEventListener('DOMContentLoaded', () => {
+  const filterContainer = document.getElementById(componentId);
+  if (!filterContainer) return;
+  
+  // Obtenir tous les éléments de filtre
+  const selects = filterContainer.querySelectorAll('[data-filter-select]');
+  const tags = filterContainer.querySelectorAll('[data-filter-tag]');
+  const checkboxes = filterContainer.querySelectorAll('[data-filter-checkbox]');
+  const radios = filterContainer.querySelectorAll('[data-filter-radio]');
+  const resetButton = filterContainer.querySelector('.reset-filters');
+  
+  // Stocker l'état des filtres
+  const filterState = {};
+  
+  // Initialiser l'état des filtres
+  filters.forEach(filter => {
+    if (filter.defaultValue) {
+      filterState[filter.id] = filter.defaultValue;
+    } else {
+      filterState[filter.id] = filter.type === 'checkbox' ? [] : '';
+    }
+  });
+  
+  // Fonction pour déclencher l'événement de changement de filtre
+  function triggerFilterChange() {
+    const event = new CustomEvent('filter-change', { 
+      detail: { filters: filterState },
+      bubbles: true
+    });
+    filterContainer.dispatchEvent(event);
+  }
+  
+  // Écouter les changements de select
+  selects.forEach(select => {
+    const filterId = select.dataset.filterSelect;
+    select.addEventListener('change', () => {
+      filterState[filterId] = select.value;
+      triggerFilterChange();
+    });
+  });
+  
+  // Écouter les clics sur les tags
+  tags.forEach(tag => {
+    const filterId = tag.dataset.filterTag;
+    const value = tag.dataset.value;
+    
+    tag.addEventListener('click', () => {
+      const isActive = tag.dataset.active === 'true';
+      
+      // Mettre à jour l'état du tag
+      tag.dataset.active = isActive ? 'false' : 'true';
+      
+      // Mettre à jour l'apparence
+      if (isActive) {
+        tag.classList.remove('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
+      } else {
+        tag.classList.add('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
+      }
+      
+      // Mettre à jour l'état du filtre
+      if (Array.isArray(filterState[filterId])) {
+        if (isActive) {
+          filterState[filterId] = filterState[filterId].filter(v => v !== value);
+        } else {
+          filterState[filterId].push(value);
+        }
+      } else {
+        filterState[filterId] = isActive ? '' : value;
+        
+        // Si c'est un filtre de type tag unique, désactiver les autres tags
+        if (!isActive) {
+          tags.forEach(otherTag => {
+            if (otherTag.dataset.filterTag === filterId && otherTag !== tag) {
+              otherTag.dataset.active = 'false';
+              otherTag.classList.remove('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
+            }
+          });
+        }
+      }
+      
+      triggerFilterChange();
+    });
+  });
+  
+  // Écouter les changements de checkbox
+  checkboxes.forEach(checkbox => {
+    const filterId = checkbox.dataset.filterCheckbox;
+    const value = checkbox.value;
+    
+    checkbox.addEventListener('change', () => {
+      if (!Array.isArray(filterState[filterId])) {
+        filterState[filterId] = [];
+      }
+      
+      if (checkbox.checked) {
+        filterState[filterId].push(value);
+      } else {
+        filterState[filterId] = filterState[filterId].filter(v => v !== value);
+      }
+      
+      triggerFilterChange();
+    });
+  });
+  
+  // Écouter les changements de radio
+  radios.forEach(radio => {
+    const filterId = radio.dataset.filterRadio;
+    
+    radio.addEventListener('change', () => {
+      if (radio.checked) {
+        filterState[filterId] = radio.value;
+        triggerFilterChange();
+      }
+    });
+  });
+  
+  // Réinitialiser les filtres
+  resetButton?.addEventListener('click', () => {
+    // Réinitialiser les select
+    selects.forEach(select => {
+      select.selectedIndex = 0;
+      filterState[select.dataset.filterSelect] = select.value;
+    });
+    
+    // Réinitialiser les tags
+    tags.forEach(tag => {
+      tag.dataset.active = 'false';
+      tag.classList.remove('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
+      filterState[tag.dataset.filterTag] = '';
+    });
+    
+    // Réinitialiser les checkbox
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false;
+      const filterId = checkbox.dataset.filterCheckbox;
+      if (!filterState[filterId]) filterState[filterId] = [];
+      else filterState[filterId] = [];
+    });
+    
+    // Réinitialiser les radio
+    radios.forEach(radio => {
+      radio.checked = radio.getAttribute('data-default') === 'true';
+      if (radio.checked) {
+        filterState[radio.dataset.filterRadio] = radio.value;
+      }
+    });
+    
+    triggerFilterChange();
+  });
+  
+  // Déclencher un événement initial pour définir l'état par défaut
+  triggerFilterChange();
+});
+</script>
+
+<style>
+.search-filter-compact .filter-container {
+  @apply flex flex-wrap gap-4 space-y-0;
+}
+
+.search-filter-compact .filter-group {
+  @apply mb-0;
+}
+</style> 

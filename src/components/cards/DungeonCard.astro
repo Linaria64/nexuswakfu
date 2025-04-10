@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import defaultDungeonImage from '@assets/images/donjons/default.jpg';
+
+interface Props {
+  dungeon: CollectionEntry<'donjons'>;
+}
+
+const { dungeon } = Astro.props;
+const imageUrl = dungeon.data.image.startsWith('/') 
+  ? defaultDungeonImage 
+  : dungeon.data.image;
+
+const difficultyColor = {
+  easy: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300',
+  medium: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300',
+  hard: 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300',
+  extreme: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+};
+
+const difficultyText = {
+  easy: 'Facile',
+  medium: 'Moyen',
+  hard: 'Difficile',
+  extreme: 'Extrême'
+};
+
+const playersText = {
+  solo: 'Solo',
+  group: 'Groupe',
+  both: 'Solo/Groupe'
+};
+---
+
+<a 
+  href={`/donjons/${dungeon.slug}/`}
+  class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group"
+>
+  <div class="relative">
+    <Image 
+      src={imageUrl}
+      alt={dungeon.data.name}
+      width={600}
+      height={300}
+      class="w-full h-48 object-cover"
+    />
+    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+      <div class="flex justify-between items-end">
+        <h3 class="text-white font-bold text-xl">{dungeon.data.name}</h3>
+        <span class="bg-wakfu-primary/90 text-white text-sm py-1 px-2 rounded-md">
+          Niv. {dungeon.data.level}
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="p-4">
+    <div class="flex items-center mb-3 space-x-2">
+      <span class={`px-2 py-1 rounded text-xs ${difficultyColor[dungeon.data.difficulty]}`}>
+        {difficultyText[dungeon.data.difficulty]}
+      </span>
+      <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs text-gray-800 dark:text-gray-300">
+        {playersText[dungeon.data.players]}
+      </span>
+      <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs text-gray-800 dark:text-gray-300">
+        {dungeon.data.region}
+      </span>
+    </div>
+    
+    <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-3">
+      {dungeon.data.description}
+    </p>
+    
+    <div class="flex justify-between items-center">
+      <div class="flex items-center space-x-1">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-wakfu-secondary">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+        </svg>
+        <span class="text-sm text-gray-600 dark:text-gray-400">{dungeon.data.rewards.length} récompenses</span>
+      </div>
+      <span class="text-wakfu-primary dark:text-wakfu-secondary font-medium text-sm group-hover:underline">
+        Voir le guide →
+      </span>
+    </div>
+  </div>
+</a> 

@@ -1,0 +1,233 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Récupérer les données des collections
+const classes = await getCollection('classes');
+const metiers = await getCollection('metiers');
+const donjons = await getCollection('donjons');
+
+// Définir les statistiques du site
+const stats = [
+  { label: "Classes", value: classes.length, icon: "👤" },
+  { label: "Métiers", value: metiers.length, icon: "🛠️" },
+  { label: "Donjons", value: donjons.filter(d => d.data && d.data.name).length, icon: "🏰" },
+  { label: "Quêtes", value: "50+", icon: "📜" }
+];
+
+// Définir les fonctionnalités
+const features = [
+  {
+    title: "Classes",
+    description: "Découvrez les 18 classes uniques de Wakfu et leurs spécificités",
+    icon: "👤",
+    link: "/classes/"
+  },
+  {
+    title: "Donjons",
+    description: "Stratégies et astuces pour tous les donjons du niveau 1 au 230",
+    icon: "🏰",
+    link: "/donjons/"
+  },
+  {
+    title: "Métiers",
+    description: "Guides des métiers de récolte et d'artisanat",
+    icon: "🛠️",
+    link: "/metiers/"
+  },
+  {
+    title: "Quêtes",
+    description: "Parcours des quêtes principales et secondaires",
+    icon: "📜",
+    link: "/quetes/"
+  }
+];
+---
+
+<MainLayout title="Accueil - Nexus Wakfu" description="Votre ressource complète sur le monde de Wakfu avec des guides, des tutoriels et des informations sur les classes, donjons et métiers" showAnnouncement={true}>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gray-900 border-b border-gray-800">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+        <span class="text-wakfu-secondary">Nexus</span> Wakfu
+      </h1>
+      <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+        Wakfu est un MMORPG tactique au tour par tour qui se déroule dans l'univers du Krosmoz. Explorez un monde coloré, maîtrisez l'une des 18 classes uniques et participez à un écosystème dynamique où vos actions ont un impact réel sur le monde.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="https://zenithwakfu.com" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          Builder Zenith
+        </a>
+        <a href="/donjons/" class="btn-outline">
+          Stratégies de Donjons
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Statistiques du site -->
+  <section class="py-12 bg-gray-950">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {stats.map(stat => (
+          <div class="bg-gray-900 border border-gray-800 rounded-lg p-6 text-center">
+            <div class="text-4xl mb-2">{stat.icon}</div>
+            <div class="text-3xl font-bold text-wakfu-secondary mb-2">{stat.value}</div>
+            <div class="text-gray-400">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Présentation du jeu -->
+  <section class="py-16 bg-gray-900">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title text-center mb-8">À propos de Wakfu</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h3 class="text-2xl font-bold mb-4 text-wakfu-secondary">Un monde riche et évolutif</h3>
+          <p class="text-gray-300 mb-4">
+            Dans Wakfu, vous incarnez un héros dans un monde fantasy coloré qui a été dévasté par les actions d'Ogrest. Six cents ans après le déluge provoqué par cette créature, vous devez reconstruire le monde et affronter de nouvelles menaces.
+          </p>
+          <p class="text-gray-300 mb-4">
+            Ce qui distingue Wakfu des autres MMORPGs est son écosystème unique où les actions des joueurs ont un impact réel : cueillir des ressources sans les replanter peut mener à l'extinction d'espèces, les monstres ont des cycles de reproduction, et l'économie est entièrement gérée par les joueurs.
+          </p>
+          <p class="text-gray-300">
+            Le système politique permet aux joueurs d'élire des gouverneurs pour chaque nation, qui peuvent établir des lois et façonner le développement de leurs territoires.
+          </p>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+          <h3 class="text-2xl font-bold mb-4 text-wakfu-secondary">Caractéristiques uniques</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <span class="text-wakfu-secondary mr-2">✦</span>
+              <span>Combats tactiques au tour par tour sur une grille</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-wakfu-secondary mr-2">✦</span>
+              <span>18 classes uniques avec des mécaniques distinctes</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-wakfu-secondary mr-2">✦</span>
+              <span>Système écologique dynamique influencé par les joueurs</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-wakfu-secondary mr-2">✦</span>
+              <span>Politique et gouvernance gérées par la communauté</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-wakfu-secondary mr-2">✦</span>
+              <span>Économie entièrement dirigée par les joueurs</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-wakfu-secondary mr-2">✦</span>
+              <span>Système de guildes et d'alliances développé</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-wakfu-secondary mr-2">✦</span>
+              <span>PvP optionnel et zones à risques</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Fonctionnalités -->
+  <section class="py-16 bg-gray-950 border-y border-gray-800">
+    <div class="container mx-auto px-4">
+      <h2 class="section-title text-center mb-12">Explorez le contenu</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {features.map(feature => (
+          <a 
+            href={feature.link}
+            class="bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-wakfu-secondary transition-colors"
+          >
+            <div class="text-4xl mb-4">{feature.icon}</div>
+            <h3 class="text-xl font-bold mb-2 text-white">
+              {feature.title}
+            </h3>
+            <p class="text-gray-400">{feature.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Classes Populaires -->
+  <section class="py-16 bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center justify-between mb-10">
+        <h2 class="section-title mb-0">Classes populaires</h2>
+        <a href="/classes/" class="text-wakfu-secondary hover:underline flex items-center">
+          Voir toutes les classes
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {classes.slice(0, 4).map(wakfuClass => (
+          <a 
+            href={`/classes/${wakfuClass.slug}/`}
+            class="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden hover:border-wakfu-secondary transition-colors"
+          >
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 text-white">
+                {wakfuClass.data.name}
+              </h3>
+              <p class="text-sm text-gray-500 mb-3">{wakfuClass.data.role}</p>
+              <p class="text-gray-400 line-clamp-3">
+                {wakfuClass.data.description?.substring(0, 120)}...
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Call to Action -->
+  <section class="py-16 bg-gray-950 border-t border-gray-800">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6 text-white">Prêt à rejoindre l'aventure ?</h2>
+      <p class="text-xl mb-8 max-w-3xl mx-auto text-gray-300">
+        Explorez nos guides complets et maîtrisez tous les aspects du monde de Wakfu dès aujourd'hui.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a 
+          href="https://www.wakfu.com/fr/mmorpg/telecharger" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary"
+        >
+          Télécharger Wakfu
+        </a>
+        <a 
+          href="/classes/" 
+          class="btn-outline"
+        >
+          Choisir une classe
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .btn-primary {
+    @apply bg-wakfu-primary hover:bg-opacity-90 text-white px-6 py-3 rounded-lg font-medium inline-block transition-colors;
+  }
+  
+  .btn-outline {
+    @apply border border-wakfu-secondary text-wakfu-secondary hover:bg-wakfu-secondary hover:bg-opacity-10 px-6 py-3 rounded-lg font-medium inline-block transition-colors;
+  }
+  
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-white;
+  }
+</style> 
