@@ -1,104 +1,112 @@
 ---
 id: "xelor"
 name: "Xelor"
-icon: {
-  src: "/images/classes/icons/xelor.png",
+icon:
+  src: "/images/classes/icons/xelor.png"
   alt: "Icône de la classe Xelor"
-}
-image: {
-  src: "/images/classes/xelor.jpg",
+image:
+  src: "/images/classes/xelor.jpg"
   alt: "Illustration de la classe Xelor"
-}
-description: "Le Xelor est le contrôleur du temps et des horloges. Une classe difficile à manier mais avec le potentiel de dégâts à distance le plus élevé du jeu."
-role: "DPS distance"
+description: "Les Xelors sont les maîtres du temps, capables de manipuler les tours de jeu et d'enchaîner des combos dévastateurs grâce à leurs horloges."
+role: "DPT distance"
 difficulty: 4
 combatStyle: "Manipulation du temps"
-strengths: "Dégâts à distance, système de PA amélioré, mobilité"
-weaknesses: "Complexité élevée, courbe d'apprentissage, fragilité"
+strengths: "Dégâts à distance, Contrôle temporel, Combos"
+weaknesses: "Complexité élevée, Setup nécessaire, Fragilité"
 mainSpells:
   - name: "Aiguille"
-    description: "Attaque à distance de base"
+    description: "Attaque à distance qui pose une horloge"
     level: 1
-    image: {
-      src: "/images/spells/xelor/aiguille.png",
+    image:
+      src: "/images/spells/xelor/aiguille.png"
       alt: "Sort Aiguille"
-    }
-  - name: "Horloge"
-    description: "Crée une horloge qui affecte le temps"
-    level: 5
-    image: {
-      src: "/images/spells/xelor/horloge.png",
-      alt: "Sort Horloge"
-    }
-  - name: "Téléfrag"
-    description: "Téléportation tactique avec dégâts"
-    level: 15
-    image: {
-      src: "/images/spells/xelor/telefrag.png",
-      alt: "Sort Téléfrag"
-    }
   - name: "Cadran"
-    description: "Manipulation des tours d'horloge"
-    level: 20
-    image: {
-      src: "/images/spells/xelor/cadran.png",
+    description: "Gestion des horloges et du temps"
+    level: 3
+    image:
+      src: "/images/spells/xelor/cadran.png"
       alt: "Sort Cadran"
-    }
+  - name: "Téléfrag"
+    description: "Téléportation et dégâts"
+    level: 6
+    image:
+      src: "/images/spells/xelor/telefrag.png"
+      alt: "Sort Téléfrag"
+  - name: "Ralentissement"
+    description: "Contrôle du temps ennemi"
+    level: 9
+    image:
+      src: "/images/spells/xelor/ralentissement.png"
+      alt: "Sort Ralentissement"
 builds:
-  - name: "Xelor AP"
-    type: "DPS combo"
-    minLevel: 100
-    description: "Maximise les actions par tour via les combos d'horloges"
-  - name: "Xelor Zone"
-    type: "DPS AOE"
-    minLevel: 120
-    description: "Spécialisation dans les dégâts de zone avec positionnement"
+  - name: "Xelor Combo"
+    type: "DPT combo"
+    minLevel: 200
+    description: "Build focalisé sur les combos d'horloges"
+  - name: "Xelor Contrôle"
+    type: "DPT/Contrôle"
+    minLevel: 200
+    description: "Build orienté manipulation du temps"
 ---
 
-# Guide du Xelor dans Wakfu
+# Guide du Xelor - Débutants
 
-Le Xelor est l'une des classes les plus complexes mais aussi les plus puissantes de Wakfu. Maître du temps et des horloges, il peut infliger des dégâts colossaux mais nécessite une bonne compréhension de ses mécaniques uniques.
+Le Xelor est la classe parfaite pour ceux qui aiment les mécaniques complexes et les combos élaborés. Si tu es prêt à investir du temps pour maîtriser l'une des classes les plus puissantes du jeu, le Xelor est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Disciples du dieu Xelor, divinité du temps, ces magiciens ont appris à manipuler le flux temporel à leur avantage. Ils utilisent des horloges mystiques pour stocker et exploiter cette énergie temporelle. Leur apparence est souvent caractérisée par des bandages qui les aident à contenir leur énergie temporelle.
+### Potentiel de dégâts énorme
+- Meilleurs combos du jeu
+- Dégâts explosifs en fin de setup
+- Capacité à one-shot les boss
 
-## Gameplay et Mécaniques
+### Manipulation du temps
+- Contrôle des PA ennemis
+- Gestion des tours de jeu
+- Ralentissement des adversaires
 
-### Manipulation du Temps
+### Mobilité tactique
+- Téléportations multiples
+- Positionnement précis
+- Contrôle du terrain
 
-La mécanique principale du Xelor repose sur plusieurs systèmes complexes :
+### Deux styles de jeu
+- **Combo** : Pour maximiser les dégâts avec les horloges
+- **Contrôle** : Pour dominer le tempo du combat
 
-- **Horloges et Tours d'Horloge** : Des compteurs qui s'accumulent et permettent d'activer des effets puissants
-- **Le Cadran** : Une mécanique qui modifie vos sorts selon votre position sur celui-ci
-- **Rebonds** : Certains sorts peuvent rebondir sur les cibles pour des effets amplifiés
+### Progression gratifiante
+- Satisfaction des combos réussis
+- Maîtrise technique valorisante
+- Toujours de nouvelles choses à apprendre
 
-Le Xelor possède également d'excellentes capacités de mouvement grâce à ses téléportations, ce qui lui permet de se repositionner efficacement.
+## ⚔️ En combat
 
-### Potentiel de Dégâts
+### Setup stratégique
+- Placement des horloges
+- Préparation des combos
+- Gestion des ressources
 
-Le Xelor dispose du potentiel de dégâts à distance le plus élevé du jeu :
-- **Excellents dégâts en zone** pour éliminer des groupes d'ennemis
-- **Excellents dégâts monocibles** pour cibler les adversaires prioritaires
-- **Capacité à augmenter drastiquement ses PA** pour enchaîner plus d'actions par tour
+### Exécution technique
+- Timing précis des sorts
+- Enchaînements complexes
+- Adaptation constante
 
-Cette puissance est néanmoins contrebalancée par une complexité élevée qui requiert une bonne maîtrise de la classe.
+## ❌ Faiblesses
 
-## Synergies avec d'autres classes
+### Complexité élevée
+- Courbe d'apprentissage raide
+- Nombreuses mécaniques à gérer
+- Nécessite beaucoup de pratique
 
-Bien que relativement autonome, le Xelor s'associe bien avec certaines classes :
+### Vulnérabilité
+- Fragile sans setup
+- Sensible aux interruptions
+- Dépendant du placement
 
-- **Zobal** : Offre protection et aide au placement, compensant la fragilité du Xelor
-- **Enutrof** : Contrôle les ennemis à distance et retire des résistances, amplifiant l'efficacité des sorts du Xelor
-- **Pandawa** : Peut regrouper les ennemis pour maximiser les dégâts de zone du Xelor
+## 🤔 Choisis ton style
 
-## Conseils pour bien débuter
+Es-tu plutôt :
+- **Xelor Combo** qui cherche les dégâts maximaux
+- **Xelor Contrôle** qui manipule le temps du combat
 
-1. Prenez le temps d'apprendre et comprendre le système d'horloges - c'est fondamental
-2. Entraînez-vous à prévoir et calculer les rebonds de vos sorts
-3. Mémorisez la position de votre cadran pour optimiser vos effets
-4. Pratiquez les combos permettant d'obtenir des PA supplémentaires
-5. Utilisez vos téléportations à la fois offensivement et défensivement
-6. Soyez patient - la maîtrise de cette classe demande plus de temps que les autres
-
-Le Xelor est idéal pour les joueurs qui apprécient la complexité et qui sont prêts à investir du temps pour maîtriser une classe au potentiel extraordinaire. La satisfaction de réussir des combos parfaits compense largement l'effort d'apprentissage initial. 
+À toi de choisir comment tu veux maîtriser le temps ! 

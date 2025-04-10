@@ -8,55 +8,105 @@ image:
   src: "/images/classes/eniripsa.jpg"
   alt: "Illustration de la classe Eniripsa"
 description: "Les Eniripsas sont des guérisseurs dévoués qui utilisent le pouvoir des mots pour soigner leurs alliés et affaiblir leurs ennemis. Ils sont essentiels à la survie de tout groupe."
-role: "Soigneur, Support" # Placeholder role
-difficulty: 1 # Placeholder difficulty
-combatStyle: "Soin, Distance, Support" # Placeholder style
-strengths: "Soins puissants, Buffs alliés, Peut retirer des états négatifs" # Placeholder strengths
-weaknesses: "Faibles dégâts, Vulnérable en mêlée" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+role: "Healer, Support"
+difficulty: 1
+combatStyle: "Soin, Support, Distance"
+strengths: "Soins puissants, Buffs d'équipe, Polyvalence"
+weaknesses: "Fragilité, DPT limités"
+mainSpells:
   - name: "Mot Soignant"
-    description: "Placeholder description"
+    description: "Soin puissant sur un allié"
     level: 1
     image:
-      src: "/images/spells/eniripsa/placeholder1.png"
+      src: "/images/spells/eniripsa/mot-soignant.png"
       alt: "Sort Mot Soignant"
   - name: "Mot Revitalisant"
-    description: "Placeholder description"
+    description: "Soin de zone et régénération"
     level: 3
     image:
-      src: "/images/spells/eniripsa/placeholder2.png"
+      src: "/images/spells/eniripsa/mot-revitalisant.png"
       alt: "Sort Mot Revitalisant"
   - name: "Mot Stimulant"
-    description: "Placeholder description"
+    description: "Boost les caractéristiques d'un allié"
     level: 6
     image:
-      src: "/images/spells/eniripsa/placeholder3.png"
+      src: "/images/spells/eniripsa/mot-stimulant.png"
       alt: "Sort Mot Stimulant"
-  - name: "Mot de Frayeur"
-    description: "Placeholder description"
+  - name: "Mot de Protection"
+    description: "Crée un bouclier absorbant les dégâts"
     level: 9
     image:
-      src: "/images/spells/eniripsa/placeholder4.png"
-      alt: "Sort Mot de Frayeur"
-builds: # Placeholder builds - needs actual data
-  - name: "Eniripsa Soin Eau"
-    type: "Soigneur"
-    minLevel: 50
-    description: "Placeholder description pour build Soin"
-  - name: "Eniripsa Support/DPS Air"
-    type: "Support/DPS distance"
-    minLevel: 120
-    description: "Placeholder description pour build Support/DPS"
+      src: "/images/spells/eniripsa/mot-protection.png"
+      alt: "Sort Mot de Protection"
+builds:
+  - name: "Eniripsa Soigneur"
+    type: "Healer"
+    minLevel: 200
+    description: "Build focalisé sur les soins et le support"
+  - name: "Eniripsa Hybride"
+    type: "Support/DPT"
+    minLevel: 200
+    description: "Build équilibré entre soins et dégâts"
 ---
 
-# Guide de l'Eniripsa dans Wakfu
+# Guide de l'Eniripsa - Débutants
 
-L'Eniripsa est le pilier de tout groupe, capable de maintenir ses alliés en vie grâce à ses puissants sorts de soin. Si vous aimez aider les autres, cette classe est pour vous.
+L'Eniripsa est la classe de soutien par excellence, parfaite pour ceux qui aiment prendre soin de leurs alliés. Si tu préfères garder ton équipe en vie et les rendre plus forts plutôt que de faire des dégâts, l'Eniripsa est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Disciples de la déesse Eniripsa, la déesse de la guérison, ces êtres ailés consacrent leur vie à soulager la souffrance. Leurs mots ont le pouvoir de refermer les blessures et d'apaiser les esprits.
+### Soins exceptionnels
+- Meilleurs soins du jeu
+- Soins directs et sur la durée
+- Capacité à gérer les situations critiques
 
-## Gameplay et Mécaniques
+### Support polyvalent
+- Buffs variés pour l'équipe
+- Protection via boucliers
+- Boost de caractéristiques
 
-Le gameplay de l'Eniripsa se concentre sur le soin des alliés, l'application de buffs et le débuff des ennemis. Ils utilisent une mécanique de "Marques" pour déclencher des effets supplémentaires. 
+### Facilité d'apprentissage
+- Mécaniques simples à comprendre
+- Gameplay intuitif
+- Progression naturelle
+
+### Deux styles de jeu
+- **Soigneur Pur** : Focus total sur les soins et le support
+- **Hybride** : Balance entre soins et dégâts
+
+### Utilité garantie
+- Toujours recherché en groupe
+- Indispensable en donjon
+- Apprécié en PvP
+
+## ⚔️ En combat
+
+### Rôle vital
+- Maintien en vie de l'équipe
+- Gestion des ressources de soin
+- Anticipation des dégâts
+
+### Positionnement
+- Placement sécurisé à distance
+- Vue d'ensemble du combat
+- Protection des alliés vulnérables
+
+## ❌ Faiblesses
+
+### Limitations offensives
+- Dégâts personnels faibles
+- Peu d'options offensives
+- Dépendant des alliés pour les dégâts
+
+### Vulnérabilité
+- Faible en défense
+- Cible prioritaire des ennemis
+- Nécessite une bonne protection
+
+## 🤔 Choisis ton style
+
+Es-tu plutôt :
+- **Eniripsa Soigneur** qui se consacre entièrement au support
+- **Eniripsa Hybride** qui équilibre soins et dégâts
+
+À toi de choisir comment tu veux soutenir ton équipe ! 

@@ -8,55 +8,105 @@ image:
   src: "/images/classes/enutrof.jpg"
   alt: "Illustration de la classe Enutrof"
 description: "Les Enutrofs sont des chasseurs de trésors avides. Ils utilisent leur pelle pour dénicher des richesses et manipuler le terrain, tout en affaiblissant leurs ennemis."
-role: "Support, Entrave, DPS distance" # Placeholder role
-difficulty: 2 # Placeholder difficulty
-combatStyle: "Distance, Entrave, Invocation (Phorzerker)" # Placeholder style
-strengths: "Retrait PM/PO, Génération de butin, Polyvalence (peut tanker en Phorzerker)" # Placeholder strengths
-weaknesses: "Dégâts directs moyens, Dépendant de la prospection" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+role: "Support, Entrave, DPT distance"
+difficulty: 2
+combatStyle: "Distance, Entrave, Invocation"
+strengths: "Retrait PM/PO, Contrôle de zone, Prospection"
+weaknesses: "Dégâts limités, Mobilité réduite"
+mainSpells:
   - name: "Pelle du Jugement"
-    description: "Placeholder description"
+    description: "Attaque à distance qui retire des PM"
     level: 1
     image:
-      src: "/images/spells/enutrof/placeholder1.png"
+      src: "/images/spells/enutrof/pelle.png"
       alt: "Sort Pelle du Jugement"
   - name: "Maladresse"
-    description: "Placeholder description"
+    description: "Réduit la portée de l'ennemi"
     level: 3
     image:
-      src: "/images/spells/enutrof/placeholder2.png"
+      src: "/images/spells/enutrof/maladresse.png"
       alt: "Sort Maladresse"
   - name: "Filouterie"
-    description: "Placeholder description"
+    description: "Vole des kamas et des bonus"
     level: 6
     image:
-      src: "/images/spells/enutrof/placeholder3.png"
+      src: "/images/spells/enutrof/filouterie.png"
       alt: "Sort Filouterie"
   - name: "Phorzerker"
-    description: "Placeholder description"
+    description: "Invoque un gardien puissant"
     level: 9
     image:
-      src: "/images/spells/enutrof/placeholder4.png"
+      src: "/images/spells/enutrof/phorzerker.png"
       alt: "Sort Phorzerker"
-builds: # Placeholder builds - needs actual data
-  - name: "Enutrof Eau Retrait PM"
-    type: "Support/Entrave distance"
-    minLevel: 50
-    description: "Placeholder description pour build Eau"
-  - name: "Enutrof Feu DPS Zone"
-    type: "DPS distance/zone"
-    minLevel: 120
-    description: "Placeholder description pour build Feu"
+builds:
+  - name: "Enutrof Contrôle"
+    type: "Support/Entrave"
+    minLevel: 200
+    description: "Build focalisé sur le contrôle et le support"
+  - name: "Enutrof DPT"
+    type: "DPT distance"
+    minLevel: 200
+    description: "Build orienté dégâts et zone"
 ---
 
-# Guide de l'Enutrof dans Wakfu
+# Guide de l'Enutrof - Débutants
 
-L'Enutrof est un maître de la prospection et de l'entrave. Si vous aimez contrôler le rythme du combat et amasser des richesses, cette classe est faite pour vous.
+L'Enutrof est la classe parfaite pour ceux qui aiment contrôler leurs ennemis tout en amassant des trésors. Si tu rêves de devenir riche tout en dominant le champ de bataille, l'Enutrof est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Disciples du dieu Enutrof, le dieu de la fortune, ces vieillards rusés passent leur vie à chercher des trésors. Leur avarice n'a d'égale que leur habileté à manipuler leurs adversaires.
+### Maître du contrôle
+- Retrait de PM efficace
+- Réduction de portée
+- Contrôle de zone
 
-## Gameplay et Mécaniques
+### Prospection unique
+- Bonus de drop
+- Génération de kamas
+- Découverte de trésors
 
-Le gameplay de l'Enutrof repose sur le retrait de PM et de PO, la découverte de Gisements sur le terrain et la transformation en Phorzerker pour gagner en résistance et en dégâts de mêlée. Ils excellent dans le rôle de support et d'entraveur à distance. 
+### Support polyvalent
+- Phorzerker puissant
+- Buffs d'équipe
+- Debuffs ennemis
+
+### Deux styles de jeu
+- **Contrôle** : Pour dominer le terrain
+- **DPT** : Pour les dégâts de zone
+
+### Utilité garantie
+- Indispensable en donjon
+- Excellent en PvP
+- Fort en farming
+
+## ⚔️ En combat
+
+### Gestion du terrain
+- Placement des pièges
+- Contrôle des mouvements
+- Création de zones sûres
+
+### Tactiques avancées
+- Timing des entraves
+- Utilisation du Phorzerker
+- Maximisation des drops
+
+## ❌ Faiblesses
+
+### Limitations offensives
+- Dégâts modérés
+- Setup nécessaire
+- Temps de mise en place
+
+### Défis spécifiques
+- Mobilité réduite
+- Vulnérabilité aux rushes
+- Dépendant du placement
+
+## 🤔 Choisis ton style
+
+Es-tu plutôt :
+- **Enutrof Contrôle** qui domine le terrain
+- **Enutrof DPT** qui fait pleuvoir les dégâts
+
+À toi de choisir comment tu veux devenir le plus riche ! 

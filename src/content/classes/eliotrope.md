@@ -8,55 +8,105 @@ image:
   src: "/images/classes/eliotrope.jpg"
   alt: "Illustration de la classe Eliotrope"
 description: "Les Eliotropes maîtrisent l'énergie Wakfu pour créer des portails de téléportation. Ils peuvent se déplacer rapidement sur le terrain et rediriger leurs sorts à travers les portails."
-role: "DPS distance, Placement" # Placeholder role
-difficulty: 3 # Placeholder difficulty
-combatStyle: "Portails, Distance, Mobilité" # Placeholder style
-strengths: "Excellente mobilité, Placement d'équipe, Dégâts à distance via portails" # Placeholder strengths
-weaknesses: "Gameplay complexe, Vulnérable sans portails, Consomme beaucoup de Wakfu" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+role: "DPT distance, Placement"
+difficulty: 4
+combatStyle: "Portails, Distance, Mobilité"
+strengths: "Combos puissants, Mobilité d'équipe, Dégâts élevés"
+weaknesses: "Complexité technique, Setup nécessaire"
+mainSpells:
   - name: "Portail"
-    description: "Placeholder description"
+    description: "Crée un portail de téléportation"
     level: 1
     image:
-      src: "/images/spells/eliotrope/placeholder1.png"
+      src: "/images/spells/eliotrope/portail.png"
       alt: "Sort Portail"
   - name: "Rayon de Wakfu"
-    description: "Placeholder description"
+    description: "Attaque à distance traversant les portails"
     level: 3
     image:
-      src: "/images/spells/eliotrope/placeholder2.png"
+      src: "/images/spells/eliotrope/rayon.png"
       alt: "Sort Rayon de Wakfu"
   - name: "Affliction"
-    description: "Placeholder description"
+    description: "Dégâts et effets à travers les portails"
     level: 6
     image:
-      src: "/images/spells/eliotrope/placeholder3.png"
+      src: "/images/spells/eliotrope/affliction.png"
       alt: "Sort Affliction"
   - name: "Tempête"
-    description: "Placeholder description"
+    description: "Zone de dégâts autour des portails"
     level: 9
     image:
-      src: "/images/spells/eliotrope/placeholder4.png"
+      src: "/images/spells/eliotrope/tempete.png"
       alt: "Sort Tempête"
-builds: # Placeholder builds - needs actual data
-  - name: "Eliotrope Distance Air"
-    type: "DPS distance"
-    minLevel: 50
-    description: "Placeholder description pour build Air"
-  - name: "Eliotrope Mêlée Eau/Terre"
-    type: "DPS mêlée/Placement"
-    minLevel: 120
-    description: "Placeholder description pour build Mêlée"
+builds:
+  - name: "Eliotrope Air/Feu"
+    type: "DPT distance"
+    minLevel: 200
+    description: "Build focalisé sur les dégâts à travers les portails"
+  - name: "Eliotrope Terre/Air"
+    type: "DPT mêlée/Placement"
+    minLevel: 200
+    description: "Build orienté combat rapproché et positionnement"
 ---
 
-# Guide de l'Eliotrope dans Wakfu
+# Guide de l'Eliotrope - Débutants
 
-L'Eliotrope est une classe unique qui manipule l'espace grâce à ses portails. Si vous aimez un gameplay stratégique basé sur le positionnement et la mobilité, cette classe est pour vous.
+L'Eliotrope est la classe parfaite pour ceux qui aiment manipuler l'espace et créer des combos complexes. Si tu rêves de maîtriser les portails et de surprendre tes adversaires avec des attaques imprévisibles, l'Eliotrope est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Reflets du Roi-Dieu Yugo, les Eliotropes sont des voyageurs dimensionnels maîtrisant le Wakfu. Ils cherchent à comprendre leur origine et à maîtriser leur incroyable pouvoir.
+### Maître des portails
+- Téléportation à volonté
+- Redirection des sorts
+- Contrôle du terrain
 
-## Gameplay et Mécaniques
+### Combos dévastateurs
+- Multiplication des dégâts
+- Enchaînements complexes
+- Effets cumulatifs
 
-Le gameplay de l'Eliotrope est centré sur la création et l'utilisation de portails pour se téléporter, déplacer alliés et ennemis, et rediriger ses propres sorts. Ils possèdent également un état "Exalté" qui booste leurs capacités. 
+### Mobilité exceptionnelle
+- Déplacement d'équipe
+- Repositionnement tactique
+- Échappement facile
+
+### Deux styles de jeu
+- **Distance** : Pour les dégâts à travers les portails
+- **Hybride** : Pour le combat rapproché et le placement
+
+### Utilité garantie
+- Indispensable en groupe
+- Excellent en PvP
+- Capable en solo
+
+## ⚔️ En combat
+
+### Gestion des portails
+- Placement stratégique
+- Création de combos
+- Anticipation des besoins
+
+### Positionnement
+- Contrôle de l'espace
+- Création d'opportunités
+- Support de l'équipe
+
+## ❌ Faiblesses
+
+### Complexité
+- Courbe d'apprentissage raide
+- Nombreux mécanismes
+- Setup important
+
+### Défis spécifiques
+- Gestion des portails
+- Timing crucial
+- Vulnérabilité pendant le setup
+
+## 🤔 Choisis ton style
+
+Es-tu plutôt :
+- **Eliotrope Distance** qui frappe à travers les portails
+- **Eliotrope Hybride** qui contrôle le terrain
+
+À toi de choisir comment tu veux maîtriser les dimensions ! 

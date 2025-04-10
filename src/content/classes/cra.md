@@ -8,55 +8,105 @@ image:
   src: "/images/classes/cra.jpg"
   alt: "Illustration de la classe Cra"
 description: "Les Cras sont des archers experts qui excellent dans le combat à distance. Ils utilisent leurs flèches pour infliger des dégâts, entraver les ennemis et contrôler le champ de bataille."
-role: "DPS distance"
-difficulty: 2 # Placeholder difficulty
-combatStyle: "Distance, Contrôle" # Placeholder style
-strengths: "Grande portée, Dégâts constants, Entrave" # Placeholder strengths
-weaknesses: "Faible en mêlée, Dépendant de la ligne de vue" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
-  - name: "Flèche Chercheuse"
-    description: "Placeholder description"
+role: "DPT distance"
+difficulty: 1
+combatStyle: "Distance, Contrôle"
+strengths: "Dégâts à distance, Contrôle de zone, Mobilité"
+weaknesses: "Fragilité, Dépendant du placement"
+mainSpells:
+  - name: "Flèche Puissante"
+    description: "Dégâts importants à distance"
     level: 1
     image:
-      src: "/images/spells/cra/placeholder1.png"
-      alt: "Sort Flèche Chercheuse"
+      src: "/images/spells/cra/fleche-puissante.png"
+      alt: "Sort Flèche Puissante"
   - name: "Flèche Explosive"
-    description: "Placeholder description"
+    description: "Dégâts de zone et contrôle"
     level: 3
     image:
-      src: "/images/spells/cra/placeholder2.png"
+      src: "/images/spells/cra/fleche-explosive.png"
       alt: "Sort Flèche Explosive"
-  - name: "Flèche Glacée"
-    description: "Placeholder description"
+  - name: "Flèche de Recul"
+    description: "Repousse l'ennemi et crée de la distance"
     level: 6
     image:
-      src: "/images/spells/cra/placeholder3.png"
-      alt: "Sort Flèche Glacée"
-  - name: "Balise Cra"
-    description: "Placeholder description"
+      src: "/images/spells/cra/fleche-recul.png"
+      alt: "Sort Flèche de Recul"
+  - name: "Flèche Critique"
+    description: "Fort potentiel de dégâts critiques"
     level: 9
     image:
-      src: "/images/spells/cra/placeholder4.png"
-      alt: "Sort Balise Cra"
-builds: # Placeholder builds - needs actual data
-  - name: "Cra Distance Mono-cible"
-    type: "DPS distance"
-    minLevel: 50
-    description: "Placeholder description pour build distance"
-  - name: "Cra Zone Feu"
-    type: "DPS zone"
-    minLevel: 120
-    description: "Placeholder description pour build zone"
+      src: "/images/spells/cra/fleche-critique.png"
+      alt: "Sort Flèche Critique"
+builds:
+  - name: "Cra Air/Feu"
+    type: "DPT distance"
+    minLevel: 200
+    description: "Build focalisé sur les dégâts à distance et le contrôle de zone"
+  - name: "Cra Terre/Air"
+    type: "DPT zone"
+    minLevel: 200
+    description: "Build orienté AoE et contrôle de terrain"
 ---
 
-# Guide du Cra dans Wakfu
+# Guide du Cra - Débutants
 
-Le Cra est le maître incontesté de l'arc et des flèches. Si vous aimez garder vos distances et cribler vos ennemis de projectiles, cette classe est faite pour vous.
+Le Cra est la classe parfaite pour ceux qui aiment garder leurs distances et pleuvoir les flèches sur leurs ennemis. Si tu préfères éliminer tes adversaires avant qu'ils ne t'atteignent, le Cra est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Disciples de la déesse Cra, ces archers sont réputés pour leur précision légendaire et leur lien profond avec la nature. Ils protègent l'équilibre du Monde des Douze depuis les hauteurs.
+### Maître de la distance
+- Meilleure portée du jeu
+- Excellente vision du combat
+- Contrôle de la distance
 
-## Gameplay et Mécaniques
+### Dégâts constants
+- DPT fiable et régulier
+- Bonnes capacités critiques
+- Options de dégâts de zone
 
-Le gameplay du Cra repose sur le maintien de la distance, l'utilisation de balises pour amplifier les effets et l'exploitation des différentes flèches élémentaires pour s'adapter à la situation. 
+### Facilité d'utilisation
+- Gameplay intuitif
+- Positionnement simple
+- Apprentissage progressif
+
+### Deux styles de combat
+- **DPT Mono** : Pour maximiser les dégâts sur une cible
+- **DPT Zone** : Pour gérer plusieurs ennemis
+
+### Autonomie
+- Peut se débrouiller seul
+- Bonne survie à distance
+- Outils de contrôle efficaces
+
+## ⚔️ En combat
+
+### Positionnement clé
+- Maintien de la distance optimale
+- Utilisation du terrain
+- Vision globale du combat
+
+### Arsenal varié
+- Flèches élémentaires adaptables
+- Options de contrôle
+- Capacités de fuite
+
+## ❌ Faiblesses
+
+### Vulnérabilité
+- Faible en mêlée
+- Peu de points de vie
+- Dépendant de la distance
+
+### Défis spécifiques
+- Sensible aux approches rapides
+- Nécessite une bonne protection
+- Dépendant du placement
+
+## 🤔 Choisis ton style
+
+Es-tu plutôt :
+- **Cra Sniper** qui se concentre sur une cible à la fois
+- **Cra AoE** qui gère plusieurs ennemis en même temps
+
+À toi de choisir comment tu veux dominer le champ de bataille à distance ! 

@@ -6,11 +6,10 @@ import { getCollection } from 'astro:content';
 const classes = await getCollection('classes');
 
 // Organiser les classes par rôle
-const classesByRole = {
-  'DPS': classes.filter(clazz => clazz.data.role === 'DPS'),
-  'Tank': classes.filter(clazz => clazz.data.role === 'Tank'),
-  'Support': classes.filter(clazz => clazz.data.role === 'Support'),
-  'Soigneur': classes.filter(clazz => clazz.data.role === 'Soigneur')
+const roleGroups = {
+  'Tank': classes.filter(clazz => clazz.data.role.includes('Tank')),
+  'Support': classes.filter(clazz => clazz.data.role.includes('Support')),
+  'DPT': classes.filter(clazz => clazz.data.role === 'DPS'),
 };
 
 // Extraire les rôles uniques pour les options de filtre
@@ -18,10 +17,9 @@ const uniqueRoles = [...new Set(classes.map(clazz => clazz.data.role))].filter(B
 
 // Définir les couleurs pour chaque rôle
 const roleColors = {
-  'DPS': 'from-red-600/80 to-orange-600/80',
-  'Tank': 'from-blue-600/80 to-indigo-600/80',
+  'Tank': 'from-blue-600/80 to-cyan-600/80',
   'Support': 'from-green-600/80 to-emerald-600/80',
-  'Soigneur': 'from-teal-600/80 to-cyan-600/80'
+  'DPT': 'from-red-600/80 to-orange-600/80',
 };
 
 // Exemple de données de sorts et passifs pour chaque classe
@@ -298,7 +296,7 @@ const spellsAndPassives = {
             <div class="bg-gray-700/30 p-3 rounded-lg">
               <h4 class="font-medium text-white mb-1">Pour les débutants :</h4>
               <div class="flex flex-wrap gap-2">
-                <span class="bg-red-600/40 text-white px-2 py-1 rounded text-xs">Iop (DPS)</span>
+                <span class="bg-red-600/40 text-white px-2 py-1 rounded text-xs">Iop (DPT)</span>
                 <span class="bg-blue-600/40 text-white px-2 py-1 rounded text-xs">Feca (Tank)</span>
                 <span class="bg-teal-600/40 text-white px-2 py-1 rounded text-xs">Eniripsa (Soigneur)</span>
               </div>
@@ -306,7 +304,7 @@ const spellsAndPassives = {
             <div class="bg-gray-700/30 p-3 rounded-lg">
               <h4 class="font-medium text-white mb-1">Pour joueurs intermédiaires :</h4>
               <div class="flex flex-wrap gap-2">
-                <span class="bg-red-600/40 text-white px-2 py-1 rounded text-xs">Cra (DPS)</span>
+                <span class="bg-red-600/40 text-white px-2 py-1 rounded text-xs">Cra (DPT)</span>
                 <span class="bg-blue-600/40 text-white px-2 py-1 rounded text-xs">Sacrieur (Tank)</span>
                 <span class="bg-green-600/40 text-white px-2 py-1 rounded text-xs">Osamodas (Support)</span>
               </div>
@@ -314,7 +312,7 @@ const spellsAndPassives = {
             <div class="bg-gray-700/30 p-3 rounded-lg">
               <h4 class="font-medium text-white mb-1">Pour joueurs expérimentés :</h4>
               <div class="flex flex-wrap gap-2">
-                <span class="bg-red-600/40 text-white px-2 py-1 rounded text-xs">Xelor (DPS)</span>
+                <span class="bg-red-600/40 text-white px-2 py-1 rounded text-xs">Xelor (DPT)</span>
                 <span class="bg-blue-600/40 text-white px-2 py-1 rounded text-xs">Ouginak (Tank)</span>
                 <span class="bg-green-600/40 text-white px-2 py-1 rounded text-xs">Sadida (Support)</span>
               </div>

@@ -1,101 +1,112 @@
 ---
 id: "zobal"
 name: "Zobal"
-icon: {
-  src: "/images/classes/icons/zobal.png",
+icon:
+  src: "/images/classes/icons/zobal.png"
   alt: "Icône de la classe Zobal"
-}
-image: {
-  src: "/images/classes/zobal.jpg",
+image:
+  src: "/images/classes/zobal.jpg"
   alt: "Illustration de la classe Zobal"
-}
-description: "Le Zobal est probablement aujourd'hui le support le plus polyvalent du jeu qui peut également endosser le rôle de personnage Dégâts au corps à corps de façon très efficace."
-role: "Support / DPS"
+description: "Les Zobals sont des maîtres des masques qui peuvent changer de rôle instantanément. Experts en positionnement, ils excellent tant en support qu'en combattant."
+role: "Support, DPT"
 difficulty: 3
-combatStyle: "Masques et positionnement"
-strengths: "Polyvalence, soutien d'équipe, positionnement"
-weaknesses: "Complexité des masques, consommation de Wakfu"
+combatStyle: "Masques, Positionnement"
+strengths: "Polyvalence, Support d'équipe, Placement"
+weaknesses: "Gestion des masques, Consommation de Wakfu"
 mainSpells:
   - name: "Mascarade"
-    description: "Change de masque et octroie un effet selon le masque"
+    description: "Change de masque et octroie un effet"
     level: 1
-    image: {
-      src: "/images/spells/zobal/mascarade.png",
+    image:
+      src: "/images/spells/zobal/mascarade.png"
       alt: "Sort Mascarade"
-    }
   - name: "Comédie"
-    description: "Dégâts et effets variables selon le masque actif"
-    level: 5
-    image: {
-      src: "/images/spells/zobal/comedie.png",
+    description: "Dégâts et effets selon le masque"
+    level: 3
+    image:
+      src: "/images/spells/zobal/comedie.png"
       alt: "Sort Comédie"
-    }
   - name: "Pantomime"
-    description: "Positionnement et effets selon le masque"
-    level: 10
-    image: {
-      src: "/images/spells/zobal/pantomime.png",
+    description: "Positionnement selon le masque"
+    level: 6
+    image:
+      src: "/images/spells/zobal/pantomime.png"
       alt: "Sort Pantomime"
-    }
   - name: "Pirouette"
-    description: "Mouvement et options de placement"
-    level: 15
-    image: {
-      src: "/images/spells/zobal/pirouette.png",
+    description: "Déplacement et placement"
+    level: 9
+    image:
+      src: "/images/spells/zobal/pirouette.png"
       alt: "Sort Pirouette"
-    }
 builds:
   - name: "Zobal Support"
-    type: "Soutien polyvalent"
-    minLevel: 50
-    description: "Focus sur les masques de soutien et protection d'équipe"
-  - name: "Zobal DPS dos"
-    type: "Dégâts positionnels"
-    minLevel: 80
-    description: "Spécialisation dans les attaques de dos et dégâts critiques"
+    type: "Support/Contrôle"
+    minLevel: 200
+    description: "Build focalisé sur le soutien et le placement"
+  - name: "Zobal DPT"
+    type: "DPT/Placement"
+    minLevel: 200
+    description: "Build orienté dégâts positionnels"
 ---
 
-# Guide du Zobal dans Wakfu
+# Guide du Zobal - Débutants
 
-Le Zobal est l'une des classes les plus versatiles de Wakfu, capable d'adapter sa stratégie en fonction des besoins de l'équipe grâce à son système unique de masques. À la fois support exceptionnel et combattant redoutable, il excelle dans diverses situations.
+Le Zobal est la classe parfaite pour ceux qui aiment s'adapter à toutes les situations. Si tu rêves de pouvoir changer de rôle instantanément et de maîtriser l'art du placement, le Zobal est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Originaires du continent de Pandala, les Zobals sont des artistes martiaux qui utilisent des masques rituels pour canaliser différentes énergies et émotions. Chaque masque représente un aspect particulier de leur art et leur confère des capacités uniques.
+### Maître des masques
+- Changement de rôle instantané
+- Effets uniques par masque
+- Adaptabilité totale
 
-## Gameplay et Mécaniques
+### Support polyvalent
+- Soins et protection
+- Buffs d'équipe
+- Réduction des résistances
 
-### Le Système de Masques
+### Placement expert
+- Mobilité exceptionnelle
+- Contrôle du terrain
+- Attaques positionnelles
 
-La mécanique principale du Zobal repose sur ses masques qui peuvent être changés en combat pour s'adapter aux situations :
+### Deux styles de jeu
+- **Support** : Pour aider et protéger
+- **DPT** : Pour les dégâts positionnels
 
-- **Masque de Comédie** : Optimise les dégâts et les critiques
-- **Masque de Tragédie** : Spécialisé dans la protection et la réduction des dommages
-- **Masque de Satisfaction** : Axé sur le soutien et les soins
-- **Masque de Versatilité** : Équilibré pour le positionnement et la polyvalence
+### Utilité garantie
+- Indispensable en groupe
+- Excellent en PvP
+- Capable en solo
 
-Changer de masque modifie vos sorts et leurs effets, ce qui offre une grande adaptabilité.
+## ⚔️ En combat
 
-### Rôles multiples
+### Gestion des masques
+- Choix du bon masque
+- Timing des changements
+- Adaptation constante
 
-En personnage Support, la classe est capable de réaliser des **soins**, de donner de l'**armure**, d'**augmenter les dégâts** de ses alliés en zone, de **réduire les résistances** des adversaires et d'effectuer du **placement** de façon souple et efficace.
+### Positionnement stratégique
+- Placement optimal
+- Création d'opportunités
+- Support de l'équipe
 
-En personnage Dégâts, la classe dispose d'**un excellent kit pour mettre un maximum de dégâts** dans le dos d'un adversaire ou via des dégâts de collision. Sa seule limite est l'utilisation gourmande de ses Points de Wakfu, ce qui peut être problématique dans les combats longs.
+## ❌ Faiblesses
 
-## Synergies avec d'autres classes
+### Complexité
+- Nombreux masques à gérer
+- Apprentissage nécessaire
+- Setup important
 
-Le Zobal est un excellent partenaire pour de nombreuses classes :
+### Limitations spécifiques
+- Consommation de Wakfu
+- Dépendant du placement
+- Fragilité potentielle
 
-- Pour les **Cra** et **Huppermage** : aide au placement, protection et réduction des résistances adverses
-- Pour les **Iop** et **Sacrieur** : augmentation des dégâts et positionnement stratégique
-- Pour les **Xelor** : protection et assistance au placement
+## 🤔 Choisis ton style
 
-## Conseils pour bien débuter
+Es-tu plutôt :
+- **Zobal Support** qui aide son équipe
+- **Zobal DPT** qui frappe dans le dos
 
-1. Familiarisez-vous avec chaque masque et ses effets spécifiques
-2. Apprenez à alterner efficacement entre les masques selon les besoins
-3. Pratiquez le positionnement pour maximiser les attaques de dos
-4. Gérez votre consommation de Wakfu, particulièrement en mode DPS
-5. Communiquez avec votre équipe pour coordonner vos soutiens
-
-Le Zobal est idéal pour les joueurs qui apprécient la versatilité et qui sont prêts à s'adapter constamment aux changements de situation en combat. 
+À toi de choisir quel masque tu veux porter ! 

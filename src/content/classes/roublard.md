@@ -8,12 +8,12 @@ image:
   src: "/images/classes/roublard.jpg"
   alt: "Illustration de la classe Roublard"
 description: "Les Roublards sont des experts en explosifs et en subterfuges. Ils posent des bombes, créent des murs et des combos dévastateurs pour contrôler le terrain et anéantir leurs ennemis."
-role: "DPS distance, Contrôle, Placement" # Placeholder role
-difficulty: 3 # Placeholder difficulty
-combatStyle: "Bombes, Murs, Combos" # Placeholder style
-strengths: "Dégâts de zone massifs, Contrôle du terrain, Placement via bombes" # Placeholder strengths
-weaknesses: "Gameplay complexe, Vulnérable en mêlée, Dépendant de la préparation" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+role: "DPT distance, Contrôle, Placement"
+difficulty: 3
+combatStyle: "Bombes, Murs, Combos"
+strengths: "Dégâts de zone, Contrôle du terrain, Mobilité"
+weaknesses: "Setup nécessaire, Gestion des ressources"
+mainSpells:
   - name: "Bombe Imposante"
     description: "Placeholder description"
     level: 1
@@ -38,15 +38,15 @@ mainSpells: # Placeholder spells - needs actual data
     image:
       src: "/images/spells/roublard/placeholder4.png"
       alt: "Sort Botte"
-builds: # Placeholder builds - needs actual data
-  - name: "Roublard Feu Bombes"
-    type: "DPS zone/contrôle"
-    minLevel: 50
-    description: "Placeholder description pour build Bombes"
-  - name: "Roublard Air/Terre Mêlée/Distance"
-    type: "DPS polyvalent"
-    minLevel: 120
-    description: "Placeholder description pour build polyvalent"
+builds:
+  - name: "Roublard Air/Feu"
+    type: "DPT zone/contrôle"
+    minLevel: 200
+    description: "Build focalisé sur les bombes et le contrôle"
+  - name: "Roublard Terre/Air"
+    type: "DPT polyvalent"
+    minLevel: 200
+    description: "Build orienté dégâts et mobilité"
 ---
 
 # Guide du Roublard dans Wakfu

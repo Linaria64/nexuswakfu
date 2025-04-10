@@ -8,12 +8,12 @@ image:
   src: "/images/classes/ouginak.jpg"
   alt: "Illustration de la classe Ouginak"
 description: "Les Ouginaks sont des guerriers bestiaux qui peuvent se transformer pour déchaîner leur rage. Ils traquent leurs proies et les achèvent avec une férocité sans pareille."
-role: "DPS mêlée/Tank" # Placeholder role
-difficulty: 2 # Placeholder difficulty
-combatStyle: "Mêlée, Transformation, Traque" # Placeholder style
-strengths: "Bons dégâts en mêlée, Tanking via transformation, Mécanique de Rage" # Placeholder strengths
-weaknesses: "Moins efficace à distance, Dépendant de la Rage" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+role: "DPT mêlée/Tank"
+difficulty: 2
+combatStyle: "Mêlée, Transformation, Traque"
+strengths: "Dégâts soutenus, Résistance, Mobilité"
+weaknesses: "Dépendant de la rage, Peu de contrôle"
+mainSpells:
   - name: "Proie"
     description: "Placeholder description"
     level: 1
@@ -38,11 +38,11 @@ mainSpells: # Placeholder spells - needs actual data
     image:
       src: "/images/spells/ouginak/placeholder4.png"
       alt: "Sort Molosse"
-builds: # Placeholder builds - needs actual data
-  - name: "Ouginak DPS Terre"
-    type: "DPS mêlée"
-    minLevel: 50
-    description: "Placeholder description pour build DPS"
+builds:
+  - name: "Ouginak DPT Terre"
+    type: "DPT mêlée"
+    minLevel: 200
+    description: "Build focalisé sur les dégâts au corps à corps"
   - name: "Ouginak Tank Eau"
     type: "Tank"
     minLevel: 120

@@ -8,55 +8,105 @@ image:
   src: "/images/classes/ecaflip.jpg"
   alt: "Illustration de la classe Ecaflip"
 description: "Les Ecaflips sont des guerriers joueurs qui comptent sur la chance et le hasard. Leurs attaques peuvent avoir des effets imprévisibles, parfois bénéfiques, parfois dévastateurs."
-role: "DPS aléatoire" # Placeholder role
-difficulty: 3 # Placeholder difficulty
-combatStyle: "Mêlée/Distance, Aléatoire" # Placeholder style
-strengths: "Potentiel de dégâts élevé, Surprises, Polyvalence" # Placeholder strengths
-weaknesses: "Très dépendant de la chance, Résultats imprévisibles" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+role: "DPT aléatoire"
+difficulty: 2
+combatStyle: "Mêlée/Distance, Aléatoire"
+strengths: "Dégâts critiques, Polyvalence, Chance"
+weaknesses: "Dépendant de l'aléatoire, Inconsistant"
+mainSpells:
   - name: "Pile ou Face"
-    description: "Placeholder description"
+    description: "Attaque avec effet aléatoire"
     level: 1
     image:
-      src: "/images/spells/ecaflip/placeholder1.png"
+      src: "/images/spells/ecaflip/pile-ou-face.png"
       alt: "Sort Pile ou Face"
   - name: "Roulette"
-    description: "Placeholder description"
+    description: "Dégâts et effets aléatoires"
     level: 3
     image:
-      src: "/images/spells/ecaflip/placeholder2.png"
+      src: "/images/spells/ecaflip/roulette.png"
       alt: "Sort Roulette"
   - name: "Griffe Joueuse"
-    description: "Placeholder description"
+    description: "Attaque avec bonus critique"
     level: 6
     image:
-      src: "/images/spells/ecaflip/placeholder3.png"
+      src: "/images/spells/ecaflip/griffe-joueuse.png"
       alt: "Sort Griffe Joueuse"
   - name: "Chasseur"
-    description: "Placeholder description"
+    description: "Invoque un compagnon félin"
     level: 9
     image:
-      src: "/images/spells/ecaflip/placeholder4.png"
+      src: "/images/spells/ecaflip/chasseur.png"
       alt: "Sort Chasseur"
-builds: # Placeholder builds - needs actual data
-  - name: "Ecaflip Terre Critique"
-    type: "DPS mêlée"
-    minLevel: 50
-    description: "Placeholder description pour build Terre"
-  - name: "Ecaflip Eau Soin/Distance"
-    type: "DPS/Soutien distance"
-    minLevel: 120
-    description: "Placeholder description pour build Eau"
+builds:
+  - name: "Ecaflip Critique"
+    type: "DPT mêlée"
+    minLevel: 200
+    description: "Build focalisé sur les coups critiques"
+  - name: "Ecaflip Hybride"
+    type: "DPT/Soutien distance"
+    minLevel: 200
+    description: "Build orienté support et dégâts"
 ---
 
-# Guide de l'Ecaflip dans Wakfu
+# Guide de l'Ecaflip - Débutants
 
-L'Ecaflip est la classe pour ceux qui aiment le frisson du jeu et de l'incertitude. Préparez-vous à lancer les dés et à voir ce que le destin vous réserve !
+L'Ecaflip est la classe parfaite pour ceux qui aiment le frisson du hasard. Si tu es prêt à laisser la chance guider tes coups et à vivre des moments de gloire imprévisibles, l'Ecaflip est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Disciples du dieu Ecaflip, le dieu de la chance et du jeu, ces félins aventuriers adorent prendre des risques. Pour eux, la vie est un grand jeu de hasard.
+### Maître du hasard
+- Effets aléatoires puissants
+- Potentiel de dégâts énorme
+- Moments de gloire mémorables
 
-## Gameplay et Mécaniques
+### Polyvalence naturelle
+- Adaptable à toutes situations
+- Mêlée et distance
+- Options de soutien
 
-Le gameplay de l'Ecaflip tourne autour de la gestion de la chance et de l'utilisation de sorts aux effets variés et souvent aléatoires. Ils peuvent infliger de lourds dégâts, soigner ou se déplacer de manière imprévisible. 
+### Gameplay unique
+- Style de jeu dynamique
+- Combats toujours différents
+- Adrénaline garantie
+
+### Deux styles de jeu
+- **Critique** : Pour maximiser les dégâts
+- **Hybride** : Pour plus de polyvalence
+
+### Autonomie
+- Fort en solo
+- Utile en groupe
+- Bon en PvP
+
+## ⚔️ En combat
+
+### Gestion du hasard
+- Anticipation des effets
+- Adaptation constante
+- Maximisation des bonus
+
+### Positionnement
+- Alternance mêlée/distance
+- Utilisation du terrain
+- Création d'opportunités
+
+## ❌ Faiblesses
+
+### Inconsistance
+- Dépendant de la chance
+- Résultats variables
+- Frustration possible
+
+### Défis spécifiques
+- Gestion du risque
+- Adaptation nécessaire
+- Plan B obligatoire
+
+## 🤔 Choisis ton style
+
+Es-tu plutôt :
+- **Ecaflip Critique** qui mise tout sur les dégâts
+- **Ecaflip Hybride** qui diversifie ses options
+
+À toi de choisir comment tu veux tenter ta chance ! 

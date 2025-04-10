@@ -7,56 +7,107 @@ icon:
 image:
   src: "/images/classes/sram.jpg"
   alt: "Illustration de la classe Sram"
-description: "Les Srams sont des assassins furtifs qui utilisent l'invisibilité, les pièges et les poisons pour éliminer leurs cibles. Ils excellent dans les attaques sournoises et le contrôle du terrain."
-role: "DPS mêlée/distance, Entrave" # Placeholder role
-difficulty: 3 # Placeholder difficulty
-combatStyle: "Furtivité, Pièges, Poison" # Placeholder style
-strengths: "Invisibilité, Dégâts élevés via pièges/poisons, Contrôle" # Placeholder strengths
-weaknesses: "Moins efficace en combat direct prolongé, Vulnérable si découvert" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+description: "Les Srams sont des assassins furtifs qui utilisent l'invisibilité et les pièges pour dominer leurs adversaires. Maîtres de l'embuscade, ils excellent dans l'élimination rapide de leurs cibles."
+role: "DPT mêlée/distance"
+difficulty: 2
+combatStyle: "Furtivité, Pièges, Poison"
+strengths: "Dégâts élevés, Contrôle de zone, Mobilité"
+weaknesses: "Fragilité, Setup nécessaire"
+mainSpells:
   - name: "Invisibilité"
-    description: "Placeholder description"
+    description: "Devient invisible et augmente les dégâts"
     level: 1
     image:
-      src: "/images/spells/sram/placeholder1.png"
+      src: "/images/spells/sram/invisibilite.png"
       alt: "Sort Invisibilité"
   - name: "Piège Sournois"
-    description: "Placeholder description"
+    description: "Pose un piège qui inflige des dégâts"
     level: 3
     image:
-      src: "/images/spells/sram/placeholder2.png"
+      src: "/images/spells/sram/piege-sournois.png"
       alt: "Sort Piège Sournois"
-  - name: "Peur"
-    description: "Placeholder description"
+  - name: "Double"
+    description: "Crée un clone pour tromper l'ennemi"
     level: 6
     image:
-      src: "/images/spells/sram/placeholder3.png"
-      alt: "Sort Peur"
-  - name: "Attaque Mortelle"
-    description: "Placeholder description"
+      src: "/images/spells/sram/double.png"
+      alt: "Sort Double"
+  - name: "Coup Mortel"
+    description: "Attaque puissante depuis l'invisibilité"
     level: 9
     image:
-      src: "/images/spells/sram/placeholder4.png"
-      alt: "Sort Attaque Mortelle"
-builds: # Placeholder builds - needs actual data
-  - name: "Sram Pièges Air/Feu"
-    type: "DPS distance/contrôle"
-    minLevel: 50
-    description: "Placeholder description pour build Pièges"
-  - name: "Sram Mêlée Eau/Terre"
-    type: "DPS mêlée"
-    minLevel: 120
-    description: "Placeholder description pour build Mêlée"
+      src: "/images/spells/sram/coup-mortel.png"
+      alt: "Sort Coup Mortel"
+builds:
+  - name: "Sram Assassin"
+    type: "DPT mêlée"
+    minLevel: 200
+    description: "Build focalisé sur les dégâts en invisibilité"
+  - name: "Sram Piégeur"
+    type: "DPT zone"
+    minLevel: 200
+    description: "Build orienté contrôle et pièges"
 ---
 
-# Guide du Sram dans Wakfu
+# Guide du Sram - Débutants
 
-Le Sram est l'assassin par excellence. Si vous aimez jouer dans l'ombre, tendre des embuscades et voir vos ennemis tomber dans vos pièges, cette classe est pour vous.
+Le Sram est la classe parfaite pour ceux qui aiment la ruse et les tactiques sournoises. Si tu préfères frapper dans l'ombre et manipuler tes ennemis plutôt que les affronter directement, le Sram est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Disciples du dieu Sram, le maître des ombres et des voleurs, les Srams sont des êtres mystérieux et craints. Ils opèrent en secret, manipulant leurs adversaires et frappant quand on s'y attend le moins.
+### Maître de l'invisibilité
+- Attaques surprises dévastatrices
+- Contrôle du rythme du combat
+- Échappatoire garantie
 
-## Gameplay et Mécaniques
+### Arsenal de pièges
+- Contrôle de zone efficace
+- Dégâts passifs constants
+- Manipulation du terrain
 
+### Mobilité exceptionnelle
+- Téléportations tactiques
+- Positionnement furtif
+- Échappement facile
+
+### Deux styles de jeu
+- **Assassin** : Pour éliminer rapidement des cibles
+- **Piégeur** : Pour contrôler le terrain
+
+### Polyvalence tactique
+- Adapté au solo comme au groupe
+- Efficace en PvP comme en PvE
+- Multiple options de jeu
+
+## ⚔️ En combat
+
+### Approche stratégique
+- Préparation du terrain
+- Timing des embuscades
+- Gestion de l'invisibilité
+
+### Exécution précise
+- Combos dévastateurs
+- Placement des pièges
+- Utilisation des doubles
+
+## ❌ Faiblesses
+
+### Fragilité
+- Peu de points de vie
+- Vulnérable une fois repéré
+- Dépendant de l'invisibilité
+
+### Complexité tactique
+- Nécessite de la planification
+- Setup important
+- Timing crucial
+
+## 🤔 Choisis ton style
+
+Es-tu plutôt :
+- **Sram Assassin** qui élimine rapidement ses cibles
+- **Sram Piégeur** qui contrôle le terrain
+
+À toi de choisir comment tu veux devenir le maître des ombres ! 
 Le gameplay du Sram repose sur l'invisibilité, la pose de pièges dévastateurs et l'application de poisons. Ils peuvent également manipuler le positionnement avec leur double et des sorts comme Peur. 

@@ -8,55 +8,97 @@ image:
   src: "/images/classes/sacrieur.jpg"
   alt: "Illustration de la classe Sacrieur"
 description: "Les Sacrieurs sont des berserkers qui puisent leur force dans la douleur. Plus ils subissent de dégâts, plus ils deviennent puissants et résistants."
-role: "Tank/DPS mêlée" # Placeholder role
-difficulty: 2 # Placeholder difficulty
-combatStyle: "Tanking, Mêlée, Sacrifice" # Placeholder style
-strengths: "Grande résistance, Dégâts augmentés avec les PV bas, Capacité de tanking" # Placeholder strengths
-weaknesses: "Vulnérable au début du combat, Moins efficace à distance" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+role: "Tank/DPT mêlée"
+difficulty: 1
+combatStyle: "Tanking, Mêlée, Sacrifice"
+strengths: "Grande résistance, Dégâts augmentés avec les PV bas, Capacité de tanking"
+weaknesses: "Vulnérable au début du combat, Moins efficace à distance"
+mainSpells:
   - name: "Sang Tatoué"
-    description: "Placeholder description"
+    description: "Augmente les résistances"
     level: 1
     image:
       src: "/images/spells/sacrieur/placeholder1.png"
       alt: "Sort Sang Tatoué"
   - name: "Punition"
-    description: "Placeholder description"
+    description: "Dégâts augmentés selon les PV perdus"
     level: 3
     image:
       src: "/images/spells/sacrieur/placeholder2.png"
       alt: "Sort Punition"
   - name: "Sacrifice"
-    description: "Placeholder description"
+    description: "Échange de position avec un allié"
     level: 6
     image:
       src: "/images/spells/sacrieur/placeholder3.png"
       alt: "Sort Sacrifice"
   - name: "Assaut"
-    description: "Placeholder description"
+    description: "Charge puissante sur l'ennemi"
     level: 9
     image:
       src: "/images/spells/sacrieur/placeholder4.png"
       alt: "Sort Assaut"
-builds: # Placeholder builds - needs actual data
+builds:
   - name: "Sacrieur Tank Terre"
     type: "Tank"
-    minLevel: 50
-    description: "Placeholder description pour build Tank"
-  - name: "Sacrieur DPS Feu Berserker"
-    type: "DPS mêlée"
-    minLevel: 120
-    description: "Placeholder description pour build DPS Feu"
+    minLevel: 200
+    description: "Build focalisé sur la protection et le contrôle"
+  - name: "Sacrieur DPT Feu Berserker"
+    type: "DPT mêlée"
+    minLevel: 200
+    description: "Build orienté dégâts au corps à corps"
 ---
 
-# Guide du Sacrieur dans Wakfu
+# Guide du Sacrieur - Débutants
 
-Le Sacrieur est une classe pour les joueurs qui aiment être au cœur de la mêlée et encaisser les coups pour devenir plus forts. La douleur est leur carburant.
+Le Sacrieur est une classe polyvalente qui se prend rapidement en main, idéale pour ceux qui veulent une expérience de jeu dynamique, à la fois autonome et dévouée au sacrifice. Si tu aimes les personnages qui encaissent, mais qui ne rechignent pas à donner des coups puissants, le Sacrieur est fait pour toi !
 
-## Histoire et Background
+## ✅ Forces
 
-Les Sacrieurs vénèrent la déesse Sacrieur, déesse de la douleur et du sacrifice. Ils croient que la souffrance mène à la puissance et n'hésitent pas à se blesser pour protéger leurs alliés ou anéantir leurs ennemis.
+### Prise en main facile
+- Pas besoin d'être un expert pour bien débuter avec cette classe
+- Mécaniques intuitives et directes
 
-## Gameplay et Mécaniques
+### Peu coûteux à stuff
+- Efficace même avec des équipements de base
+- Progression naturelle en équipement
 
-Le gameplay du Sacrieur est centré sur la mécanique de la "Chrage", qui augmente leurs dégâts et leur résistance à mesure que leurs points de vie diminuent. Ils excellent dans le rôle de tank et peuvent infliger de lourds dégâts en mêlée. 
+### Polyvalence et Autonomie
+- S'intègre bien dans presque toutes les compositions d'équipe
+- Capable de se débrouiller en solo sans dépendre d'un soutien constant
+
+### Deux styles de jeu distincts
+- **DPT Berserk** : Pour infliger des dégâts énormes en sacrifiant un peu de vie
+- **Tank/Placeur** : Pour encaisser et contrôler le terrain tout en protégeant les alliés
+
+### Adaptabilité au combat
+- Excellente mobilité et repositionnement rapide
+- Grande survivabilité grâce aux résistances et soins
+- Capacités de contrôle avec "Transposition" et "Transfert de Vie"
+
+## ⚔️ En combat
+
+### Dégâts solides
+- Efficace en mode berserk comme en tank
+- Excellente gestion de la douleur
+- Capacité à transformer les dégâts reçus en force offensive
+
+## ❌ Faiblesses
+
+### Dépendances critiques
+- Nécessite une bonne gestion des résistances
+- Doit maintenir l'aggro efficacement
+- Vulnérable aux gros bursts de dégâts
+
+### Défis en solo
+- Demande une bonne maîtrise de la gestion des PV
+- Placement crucial pour la survie
+- Balance délicate entre dégâts et survie
+
+## 🤔 Choisis ton style
+
+Es-tu plutôt :
+- **Sacrieur Tank** qui protège ses alliés avec détermination
+- **Sacrieur Berserk** qui fonce dans le tas pour maximiser les dégâts
+
+À toi de choisir ton style de jeu et de devenir le Sacrieur que tu souhaites être ! 

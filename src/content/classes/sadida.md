@@ -43,10 +43,10 @@ builds: # Placeholder builds - needs actual data
     type: "Invocateur/Support"
     minLevel: 50
     description: "Placeholder description pour build Invocation"
-  - name: "Sadida DPS Air/Feu"
-    type: "DPS distance/zone"
-    minLevel: 120
-    description: "Placeholder description pour build DPS"
+  - name: "Sadida DPT Air/Feu"
+    type: "DPT distance/zone"
+    minLevel: 200
+    description: "Build focalisé sur les dégâts de zone et le contrôle"
 ---
 
 # Guide du Sadida dans Wakfu

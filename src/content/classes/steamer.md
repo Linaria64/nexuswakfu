@@ -8,12 +8,12 @@ image:
   src: "/images/classes/steamer.jpg"
   alt: "Illustration de la classe Steamer"
 description: "Les Steamers sont des technomages qui utilisent des tourelles et des mécanismes pour combattre. Ils peuvent s'adapter à de nombreux rôles grâce à leurs invocations mécaniques."
-role: "DPS distance/mêlée, Placement, Tank" # Placeholder role
-difficulty: 3 # Placeholder difficulty
-combatStyle: "Tourelles, Rails, Mécanismes" # Placeholder style
-strengths: "Grande polyvalence, Contrôle du terrain, Dégâts/Soin/Placement via tourelles" # Placeholder strengths
-weaknesses: "Dépendant des tourelles, Gameplay complexe, Peut manquer de mobilité directe" # Placeholder weaknesses
-mainSpells: # Placeholder spells - needs actual data
+role: "DPT distance/mêlée, Placement, Tank"
+difficulty: 4
+combatStyle: "Tourelles, Rails, Mécanismes"
+strengths: "Polyvalence, Contrôle de zone, Dégâts constants"
+weaknesses: "Gestion complexe des ressources, Setup nécessaire"
+mainSpells:
   - name: "Cybot"
     description: "Placeholder description"
     level: 1
@@ -38,15 +38,15 @@ mainSpells: # Placeholder spells - needs actual data
     image:
       src: "/images/spells/steamer/placeholder4.png"
       alt: "Sort Steampalm"
-builds: # Placeholder builds - needs actual data
-  - name: "Steamer Stasis DPS Distance"
-    type: "DPS distance"
-    minLevel: 50
-    description: "Placeholder description pour build Stasis"
-  - name: "Steamer Tank Terre"
-    type: "Tank/DPS mêlée"
-    minLevel: 120
-    description: "Placeholder description pour build Tank"
+builds:
+  - name: "Steamer Stasis DPT Distance"
+    type: "DPT distance"
+    minLevel: 200
+    description: "Build focalisé sur les dégâts à distance"
+  - name: "Steamer Tank/DPT"
+    type: "Tank/DPT mêlée"
+    minLevel: 200
+    description: "Build hybride tank et dégâts"
 ---
 
 # Guide du Steamer dans Wakfu
