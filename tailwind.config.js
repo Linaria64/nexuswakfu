@@ -3,15 +3,21 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
       colors: {
-        'wakfu-primary': {
-          DEFAULT: '#3B82F6',
-          dark: '#2563EB'
-        },
-        'wakfu-secondary': {
-          DEFAULT: '#8B5CF6',
-          dark: '#7C3AED'
+        wakfu: {
+          primary: '#FF6B6B',
+          secondary: '#4ECDC4',
+          accent: '#45B7AF',
+          background: '#1A1B1E',
+          foreground: '#FFFFFF',
         },
         'gray': {
           '950': '#0B0F19',
@@ -21,9 +27,32 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-      }
+        sans: ['Inter var', 'sans-serif'],
+      },
+      animation: {
+        'fade-up': 'fadeUp 0.5s ease-out forwards',
+        'fade-down': 'fadeDown 0.5s ease-out forwards',
+        'slide-in': 'slideIn 0.5s ease-out forwards',
+      },
+      keyframes: {
+        fadeUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeDown: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideIn: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
 } 

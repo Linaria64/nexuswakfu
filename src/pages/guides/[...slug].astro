@@ -1,0 +1,211 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+// Get the slug from the URL
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  const classes = await getCollection('classes');
+  
+  return [
+    ...guides.map(guide => ({
+      params: { slug: guide.slug },
+      props: { type: 'guide', entry: guide }
+    })),
+    ...classes.map(classEntry => ({
+      params: { slug: `classes/${classEntry.data.id}` },
+      props: { type: 'class', entry: classEntry }
+    }))
+  ];
+}
+
+const { type, entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<MainLayout 
+  title={type === 'guide' ? entry.data.title : `Guide complet ${entry.data.name}`}
+  description={entry.data.description}
+>
+  <article class="py-12 px-4">
+    <div class="container mx-auto max-w-4xl">
+      {type === 'class' && (
+        <div class="animate-fade-up">
+          {/* En-tête de la classe */}
+          <div class="mb-8 flex items-center gap-6">
+            <Image 
+              src={entry.data.icon.src}
+              alt={entry.data.icon.alt}
+              width={64}
+              height={64}
+              class="rounded-lg"
+            />
+            <div>
+              <h1 class="text-4xl font-bold text-wakfu-primary dark:text-wakfu-secondary">
+                Guide complet {entry.data.name}
+              </h1>
+              <p class="text-xl text-gray-600 dark:text-gray-400 mt-2">
+                {entry.data.description}
+              </p>
+            </div>
+          </div>
+
+          {/* Informations principales */}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="card">
+              <h2 class="text-2xl font-bold mb-4 text-wakfu-primary dark:text-wakfu-secondary">Caractéristiques</h2>
+              <div class="space-y-4">
+                <div>
+                  <h3 class="font-semibold text-wakfu-secondary">Rôle</h3>
+                  <p>{entry.data.role}</p>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-wakfu-secondary">Style de Combat</h3>
+                  <p>{entry.data.combatStyle}</p>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-wakfu-secondary">Difficulté</h3>
+                  <p>Niveau {entry.data.difficulty}/5</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h2 class="text-2xl font-bold mb-4 text-wakfu-primary dark:text-wakfu-secondary">Forces et Faiblesses</h2>
+              <div class="space-y-4">
+                <div>
+                  <h3 class="font-semibold text-green-500">Forces</h3>
+                  <p>{entry.data.strengths}</p>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-red-500">Faiblesses</h3>
+                  <p>{entry.data.weaknesses}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sorts principaux */}
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-wakfu-primary dark:text-wakfu-secondary">Sorts Principaux</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {entry.data.mainSpells.map(spell => (
+                <div class="card">
+                  <div class="flex items-start gap-4">
+                    {spell.image && (
+                      <Image
+                        src={spell.image.src}
+                        alt={spell.image.alt}
+                        width={48}
+                        height={48}
+                        class="rounded-lg"
+                      />
+                    )}
+                    <div>
+                      <h3 class="font-semibold text-wakfu-secondary">{spell.name}</h3>
+                      <p class="text-sm text-gray-400">{spell.description}</p>
+                      <p class="text-xs text-gray-500 mt-1">Niveau {spell.level}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Builds */}
+          {entry.data.builds && (
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold mb-6 text-wakfu-primary dark:text-wakfu-secondary">Builds Recommandés</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {entry.data.builds.map(build => (
+                  <div class="card">
+                    <h3 class="text-xl font-bold mb-2 text-wakfu-secondary">{build.name}</h3>
+                    <p class="text-sm text-gray-400 mb-4">{build.description}</p>
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs bg-gray-700 px-2 py-1 rounded-full">{build.type}</span>
+                      <span class="text-xs bg-gray-700 px-2 py-1 rounded-full">Niveau {build.minLevel}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Guide détaillé */}
+          <div class="card">
+            <h2 class="text-2xl font-bold mb-6 text-wakfu-primary dark:text-wakfu-secondary">Guide Détaillé</h2>
+            <div class="prose prose-invert max-w-none guide-content">
+              <h3>Comment jouer {entry.data.name} ?</h3>
+              <p>Le {entry.data.name} est une classe qui excelle en {entry.data.role}. Son style de combat est basé sur {entry.data.combatStyle.toLowerCase()}.</p>
+
+              <h3>Conseils pour débuter</h3>
+              <ul>
+                <li>Familiarisez-vous avec les sorts de base</li>
+                <li>Apprenez à utiliser vos points forts : {entry.data.strengths}</li>
+                <li>Faites attention à vos faiblesses : {entry.data.weaknesses}</li>
+              </ul>
+
+              <h3>Progression</h3>
+              <p>Pour progresser efficacement avec votre {entry.data.name}, concentrez-vous sur :</p>
+              <ul>
+                <li>La maîtrise de vos sorts principaux</li>
+                <li>L'optimisation de votre équipement</li>
+                <li>L'apprentissage des combos et des synergies</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {type === 'guide' && (
+        <div class="mb-8 animate-fade-up">
+          <h1 class="text-4xl font-bold text-wakfu-primary dark:text-wakfu-secondary">
+            {entry.data.title}
+          </h1>
+          {entry.data.author && (
+            <p class="text-gray-600 dark:text-gray-400 mt-2">
+              Par {entry.data.author.name}
+            </p>
+          )}
+          <div class="prose prose-invert max-w-none guide-content mt-8">
+            <Content />
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+</MainLayout>
+
+<style>
+  :global(.guide-content h1),
+  :global(.guide-content h2),
+  :global(.guide-content h3),
+  :global(.guide-content h4) {
+    @apply text-wakfu-primary dark:text-wakfu-secondary;
+  }
+  
+  :global(.guide-content a) {
+    @apply text-wakfu-primary dark:text-wakfu-secondary hover:underline;
+  }
+  
+  :global(.guide-content strong) {
+    @apply text-wakfu-primary dark:text-wakfu-secondary;
+  }
+
+  :global(.guide-content ul) {
+    @apply list-disc list-inside;
+  }
+
+  :global(.guide-content ol) {
+    @apply list-decimal list-inside;
+  }
+
+  :global(.guide-content li) {
+    @apply mb-2;
+  }
+
+  :global(.guide-content p) {
+    @apply mb-4;
+  }
+</style> 

@@ -3,41 +3,51 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --wakfu-primary: #3B82F6;
-  --wakfu-primary-dark: #2563EB;
-  --wakfu-secondary: #8B5CF6;
-  --wakfu-secondary-dark: #7C3AED;
+@layer base {
+  :root {
+    --wakfu-primary: #FF6B6B;
+    --wakfu-secondary: #4ECDC4;
+    --wakfu-accent: #45B7AF;
+    --wakfu-background: #1A1B1E;
+    --wakfu-foreground: #FFFFFF;
+  }
+
+  html {
+    scrollbar-color: #4B5563 #1F2937;
+  }
+
+  body {
+    font-feature-settings: 'kern';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-html {
-  scrollbar-color: #4B5563 #1F2937;
-}
+/* Scrollbar styles */
+@layer utilities {
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #4B5563 #1F2937;
+  }
 
-body {
-  font-feature-settings: 'kern';
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
 
-/* Scrollbar styles for webkit browsers */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #1F2937;
+  }
 
-::-webkit-scrollbar-track {
-  background: #1F2937;
-}
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4B5563;
+    border-radius: 4px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #4B5563;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #6B7280;
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #6B7280;
+  }
 }
 
 /* Dark mode optimizations */
@@ -64,19 +74,24 @@ body {
 /* Common Components */
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 bg-wakfu-primary text-white font-medium rounded-lg hover:bg-wakfu-primary-dark transition-colors;
+    @apply px-4 py-2 bg-wakfu-primary text-white font-medium rounded-lg 
+    hover:bg-wakfu-primary/90 transition-colors;
   }
   
   .btn-secondary {
-    @apply px-4 py-2 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors;
+    @apply px-4 py-2 bg-wakfu-secondary text-white font-medium rounded-lg 
+    hover:bg-wakfu-secondary/90 transition-colors;
   }
   
   .btn-outline {
-    @apply px-4 py-2 border border-gray-700 text-gray-300 font-medium rounded-lg hover:bg-gray-800 transition-colors;
+    @apply px-4 py-2 border border-gray-700 text-gray-300 font-medium rounded-lg 
+    hover:bg-gray-800 transition-colors;
   }
   
   .card {
-    @apply bg-gray-900 border border-gray-800 rounded-xl shadow-sm overflow-hidden;
+    @apply bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 
+    rounded-xl shadow-xl overflow-hidden hover:border-wakfu-secondary 
+    transition-all duration-300;
   }
   
   .section-title {

@@ -1,38 +1,57 @@
 ---
-export interface Props {
+interface Props {
   placeholder?: string;
-  fullWidth?: boolean;
+  class?: string;
 }
 
-const { 
+const {
   placeholder = "Rechercher...",
-  fullWidth = false 
+  class: className
 } = Astro.props;
+
+const classes = [
+  "w-full p-3 pl-10 rounded-lg",
+  "bg-gray-700/70 text-white",
+  "border border-gray-600",
+  "focus:border-wakfu-secondary focus:ring-1 focus:ring-wakfu-secondary",
+  "outline-none transition-all",
+  className
+].filter(Boolean).join(" ");
 ---
 
-<div class={`relative ${fullWidth ? 'w-full' : 'max-w-md'}`}>
-  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-    </svg>
-  </div>
-  <input
-    id="search-input"
+<div class="relative">
+  <input 
     type="text"
-    class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary focus:border-transparent"
     placeholder={placeholder}
+    class={classes}
   />
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    class="h-5 w-5 absolute left-3 top-3.5 text-gray-400" 
+    fill="none" 
+    viewBox="0 0 24 24" 
+    stroke="currentColor"
+  >
+    <path 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      stroke-width="2" 
+      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+    />
+  </svg>
 </div>
 
 <script>
-  const searchInput = document.getElementById('search-input');
-  
+  // Add search functionality
+  const searchInput = document.querySelector('input[type="text"]');
   if (searchInput) {
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        const query = encodeURIComponent(searchInput.value);
-        window.location.href = `/recherche/?q=${query}`;
-      }
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+      // Dispatch custom event for search
+      const searchEvent = new CustomEvent('search', { 
+        detail: { searchTerm } 
+      });
+      document.dispatchEvent(searchEvent);
     });
   }
 </script> 

@@ -1,151 +1,44 @@
 ---
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'danger';
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  variant?: 'default' | 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
   href?: string;
-  disabled?: boolean;
-  fullWidth?: boolean;
-  type?: 'button' | 'submit' | 'reset';
-  loading?: boolean;
-  leadingIcon?: string;
-  trailingIcon?: string;
-  target?: string;
-  rel?: string;
-  className?: string;
-  ariaLabel?: string;
-  id?: string;
 }
 
-const {
-  variant = 'primary',
+const { 
+  variant = 'default',
   size = 'md',
-  href,
-  disabled = false,
-  fullWidth = false,
-  type = 'button',
-  loading = false,
-  leadingIcon,
-  trailingIcon,
-  target,
-  rel,
-  className = '',
-  ariaLabel,
-  id,
+  class: className,
+  href
 } = Astro.props;
 
-// Définir les classes de variante
-const variantClasses = {
-  primary: 'bg-wakfu-primary hover:bg-wakfu-primary-dark text-white dark:bg-wakfu-secondary dark:hover:bg-wakfu-secondary-dark shadow-sm',
-  secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200',
-  outline: 'border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300',
-  ghost: 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800',
-  link: 'text-wakfu-primary dark:text-wakfu-secondary hover:underline p-0 h-auto shadow-none',
-  danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm',
+const baseStyles = "inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+
+const variants = {
+  default: "bg-gray-900 text-white hover:bg-gray-800 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90",
+  primary: "bg-gradient-to-r from-wakfu-primary to-wakfu-secondary text-white hover:from-wakfu-primary/90 hover:to-wakfu-secondary/90",
+  secondary: "bg-gray-100 text-gray-900 hover:bg-gray-100/80 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-800/80",
+  outline: "border border-gray-200 bg-white hover:bg-gray-100 hover:text-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50",
+  ghost: "hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-50"
 };
 
-// Définir les classes de taille
-const sizeClasses = {
-  xs: 'px-2 py-1 text-xs',
-  sm: 'px-2.5 py-1.5 text-sm',
-  md: 'px-4 py-2 text-sm',
-  lg: 'px-5 py-2.5 text-base',
-  xl: 'px-6 py-3 text-lg',
+const sizes = {
+  sm: "h-9 px-3 text-xs",
+  md: "h-10 px-4 text-sm",
+  lg: "h-11 px-8 text-base"
 };
 
-// Classes pour l'état de chargement et l'état désactivé
-const loadingClass = loading ? 'opacity-80 pointer-events-none' : '';
-const disabledClass = disabled ? 'opacity-60 cursor-not-allowed pointer-events-none' : '';
-const widthClass = fullWidth ? 'w-full' : '';
-
-// Classes icônes
-const iconSizeClasses = {
-  xs: 'w-3 h-3',
-  sm: 'w-4 h-4',
-  md: 'w-4 h-4',
-  lg: 'w-5 h-5',
-  xl: 'w-5 h-5',
-};
-
-// Classes de base
-const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary dark:focus:ring-offset-gray-900';
-
-// Assembler toutes les classes
 const classes = [
-  baseClasses,
-  variantClasses[variant],
-  sizeClasses[size],
-  loadingClass,
-  disabledClass,
-  widthClass,
-  className,
-].filter(Boolean).join(' ');
+  baseStyles,
+  variants[variant],
+  sizes[size],
+  className
+].join(" ");
 
-// Déterminer le type d'élément (a ou button)
-const Element = href && !disabled ? 'a' : 'button';
-
-// Configurer les props pour le bouton ou le lien
-const elementProps = Element === 'a' 
-  ? { href, target, rel: rel || (target === '_blank' ? 'noopener noreferrer' : undefined) }
-  : { type, disabled };
-
-// Spinner pour l'état de chargement
-const spinnerSize = iconSizeClasses[size];
+const Tag = href ? 'a' : 'button';
 ---
 
-<Element 
-  id={id} 
-  class={classes} 
-  aria-label={ariaLabel} 
-  aria-disabled={disabled}
-  aria-busy={loading}
-  {...elementProps}
->
-  {loading && (
-    <svg 
-      class={`animate-spin -ml-1 mr-2 ${spinnerSize}`} 
-      xmlns="http://www.w3.org/2000/svg" 
-      fill="none" 
-      viewBox="0 0 24 24"
-    >
-      <circle 
-        class="opacity-25" 
-        cx="12" 
-        cy="12" 
-        r="10" 
-        stroke="currentColor" 
-        stroke-width="4"
-      ></circle>
-      <path 
-        class="opacity-75" 
-        fill="currentColor" 
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-      ></path>
-    </svg>
-  )}
-  
-  {!loading && leadingIcon && (
-    <span class={`mr-2 ${iconSizeClasses[size]}`} set:html={leadingIcon} />
-  )}
-  
+<Tag href={href} class={classes}>
   <slot />
-  
-  {!loading && trailingIcon && (
-    <span class={`ml-2 ${iconSizeClasses[size]}`} set:html={trailingIcon} />
-  )}
-</Element>
-
-<style>
-  /* Ajouter une animation de pulsation pour l'état hover des boutons primaires */
-  .bg-wakfu-primary:hover:not([aria-disabled="true"]):not([aria-busy="true"]) {
-    animation: button-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  
-  @keyframes button-pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.85;
-    }
-  }
-</style> 
+</Tag> 

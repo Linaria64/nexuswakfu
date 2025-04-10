@@ -12,6 +12,22 @@ export default defineConfig({
   vite: {
     ssr: {
       noExternal: ['@astrojs/*']
+    },
+    build: {
+      cssCodeSplit: true,
+      minify: 'terser',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'wakfu-core': [
+              './src/layouts/MainLayout.astro',
+              './src/components/ui/Button.astro',
+              './src/components/ui/Card.astro',
+              './src/components/ui/SearchBar.astro'
+            ]
+          }
+        }
+      }
     }
   },
   markdown: {
@@ -21,8 +37,11 @@ export default defineConfig({
     }
   },
   site: 'https://guide-wakfu.com',
-  trailingSlash: 'always',
+  trailingSlash: 'never',
   build: {
-    assets: '_assets'
-  }
+    assets: '_assets',
+    inlineStylesheets: 'auto'
+  },
+  compressHTML: true,
+  output: 'static'
 }); 

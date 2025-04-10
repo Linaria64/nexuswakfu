@@ -7,14 +7,14 @@ interface Props {
   href?: string;
   badge?: string;
   badgeColor?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
-  variant?: 'default' | 'bordered' | 'elevated' | 'flat';
+  variant?: 'default' | 'primary' | 'secondary';
   aspectRatio?: 'auto' | 'square' | 'video';
   className?: string;
   imgClassName?: string;
   titleClassName?: string;
   subtitleClassName?: string;
   footerClassName?: string;
-  hoverEffect?: boolean;
+  hover?: boolean;
 }
 
 const {
@@ -25,23 +25,22 @@ const {
   href,
   badge,
   badgeColor = "primary",
-  variant = "default",
+  variant = 'default',
   aspectRatio = "auto",
   className = "",
   imgClassName = "",
   titleClassName = "",
   subtitleClassName = "",
   footerClassName = "",
-  hoverEffect = true
+  hover = false
 } = Astro.props;
 
 // Générer les classes en fonction des variants
 const cardBaseClass = "overflow-hidden rounded-lg flex flex-col";
 const variantClasses = {
-  default: "bg-white dark:bg-gray-800",
-  bordered: "border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800",
-  elevated: "bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700/20",
-  flat: "bg-gray-50 dark:bg-gray-900"
+  default: "bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700",
+  primary: "bg-gradient-to-br from-wakfu-primary/10 to-wakfu-secondary/10 border-wakfu-primary/20",
+  secondary: "bg-gradient-to-br from-gray-700/50 to-gray-800/50 border-gray-600/50"
 };
 
 // Définir les couleurs du badge
@@ -62,8 +61,8 @@ const aspectRatioClasses = {
 };
 
 // Effet de survol
-const hoverClass = hoverEffect 
-  ? "transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg" 
+const hoverClass = hover 
+  ? "transition-all duration-300 transform hover:-translate-y-1 hover:border-wakfu-secondary" 
   : "";
 
 // Construire les classes finales
