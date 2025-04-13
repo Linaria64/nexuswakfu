@@ -3,20 +3,25 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 import Modal from '../../components/ui/Modal.astro';
 
-// Fetch actual dungeons from content collection
-const allDungeonsRaw = (await getCollection('donjons')).sort((a, b) => a.data.level - b.data.level);
+    // 1. Fetch all entries from the collection
+    const allDungeonsRaw = await getCollection('donjons');
 
-// Prepare dungeons data with rendered content
-const allDungeons = await Promise.all(
-  allDungeonsRaw.map(async (donjon) => {
-    const { Content } = await donjon.render();
-    return {
-      ...donjon, // Spread original properties (id, slug, data, etc.)
-      Content,   // Add the rendered Content component
-    };
-  })
-);
+    // 2. Filter for .mdx files ONLY
+    const mdxDungeonsRaw = allDungeonsRaw.filter(donjon => donjon.id.endsWith('.mdx'));
 
+    // 3. Sort the filtered .mdx entries by level
+    const sortedMdxDungeonsRaw = mdxDungeonsRaw.sort((a, b) => a.data.level - b.data.level);
+
+    // 4. Prepare the final array with rendered content for the sorted .mdx files
+    const allDungeons = await Promise.all(
+      sortedMdxDungeonsRaw.map(async (donjon) => {
+        const { Content } = await donjon.render();
+        return {
+          ...donjon, // Spread original properties (id, slug, data, etc.)
+          Content,   // Add the rendered Content component
+        };
+      })
+    );
 // Keep difficulty labels definition
 const difficultyLabels = {
   'easy': { label: 'Facile', color: 'bg-green-500/20 text-green-300 border-green-500/50', class: 'easy' },
@@ -33,6 +38,8 @@ const playerLabels = {
 };
 
 // TODO: Consider fetching drops dynamically if needed, remove simulation
+
+// Extract unique difficulties for the filter dropdown
 
 ---
 
@@ -197,9 +204,13 @@ const playerLabels = {
       const { Content } = donjon; // Keep access to Content, even if not used yet
       return (
         <Modal id={`modal-donjon-${donjon.slug}`} title={donjon.data.name} size="full">
-          {/* Simplified content for now */}
-          <div>
-            <h2>{donjon.data.name} - Placeholder</h2>
+          {/* Refined content structure for UI/UX */}
+          <div class="p-6"> {/* Main padding */}
+            {/* Strategy Section */}
+            <h2 class="text-2xl font-bold mb-4 text-[var(--color-text-h2)]">Stratégie</h2>
+            <div class="prose prose-invert max-w-none mb-8"> {/* Apply prose only here, add bottom margin */}
+              <Content />
+            </div>
           </div>
         </Modal>
       );
