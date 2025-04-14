@@ -47,7 +47,7 @@ const donjonCollection = defineCollection({
     name: z.string(),
     level: z.number(),
     difficulty: z.enum(['easy', 'medium', 'hard', 'extreme']),
-    players: z.enum(['solo', 'group', 'both']),
+    players: z.enum(['3', '6',]),
     region: z.string(),
     image: z.object({
       src: z.string(),
@@ -61,7 +61,6 @@ const donjonCollection = defineCollection({
         description: z.string(),
       })
     ),
-    description: z.string(),
   }),
 });
 
