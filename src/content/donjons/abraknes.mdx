@@ -47,6 +47,8 @@ rooms: [
 ]
 ---
 
+import StasisCalculator from '@/components/content/StasisCalculator.astro';
+
 {/* Section Boss */}
 <div className="mb-12">
   <h2 className="text-3xl font-bold text-emerald-300 mb-6 border-b border-emerald-700 pb-2">Le Boss : {frontmatter.bosses[0].name}</h2>
@@ -83,32 +85,11 @@ rooms: [
           ))}
         </ul>
         
-        <h4 className="text-lg font-semibold text-emerald-300 mt-6 mb-2">Niveaux de Stasis</h4>
-        <div className="overflow-x-auto bg-black/20 p-3 rounded text-sm">
-          <table className="min-w-full divide-y divide-gray-700">
-            <thead className="text-left text-xs font-medium text-emerald-400 uppercase tracking-wider">
-              <tr>
-                <th scope="col" className="px-3 py-2">Stasis</th>
-                <th scope="col" className="px-3 py-2">PV (%)</th>
-                <th scope="col" className="px-3 py-2">Dommages (%)</th>
-                <th scope="col" className="px-3 py-2">Butin (%)</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-600 text-gray-300">
-              {/* Stasis Data */}
-              <tr><td className="px-3 py-1.5">1</td><td className="px-3 py-1.5">70%</td><td className="px-3 py-1.5">60%</td><td className="px-3 py-1.5">60%</td></tr>
-              <tr><td className="px-3 py-1.5">2</td><td className="px-3 py-1.5">100%</td><td className="px-3 py-1.5">100%</td><td className="px-3 py-1.5">100%</td></tr>
-              <tr><td className="px-3 py-1.5">3</td><td className="px-3 py-1.5">140%</td><td className="px-3 py-1.5">130%</td><td className="px-3 py-1.5">120%</td></tr>
-              <tr><td className="px-3 py-1.5">4</td><td className="px-3 py-1.5">210%</td><td className="px-3 py-1.5">190%</td><td className="px-3 py-1.5">160%</td></tr>
-              <tr><td className="px-3 py-1.5">5</td><td className="px-3 py-1.5">310%</td><td className="px-3 py-1.5">200%</td><td className="px-3 py-1.5">188%</td></tr>
-              <tr><td className="px-3 py-1.5">6</td><td className="px-3 py-1.5">440%</td><td className="px-3 py-1.5">210%</td><td className="px-3 py-1.5">200%</td></tr>
-              <tr><td className="px-3 py-1.5">7</td><td className="px-3 py-1.5">600%</td><td className="px-3 py-1.5">230%</td><td className="px-3 py-1.5">205%</td></tr>
-              <tr><td className="px-3 py-1.5">8</td><td className="px-3 py-1.5">660%</td><td className="px-3 py-1.5">240%</td><td className="px-3 py-1.5">210%</td></tr>
-              <tr><td className="px-3 py-1.5">9</td><td className="px-3 py-1.5">880%</td><td className="px-3 py-1.5">250%</td><td className="px-3 py-1.5">215%</td></tr>
-              <tr><td className="px-3 py-1.5">10</td><td className="px-3 py-1.5">1100%</td><td className="px-3 py-1.5">260%</td><td className="px-3 py-1.5">220%</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <StasisCalculator 
+          baseHp={frontmatter.bosses[0].hp}
+          baseAp={frontmatter.bosses[0].ap}
+          baseMp={frontmatter.bosses[0].mp}
+        />
       </div>
     </div>
   </div>

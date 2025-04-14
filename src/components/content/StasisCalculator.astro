@@ -1,0 +1,91 @@
+---
+// src/components/content/StasisCalculator.astro
+interface Props {
+  baseHp: number;
+  baseAp: number;
+  baseMp: number;
+}
+
+const { baseHp, baseAp, baseMp } = Astro.props;
+
+// Stasis modifier data (HP %, Damage %, Loot %)
+const stasisData = [
+  { level: 1, hpMod: 70, dmgMod: 60, lootMod: 60 },
+  { level: 2, hpMod: 100, dmgMod: 100, lootMod: 100 },
+  { level: 3, hpMod: 140, dmgMod: 130, lootMod: 120 },
+  { level: 4, hpMod: 210, dmgMod: 190, lootMod: 160 },
+  { level: 5, hpMod: 310, dmgMod: 200, lootMod: 188 },
+  { level: 6, hpMod: 440, dmgMod: 210, lootMod: 200 },
+  { level: 7, hpMod: 600, dmgMod: 230, lootMod: 205 },
+  { level: 8, hpMod: 660, dmgMod: 240, lootMod: 210 },
+  { level: 9, hpMod: 880, dmgMod: 250, lootMod: 215 },
+  { level: 10, hpMod: 1100, dmgMod: 260, lootMod: 220 },
+];
+
+const baseDamage = 1000; // Base damage reference as requested
+---
+
+<div class="bg-black/20 p-4 rounded mt-6">
+  <h4 class="text-lg font-semibold text-emerald-300 mb-3">Calculateur de Stasis</h4>
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+    <label for="stasis-slider" class="text-sm font-medium text-gray-300 whitespace-nowrap">Niveau Stasis : <span id="stasis-level-display" class="font-bold text-emerald-400">2</span></label>
+    <input
+      id="stasis-slider"
+      type="range"
+      min="1"
+      max="10"
+      step="1"
+      value="2" # Default to Stasis 2
+      class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+    />
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-gray-300 bg-black/30 p-3 rounded">
+    <div>
+      <p class="text-xs text-gray-400 uppercase tracking-wider">HP</p>
+      <p id="stasis-hp-display" class="text-lg font-semibold font-mono text-emerald-400">{baseHp}</p>
+    </div>
+    <div>
+      <p class="text-xs text-gray-400 uppercase tracking-wider">Dégâts Base</p>
+      <p id="stasis-dmg-display" class="text-lg font-semibold font-mono text-emerald-400">{baseDamage}</p>
+    </div>
+    <div>
+      <p class="text-xs text-gray-400 uppercase tracking-wider">PA</p>
+      <p class="text-lg font-semibold font-mono text-emerald-400">{baseAp}</p>
+    </div>
+    <div>
+      <p class="text-xs text-gray-400 uppercase tracking-wider">PM</p>
+      <p class="text-lg font-semibold font-mono text-emerald-400">{baseMp}</p>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ baseHp, baseDamage, stasisData }}>
+  const slider = document.getElementById('stasis-slider');
+  const levelDisplay = document.getElementById('stasis-level-display');
+  const hpDisplay = document.getElementById('stasis-hp-display');
+  const dmgDisplay = document.getElementById('stasis-dmg-display');
+
+  function updateStats() {
+    const currentLevel = parseInt(slider.value);
+    const data = stasisData.find(d => d.level === currentLevel);
+
+    if (!data) return;
+
+    levelDisplay.textContent = currentLevel;
+
+    // Calculate and display HP
+    const calculatedHp = Math.round(baseHp * (data.hpMod / 100));
+    hpDisplay.textContent = calculatedHp.toLocaleString();
+
+    // Calculate and display Damage
+    const calculatedDmg = Math.round(baseDamage * (data.dmgMod / 100));
+    dmgDisplay.textContent = calculatedDmg.toLocaleString();
+  }
+
+  // Initial calculation on load
+  updateStats();
+
+  // Update stats when slider value changes
+  slider.addEventListener('input', updateStats);
+</script> 
