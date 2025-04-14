@@ -1,61 +1,156 @@
 ---
-name: "Chez la mére Michou"
-level: 9
-difficulty: "easy"
+name: "Donjon Abrakne"
+level: 15 # Placeholder
+difficulty: "medium" # Placeholder
 players: "6"
-region: "Astrub"
+region: "Forêt Sombre" # Placeholder
+description: "Le donjon Abrakne, un défi arboricole au cœur de la Forêt Sombre." # Placeholder
 image: {
-  src: "/images/donjons/incarnam.jpg",
-  alt: "Donjon d'Incarnam"
+  src: "/images/donjons/abrakne_placeholder.jpg", # Placeholder
+  alt: "Donjon Abrakne"
 }
-rewards: ["emplacement des équipement ici"]
+rewards: ["Ressources Abrakne", "Équipements niveau 15+"] # Placeholder
 bosses: [
   {
-    name: "Nom du boss",
-    level: 9,
-    description: "Description du boss"
+    name: "Abrakne Ancestral", # Placeholder name
+    level: 20, # Placeholder
+    description: "L'imposant gardien de la forêt, maître des racines.", # Placeholder description added
+    bossImage: { src: "/images/mobs/abrakne_ancestral_placeholder.jpg", alt: "Abrakne Ancestral" }, # Placeholder
+    hp: 5000, # Placeholder
+    ap: 8, # Placeholder
+    mp: 3, # Placeholder
+    resistances: { water: 20, earth: 50, air: 10, fire: 10 }, # Placeholder
+    spells: [
+      { name: "Étreinte Ligneuse", description: "Attire la cible et inflige des dégâts Terre." }, # Placeholder
+      { name: "Racines Accrocheuses", description: "Retire des PM et applique l'état Enraciné.", effect: "Zone" }, # Placeholder
+      { name: "Écorce Protectrice", description: "Augmente ses résistances pendant 1 tour." } # Placeholder
+    ]
   }
+]
+rooms: [
+  {
+    roomNumber: 1,
+    mobs: [
+      { name: "Abrakne Sombre", mechanics: "Peut se soigner.", spells: [{ name: "Ronces", description: "Dégâts Eau" }] }, # Placeholder
+      { name: "Arakne Majeure", mechanics: "Pose des toiles qui retirent des PM." } # Placeholder
+    ]
+  },
+    {
+    roomNumber: 2,
+    mobs: [
+      { name: "Abrakne", mechanics: "Attaque au corps à corps." }, # Placeholder
+      { name: "Abrakne Sombre", mechanics: "Peut se soigner.", spells: [{ name: "Ronces", description: "Dégâts Eau" }] }, # Placeholder
+      { name: "Arakne Majeure", mechanics: "Pose des toiles qui retirent des PM." } # Placeholder
+    ]
+  }
+  # Ajoutez d'autres salles ici si nécessaire
 ]
 ---
 
+{/* Section Boss */}
+<div className="mb-12">
+  <h2 className="text-3xl font-bold text-emerald-300 mb-6 border-b border-emerald-700 pb-2">Le Boss : {frontmatter.bosses[0].name}</h2>
+  <div className="bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 backdrop-blur-sm border border-white/10 rounded-lg p-6 shadow-xl">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Colonne Image et Stats */}
+      <div className="md:col-span-1 flex flex-col items-center">
+        <img src={frontmatter.bosses[0].bossImage.src} alt={frontmatter.bosses[0].bossImage.alt} className="rounded-lg shadow-md mb-4 w-48 h-48 object-cover border-2 border-emerald-500/50"/>
+        <h3 className="text-xl font-semibold text-emerald-400 mb-3">Niveau {frontmatter.bosses[0].level}</h3>
+        <div className="text-center space-y-1 text-gray-300">
+          <p>❤️ <span className="font-mono">{frontmatter.bosses[0].hp}</span> HP</p>
+          <p>💧 <span className="font-mono">{frontmatter.bosses[0].ap}</span> PA</p>
+          <p>👟 <span className="font-mono">{frontmatter.bosses[0].mp}</span> PM</p>
+        </div>
+      </div>
 
-<div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 rounded-lg p-6 mb-8 shadow-lg hover:border-white/40 hover:shadow-xl transition-all duration-300 ease-in-out">
-<h2 className="text-2xl font-bold text-cyan-200 mt-2 mb-4 border-b border-cyan-700 pb-2">Mécaniques spéciales</h2>
+      {/* Colonne Résistances et Sorts */}
+      <div className="md:col-span-2">
+        <h4 className="text-lg font-semibold text-emerald-300 mb-2">Résistances</h4>
+        <div className="flex justify-around bg-black/20 p-2 rounded mb-4 text-sm">
+          <span title="Eau">💧 {frontmatter.bosses[0].resistances.water}%</span>
+          <span title="Terre">🌿 {frontmatter.bosses[0].resistances.earth}%</span>
+          <span title="Air">💨 {frontmatter.bosses[0].resistances.air}%</span>
+          <span title="Feu">🔥 {frontmatter.bosses[0].resistances.fire}%</span>
+        </div>
 
-Stratégies du donjon :
-
-<h3 className="text-xl font-semibold text-cyan-300 mt-6 mb-2">Nom du boss (Boss)</h3>
-<ul className="list-disc list-inside space-y-2 text-gray-200 pl-4">
-<li><strong className="font-semibold text-yellow-300">Énergie Primordiale</strong> : Strat 1</li>
-<li><strong className="font-semibold text-yellow-300">Manifestation</strong> : strat 2</li>
-<li><strong className="font-semibold text-yellow-300">Appel du Gardien</strong> : strat 3</li>
-</ul>
+        <h4 className="text-lg font-semibold text-emerald-300 mb-2">Sorts Notables</h4>
+        <ul className="space-y-3 text-gray-300">
+          {frontmatter.bosses[0].spells.map(spell => (
+            <li className="border-l-4 border-emerald-600 pl-3 py-1 bg-black/10 rounded-r-md">
+              <strong className="font-semibold text-emerald-400">{spell.name}</strong> {spell.effect ? `(${spell.effect})` : ''}:
+              <span className="block text-sm text-gray-400 ml-2">{spell.description}</span>
+            </li>
+          ))}
+        </ul>
+        
+        <h4 className="text-lg font-semibold text-emerald-300 mt-6 mb-2">Niveaux de Stasis</h4>
+        <div className="overflow-x-auto bg-black/20 p-3 rounded text-sm">
+          <table className="min-w-full divide-y divide-gray-700">
+            <thead className="text-left text-xs font-medium text-emerald-400 uppercase tracking-wider">
+              <tr>
+                <th scope="col" className="px-3 py-2">Stasis</th>
+                <th scope="col" className="px-3 py-2">PV (%)</th>
+                <th scope="col" className="px-3 py-2">Dommages (%)</th>
+                <th scope="col" className="px-3 py-2">Butin (%)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-600 text-gray-300">
+              {/* Stasis Data */}
+              <tr><td className="px-3 py-1.5">1</td><td className="px-3 py-1.5">70%</td><td className="px-3 py-1.5">60%</td><td className="px-3 py-1.5">60%</td></tr>
+              <tr><td className="px-3 py-1.5">2</td><td className="px-3 py-1.5">100%</td><td className="px-3 py-1.5">100%</td><td className="px-3 py-1.5">100%</td></tr>
+              <tr><td className="px-3 py-1.5">3</td><td className="px-3 py-1.5">140%</td><td className="px-3 py-1.5">130%</td><td className="px-3 py-1.5">120%</td></tr>
+              <tr><td className="px-3 py-1.5">4</td><td className="px-3 py-1.5">210%</td><td className="px-3 py-1.5">190%</td><td className="px-3 py-1.5">160%</td></tr>
+              <tr><td className="px-3 py-1.5">5</td><td className="px-3 py-1.5">310%</td><td className="px-3 py-1.5">200%</td><td className="px-3 py-1.5">188%</td></tr>
+              <tr><td className="px-3 py-1.5">6</td><td className="px-3 py-1.5">440%</td><td className="px-3 py-1.5">210%</td><td className="px-3 py-1.5">200%</td></tr>
+              <tr><td className="px-3 py-1.5">7</td><td className="px-3 py-1.5">600%</td><td className="px-3 py-1.5">230%</td><td className="px-3 py-1.5">205%</td></tr>
+              <tr><td className="px-3 py-1.5">8</td><td className="px-3 py-1.5">660%</td><td className="px-3 py-1.5">240%</td><td className="px-3 py-1.5">210%</td></tr>
+              <tr><td className="px-3 py-1.5">9</td><td className="px-3 py-1.5">880%</td><td className="px-3 py-1.5">250%</td><td className="px-3 py-1.5">215%</td></tr>
+              <tr><td className="px-3 py-1.5">10</td><td className="px-3 py-1.5">1100%</td><td className="px-3 py-1.5">260%</td><td className="px-3 py-1.5">220%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 rounded-lg p-6 mb-8 shadow-lg hover:border-white/40 hover:shadow-xl transition-all duration-300 ease-in-out">
-<h2 className="text-2xl font-bold text-cyan-200 mt-2 mb-4 border-b border-cyan-700 pb-2">Stratégies</h2>
-
-<h3 className="text-xl font-semibold text-cyan-300 mt-6 mb-2">Composition d'équipe recommandée</h3>
-<ul className="list-disc list-inside space-y-2 text-gray-200 pl-4">
-<li><strong className="font-semibold text-yellow-300">Nombre de joueurs</strong> : astuce de compoisition d'equipe si il faut un placement un heal 2 heal mecanique particulèere</li>
-<li>si mécanique particulière explication ici </li>
-</ul>
+{/* Section Salles */}
+<div className="mb-12">
+  <h2 className="text-3xl font-bold text-cyan-300 mb-6 border-b border-cyan-700 pb-2">Salles du Donjon</h2>
+  {frontmatter.rooms.map(room => (
+    <div key={room.roomNumber} className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-6 shadow-lg transition-all duration-300 ease-in-out hover:border-white/20 hover:shadow-xl">
+      <h3 className="text-xl font-semibold text-cyan-400 mb-4">Salle {room.roomNumber} - Monstres</h3>
+      <ul className="space-y-3">
+        {room.mobs.map(mob => (
+          <li className="border-l-4 border-cyan-600 pl-3 py-1 bg-black/10 rounded-r-md text-gray-300">
+            <strong className="font-semibold text-cyan-400">{mob.name}</strong>
+            {mob.mechanics && <p className="text-sm text-gray-400 ml-2"><em>Mécanique:</em> {mob.mechanics}</p>}
+            {mob.spells && mob.spells.length > 0 && (
+              <div className="ml-2 mt-1">
+                <p className="text-sm font-medium text-gray-400">Sorts:</p>
+                <ul className="list-disc list-inside text-xs text-gray-400 pl-2">
+                  {mob.spells.map(spell => <li key={spell.name}>{spell.name}: {spell.description}</li>)}
+                </ul>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
 </div>
 
+{/* Section Stratégie */}
+<div className="mb-12">
+  <h2 className="text-3xl font-bold text-yellow-300 mb-6 border-b border-yellow-700 pb-2">Stratégie</h2>
+  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 shadow-lg transition-all duration-300 ease-in-out hover:border-white/20 hover:shadow-xl text-gray-300 space-y-4">
+    <p>Concentrez-vous sur l'Abrakne Ancestral mais gérez les autres menaces.</p> {/* Placeholder */}
+    <p>Utilisez le retrait PM contre les Abraknes pour contrôler leurs déplacements.</p> {/* Placeholder */}
+    <p>Évitez de rester groupés pour minimiser les dégâts de zone potentiels.</p> {/* Placeholder */}
+  </div>
+</div>
 
-<div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 rounded-lg p-6 mb-8 shadow-lg hover:border-white/40 hover:shadow-xl transition-all duration-300 ease-in-out">
 <h2 className="text-2xl font-bold text-cyan-200 mt-2 mb-4 border-b border-cyan-700 pb-2">Récompenses</h2>
-
-En terminant ce donjon, vous pouvez obtenir :
-
-
-<ul className="list-disc list-inside space-y-2 text-gray-200 pl-4 mt-4">
-<li>Des équipements de niveau 3</li>
-<li>Des ressources de base utiles pour débuter</li>
-<li>Des kamas pour commencer votre aventure</li>
-<li>De l'expérience parfaite pour les niveaux 1-5</li>
-</ul>
-</div>
 
 <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 rounded-lg p-6 mb-8 shadow-lg hover:border-white/40 hover:shadow-xl transition-all duration-300 ease-in-out">
   <h2 className="text-3xl font-bold text-yellow-300 mt-2 mb-6 text-center border-b border-yellow-700 pb-3">Drop</h2>
@@ -79,10 +174,12 @@ En terminant ce donjon, vous pouvez obtenir :
   </div>
 </div>
 
-<div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 rounded-lg p-6 mb-8 shadow-lg hover:border-white/40 hover:shadow-xl transition-all duration-300 ease-in-out">
-<h2 className="text-2xl font-bold text-cyan-200 mt-2 mb-4 border-b border-cyan-700 pb-2">Conclusion</h2>
-
-Le Donjon d'Incarnam est l'introduction parfaite au système de donjon de Wakfu. Il enseigne les mécaniques de base tout en restant accessible et gratifiant. C'est une étape importante dans l'apprentissage du jeu avant de descendre vers Astrub et le reste du monde.
+{/* Section Conclusion */}
+<div className="mb-12">
+  <h2 className="text-3xl font-bold text-purple-300 mb-6 border-b border-purple-700 pb-2">Conclusion</h2>
+  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 shadow-lg transition-all duration-300 ease-in-out hover:border-white/20 hover:shadow-xl text-gray-300">
+    <p>Le Donjon Abrakne offre des récompenses intéressantes mais demande une bonne gestion du placement et des résistances Terre du boss. Une étape clé pour les aventuriers explorant la Forêt Sombre.</p> {/* Placeholder */}
+  </div>
 </div>
 
 
