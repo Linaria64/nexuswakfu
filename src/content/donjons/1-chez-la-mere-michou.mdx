@@ -1,29 +1,29 @@
 ---
-name: "Donjon Abrakne"
-level: 15 # Placeholder
-difficulty: "medium" # Placeholder
+name: "Chez la Mére Michou"
+level: 9 # Placeholder
+difficulty: "hard" # Placeholder
 players: "6"
-region: "Forêt Sombre" # Placeholder
-description: "Le donjon Abrakne, un défi arboricole au cœur de la Forêt Sombre." # Placeholder
+region: "Centre d'astrub" # Placeholder
+description: "Le premiers donjon du jeux avec des chats trop mignon en vrai le boss est souriant" # Placeholder
 image: {
   src: "/images/donjons/abrakne_placeholder.jpg", # Placeholder
   alt: "Donjon Abrakne"
 }
-rewards: ["Ressources Abrakne", "Équipements niveau 15+"] # Placeholder
+rewards: ["reward"] # Placeholder
 bosses: [
   {
-    name: "Abrakne Ancestral", # Placeholder name
-    level: 20, # Placeholder
-    description: "L'imposant gardien de la forêt, maître des racines.", # Placeholder description added
+    name: "Mayne Coone", # Placeholder name
+    level: 11, # Placeholder
+    description: "La mére de tous les chachas de la ville d'astrub", # Placeholder description added
     bossImage: { src: "/images/mobs/abrakne_ancestral_placeholder.jpg", alt: "Abrakne Ancestral" }, # Placeholder
-    hp: 5000, # Placeholder
+    hp: 139, # Placeholder
     ap: 8, # Placeholder
-    mp: 3, # Placeholder
-    resistances: { water: 20, earth: 50, air: 10, fire: 10 }, # Placeholder
+    mp: 4, # Placeholder
+    resistances: { water: 51, earth: 35, air: 41, fire: 46 }, # Placeholder
     spells: [
-      { name: "Étreinte Ligneuse", description: "Attire la cible et inflige des dégâts Terre." }, # Placeholder
-      { name: "Racines Accrocheuses", description: "Retire des PM et applique l'état Enraciné.", effect: "Zone" }, # Placeholder
-      { name: "Écorce Protectrice", description: "Augmente ses résistances pendant 1 tour." } # Placeholder
+      { name: "léchouille malpropre (feu)", description: "dégats feu au corps a corps 11 de degats ", baseDamage: 11, damageType: 'direct' }, # Placeholder
+      { name: "Chachapotté", description: "Retire jusqu'a 2 pa ", baseDamage: null, damageType: 'other' }, # Placeholder
+      { name: "Sacripuce", description: "Poison qui fait de 1 a 100 de dégats selon le niveau de puce +8 par attaque", baseDamage: null, damageType: 'poison' } # Placeholder
     ]
   }
 ]
@@ -59,7 +59,7 @@ import StasisCalculator from '@/components/content/StasisCalculator.astro';
         <img src={frontmatter.bosses[0].bossImage.src} alt={frontmatter.bosses[0].bossImage.alt} className="rounded-lg shadow-md mb-4 w-48 h-48 object-cover border-2 border-emerald-500/50"/>
         <h3 className="text-xl font-semibold text-emerald-400 mb-3">Niveau {frontmatter.bosses[0].level}</h3>
         <div className="text-center space-y-1 text-gray-300">
-          <p>❤️ <span className="font-mono">{frontmatter.bosses[0].hp}</span> HP</p>
+          <p>❤️ <span id={`boss-hp-${frontmatter.bosses[0].name.toLowerCase().replace(/\s+/g, '-')}`} className="font-mono">{frontmatter.bosses[0].hp}</span> HP</p>
           <p>💧 <span className="font-mono">{frontmatter.bosses[0].ap}</span> PA</p>
           <p>👟 <span className="font-mono">{frontmatter.bosses[0].mp}</span> PM</p>
         </div>
@@ -74,21 +74,28 @@ import StasisCalculator from '@/components/content/StasisCalculator.astro';
           <span title="Air">💨 {frontmatter.bosses[0].resistances.air}%</span>
           <span title="Feu">🔥 {frontmatter.bosses[0].resistances.fire}%</span>
         </div>
-
-        <h4 className="text-lg font-semibold text-emerald-300 mb-2">Sorts Notables</h4>
+        
+        <h4 className="text-lg font-semibold text-emerald-300 mb-2 mt-4">Sorts Notables</h4>
         <ul className="space-y-3 text-gray-300">
           {frontmatter.bosses[0].spells.map(spell => (
             <li className="border-l-4 border-emerald-600 pl-3 py-1 bg-black/10 rounded-r-md">
               <strong className="font-semibold text-emerald-400">{spell.name}</strong> {spell.effect ? `(${spell.effect})` : ''}:
-              <span className="block text-sm text-gray-400 ml-2">{spell.description}</span>
+              <span 
+                className="block text-sm text-gray-400 ml-2" 
+                data-spell-name={spell.name} 
+                data-base-damage={spell.baseDamage} 
+                data-damage-type={spell.damageType}
+              >
+                {spell.description}
+              </span>
             </li>
           ))}
         </ul>
         
         <StasisCalculator 
           baseHp={frontmatter.bosses[0].hp}
-          baseAp={frontmatter.bosses[0].ap}
-          baseMp={frontmatter.bosses[0].mp}
+          spells={frontmatter.bosses[0].spells}
+          targetHpElementId={`boss-hp-${frontmatter.bosses[0].name.toLowerCase().replace(/\s+/g, '-')}`}
         />
       </div>
     </div>
@@ -125,9 +132,9 @@ import StasisCalculator from '@/components/content/StasisCalculator.astro';
 <div className="mb-12">
   <h2 className="text-3xl font-bold text-yellow-300 mb-6 border-b border-yellow-700 pb-2">Stratégie</h2>
   <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 shadow-lg transition-all duration-300 ease-in-out hover:border-white/20 hover:shadow-xl text-gray-300 space-y-4">
-    <p>Concentrez-vous sur l'Abrakne Ancestral mais gérez les autres menaces.</p> {/* Placeholder */}
-    <p>Utilisez le retrait PM contre les Abraknes pour contrôler leurs déplacements.</p> {/* Placeholder */}
-    <p>Évitez de rester groupés pour minimiser les dégâts de zone potentiels.</p> {/* Placeholder */}
+    <p>Le boss tape fort au corps a corps et ajoute un poison avec son sort sacripuce a 2 de po</p> {/* Placeholder */}
+    <p></p> {/* Placeholder */}
+    <p></p> {/* Placeholder */}
   </div>
 </div>
 

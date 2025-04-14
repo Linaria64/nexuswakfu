@@ -1,12 +1,23 @@
 ---
 // src/components/content/StasisCalculator.astro
-interface Props {
-  baseHp: number;
-  baseAp: number;
-  baseMp: number;
+interface Spell {
+  name: string;
+  description: string;
+  baseDamage: number | null;
+  damageType: 'direct' | 'poison' | 'other';
+  effect?: string; 
 }
 
-const { baseHp, baseAp, baseMp } = Astro.props;
+interface Props {
+  baseHp: number;
+  spells: Spell[]; // Re-add spells prop
+  targetHpElementId: string; // Add prop for target ID
+}
+
+const { baseHp, spells = [], targetHpElementId } = Astro.props; // Re-add spells prop with default and get the target ID
+
+// --- DEBUGGING LOG --- 
+console.log('[StasisCalculator] Prop received - baseHp:', baseHp, 'Type:', typeof baseHp);
 
 // Stasis modifier data (HP %, Damage %, Loot %)
 const stasisData = [
@@ -22,12 +33,13 @@ const stasisData = [
   { level: 10, hpMod: 1100, dmgMod: 260, lootMod: 220 },
 ];
 
-const baseDamage = 1000; // Base damage reference as requested
+// REMOVED displaySpells filter
 ---
 
 <div class="bg-black/20 p-4 rounded mt-6">
+  {/* Slider Section */}
   <h4 class="text-lg font-semibold text-emerald-300 mb-3">Calculateur de Stasis</h4>
-  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
     <label for="stasis-slider" class="text-sm font-medium text-gray-300 whitespace-nowrap">Niveau Stasis : <span id="stasis-level-display" class="font-bold text-emerald-400">2</span></label>
     <input
       id="stasis-slider"
@@ -40,52 +52,88 @@ const baseDamage = 1000; // Base damage reference as requested
     />
   </div>
 
-  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-gray-300 bg-black/30 p-3 rounded">
-    <div>
-      <p class="text-xs text-gray-400 uppercase tracking-wider">HP</p>
-      <p id="stasis-hp-display" class="text-lg font-semibold font-mono text-emerald-400">{baseHp}</p>
-    </div>
-    <div>
-      <p class="text-xs text-gray-400 uppercase tracking-wider">Dégâts Base</p>
-      <p id="stasis-dmg-display" class="text-lg font-semibold font-mono text-emerald-400">{baseDamage}</p>
-    </div>
-    <div>
-      <p class="text-xs text-gray-400 uppercase tracking-wider">PA</p>
-      <p class="text-lg font-semibold font-mono text-emerald-400">{baseAp}</p>
-    </div>
-    <div>
-      <p class="text-xs text-gray-400 uppercase tracking-wider">PM</p>
-      <p class="text-lg font-semibold font-mono text-emerald-400">{baseMp}</p>
-    </div>
-  </div>
+  {/* REMOVED Integrated Stats Display */}
+  {/* REMOVED Dynamic Spell List */}
 </div>
 
-<script define:vars={{ baseHp, baseDamage, stasisData }}>
+<script define:vars={{ baseHp, stasisData, spells, targetHpElementId }}>
+  // --- DEBUGGING LOG --- 
+  console.log('[StasisCalculator Script] define:vars - baseHp:', baseHp, 'Type:', typeof baseHp);
+  
   const slider = document.getElementById('stasis-slider');
   const levelDisplay = document.getElementById('stasis-level-display');
-  const hpDisplay = document.getElementById('stasis-hp-display');
-  const dmgDisplay = document.getElementById('stasis-dmg-display');
+  const hpDisplay = document.getElementById(targetHpElementId); 
+  
+  function getSpellDescriptionElements() {
+    return document.querySelectorAll('span[data-spell-name]');
+  }
 
   function updateStats() {
+    // Check for the specific hpDisplay element for this instance
+    const currentHpDisplay = document.getElementById(targetHpElementId);
+    if (!currentHpDisplay) {
+      // console.error(`[StasisCalculator Script] HP display element (#${targetHpElementId}) not found.`);
+      return; 
+    }
+    // console.log(`[StasisCalculator Script] Found HP display #${targetHpElementId}`);
+    
     const currentLevel = parseInt(slider.value);
     const data = stasisData.find(d => d.level === currentLevel);
 
     if (!data) return;
 
     levelDisplay.textContent = currentLevel;
+    
+    const numericBaseHp = Number(baseHp);
+    // console.log(`[StasisCalculator Script #${targetHpElementId}] baseHp: ${baseHp}, numericBaseHp: ${numericBaseHp}`);
 
-    // Calculate and display HP
-    const calculatedHp = Math.round(baseHp * (data.hpMod / 100));
-    hpDisplay.textContent = calculatedHp.toLocaleString();
+    if (!isNaN(numericBaseHp)) {
+        const calculatedHp = Math.round(numericBaseHp * (data.hpMod / 100));
+        // console.log(`[StasisCalculator Script #${targetHpElementId}] Stasis ${currentLevel} -> HP: ${calculatedHp}`);
+        currentHpDisplay.textContent = calculatedHp.toLocaleString(); // Update the specific element
+    } else {
+        // console.error(`[StasisCalculator Script #${targetHpElementId}] baseHp prop is invalid: ${baseHp}`);
+        currentHpDisplay.textContent = 'Erreur'; 
+    }
 
-    // Calculate and display Damage
-    const calculatedDmg = Math.round(baseDamage * (data.dmgMod / 100));
-    dmgDisplay.textContent = calculatedDmg.toLocaleString();
+    // Update spell descriptions (still targets elements across the page, might need refinement if multiple spell lists exist)
+    const spellDescElements = getSpellDescriptionElements();
+    spellDescElements.forEach(span => {
+        // Retrieve data from the element itself
+        const baseDamage = parseFloat(span.dataset.baseDamage);
+        const damageType = span.dataset.damageType;
+        const originalDescription = span.dataset.originalDescription || span.textContent; // Store original on first run
+        span.dataset.originalDescription = originalDescription; // Store it
+
+        let updatedDescription = originalDescription;
+
+        // Calculate damage only for 'direct' type with a valid baseDamage
+        if (damageType === 'direct' && !isNaN(baseDamage)) {
+            const calculatedDmg = Math.round(baseDamage * (data.dmgMod / 100));
+            // Replace the first number found in the original description template
+            updatedDescription = originalDescription.replace(/\d+/, `<span class="font-mono font-semibold text-emerald-400">${calculatedDmg.toLocaleString()}</span>`);
+        } 
+        
+        // Update the span's innerHTML safely
+        span.innerHTML = updatedDescription;
+    });
   }
 
-  // Initial calculation on load
-  updateStats();
+  // Add check if hpDisplay exists before initial call
+  const initialHpDisplay = document.getElementById(targetHpElementId);
+  if (initialHpDisplay) {
+      setTimeout(updateStats, 100); 
+  } else {
+      setTimeout(() => {
+          const hpDisplayRetry = document.getElementById(targetHpElementId);
+          if (hpDisplayRetry) {
+              // console.log(`[StasisCalculator Script #${targetHpElementId}] hpDisplay found on retry.`);
+              updateStats();
+          } else {
+              console.error(`[StasisCalculator Script] HP display element (#${targetHpElementId}) still not found after retry.`);
+          }
+      }, 500);
+  }
 
-  // Update stats when slider value changes
   slider.addEventListener('input', updateStats);
 </script> 
