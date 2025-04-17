@@ -1,0 +1,357 @@
+---
+interface Props {
+  bossId: string;
+  resistances: {
+    water: number;
+    earth: number;
+    air: number;
+    fire: number;
+  };
+  maxStasis?: number;
+}
+
+const { bossId, resistances, maxStasis = 1000 } = Astro.props;
+---
+
+<div class="stasis-calculator glass">
+  <h4 class="calculator-title text-lg font-semibold mb-5 flex items-center">
+    <span class="mr-2 text-gradient-primary">Calculateur de Stase</span>
+    <span class="h-px flex-grow bg-gradient-to-r from-[var(--color-primary)/30] to-transparent"></span>
+  </h4>
+  
+  <div class="element-inputs">
+    <div class="element-input">
+      <label for={`water-${bossId}`} class="element-label water">
+        <span class="element-icon"></span>
+        Eau
+      </label>
+      <input 
+        type="number" 
+        id={`water-${bossId}`}
+        class="damage-input input-glass"
+        min="0" 
+        value="0"
+        data-resistance={resistances.water}
+        data-element="water"
+      />
+      <span class="resistance-value">
+        {resistances.water > 0 ? '+' : ''}{resistances.water}%
+      </span>
+    </div>
+
+    <div class="element-input">
+      <label for={`earth-${bossId}`} class="element-label earth">
+        <span class="element-icon"></span>
+        Terre
+      </label>
+      <input 
+        type="number" 
+        id={`earth-${bossId}`}
+        class="damage-input input-glass"
+        min="0" 
+        value="0"
+        data-resistance={resistances.earth}
+        data-element="earth"
+      />
+      <span class="resistance-value">
+        {resistances.earth > 0 ? '+' : ''}{resistances.earth}%
+      </span>
+    </div>
+
+    <div class="element-input">
+      <label for={`air-${bossId}`} class="element-label air">
+        <span class="element-icon"></span>
+        Air
+      </label>
+      <input 
+        type="number" 
+        id={`air-${bossId}`}
+        class="damage-input input-glass"
+        min="0" 
+        value="0"
+        data-resistance={resistances.air}
+        data-element="air"
+      />
+      <span class="resistance-value">
+        {resistances.air > 0 ? '+' : ''}{resistances.air}%
+      </span>
+    </div>
+
+    <div class="element-input">
+      <label for={`fire-${bossId}`} class="element-label fire">
+        <span class="element-icon"></span>
+        Feu
+      </label>
+      <input 
+        type="number" 
+        id={`fire-${bossId}`}
+        class="damage-input input-glass"
+        min="0" 
+        value="0"
+        data-resistance={resistances.fire}
+        data-element="fire"
+      />
+      <span class="resistance-value">
+        {resistances.fire > 0 ? '+' : ''}{resistances.fire}%
+      </span>
+    </div>
+  </div>
+
+  <div class="results-section">
+    <div class="total-damage">
+      <span class="label">Dégâts totaux:</span>
+      <span id={`total-damage-${bossId}`} class="value">0</span>
+    </div>
+
+    <div class="stasis-progress">
+      <div class="progress-track">
+        <div id={`stasis-bar-${bossId}`} class="progress-bar"></div>
+      </div>
+      <div class="progress-labels">
+        <span>0</span>
+        <span>{maxStasis}</span>
+      </div>
+    </div>
+
+    <div class="stasis-status">
+      <span class="label">État:</span>
+      <span id={`stasis-status-${bossId}`} class="status">Pas en stase</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .stasis-calculator {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stasis-calculator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at bottom right, rgba(var(--color-primary), 0.15) 0%, transparent 70%);
+    z-index: -1;
+  }
+
+  .calculator-title {
+    text-shadow: 0 0 10px hsla(var(--color-primary), 0.5);
+  }
+
+  .element-inputs {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .element-input {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .element-input:hover {
+    background: rgba(var(--color-primary), 0.1);
+    border-color: hsla(var(--color-primary), 0.3);
+    transform: translateY(-2px);
+  }
+
+  .element-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    min-width: 80px;
+  }
+
+  .element-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 0.25rem;
+  }
+
+  .water .element-icon {
+    background: var(--color-neon-blue);
+    box-shadow: 0 0 10px var(--color-neon-blue);
+  }
+
+  .earth .element-icon {
+    background: var(--color-neon-green);
+    box-shadow: 0 0 10px var(--color-neon-green);
+  }
+
+  .air .element-icon {
+    background: var(--color-neon-purple);
+    box-shadow: 0 0 10px var(--color-neon-purple);
+  }
+
+  .fire .element-icon {
+    background: var(--color-neon-red);
+    box-shadow: 0 0 10px var(--color-neon-red);
+  }
+
+  .damage-input {
+    font-family: 'Orbitron', sans-serif;
+    width: 100%;
+  }
+
+  .resistance-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .results-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .total-damage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.25rem;
+  }
+
+  .total-damage .value {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    color: hsl(var(--color-primary));
+  }
+
+  .stasis-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .progress-track {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, hsl(var(--color-primary)), hsl(var(--color-secondary)));
+    transition: width 0.3s ease;
+  }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: hsl(var(--color-primary));
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .stasis-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .status {
+    font-weight: 600;
+  }
+
+  .status.active {
+    color: var(--color-neon-green);
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  }
+
+  @media (min-width: 768px) {
+    .element-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+  }
+</style>
+
+<script define:vars={{ bossId, resistances, maxStasis }}>
+  // Wait for document to be fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all input elements
+    const inputs = document.querySelectorAll(`[id^="${bossId}"][id$="-${bossId}"].damage-input`);
+    const totalDamageElement = document.getElementById(`total-damage-${bossId}`);
+    const stasisBar = document.getElementById(`stasis-bar-${bossId}`);
+    const stasisStatus = document.getElementById(`stasis-status-${bossId}`);
+
+    // Calculate total damage considering resistances
+    function calculateTotalDamage() {
+      let total = 0;
+      
+      inputs.forEach(input => {
+        const damage = parseInt(input.value) || 0;
+        const resistance = parseInt(input.dataset.resistance) || 0;
+        
+        // Apply resistance correctly (reduce damage by resistance percentage)
+        const effectiveDamage = damage * (1 - resistance / 100);
+        
+        total += Math.max(0, effectiveDamage); // Ensure no negative damage
+      });
+
+      return Math.floor(total);
+    }
+
+    // Update UI with calculated values
+    function updateUI() {
+      const totalDamage = calculateTotalDamage();
+      const stasisPercentage = Math.min((totalDamage / maxStasis) * 100, 100);
+      
+      // Update total damage display
+      if (totalDamageElement) {
+        totalDamageElement.textContent = totalDamage.toLocaleString();
+      }
+      
+      // Update progress bar
+      if (stasisBar) {
+        stasisBar.style.width = `${stasisPercentage}%`;
+      }
+      
+      // Update stasis status text and style
+      if (stasisStatus) {
+        if (totalDamage >= maxStasis) {
+          stasisStatus.textContent = "En stase !";
+          stasisStatus.classList.add("active");
+        } else {
+          stasisStatus.textContent = "Pas en stase";
+          stasisStatus.classList.remove("active");
+        }
+      }
+    }
+
+    // Add event listeners to all inputs
+    if (inputs) {
+      inputs.forEach(input => {
+        input.addEventListener("input", updateUI);
+      });
+    }
+
+    // Initialize UI
+    updateUI();
+  });
+</script> 
