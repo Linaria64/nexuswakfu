@@ -47,20 +47,57 @@ const donjonCollection = defineCollection({
     name: z.string(),
     level: z.number(),
     difficulty: z.enum(['easy', 'medium', 'hard', 'extreme']),
-    players: z.enum(['3', '6',]),
+    players: z.enum(['3', '6', 'group']),
     region: z.string(),
-    image: z.object({
-      src: z.string(),
-      alt: z.string().optional(),
-    }),
+    description: z.string(),
+    image: imageSchema,
     rewards: z.array(z.string()),
     bosses: z.array(
       z.object({
         name: z.string(),
-        level: z.number(),
-        description: z.string(),
+        levels: z.array(
+          z.object({
+            level: z.number(),
+            hp: z.number(),
+            ap: z.number(),
+            mp: z.number(),
+            description: z.string(),
+            bossImage: imageSchema,
+            resistances: z.object({
+              water: z.number(),
+              earth: z.number(),
+              air: z.number(),
+              fire: z.number(),
+            }),
+            spells: z.array(
+              z.object({
+                name: z.string(),
+                description: z.string(),
+                baseDamage: z.number().nullable(),
+                damageType: z.enum(['direct', 'indirect', 'poison', 'heal', 'buff', 'debuff', 'other']),
+              })
+            )
+          })
+        )
       })
     ),
+    rooms: z.array(
+      z.object({
+        roomNumber: z.number(),
+        mobs: z.array(
+          z.object({
+            name: z.string(),
+            mechanics: z.string().optional(),
+            spells: z.array(
+              z.object({
+                name: z.string(),
+                description: z.string()
+              })
+            ).optional()
+          })
+        )
+      })
+    ).optional(),
   }),
 });
 

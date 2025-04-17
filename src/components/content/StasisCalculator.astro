@@ -1,23 +1,26 @@
 ---
 // src/components/content/StasisCalculator.astro
+
+// Interface should match the data STRUCTURE expected, 
+// even if BossDisplay passes the slightly different BossSpellData.
+// Alternatively, BossDisplay could map the data before passing.
+// For now, let's keep it simple and match the schema.
 interface Spell {
   name: string;
   description: string;
   baseDamage: number | null;
-  damageType: 'direct' | 'poison' | 'other';
-  effect?: string; 
+  // Aligning with the Zod schema used in config.ts & BossDisplay
+  damageType: 'direct' | 'indirect' | 'poison' | 'heal' | 'buff' | 'debuff' | 'other'; 
+  // Removed effect?: string;
 }
 
 interface Props {
   baseHp: number;
-  spells: Spell[]; // Re-add spells prop
-  targetHpElementId: string; // Add prop for target ID
+  targetHpElementId: string; // ID of the HP span to update in BossDisplay
+  bossDisplayId: string; // ID of the parent BossDisplay container to scope listeners
 }
 
-const { baseHp, spells = [], targetHpElementId } = Astro.props; // Re-add spells prop with default and get the target ID
-
-// --- DEBUGGING LOG --- 
-console.log('[StasisCalculator] Prop received - baseHp:', baseHp, 'Type:', typeof baseHp);
+const { baseHp, targetHpElementId, bossDisplayId } = Astro.props;
 
 // Stasis modifier data (HP %, Damage %, Loot %)
 const stasisData = [
@@ -32,108 +35,151 @@ const stasisData = [
   { level: 9, hpMod: 880, dmgMod: 250, lootMod: 215 },
   { level: 10, hpMod: 1100, dmgMod: 260, lootMod: 220 },
 ];
-
-// REMOVED displaySpells filter
 ---
 
-<div class="bg-black/20 p-4 rounded mt-6">
-  {/* Slider Section */}
+<div class="stasis-calculator-container bg-black/20 p-4 rounded mt-6">
   <h4 class="text-lg font-semibold text-emerald-300 mb-3">Calculateur de Stasis</h4>
   <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-    <label for="stasis-slider" class="text-sm font-medium text-gray-300 whitespace-nowrap">Niveau Stasis : <span id="stasis-level-display" class="font-bold text-emerald-400">2</span></label>
+    <label for={`${bossDisplayId}-stasis-slider`} class="text-sm font-medium text-gray-300 whitespace-nowrap">Niveau Stasis : <span id={`${bossDisplayId}-stasis-level-display`} class="stasis-level-display font-bold text-emerald-400">2</span></label>
     <input
-      id="stasis-slider"
+      id={`${bossDisplayId}-stasis-slider`} 
       type="range"
       min="1"
       max="10"
       step="1"
-      value="2" # Default to Stasis 2
-      class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+      value="2"
+      class="stasis-slider w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+      aria-labelledby={`${bossDisplayId}-stasis-label`}
     />
+    <span id={`${bossDisplayId}-stasis-label`} class="sr-only">Sélecteur de niveau Stasis</span>
   </div>
-
-  {/* REMOVED Integrated Stats Display */}
-  {/* REMOVED Dynamic Spell List */}
+  
+  <div class="grid grid-cols-3 gap-2 mt-4">
+    <div class="bg-black/30 p-2 rounded text-center">
+      <span class="text-xs text-gray-400">PV</span>
+      <p class="text-sm font-semibold text-emerald-400"><span id={`${bossDisplayId}-stasis-hp-mod`}>100</span>%</p>
+    </div>
+    <div class="bg-black/30 p-2 rounded text-center">
+      <span class="text-xs text-gray-400">Dégâts</span>
+      <p class="text-sm font-semibold text-emerald-400"><span id={`${bossDisplayId}-stasis-dmg-mod`}>100</span>%</p>
+    </div>
+    <div class="bg-black/30 p-2 rounded text-center">
+      <span class="text-xs text-gray-400">Butin</span>
+      <p class="text-sm font-semibold text-emerald-400"><span id={`${bossDisplayId}-stasis-loot-mod`}>100</span>%</p>
+    </div>
+  </div>
 </div>
 
-<script define:vars={{ baseHp, stasisData, spells, targetHpElementId }}>
-  // --- DEBUGGING LOG --- 
-  console.log('[StasisCalculator Script] define:vars - baseHp:', baseHp, 'Type:', typeof baseHp);
-  
-  const slider = document.getElementById('stasis-slider');
-  const levelDisplay = document.getElementById('stasis-level-display');
-  const hpDisplay = document.getElementById(targetHpElementId); 
-  
-  function getSpellDescriptionElements() {
-    return document.querySelectorAll('span[data-spell-name]');
-  }
-
-  function updateStats() {
-    // Check for the specific hpDisplay element for this instance
-    const currentHpDisplay = document.getElementById(targetHpElementId);
-    if (!currentHpDisplay) {
-      // console.error(`[StasisCalculator Script] HP display element (#${targetHpElementId}) not found.`);
-      return; 
+<script define:vars={{ baseHp, stasisData, targetHpElementId, bossDisplayId }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const bossContainer = document.querySelector(`.boss-display-container.${bossDisplayId}`);
+    if (!bossContainer) {
+      console.error(`StasisCalculator: Could not find parent BossDisplay container with ID ${bossDisplayId}`);
+      return;
     }
-    // console.log(`[StasisCalculator Script] Found HP display #${targetHpElementId}`);
     
-    const currentLevel = parseInt(slider.value);
-    const data = stasisData.find(d => d.level === currentLevel);
-
-    if (!data) return;
-
-    levelDisplay.textContent = currentLevel;
+    const slider = bossContainer.querySelector(`#${bossDisplayId}-stasis-slider`);
+    const levelDisplay = bossContainer.querySelector(`#${bossDisplayId}-stasis-level-display`);
+    const hpModDisplay = document.getElementById(`${bossDisplayId}-stasis-hp-mod`);
+    const dmgModDisplay = document.getElementById(`${bossDisplayId}-stasis-dmg-mod`);
+    const lootModDisplay = document.getElementById(`${bossDisplayId}-stasis-loot-mod`);
     
-    const numericBaseHp = Number(baseHp);
-    // console.log(`[StasisCalculator Script #${targetHpElementId}] baseHp: ${baseHp}, numericBaseHp: ${numericBaseHp}`);
+    let currentTargetHpId = targetHpElementId;
+    let currentBaseHp = baseHp;
 
-    if (!isNaN(numericBaseHp)) {
-        const calculatedHp = Math.round(numericBaseHp * (data.hpMod / 100));
-        // console.log(`[StasisCalculator Script #${targetHpElementId}] Stasis ${currentLevel} -> HP: ${calculatedHp}`);
-        currentHpDisplay.textContent = calculatedHp.toLocaleString(); // Update the specific element
-    } else {
-        // console.error(`[StasisCalculator Script #${targetHpElementId}] baseHp prop is invalid: ${baseHp}`);
-        currentHpDisplay.textContent = 'Erreur'; 
-    }
+    // --- Main Update Function ---
+    function updateStats() {
+      if (!slider || !levelDisplay) {
+        return;
+      }
 
-    // Update spell descriptions (still targets elements across the page, might need refinement if multiple spell lists exist)
-    const spellDescElements = getSpellDescriptionElements();
-    spellDescElements.forEach(span => {
-        // Retrieve data from the element itself
+      const hpDisplaySpan = document.getElementById(currentTargetHpId); 
+      if (!hpDisplaySpan) {
+        console.error(`StasisCalculator: Target HP element with ID ${currentTargetHpId} not found.`);
+        return;
+      }
+
+      const currentStasisLevel = parseInt(slider.value, 10);
+      const data = stasisData.find(d => d.level === currentStasisLevel);
+
+      if (!data) {
+        console.error(`Stasis data for level ${currentStasisLevel} not found.`);
+        return;
+      }
+
+      // Update Stasis Level Display
+      levelDisplay.textContent = currentStasisLevel;
+      
+      // Update modifier displays
+      if (hpModDisplay) hpModDisplay.textContent = data.hpMod;
+      if (dmgModDisplay) dmgModDisplay.textContent = data.dmgMod;
+      if (lootModDisplay) lootModDisplay.textContent = data.lootMod;
+      
+      // Calculate and Update HP
+      if (!isNaN(currentBaseHp)) {
+        const calculatedHp = Math.round(currentBaseHp * (data.hpMod / 100));
+        hpDisplaySpan.textContent = calculatedHp.toLocaleString(); 
+      } else {
+        hpDisplaySpan.textContent = 'Erreur'; 
+      }
+
+      // Récupérer uniquement les éléments de description de sort visibles (dans le conteneur de niveau actif)
+      const activeContainer = bossContainer.querySelector('.boss-level-container.active');
+      if (!activeContainer) return;
+      
+      const spellDescElements = activeContainer.querySelectorAll('.spell-description');
+      spellDescElements.forEach(span => {
+        // Retrieve base data stored on the element by BossDisplay
         const baseDamage = parseFloat(span.dataset.baseDamage);
         const damageType = span.dataset.damageType;
-        const originalDescription = span.dataset.originalDescription || span.textContent; // Store original on first run
-        span.dataset.originalDescription = originalDescription; // Store it
+        // Use original description stored on element, default to current text content if dataset is missing
+        let originalDescription = span.dataset.originalDescription || span.textContent.trim(); 
+        
+        // Ensure original description is stored for next update
+        if (!span.dataset.originalDescription) {
+          span.dataset.originalDescription = originalDescription;
+        }
 
         let updatedDescription = originalDescription;
 
-        // Calculate damage only for 'direct' type with a valid baseDamage
-        if (damageType === 'direct' && !isNaN(baseDamage)) {
-            const calculatedDmg = Math.round(baseDamage * (data.dmgMod / 100));
-            // Replace the first number found in the original description template
-            updatedDescription = originalDescription.replace(/\d+/, `<span class="font-mono font-semibold text-emerald-400">${calculatedDmg.toLocaleString()}</span>`);
+        // Update description only for direct damage spells with valid base damage
+        if (damageType === 'direct' && !isNaN(baseDamage) && baseDamage !== null) {
+          const calculatedDmg = Math.round(baseDamage * (data.dmgMod / 100));
+          // Be more specific replacing only the first number found, assuming format like "X damage"
+          updatedDescription = originalDescription.replace(/(\d[\d,\.]*)/, 
+            `<span class="font-mono font-semibold text-emerald-400">${calculatedDmg.toLocaleString()}</span>`);
         } 
+        // TODO: Add logic here if poison/other damage types should scale with Stasis?
         
-        // Update the span's innerHTML safely
-        span.innerHTML = updatedDescription;
-    });
-  }
+        span.innerHTML = updatedDescription; // Use innerHTML to render the styled span
+      });
+    }
 
-  // Add check if hpDisplay exists before initial call
-  const initialHpDisplay = document.getElementById(targetHpElementId);
-  if (initialHpDisplay) {
-      setTimeout(updateStats, 100); 
-  } else {
-      setTimeout(() => {
-          const hpDisplayRetry = document.getElementById(targetHpElementId);
-          if (hpDisplayRetry) {
-              // console.log(`[StasisCalculator Script #${targetHpElementId}] hpDisplay found on retry.`);
-              updateStats();
-          } else {
-              console.error(`[StasisCalculator Script] HP display element (#${targetHpElementId}) still not found after retry.`);
+    // --- Event Listener for Stasis Slider --- 
+    if (slider) {
+      slider.addEventListener('input', () => {
+        updateStats();
+      });
+    }
+    
+    // --- Event Listener for Level Changes from BossDisplay --- 
+    document.addEventListener('boss-level-changed', (event) => { 
+      const customEvent = event;
+      if (customEvent.detail && customEvent.detail.bossDisplayId === bossDisplayId) {
+        const newLevelData = customEvent.detail.newLevelData;
+        const newTargetHpId = customEvent.detail.targetHpElementId;
+        
+        if (newLevelData && newLevelData.hp) {
+          currentBaseHp = newLevelData.hp;
+          if (newTargetHpId) {
+            currentTargetHpId = newTargetHpId;
           }
-      }, 500);
-  }
-
-  slider.addEventListener('input', updateStats);
+          updateStats();
+        }
+      }
+    });
+    
+    // --- Initial Calculation ---
+    updateStats();
+  });
 </script> 
