@@ -1,0 +1,505 @@
+---
+name: "Chez la Mère Michou"
+level: 9
+difficulty: "easy"
+players: "group"
+region: "Centre d'Astrub"
+description: "Le premier donjon du jeu avec des chats trop mignons. Le boss est souriant."
+image: {
+  "src": "/images/donjons/mere_michou_placeholder.jpg",
+  "alt": "Donjon Chez la Mère Michou"
+}
+rewards: ["Panoplie Chacha", "Ressources Chacha"]
+bosses: [
+  {
+    "name": "Mayne Coone",
+    "levels": [
+      {
+        "level": 10,
+        "hp": 120,
+        "ap": 8,
+        "mp": 4,
+        "description": "La mère de tous les chachas de la ville d'Astrub.",
+        "bossImage": { "src": "/images/mobs/mayne_coone_placeholder.jpg", "alt": "Mayne Coone (Niv 10)" },
+        "resistances": { "water": 45, "earth": 30, "air": 35, "fire": 40 },
+        "spells": [
+          { "name": "Léchouille malpropre (feu)", "description": "Dégâts Feu (CAC): 10", "baseDamage": 10, "damageType": "direct" },
+          { "name": "Chachapotté", "description": "Retire jusqu'à -2 PA", "baseDamage": null, "damageType": "other" },
+          { "name": "Sacripuce", "description": "Poison Feu faible", "baseDamage": null, "damageType": "poison" }
+        ]
+      }
+    ]
+  }
+]
+rooms: [
+  {
+    "roomNumber": 1,
+    "mobs": [
+      { "name": "Abrakne Sombre", "mechanics": "Peut se soigner." },
+      { "name": "Arakne Majeure", "mechanics": "Pose des toiles qui retirent des PM." }
+    ]
+  },
+  {
+    "roomNumber": 2,
+    "mobs": [
+      { "name": "Abrakne", "mechanics": "Attaque au corps à corps." },
+      { "name": "Abrakne Sombre", "mechanics": "Peut se soigner." },
+      { "name": "Arakne Majeure", "mechanics": "Pose des toiles qui retirent des PM." }
+    ]
+  }
+]
+---
+
+import BossDisplay from '@/components/content/BossDisplay.astro';
+
+# {frontmatter.name}
+
+<div class="dungeon-header">
+  <div class="dungeon-image-wrapper">
+    <img src={frontmatter.image.src} alt={frontmatter.image.alt} class="dungeon-image" />
+  </div>
+  <div class="dungeon-info">
+    <div class="flex flex-wrap gap-3 mb-4">
+      <div class={`status-badge ${frontmatter.difficulty}`}>{frontmatter.difficulty}</div>
+      <div class="status-badge level">Niveau {frontmatter.level}</div>
+      <div class="status-badge players">{frontmatter.players}</div>
+    </div>
+    <p class="text-gray-300 mb-2">{frontmatter.description}</p>
+    <p class="text-sm text-cyan-400 font-semibold">{frontmatter.region}</p>
+  </div>
+</div>
+
+{/* Section Boss */}
+<BossDisplay boss={frontmatter.bosses[0]} />
+
+{/* Section Salles */}
+<div class="glass-card mb-12">
+  <h2 class="section-title">
+    <span class="section-title-text">Salles du Donjon</span>
+  </h2>
+  
+  <div class="room-card mb-6">
+    <div class="room-header">
+      <h3 class="text-xl font-semibold">
+        <span class="room-number">1</span>
+        <span class="room-title">Salle 1</span>
+      </h3>
+    </div>
+    
+    <ul class="space-y-3 mt-4">
+      <li class="mob-card">
+        <strong class="mob-name">Abrakne Sombre</strong>
+        <p class="mob-mechanics">
+          <em class="mechanics-label">Mécanique:</em> Peut se soigner.
+        </p>
+      </li>
+      <li class="mob-card">
+        <strong class="mob-name">Arakne Majeure</strong>
+        <p class="mob-mechanics">
+          <em class="mechanics-label">Mécanique:</em> Pose des toiles qui retirent des PM.
+        </p>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="room-card mb-6">
+    <div class="room-header">
+      <h3 class="text-xl font-semibold">
+        <span class="room-number">2</span>
+        <span class="room-title">Salle 2</span>
+      </h3>
+    </div>
+    
+    <ul class="space-y-3 mt-4">
+      <li class="mob-card">
+        <strong class="mob-name">Abrakne</strong>
+        <p class="mob-mechanics">
+          <em class="mechanics-label">Mécanique:</em> Attaque au corps à corps.
+        </p>
+      </li>
+      <li class="mob-card">
+        <strong class="mob-name">Abrakne Sombre</strong>
+        <p class="mob-mechanics">
+          <em class="mechanics-label">Mécanique:</em> Peut se soigner.
+        </p>
+      </li>
+      <li class="mob-card">
+        <strong class="mob-name">Arakne Majeure</strong>
+        <p class="mob-mechanics">
+          <em class="mechanics-label">Mécanique:</em> Pose des toiles qui retirent des PM.
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+{/* Section Stratégie */}
+<div class="glass-card mb-12">
+  <h2 class="section-title">
+    <span class="section-title-text section-title-strategy">Stratégie</span>
+  </h2>
+  
+  <div class="space-y-4 text-gray-300">
+    <p>Le boss tape fort au corps à corps et ajoute un poison avec son sort Sacripuce à 2 de portée.</p>
+    <p>Pour une stratégie efficace, gardez vos distances et utilisez des sorts à longue portée pour éviter les dégâts directs.</p>
+    <p>Les résistances du boss sont principalement orientées vers l'eau, privilégiez donc les attaques de type Air qui exploitent sa faiblesse.</p>
+  </div>
+</div>
+
+{/* Section Récompenses */}
+<div class="glass-card mb-12">
+  <h2 class="section-title text-center">
+    <span class="section-title-text section-title-rewards">Récompenses</span>
+  </h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+    <div class="reward-category">
+      <h3 class="reward-category-title">
+        <span class="category-icon equipment"></span>
+        Équipement
+      </h3>
+      <ul class="reward-list">
+        <li class="reward-item">Chapeau Chacha (Niv. 10)</li>
+        <li class="reward-item">Cape Féline (Niv. 10)</li>
+        <li class="reward-item">Bottes de Chacha (Niv. 10)</li>
+      </ul>
+    </div>
+    <div class="reward-category">
+      <h3 class="reward-category-title">
+        <span class="category-icon resources"></span>
+        Ressources
+      </h3>
+      <ul class="reward-list">
+        <li class="reward-item">Poils de Chacha</li>
+        <li class="reward-item">Griffes de Chacha</li>
+        <li class="reward-item">Petit Croc de Félin</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{/* Section Conclusion */}
+<div class="glass-card mb-12">
+  <h2 class="section-title">
+    <span class="section-title-text section-title-conclusion">Conclusion</span>
+  </h2>
+  
+  <div class="text-gray-300">
+    <p>Le donjon Chez la Mère Michou est parfait pour les débutants cherchant à s'initier aux mécaniques de donjon. Les récompenses de la panoplie Chacha offrent un bon ensemble de départ pour les nouveaux joueurs.</p>
+  </div>
+</div>
+
+<style>
+  .dungeon-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+  
+  @media (min-width: 768px) {
+    .dungeon-header {
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    .dungeon-image-wrapper {
+      flex: 1;
+    }
+    
+    .dungeon-info {
+      flex: 2;
+    }
+  }
+  
+  .dungeon-image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  
+  .dungeon-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(6, 182, 212, 0.3), transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .dungeon-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .dungeon-info {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+  
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  
+  .status-badge.easy {
+    background: rgba(0, 200, 83, 0.2);
+    color: var(--color-neon-green);
+    border: 1px solid var(--color-neon-green);
+    box-shadow: 0 0 10px rgba(0, 255, 128, 0.3);
+  }
+  
+  .status-badge.level {
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--color-neon-blue);
+    border: 1px solid var(--color-neon-blue);
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+  }
+  
+  .status-badge.players {
+    background: rgba(165, 55, 253, 0.2);
+    color: var(--color-neon-purple);
+    border: 1px solid var(--color-neon-purple);
+    box-shadow: 0 0 10px rgba(165, 55, 253, 0.3);
+  }
+  
+  .section-title {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 0.5rem;
+  }
+  
+  .section-title-text {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(90deg, rgb(6, 182, 212), rgb(14, 165, 233));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-right: 1rem;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, rgb(6, 182, 212), transparent);
+    border-radius: 2px;
+  }
+  
+  .section-title-strategy {
+    background: linear-gradient(90deg, rgb(250, 204, 21), rgb(234, 179, 8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .section-title-strategy + div {
+    position: relative;
+  }
+  
+  .section-title-strategy + div::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(250, 204, 21, 0.15), transparent 70%);
+    z-index: -1;
+    border-radius: 50%;
+  }
+  
+  .section-title-rewards {
+    background: linear-gradient(90deg, rgb(249, 115, 22), rgb(217, 119, 6));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .section-title-conclusion {
+    background: linear-gradient(90deg, rgb(168, 85, 247), rgb(147, 51, 234));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .room-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(6, 182, 212, 0.2);
+  }
+  
+  .room-header {
+    background: rgba(6, 182, 212, 0.1);
+    padding: 1rem;
+    border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+  }
+  
+  .room-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: rgba(6, 182, 212, 0.2);
+    color: rgb(6, 182, 212);
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  .room-title {
+    color: rgb(6, 182, 212);
+    text-shadow: 0 0 5px rgba(6, 182, 212, 0.5);
+  }
+  
+  .mob-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid rgb(6, 182, 212);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem;
+    margin: 0 1rem 1rem 1rem;
+  }
+  
+  .mob-name {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgb(6, 182, 212);
+    margin-bottom: 0.5rem;
+  }
+  
+  .mob-mechanics {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+  }
+  
+  .mechanics-label {
+    color: rgba(255, 255, 255, 0.5);
+    margin-right: 0.25rem;
+  }
+  
+  .mob-spells {
+    margin-top: 0.5rem;
+  }
+  
+  .spells-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.25rem;
+  }
+  
+  .spells-list {
+    padding-left: 1rem;
+    list-style-type: disc;
+  }
+  
+  .spell-item {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.25rem;
+  }
+  
+  .spell-name {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+  }
+  
+  .reward-category {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .reward-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(249, 115, 22, 0.2);
+  }
+  
+  .reward-category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, rgb(249, 115, 22), transparent);
+  }
+  
+  .reward-category-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgb(249, 115, 22);
+    margin-bottom: 1rem;
+  }
+  
+  .category-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 0.75rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  
+  .reward-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .reward-item {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .reward-item::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: rgb(249, 115, 22);
+    font-weight: bold;
+  }
+</style>
+
+

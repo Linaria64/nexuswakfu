@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  type?: 'default' | 'dungeon' | 'strategy' | 'rewards' | 'conclusion';
+}
+
+const { title, type = 'default' } = Astro.props;
+
+const getTitleClass = () => {
+  switch (type) {
+    case 'dungeon':
+      return 'section-title-text';
+    case 'strategy':
+      return 'section-title-strategy';
+    case 'rewards':
+      return 'section-title-rewards';
+    case 'conclusion':
+      return 'section-title-conclusion';
+    default:
+      return 'section-title-text';
+  }
+};
+---
+
+<div class="section-title">
+  <h2 class={getTitleClass()}>{title}</h2>
+</div> 

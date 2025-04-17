@@ -1,18 +1,14 @@
 ---
 import StasisCalculator from './StasisCalculator.astro';
 
-interface ResistanceProps {
-  value: number;
-}
-
-interface SpellProps {
+interface Spell {
   name: string;
   description: string;
   baseDamage: number | null;
   damageType: 'direct' | 'indirect' | 'poison' | 'heal' | 'buff' | 'debuff' | 'other';
 }
 
-interface LevelProps {
+interface BossLevel {
   level: number;
   hp: number;
   ap: number;
@@ -28,15 +24,21 @@ interface LevelProps {
     air: number;
     fire: number;
   };
-  spells: SpellProps[];
+  spells: Spell[];
 }
 
-interface BossProps {
+interface Boss {
   name: string;
-  levels: LevelProps[];
+  levels: BossLevel[];
 }
 
-const { boss } = Astro.props as { boss: BossProps };
+interface Props {
+  boss: Boss;
+}
+
+const { boss } = Astro.props;
+const currentLevel = boss.levels[0]; // Display first level by default
+
 // Créer un ID unique pour ce boss basé sur son nom
 const bossDisplayId = boss.name.toLowerCase().replace(/\s+/g, '-');
 
@@ -45,116 +47,89 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
 ---
 
 <div class={`boss-display-container ${bossDisplayId} mb-12`}>
-  <h2 class="text-3xl font-bold text-red-300 mb-6 border-b border-red-700 pb-2">Boss du Donjon</h2>
+  <h2 class="boss-title text-3xl font-bold text-center mb-6">
+    <span class="inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+      Boss du Donjon: {boss.name}
+    </span>
+  </h2>
   
-  <div class="boss-container">
-    <h3 class="text-2xl font-bold text-red-400 mb-4">{boss.name}</h3>
-    
-    <div class="mb-4 flex flex-wrap gap-2">
-      <span class="text-sm font-medium text-gray-300 mr-2">Niveau du boss:</span>
-      {sortedLevels.map((level, index) => (
-        <button 
-          class="level-selector px-3 py-1 rounded-full bg-red-900/50 text-red-200 hover:bg-red-800/60 transition-colors" 
-          data-level-index={index}
-          data-level={level.level}
-        >
-          {level.level}
-        </button>
-      ))}
-    </div>
-
-    {sortedLevels.map((level, index) => (
-      <div class={`boss-level-container ${index === 0 ? 'active' : 'hidden'}`} data-level-index={index} data-level={level.level}>
-        <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-6 shadow-lg transition-all duration-300 ease-in-out hover:border-white/20 hover:shadow-xl">
-          <div class="flex flex-col md:flex-row gap-6">
-            <div class="md:w-1/3">
-              <img
-                src={level.bossImage.src}
-                alt={level.bossImage.alt}
-                class="rounded-lg w-full h-auto border-2 border-white/20 shadow-lg"
-                loading="lazy"
-                width="400"
-                height="400"
-              />
-            </div>
-            
-            <div class="md:w-2/3">
-              <h4 class="text-xl font-semibold text-red-400 mb-2">Niveau <span class="boss-level-display">{level.level}</span></h4>
-              <p class="text-gray-300 mb-4">{level.description}</p>
-              
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                <div class="bg-black/30 p-2 rounded-lg text-center">
-                  <span class="text-xs text-gray-400">PV</span>
-                  <p class="text-lg font-bold text-red-300">
-                    <span id={`boss-hp-${bossDisplayId}-${level.level}`} class="boss-hp" data-base-hp={level.hp}>{level.hp}</span>
-                  </p>
-                </div>
-                <div class="bg-black/30 p-2 rounded-lg text-center">
-                  <span class="text-xs text-gray-400">PA</span>
-                  <p class="text-lg font-bold text-yellow-300">{level.ap}</p>
-                </div>
-                <div class="bg-black/30 p-2 rounded-lg text-center">
-                  <span class="text-xs text-gray-400">PM</span>
-                  <p class="text-lg font-bold text-blue-300">{level.mp}</p>
-                </div>
-              </div>
-              
-              <h5 class="text-lg font-semibold text-gray-200 mb-2">Résistances</h5>
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                <div class="bg-blue-900/30 p-2 rounded-lg text-center">
-                  <span class="text-xs text-gray-300">Eau</span>
-                  <p class={`text-lg font-bold ${level.resistances.water >= 0 ? 'text-blue-300' : 'text-red-400'}`}>
-                    {level.resistances.water > 0 ? '+' : ''}{level.resistances.water}%
-                  </p>
-                </div>
-                <div class="bg-green-900/30 p-2 rounded-lg text-center">
-                  <span class="text-xs text-gray-300">Terre</span>
-                  <p class={`text-lg font-bold ${level.resistances.earth >= 0 ? 'text-green-300' : 'text-red-400'}`}>
-                    {level.resistances.earth > 0 ? '+' : ''}{level.resistances.earth}%
-                  </p>
-                </div>
-                <div class="bg-purple-900/30 p-2 rounded-lg text-center">
-                  <span class="text-xs text-gray-300">Air</span>
-                  <p class={`text-lg font-bold ${level.resistances.air >= 0 ? 'text-purple-300' : 'text-red-400'}`}>
-                    {level.resistances.air > 0 ? '+' : ''}{level.resistances.air}%
-                  </p>
-                </div>
-                <div class="bg-orange-900/30 p-2 rounded-lg text-center">
-                  <span class="text-xs text-gray-300">Feu</span>
-                  <p class={`text-lg font-bold ${level.resistances.fire >= 0 ? 'text-orange-300' : 'text-red-400'}`}>
-                    {level.resistances.fire > 0 ? '+' : ''}{level.resistances.fire}%
-                  </p>
-                </div>
-              </div>
-              
-              <h5 class="text-lg font-semibold text-gray-200 mb-2">Sorts</h5>
-              <div class="space-y-2">
-                {level.spells.map((spell) => (
-                  <div class="bg-black/30 p-3 rounded-lg">
-                    <h6 class="font-semibold text-yellow-300">{spell.name}</h6>
-                    <p class="text-gray-300 text-sm spell-description" 
-                       data-base-damage={spell.baseDamage} 
-                       data-damage-type={spell.damageType}>
-                      {spell.description}
-                    </p>
-                    <span class={`inline-block px-2 py-1 rounded text-xs mt-1
-                      ${spell.damageType === 'direct' ? 'bg-red-900/50 text-red-200' : ''}
-                      ${spell.damageType === 'poison' ? 'bg-green-900/50 text-green-200' : ''}
-                      ${spell.damageType === 'heal' ? 'bg-emerald-900/50 text-emerald-200' : ''}
-                      ${spell.damageType === 'buff' ? 'bg-blue-900/50 text-blue-200' : ''}
-                      ${spell.damageType === 'debuff' ? 'bg-purple-900/50 text-purple-200' : ''}
-                      ${spell.damageType === 'other' ? 'bg-gray-900/50 text-gray-200' : ''}
-                    `}>
-                      {spell.damageType}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
+  <div class="boss-container glass-card">
+    <div class="boss-header">
+      <div class="boss-image-wrapper">
+        {currentLevel.bossImage?.src ? (
+          <img src={currentLevel.bossImage.src} alt={currentLevel.bossImage.alt || boss.name} class="boss-image" />
+        ) : (
+          <div class="boss-image-placeholder">
+            <span>{boss.name.charAt(0)}</span>
+          </div>
+        )}
+      </div>
+      
+      <div class="boss-info">
+        <h3 class="boss-name">{boss.name}</h3>
+        <p class="boss-title">{currentLevel.description}</p>
+        
+        <div class="boss-stats">
+          <div class="stat-item">
+            <span class="stat-icon hp"></span>
+            <span class="stat-value">{currentLevel.hp}</span>
+            <span class="stat-label">PV</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon ap"></span>
+            <span class="stat-value">{currentLevel.ap}</span>
+            <span class="stat-label">PA</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon mp"></span>
+            <span class="stat-value">{currentLevel.mp}</span>
+            <span class="stat-label">PM</span>
           </div>
         </div>
       </div>
-    ))}
+    </div>
+    
+    <div class="boss-details">
+      <div class="boss-resistances">
+        <h4 class="details-title">Résistances</h4>
+        <div class="resistances-grid">
+          <div class={`resistance-item ${currentLevel.resistances.water > 0 ? 'positive' : 'negative'}`}>
+            <span class="element-icon water"></span>
+            <span class="resistance-value">{currentLevel.resistances.water > 0 ? '+' : ''}{currentLevel.resistances.water}%</span>
+          </div>
+          <div class={`resistance-item ${currentLevel.resistances.earth > 0 ? 'positive' : 'negative'}`}>
+            <span class="element-icon earth"></span>
+            <span class="resistance-value">{currentLevel.resistances.earth > 0 ? '+' : ''}{currentLevel.resistances.earth}%</span>
+          </div>
+          <div class={`resistance-item ${currentLevel.resistances.air > 0 ? 'positive' : 'negative'}`}>
+            <span class="element-icon air"></span>
+            <span class="resistance-value">{currentLevel.resistances.air > 0 ? '+' : ''}{currentLevel.resistances.air}%</span>
+          </div>
+          <div class={`resistance-item ${currentLevel.resistances.fire > 0 ? 'positive' : 'negative'}`}>
+            <span class="element-icon fire"></span>
+            <span class="resistance-value">{currentLevel.resistances.fire > 0 ? '+' : ''}{currentLevel.resistances.fire}%</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="boss-spells">
+        <h4 class="details-title">Sorts</h4>
+        <div class="spells-container">
+          {currentLevel.spells.map((spell) => (
+            <div class={`spell-card ${spell.damageType}`}>
+              <div class="spell-header">
+                <h5 class="spell-name">{spell.name}</h5>
+                {spell.baseDamage && (
+                  <span class="spell-damage">{spell.baseDamage} dégâts</span>
+                )}
+              </div>
+              <p class="spell-description">{spell.description}</p>
+              <span class="spell-type">{spell.damageType}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
 
     {/* Stasis Calculator */}
     <StasisCalculator 
@@ -200,8 +175,8 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
         const levelIndex = parseInt(button.dataset.levelIndex, 10);
         
         // Mettre à jour la classe active des boutons
-        levelSelectors.forEach(btn => btn.classList.remove('bg-red-700', 'font-semibold'));
-        button.classList.add('bg-red-700', 'font-semibold');
+        levelSelectors.forEach(btn => btn.classList.remove('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500'));
+        button.classList.add('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500');
         
         // Afficher le container du niveau sélectionné et cacher les autres
         levelContainers.forEach((container, idx) => {
@@ -216,27 +191,337 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
 
     // Activer le premier niveau par défaut
     if (levelSelectors.length > 0) {
-      levelSelectors[0].classList.add('bg-red-700', 'font-semibold');
+      levelSelectors[0].classList.add('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500');
     }
   });
 </script>
 
 <style>
+  .boss-title {
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+  }
+  
   .boss-container {
+    position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+  }
+  
+  .boss-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle at center,
+      rgba(6, 182, 212, 0.1) 0%,
+      transparent 60%
+    );
+    animation: rotate 30s linear infinite;
+    z-index: -1;
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
   
   .level-selector {
-    cursor: pointer;
-    transition: all 0.2s ease;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .level-selector:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+  }
+  
+  .level-selector::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      rgba(6, 182, 212, 0) 0%,
+      rgba(6, 182, 212, 0.3) 50%,
+      rgba(6, 182, 212, 0) 100%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    transition: all 0.5s ease;
+  }
+  
+  .level-selector:hover::after {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
   }
   
   .boss-level-container {
-    transition: opacity 0.3s ease;
+    transition: all 0.5s ease;
   }
   
-  .boss-level-container.hidden {
-    display: none;
+  .boss-image-container {
+    position: relative;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .boss-image-container:hover {
+    transform: translateY(-5px);
+  }
+  
+  .boss-image-container:hover img {
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+  }
+  
+  .boss-display {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+  
+  .boss-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(165, 55, 253, 0.1);
+    border-bottom: 1px solid rgba(165, 55, 253, 0.2);
+  }
+  
+  @media (min-width: 768px) {
+    .boss-header {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  
+  .boss-image-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(165, 55, 253, 0.5);
+    box-shadow: 0 0 20px rgba(165, 55, 253, 0.4);
+  }
+  
+  .boss-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .boss-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(165, 55, 253, 0.2);
+    color: rgba(165, 55, 253, 0.8);
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  
+  .boss-info {
+    flex: 1;
+  }
+  
+  .boss-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: rgb(167, 139, 250);
+    margin-bottom: 0.25rem;
+  }
+  
+  .boss-title {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+  }
+  
+  .boss-stats {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .stat-icon {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  
+  .stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+  }
+  
+  .stat-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .boss-details {
+    padding: 1.5rem;
+  }
+  
+  .details-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgb(167, 139, 250);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(165, 55, 253, 0.2);
+  }
+  
+  .resistances-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .resistances-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .resistance-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .resistance-item.positive {
+    border-left: 3px solid rgb(16, 185, 129);
+  }
+  
+  .resistance-item.negative {
+    border-left: 3px solid rgb(239, 68, 68);
+  }
+  
+  .element-icon {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  
+  .resistance-value {
+    font-weight: 600;
+  }
+  
+  .resistance-item.positive .resistance-value {
+    color: rgb(16, 185, 129);
+  }
+  
+  .resistance-item.negative .resistance-value {
+    color: rgb(239, 68, 68);
+  }
+  
+  .boss-spells {
+    margin-top: 2rem;
+  }
+  
+  .spells-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .spells-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .spell-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 3px solid rgb(167, 139, 250);
+  }
+  
+  .spell-card.direct {
+    border-left-color: rgb(239, 68, 68);
+  }
+  
+  .spell-card.indirect {
+    border-left-color: rgb(245, 158, 11);
+  }
+  
+  .spell-card.poison {
+    border-left-color: rgb(16, 185, 129);
+  }
+  
+  .spell-card.heal {
+    border-left-color: rgb(59, 130, 246);
+  }
+  
+  .spell-card.buff {
+    border-left-color: rgb(139, 92, 246);
+  }
+  
+  .spell-card.debuff {
+    border-left-color: rgb(236, 72, 153);
+  }
+  
+  .spell-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .spell-name {
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+  }
+  
+  .spell-damage {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .spell-description {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+  }
+  
+  .spell-type {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: capitalize;
   }
 </style> 

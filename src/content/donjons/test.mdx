@@ -1,0 +1,48 @@
+---
+name: "Test"
+level: 1
+difficulty: "easy"
+players: "group"
+region: "Test"
+description: "Test description"
+image: {
+  "src": "/images/donjons/mere_michou_placeholder.jpg",
+  "alt": "Test"
+}
+rewards: ["Test"]
+bosses: [
+  {
+    "name": "Test Boss",
+    "levels": [
+      {
+        "level": 1,
+        "hp": 100,
+        "ap": 6,
+        "mp": 3,
+        "description": "Test boss description",
+        "bossImage": { "src": "/images/mobs/mayne_coone_placeholder.jpg", "alt": "Test Boss" },
+        "resistances": { "water": 0, "earth": 0, "air": 0, "fire": 0 },
+        "spells": [
+          { "name": "Test Spell", "description": "Test spell description", "baseDamage": 10, "damageType": "direct" }
+        ]
+      }
+    ]
+  }
+]
+rooms: [
+  {
+    "roomNumber": 1,
+    "mobs": [
+      { "name": "Test Mob", "mechanics": "Test mechanics" }
+    ]
+  }
+]
+---
+
+# {frontmatter.name}
+
+This is a test file.
+
+<div>
+  <p>Test content</p>
+</div> 

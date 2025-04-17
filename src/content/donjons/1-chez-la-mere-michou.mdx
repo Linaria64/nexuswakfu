@@ -1,73 +1,48 @@
 ---
 name: "Chez la Mère Michou"
-level: 9
+level: 10
 difficulty: "easy"
-players: "group"
-region: "Centre d'Astrub"
-description: "Le premier donjon du jeu avec des chats trop mignons. Le boss est souriant."
+players: "3"
+region: "Région d'Amakna"
+description: "Un donjon parfait pour débuter, où vous affronterez des félins mutants et leur cheffe, Mayne Coone."
 image: {
-  "src": "/images/donjons/mere_michou_placeholder.jpg",
-  "alt": "Donjon Chez la Mère Michou"
+  "src": "/images/donjons/chez-la-mere-michou.jpg",
+  "alt": "Entrée du donjon Chez la Mère Michou"
 }
-rewards: ["Panoplie Chacha", "Ressources Chacha"]
+rewards: ["Chapeau Chacha", "Cape Féline", "Poils de Chacha"]
 bosses: [
   {
     "name": "Mayne Coone",
     "levels": [
       {
         "level": 10,
-        "hp": 120,
-        "ap": 8,
-        "mp": 4,
-        "description": "Version niveau 10 de la mère des chachas.",
-        "bossImage": { "src": "/images/mobs/mayne_coone_placeholder.jpg", "alt": "Mayne Coone (Niv 10)" },
-        "resistances": { "water": 45, "earth": 30, "air": 35, "fire": 40 },
+        "hp": 1000,
+        "ap": 6,
+        "mp": 3,
+        "description": "Protectrice des félins",
+        "bossImage": {
+          "src": "/images/bosses/mayne-coone.jpg",
+          "alt": "Mayne Coone"
+        },
+        "resistances": {
+          "water": 30,
+          "earth": 10,
+          "air": -15,
+          "fire": 10
+        },
         "spells": [
-          { "name": "Léchouille malpropre (feu)", "description": "Dégâts Feu (CAC): 10", "baseDamage": 10, "damageType": "direct" },
-          { "name": "Chachapotté", "description": "Retire jusqu'à -2 PA", "baseDamage": null, "damageType": "other" },
-          { "name": "Sacripuce", "description": "Poison Feu faible", "baseDamage": null, "damageType": "poison" }
-        ]
-      },
-      {
-        "level": 11,
-        "hp": 139,
-        "ap": 8,
-        "mp": 4,
-        "description": "La mère de tous les chachas de la ville d'Astrub.",
-        "bossImage": { "src": "/images/mobs/mayne_coone_placeholder.jpg", "alt": "Mayne Coone (Niv 11)" },
-        "resistances": { "water": 51, "earth": 35, "air": 41, "fire": 46 },
-        "spells": [
-          { "name": "Léchouille malpropre (feu)", "description": "Dégâts Feu (CAC): 11", "baseDamage": 11, "damageType": "direct" },
-          { "name": "Chachapotté", "description": "Retire jusqu'à -2 PA", "baseDamage": null, "damageType": "other" },
-          { "name": "Sacripuce", "description": "Poison Feu (1-100 dégâts/tour)", "baseDamage": null, "damageType": "poison" }
-        ]
-      },
-      {
-        "level": 12,
-        "hp": 160,
-        "ap": 8,
-        "mp": 4,
-        "description": "Version niveau 12 de la mère des chachas.",
-        "bossImage": { "src": "/images/mobs/mayne_coone_placeholder.jpg", "alt": "Mayne Coone (Niv 12)" },
-        "resistances": { "water": 55, "earth": 40, "air": 45, "fire": 50 },
-        "spells": [
-          { "name": "Léchouille malpropre (feu)", "description": "Dégâts Feu (CAC): 12", "baseDamage": 12, "damageType": "direct" },
-          { "name": "Chachapotté", "description": "Retire jusqu'à -2 PA", "baseDamage": null, "damageType": "other" },
-          { "name": "Sacripuce", "description": "Poison Feu moyen", "baseDamage": null, "damageType": "poison" }
-        ]
-      },
-      {
-        "level": 15,
-        "hp": 200,
-        "ap": 8,
-        "mp": 4,
-        "description": "Version niveau 15 de la mère des chachas.",
-        "bossImage": { "src": "/images/mobs/mayne_coone_placeholder.jpg", "alt": "Mayne Coone (Niv 15)" },
-        "resistances": { "water": 15, "earth": 15, "air": -15, "fire": 15 },
-        "spells": [
-          { "name": "Léchouille malpropre (feu)", "description": "Dégâts Feu (CAC): 11", "baseDamage": 11, "damageType": "direct" },
-          { "name": "Chachapotté", "description": "Retire jusqu'à -2 PA", "baseDamage": null, "damageType": "other" },
-          { "name": "Sacripuce", "description": "Poison Feu (1-100 dégâts/tour)", "baseDamage": null, "damageType": "poison" }
+          { 
+            "name": "Griffes Acérées", 
+            "description": "Attaque de mêlée qui inflige des dégâts et a 30% de chance d'appliquer Saignement.",
+            "baseDamage": 15,
+            "damageType": "direct"
+          },
+          { 
+            "name": "Sacripuce", 
+            "description": "Lance un poison qui inflige 5 dégâts par tour pendant 3 tours.",
+            "baseDamage": 5,
+            "damageType": "poison"
+          }
         ]
       }
     ]
@@ -77,7 +52,7 @@ rooms: [
   {
     "roomNumber": 1,
     "mobs": [
-      { "name": "Abrakne Sombre", "mechanics": "Peut se soigner.", "spells": [{ "name": "Ronces", "description": "Dégâts Eau" }] },
+      { "name": "Abrakne Sombre", "mechanics": "Peut se soigner." },
       { "name": "Arakne Majeure", "mechanics": "Pose des toiles qui retirent des PM." }
     ]
   },
@@ -85,7 +60,7 @@ rooms: [
     "roomNumber": 2,
     "mobs": [
       { "name": "Abrakne", "mechanics": "Attaque au corps à corps." },
-      { "name": "Abrakne Sombre", "mechanics": "Peut se soigner.", "spells": [{ "name": "Ronces", "description": "Dégâts Eau" }] },
+      { "name": "Abrakne Sombre", "mechanics": "Peut se soigner." },
       { "name": "Arakne Majeure", "mechanics": "Pose des toiles qui retirent des PM." }
     ]
   }
@@ -93,79 +68,55 @@ rooms: [
 ---
 
 import BossDisplay from '@/components/content/BossDisplay.astro';
+import DungeonHeader from '@/components/content/DungeonHeader.astro';
+import DungeonRooms from '@/components/content/DungeonRooms.astro';
+import DungeonRewards from '@/components/content/DungeonRewards.astro';
+import SectionTitle from '@/components/common/SectionTitle.astro';
+import '@/styles/dungeon.css';
 
-{/* Section Boss */}
-{frontmatter.bosses && frontmatter.bosses.length > 0 && (
-  <BossDisplay boss={frontmatter.bosses[0]} />
-)}
+# {frontmatter.name}
 
-{/* Section Salles */}
-<div class="mb-12">
-  <h2 class="text-3xl font-bold text-cyan-300 mb-6 border-b border-cyan-700 pb-2">Salles du Donjon</h2>
-  {frontmatter.rooms && frontmatter.rooms.map(room => (
-    <div key={room.roomNumber} class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 mb-6 shadow-lg transition-all duration-300 ease-in-out hover:border-white/20 hover:shadow-xl">
-      <h3 class="text-xl font-semibold text-cyan-400 mb-4">Salle {room.roomNumber} - Monstres</h3>
-      <ul class="space-y-3">
-        {room.mobs.map(mob => (
-          <li class="border-l-4 border-cyan-600 pl-3 py-1 bg-black/10 rounded-r-md text-gray-300">
-            <strong class="font-semibold text-cyan-400">{mob.name}</strong>
-            {mob.mechanics && <p class="text-sm text-gray-400 ml-2"><em>Mécanique:</em> {mob.mechanics}</p>}
-            {mob.spells && mob.spells.length > 0 && (
-              <div class="ml-2 mt-1">
-                <p class="text-sm font-medium text-gray-400">Sorts:</p>
-                <ul class="list-disc list-inside text-xs text-gray-400 pl-2">
-                  {mob.spells.map(spell => (
-                    <li key={spell.name}>{spell.name}: {spell.description}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
-  ))}
-</div>
+<DungeonHeader 
+  image={frontmatter.image}
+  name={frontmatter.name}
+  level={frontmatter.level}
+  difficulty={frontmatter.difficulty}
+  players={frontmatter.players}
+  region={frontmatter.region}
+  description={frontmatter.description}
+/>
 
-{/* Section Stratégie */}
-<div class="mb-12">
-  <h2 class="text-3xl font-bold text-yellow-300 mb-6 border-b border-yellow-700 pb-2">Stratégie</h2>
-  <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 shadow-lg transition-all duration-300 ease-in-out hover:border-white/20 hover:shadow-xl text-gray-300 space-y-4">
-    <p>Le boss tape fort au corps à corps et ajoute un poison avec son sort Sacripuce à 2 de portée.</p>
-    <p>Pour une stratégie efficace, gardez vos distances et utilisez des sorts à longue portée pour éviter les dégâts directs.</p>
-    <p>Les résistances du boss sont principalement orientées vers l'eau, privilégiez donc les attaques de type Air qui exploitent sa faiblesse.</p>
-  </div>
-</div>
+<BossDisplay boss={frontmatter.bosses[0]} />
 
-{/* Section Récompenses et Drop */}
-<div class="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 rounded-lg p-6 mb-8 shadow-lg hover:border-white/40 hover:shadow-xl transition-all duration-300 ease-in-out">
-  <h2 class="text-3xl font-bold text-yellow-300 mt-2 mb-6 text-center border-b border-yellow-700 pb-3">Récompenses</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-      <h3 class="text-xl font-semibold text-cyan-300 mb-3">Équipement</h3>
-      <ul class="list-disc list-inside space-y-1 text-gray-200 pl-4">
-        <li>Chapeau Chacha (Niv. 10)</li>
-        <li>Cape Féline (Niv. 10)</li>
-        <li>Bottes de Chacha (Niv. 10)</li>
-      </ul>
-    </div>
-    <div>
-      <h3 class="text-xl font-semibold text-cyan-300 mb-3">Ressources</h3>
-      <ul class="list-disc list-inside space-y-1 text-gray-200 pl-4">
-        <li>Poils de Chacha</li>
-        <li>Griffes de Chacha</li>
-        <li>Petit Croc de Félin</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<SectionTitle title="Salles du Donjon" type="dungeon" />
 
-{/* Section Conclusion */}
-<div class="mb-12">
-  <h2 class="text-3xl font-bold text-purple-300 mb-6 border-b border-purple-700 pb-2">Conclusion</h2>
-  <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/10 rounded-lg p-6 shadow-lg transition-all duration-300 ease-in-out hover:border-white/20 hover:shadow-xl text-gray-300">
-    <p>Le donjon Chez la Mère Michou est parfait pour les débutants cherchant à s'initier aux mécaniques de donjon. Les récompenses de la panoplie Chacha offrent un bon ensemble de départ pour les nouveaux joueurs.</p>
-  </div>
-</div>
+<DungeonRooms rooms={frontmatter.rooms} />
+
+<SectionTitle title="Stratégie" type="strategy" />
+
+Le boss tape fort au corps à corps et ajoute un poison avec son sort Sacripuce à 2 de portée.
+
+Pour une stratégie efficace, gardez vos distances et utilisez des sorts à longue portée pour éviter les dégâts directs.
+
+Les résistances du boss sont principalement orientées vers l'eau, privilégiez donc les attaques de type Air qui exploitent sa faiblesse.
+
+<SectionTitle title="Récompenses" type="rewards" />
+
+<DungeonRewards 
+  equipment={[
+    "Chapeau Chacha (Niv. 10)",
+    "Cape Féline (Niv. 10)",
+    "Bottes de Chacha (Niv. 10)"
+  ]}
+  resources={[
+    "Poils de Chacha",
+    "Griffes de Chacha",
+    "Petit Croc de Félin"
+  ]}
+/>
+
+<SectionTitle title="Conclusion" type="conclusion" />
+
+Le donjon Chez la Mère Michou est parfait pour les débutants cherchant à s'initier aux mécaniques de donjon. Les récompenses de la panoplie Chacha offrent un bon ensemble de départ pour les nouveaux joueurs.
 
 

@@ -37,35 +37,80 @@ const stasisData = [
 ];
 ---
 
-<div class="stasis-calculator-container bg-black/20 p-4 rounded mt-6">
-  <h4 class="text-lg font-semibold text-emerald-300 mb-3">Calculateur de Stasis</h4>
-  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-    <label for={`${bossDisplayId}-stasis-slider`} class="text-sm font-medium text-gray-300 whitespace-nowrap">Niveau Stasis : <span id={`${bossDisplayId}-stasis-level-display`} class="stasis-level-display font-bold text-emerald-400">2</span></label>
-    <input
-      id={`${bossDisplayId}-stasis-slider`} 
-      type="range"
-      min="1"
-      max="10"
-      step="1"
-      value="2"
-      class="stasis-slider w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
-      aria-labelledby={`${bossDisplayId}-stasis-label`}
-    />
-    <span id={`${bossDisplayId}-stasis-label`} class="sr-only">Sélecteur de niveau Stasis</span>
+<div class="stasis-calculator-container mt-6 mb-3 overflow-hidden relative">
+  <div class="glow-effect absolute"></div>
+  
+  <h4 class="calculator-title text-lg font-semibold mb-5 flex items-center">
+    <span class="mr-2 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">Calculateur de Stasis</span>
+    <span class="h-px flex-grow bg-gradient-to-r from-emerald-500/30 to-transparent"></span>
+  </h4>
+  
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+    <label for={`${bossDisplayId}-stasis-slider`} class="text-sm font-medium text-gray-300 whitespace-nowrap flex items-center">
+      <span class="w-24">Niveau Stasis :</span> 
+      <span id={`${bossDisplayId}-stasis-level-display`} class="ml-2 font-orbitron text-xl font-bold text-emerald-400 min-w-[1.5rem] text-center">2</span>
+    </label>
+    
+    <div class="slider-container relative w-full h-10 flex items-center px-2">
+      <div class="slider-track absolute h-1 w-full bg-gray-700/50 rounded"></div>
+      <div class="slider-progress absolute h-1 left-0 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded" style="width: calc(10% * 2);"></div>
+      <input
+        id={`${bossDisplayId}-stasis-slider`} 
+        type="range"
+        min="1"
+        max="10"
+        step="1"
+        value="2"
+        class="stasis-slider z-10 w-full h-2 appearance-none cursor-pointer bg-transparent"
+        aria-labelledby={`${bossDisplayId}-stasis-label`}
+      />
+      <span id={`${bossDisplayId}-stasis-label`} class="sr-only">Sélecteur de niveau Stasis</span>
+    </div>
   </div>
   
-  <div class="grid grid-cols-3 gap-2 mt-4">
-    <div class="bg-black/30 p-2 rounded text-center">
-      <span class="text-xs text-gray-400">PV</span>
-      <p class="text-sm font-semibold text-emerald-400"><span id={`${bossDisplayId}-stasis-hp-mod`}>100</span>%</p>
+  <div class="grid grid-cols-3 gap-3 mt-5">
+    <div class="stasis-stat-block">
+      <div class="stasis-stat-icon hp-icon flex justify-center items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+        </svg>
+      </div>
+      <div class="stasis-stat-content">
+        <span class="stasis-stat-label">PV</span>
+        <div class="stasis-stat-value">
+          <span id={`${bossDisplayId}-stasis-hp-mod`}>100</span>%
+        </div>
+      </div>
     </div>
-    <div class="bg-black/30 p-2 rounded text-center">
-      <span class="text-xs text-gray-400">Dégâts</span>
-      <p class="text-sm font-semibold text-emerald-400"><span id={`${bossDisplayId}-stasis-dmg-mod`}>100</span>%</p>
+    
+    <div class="stasis-stat-block">
+      <div class="stasis-stat-icon dmg-icon flex justify-center items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M13.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
+          <path fill-rule="evenodd" d="M19.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="stasis-stat-content">
+        <span class="stasis-stat-label">Dégâts</span>
+        <div class="stasis-stat-value">
+          <span id={`${bossDisplayId}-stasis-dmg-mod`}>100</span>%
+        </div>
+      </div>
     </div>
-    <div class="bg-black/30 p-2 rounded text-center">
-      <span class="text-xs text-gray-400">Butin</span>
-      <p class="text-sm font-semibold text-emerald-400"><span id={`${bossDisplayId}-stasis-loot-mod`}>100</span>%</p>
+    
+    <div class="stasis-stat-block">
+      <div class="stasis-stat-icon loot-icon flex justify-center items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path d="M9.375 3a1.875 1.875 0 000 3.75h1.875v4.5H3.375A1.875 1.875 0 011.5 9.375v-.75c0-1.036.84-1.875 1.875-1.875h3.193A3.375 3.375 0 0112 2.753a3.375 3.375 0 015.432 3.997h3.943c1.035 0 1.875.84 1.875 1.875v.75c0 1.036-.84 1.875-1.875 1.875H12.75v-4.5h1.875a1.875 1.875 0 10-1.875-1.875V6.75h-1.5V4.875C11.25 3.839 10.41 3 9.375 3z" />
+          <path d="M11.25 12.75H3v6.75a2.25 2.25 0 002.25 2.25h6v-9zM12.75 12.75v9h6.75a2.25 2.25 0 002.25-2.25v-6.75h-9z" />
+        </svg>
+      </div>
+      <div class="stasis-stat-content">
+        <span class="stasis-stat-label">Butin</span>
+        <div class="stasis-stat-value">
+          <span id={`${bossDisplayId}-stasis-loot-mod`}>100</span>%
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -83,6 +128,7 @@ const stasisData = [
     const hpModDisplay = document.getElementById(`${bossDisplayId}-stasis-hp-mod`);
     const dmgModDisplay = document.getElementById(`${bossDisplayId}-stasis-dmg-mod`);
     const lootModDisplay = document.getElementById(`${bossDisplayId}-stasis-loot-mod`);
+    const sliderProgress = bossContainer.querySelector('.slider-progress');
     
     let currentTargetHpId = targetHpElementId;
     let currentBaseHp = baseHp;
@@ -109,6 +155,11 @@ const stasisData = [
 
       // Update Stasis Level Display
       levelDisplay.textContent = currentStasisLevel;
+      
+      // Update slider progress
+      if (sliderProgress) {
+        sliderProgress.style.width = `calc(10% * ${currentStasisLevel})`;
+      }
       
       // Update modifier displays
       if (hpModDisplay) hpModDisplay.textContent = data.hpMod;
@@ -182,4 +233,131 @@ const stasisData = [
     // --- Initial Calculation ---
     updateStats();
   });
-</script> 
+</script>
+
+<style>
+  .stasis-calculator-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    position: relative;
+  }
+  
+  .glow-effect {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+    z-index: -1;
+  }
+  
+  .calculator-title {
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  }
+  
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .stasis-slider {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .stasis-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #10b981;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .stasis-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.9);
+  }
+  
+  .stasis-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #10b981;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .stasis-slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.9);
+  }
+  
+  .stasis-stat-block {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .stasis-stat-block:hover {
+    transform: translateY(-3px);
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
+  }
+  
+  .stasis-stat-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.75rem;
+    border-radius: 50%;
+    color: white;
+  }
+  
+  .hp-icon {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    color: white;
+  }
+  
+  .dmg-icon {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+  }
+  
+  .loot-icon {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: white;
+  }
+  
+  .stasis-stat-content {
+    flex-grow: 1;
+  }
+  
+  .stasis-stat-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .stasis-stat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #10b981;
+    text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+  }
+</style> 
