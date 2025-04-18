@@ -1,38 +1,55 @@
 ---
 interface Props {
-  id: string;
-  title: string;
-  size?: 'default' | 'full';
+  isOpen: boolean;
+  title?: string;
+  onClose: () => void;
+  size?: 'sm' | 'md' | 'lg' | 'full';
+  className?: string;
 }
 
-const { id, title, size = 'default' } = Astro.props;
+const { isOpen, title, onClose, size = 'md', className = '' } = Astro.props;
 
 const sizeClasses = {
-  default: 'max-w-2xl',
-  full: 'max-w-6xl w-11/12',
+  sm: 'max-w-sm',
+  md: 'max-w-lg',
+  lg: 'max-w-2xl',
+  full: 'max-w-full',
 };
 ---
 
 <div 
-  id={id} 
-  class="modal fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300 ease-in-out bg-black/60 backdrop-blur-sm"
+  class={`modal fixed inset-0 z-50 flex items-center justify-center ${isOpen ? '' : 'pointer-events-none opacity-0'} ${className}`} 
+  aria-modal="true" 
   role="dialog" 
-  aria-modal="true"
-  aria-labelledby={`${id}-title`}
-  aria-hidden="true" 
+  tabindex="-1"
 >
-  {/* Modal Content - Apply .glass class directly */}
-  <div class={`modal-content glass rounded-xl shadow-2xl relative max-h-[90vh] overflow-y-auto transition-transform duration-300 ease-in-out scale-95 p-6 sm:p-8 ${sizeClasses[size]}`}>
+  <div 
+    class="modal-overlay fixed inset-0 bg-black/60 backdrop-blur-lg transition-opacity duration-300" 
+    on:click={onClose}
+  ></div>
+  <div 
+    class={`modal-content glass-card relative w-full mx-auto animate-fadeInUp ${sizeClasses[size]}`}
+  >
     {/* Modal Header */}
     <div class="absolute top-0 right-0 pt-4 pr-4">
       <button 
-        type="button"
-        class="close-modal rounded-md p-1 text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 transition-all"
-        aria-label="Close modal"
+        class="absolute top-5 right-5 btn btn-glass bg-transparent text-primary hover:text-accent focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-all" 
+        aria-label="Fermer la modale" 
+        on:click={onClose}
       >
-        <span class="sr-only">Close</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          class="h-7 w-7" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M6 18L18 6M6 6l12 12" 
+          />
         </svg>
       </button>
     </div>
@@ -40,7 +57,6 @@ const sizeClasses = {
     {/* Modal Body - Slot for content */}
     <div class="modal-body">
       {/* Title is now usually part of the slotted content for better layout control */}
-      {/* <h2 id={`${id}-title`} class="text-2xl font-bold text-white mb-6">{title}</h2> */} 
       <slot />
     </div>
   </div>
@@ -89,66 +105,57 @@ const sizeClasses = {
 </style>
 
 <script>
-  function openModal(modalElement) {
-    if (!modalElement) return;
-    modalElement.classList.add('is-open');
-    modalElement.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
+  import { openModal, closeModal, trapFocus } from '../../lib/utils/modal';
 
-  function closeModal(modalElement) {
-    if (!modalElement) return;
-    modalElement.classList.remove('is-open');
-    modalElement.setAttribute('aria-hidden', 'true');
-    // Check if any other modals are open before restoring scroll
-    const anyModalOpen = document.querySelector('.modal.is-open');
-    if (!anyModalOpen) {
-      document.body.style.overflow = '';
-    }
-  }
+  let lastFocusedElement = null;
 
-  // Use a single event listener setup after DOM loaded
   function initializeModalListeners() {
-      document.body.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        
-        // Handle modal triggers
-        const triggerButton = target.closest('[data-modal-target]');
-        if (triggerButton) {
-          const modalId = triggerButton.getAttribute('data-modal-target');
-          const modal = document.getElementById(modalId);
-          openModal(modal);
+    document.body.addEventListener('click', (e) => {
+      const target = e.target;
+      // Modal trigger
+      const triggerButton = target.closest('[data-modal-target]');
+      if (triggerButton) {
+        const modalId = triggerButton.getAttribute('data-modal-target');
+        const modal = document.getElementById(modalId);
+        lastFocusedElement = document.activeElement;
+        openModal(modal);
+        // Focus trap
+        if (modal) trapFocus(modal);
+      }
+      // Modal close (button or overlay)
+      const closeButton = target.closest('.close-modal');
+      const modalOverlay = target.closest('.modal');
+      if (closeButton) {
+        const modalToClose = closeButton.closest('.modal');
+        closeModal(modalToClose);
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+          lastFocusedElement.focus();
         }
-        
-        // Handle modal close buttons OR click outside modal content
-        const closeButton = target.closest('.close-modal');
-        const modalOverlay = target.closest('.modal');
-        
-        if (closeButton) {
-            const modalToClose = closeButton.closest('.modal');
-            closeModal(modalToClose);
-        } else if (modalOverlay && target === modalOverlay) { // Clicked on overlay, not content
-            closeModal(modalOverlay);
-        } 
-      }, { capture: false }); // Use bubble phase
-
-      // Handle escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          const openModalElement = document.querySelector('.modal.is-open');
-          if (openModalElement) {
-            closeModal(openModalElement);
+      } else if (modalOverlay && target === modalOverlay) {
+        closeModal(modalOverlay);
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+          lastFocusedElement.focus();
+        }
+      }
+    }, { capture: false });
+    // Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const openModalElement = document.querySelector('.modal.is-open');
+        if (openModalElement) {
+          closeModal(openModalElement);
+          if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+            lastFocusedElement.focus();
           }
         }
-      });
+      }
+    });
   }
-  
-  // Run initialization script
-  if (typeof window !== 'undefined') { // Ensure runs only in browser
-    if (document.readyState === 'loading') { // HandleDOMContentLoaded equivalent for modules
+  if (typeof window !== 'undefined') {
+    if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initializeModalListeners);
     } else {
-      initializeModalListeners(); // Already loaded
+      initializeModalListeners();
     }
   }
-</script> 
+</script>

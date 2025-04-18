@@ -11,12 +11,14 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+<div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800" role="menu" aria-label="Menu principal" tabindex="-1">
   <div class="px-2 pt-2 pb-3 space-y-1">
     {items.map((item) => (
       <a
         href={item.href}
         class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-wakfu-primary dark:hover:text-wakfu-secondary hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        role="menuitem"
+        tabindex="0"
       >
         {item.text}
       </a>
@@ -38,9 +40,45 @@ const { items } = Astro.props;
       <a
         href="/recherche/"
         class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-wakfu-primary dark:hover:text-wakfu-secondary hover:bg-gray-100 dark:hover:bg-gray-800"
+        role="menuitem"
+        tabindex="0"
       >
         Recherche
       </a>
     </div>
   </div>
-</div> 
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menu = document.getElementById('mobile-menu');
+  if (!menu) return;
+  // Focus trap et navigation clavier
+  function trapFocus(e) {
+    if (menu.classList.contains('hidden')) return;
+    if (e.key === 'Escape') {
+      menu.classList.add('hidden');
+      // Focus sur le bouton menu si présent
+      const btn = document.querySelector('.mobile-menu-button');
+      if (btn) btn.focus();
+    }
+    if (e.key === 'Tab') {
+      const focusableEls = Array.from(menu.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])')).filter(el => !el.hasAttribute('disabled'));
+      if (!focusableEls.length) return;
+      const first = focusableEls[0];
+      const last = focusableEls[focusableEls.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+  }
+  document.addEventListener('keydown', trapFocus);
+});
+</script>

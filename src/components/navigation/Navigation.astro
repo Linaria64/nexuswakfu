@@ -95,24 +95,81 @@ import GlobalSearch from '../search/GlobalSearch.astro';
 <GlobalSearch />
 
 <script>
-  // Javascript pour gérer le menu mobile
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuButton = document.querySelector('.mobile-menu-button');
-    const mobileMenu = document.querySelector('.mobile-menu');
+// Gestion avancée du menu mobile (accessibilité, focus, ARIA)
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileMenuButton = document.querySelector('.mobile-menu-button');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  let lastFocusedElement = null;
 
-    mobileMenuButton?.addEventListener('click', () => {
-      mobileMenu?.classList.toggle('hidden');
-    });
+  // Accessibilité ARIA
+  if (mobileMenu) {
+    mobileMenu.setAttribute('role', 'menu');
+    mobileMenu.setAttribute('aria-label', 'Menu principal');
+    mobileMenu.setAttribute('tabindex', '-1');
+  }
+  if (mobileMenuButton) {
+    mobileMenuButton.setAttribute('aria-expanded', 'false');
+    mobileMenuButton.setAttribute('aria-controls', 'mobile-menu');
+  }
 
-    // Fermer le menu quand on clique en dehors
-    document.addEventListener('click', (event) => {
-      const target = event.target as HTMLElement;
-      const isMenuButtonClick = target.closest('.mobile-menu-button');
-      const isMenuClick = target.closest('.mobile-menu');
-      
-      if (!isMenuButtonClick && !isMenuClick && !mobileMenu?.classList.contains('hidden')) {
-        mobileMenu?.classList.add('hidden');
+  function openMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.classList.remove('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', 'true');
+    // Focus sur le premier lien
+    const firstLink = mobileMenu.querySelector('a');
+    if (firstLink) firstLink.focus();
+    // Trap focus
+    document.addEventListener('keydown', trapFocus);
+  }
+  function closeMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.classList.add('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    // Rendre le focus au bouton
+    if (mobileMenuButton) mobileMenuButton.focus();
+    document.removeEventListener('keydown', trapFocus);
+  }
+  function trapFocus(e) {
+    if (!mobileMenu || mobileMenu.classList.contains('hidden')) return;
+    if (e.key === 'Escape') {
+      closeMenu();
+    }
+    if (e.key === 'Tab') {
+      const focusableEls = Array.from(mobileMenu.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])')).filter(el => !el.hasAttribute('disabled'));
+      if (!focusableEls.length) return;
+      const first = focusableEls[0];
+      const last = focusableEls[focusableEls.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
-    });
+    }
+  }
+
+  mobileMenuButton?.addEventListener('click', () => {
+    if (mobileMenu?.classList.contains('hidden')) {
+      lastFocusedElement = document.activeElement;
+      openMenu();
+    } else {
+      closeMenu();
+    }
   });
-</script> 
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    const isMenuButtonClick = target.closest('.mobile-menu-button');
+    const isMenuClick = target.closest('.mobile-menu');
+    if (!isMenuButtonClick && !isMenuClick && !mobileMenu?.classList.contains('hidden')) {
+      closeMenu();
+    }
+  });
+});
+</script>

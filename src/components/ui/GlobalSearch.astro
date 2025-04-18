@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import type { SearchItem } from '../../lib/utils/search';
 
 // Récupérer toutes les collections nécessaires
 const classes = await getCollection('classes');
@@ -8,7 +9,7 @@ const donjons = (await getCollection('donjons')).filter(item => item.data && ite
 const guides = (await getCollection('guides')).filter(item => item.data && item.data.title);
 
 // Fusionner toutes les données pour la recherche
-const searchData = [
+const searchData: SearchItem[] = [
   ...classes.map(item => ({
     type: 'classe',
     title: item.data.title,
@@ -48,103 +49,105 @@ const searchData = [
 ];
 ---
 
-<div class="relative" x-data="{ 
-  open: false, 
-  searchQuery: '', 
-  searchResults: [], 
-  selectedIndex: -1,
-  resultsGrouped: {},
-  showResults: false,
-  
-  init() {
-    this.searchData = JSON.parse(document.getElementById('search-data').textContent);
-    
-    // Intercepter la touche '/' pour ouvrir la recherche
-    document.addEventListener('keydown', (e) => {
-      if (e.key === '/' && !this.open && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-        this.open = true;
-        this.$nextTick(() => {
-          this.$refs.searchInput.focus();
-        });
-      }
-      
-      if (e.key === 'Escape' && this.open) {
-        this.close();
-      }
-    });
-    
-    this.$watch('searchQuery', (value) => {
-      if (value.length > 1) {
-        this.search(value);
-        this.showResults = true;
-      } else {
-        this.searchResults = [];
-        this.resultsGrouped = {};
-        this.showResults = false;
-      }
-    });
-  },
-  
-  search(query) {
-    query = query.toLowerCase();
-    
-    // Recherche simple basée sur le contenu
-    this.searchResults = this.searchData
-      .filter(item => {
-        const searchableText = `${item.title} ${item.subtitle} ${item.description} ${item.keywords}`.toLowerCase();
-        return searchableText.includes(query);
-      })
-      .slice(0, 10);
-    
-    // Grouper les résultats par type
-    this.resultsGrouped = this.searchResults.reduce((acc, item) => {
-      const type = item.type;
-      if (!acc[type]) {
-        acc[type] = [];
-      }
-      acc[type].push(item);
-      return acc;
-    }, {});
-  },
-  
-  selectItem(index) {
-    this.selectedIndex = index;
-  },
-  
-  navigate(direction) {
-    const totalResults = this.searchResults.length;
-    if (totalResults === 0) return;
-    
-    if (direction === 'next') {
-      this.selectedIndex = (this.selectedIndex + 1) % totalResults;
-    } else {
-      this.selectedIndex = (this.selectedIndex - 1 + totalResults) % totalResults;
+<div class="relative" x-data="searchModal()" aria-haspopup="dialog" aria-expanded="false">
+  <script>
+    import { debounce } from '../../lib/utils/debounce';
+    import { simpleSearch } from '../../lib/utils/search';
+    /**
+     * @typedef {import('../../lib/utils/search').SearchItem} SearchItem
+     */
+    function searchModal() {
+      return {
+        open: false,
+        searchQuery: '',
+        searchResults: [],
+        selectedIndex: -1,
+        resultsGrouped: {},
+        showResults: false,
+        searchData: [],
+        _keydownListener: null,
+        _debouncedSearch: null,
+        init() {
+          this.searchData = JSON.parse(document.getElementById('search-data').textContent);
+          this._debouncedSearch = debounce((value) => {
+            if (value.length > 1) {
+              this.search(value);
+              this.showResults = true;
+            } else {
+              this.searchResults = [];
+              this.resultsGrouped = {};
+              this.showResults = false;
+            }
+          }, 200);
+
+          // Intercepter la touche '/' pour ouvrir la recherche
+          this._keydownListener = (e) => {
+            if (e.key === '/' && !this.open && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+              e.preventDefault();
+              this.open = true;
+              this.$nextTick(() => {
+                this.$refs.searchInput.focus();
+              });
+            }
+            if (e.key === 'Escape' && this.open) {
+              this.close();
+            }
+          };
+          document.addEventListener('keydown', this._keydownListener);
+
+          this.$watch('searchQuery', (value) => {
+            this._debouncedSearch(value);
+          });
+        },
+        destroy() {
+          if (this._keydownListener) {
+            document.removeEventListener('keydown', this._keydownListener);
+          }
+        },
+        search(query) {
+          // Utilitaire factorisé (prêt à remplacer par Fuse.js si besoin)
+          this.searchResults = simpleSearch(query, this.searchData, 10);
+          // Grouper les résultats par type
+          this.resultsGrouped = this.searchResults.reduce((acc, item) => {
+            const type = item.type;
+            if (!acc[type]) acc[type] = [];
+            acc[type].push(item);
+            return acc;
+          }, {});
+        },
+        selectItem(index) {
+          this.selectedIndex = index;
+        },
+        navigate(direction) {
+          const totalResults = this.searchResults.length;
+          if (totalResults === 0) return;
+          if (direction === 'next') {
+            this.selectedIndex = (this.selectedIndex + 1) % totalResults;
+          } else {
+            this.selectedIndex = (this.selectedIndex - 1 + totalResults) % totalResults;
+          }
+          this.$nextTick(() => {
+            const selected = this.$el.querySelector(`[data-index='${this.selectedIndex}']`);
+            if (selected) {
+              selected.scrollIntoView({ block: 'nearest' });
+            }
+          });
+        },
+        goToSelected() {
+          if (this.selectedIndex >= 0 && this.searchResults[this.selectedIndex]) {
+            window.location.href = this.searchResults[this.selectedIndex].slug;
+          }
+        },
+        close() {
+          this.open = false;
+          this.searchQuery = '';
+          this.searchResults = [];
+          this.selectedIndex = -1;
+          this.showResults = false;
+        }
+      };
     }
-    
-    // S'assurer que l'élément sélectionné est visible
-    this.$nextTick(() => {
-      const selected = this.$el.querySelector(`[data-index='${this.selectedIndex}']`);
-      if (selected) {
-        selected.scrollIntoView({ block: 'nearest' });
-      }
-    });
-  },
-  
-  goToSelected() {
-    if (this.selectedIndex >= 0 && this.searchResults[this.selectedIndex]) {
-      window.location.href = this.searchResults[this.selectedIndex].slug;
-    }
-  },
-  
-  close() {
-    this.open = false;
-    this.searchQuery = '';
-    this.searchResults = [];
-    this.selectedIndex = -1;
-    this.showResults = false;
-  }
-}">
+  </script>
   <!-- Bouton de recherche -->
   <button 
     type="button" 
@@ -174,6 +177,9 @@ const searchData = [
     @keydown.enter.prevent="goToSelected"
     class="fixed inset-0 z-50"
     style="display: none;"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Recherche"
   >
     <!-- Fond semi-transparent -->
     <div 

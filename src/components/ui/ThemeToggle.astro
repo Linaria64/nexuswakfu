@@ -7,6 +7,8 @@
   type="button"
   class="fixed bottom-4 right-4 p-2 z-50 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary"
   aria-label="Changer de thème"
+  aria-pressed="false"
+  tabindex="0"
 >
   <!-- Icône soleil (affiché en mode sombre) -->
   <svg
@@ -49,34 +51,51 @@
     function setDarkMode() {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+      if (themeToggle) themeToggle.setAttribute('aria-pressed', 'true');
     }
     
     // Définir le thème clair
     function setLightMode() {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
+      if (themeToggle) themeToggle.setAttribute('aria-pressed', 'false');
     }
     
-    // Vérifier le thème actuel
+    // Vérifier le thème actuel ou la préférence système
     function checkTheme() {
       const theme = localStorage.getItem('theme');
       
       if (theme === 'light') {
         setLightMode();
-      } else {
+      } else if (theme === 'dark') {
         setDarkMode();
+      } else {
+        // Si pas de choix utilisateur, suivre le thème système
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          setDarkMode();
+        } else {
+          setLightMode();
+        }
       }
     }
     
     // Initialiser le thème
     checkTheme();
     
-    // Basculer le thème quand on clique sur le bouton
-    themeToggle?.addEventListener('click', () => {
+    // Basculer le thème quand on clique ou utilise Entrée/Espace
+    function toggleTheme() {
       if (document.documentElement.classList.contains('dark')) {
         setLightMode();
       } else {
         setDarkMode();
+      }
+    }
+    
+    themeToggle?.addEventListener('click', toggleTheme);
+    themeToggle?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleTheme();
       }
     });
   });

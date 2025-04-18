@@ -1,13 +1,10 @@
 ---
+import type { FilterDef, FilterState } from '../../lib/utils/filterState';
+import { initFilterState, updateFilterState } from '../../lib/utils/filterState';
+
 interface Props {
   title?: string;
-  filters: {
-    id: string;
-    label: string;
-    options: { value: string; label: string; count?: number }[];
-    type?: 'checkbox' | 'radio' | 'select' | 'tag';
-    defaultValue?: string | string[];
-  }[];
+  filters: FilterDef[];
   showReset?: boolean;
   showCount?: boolean;
   compact?: boolean;
@@ -23,11 +20,10 @@ const {
   className = ""
 } = Astro.props;
 
-// Générer un ID unique pour ce composant
 const componentId = `filter-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
-<div id={componentId} class={`search-filter ${compact ? 'search-filter-compact' : ''} ${className}`}>
+<div id={componentId} class={`search-filter ${compact ? 'search-filter-compact' : ''} ${className}`} role="region" aria-label={title ?? 'Filtres'} tabindex="-1">
   {title && <h3 class="text-lg font-semibold mb-4">{title}</h3>}
   
   <div class="filter-container space-y-6">
@@ -41,6 +37,7 @@ const componentId = `filter-${Math.random().toString(36).substring(2, 9)}`;
               id={`filter-${filter.id}`} 
               class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md shadow-sm focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary focus:border-wakfu-primary dark:focus:border-wakfu-secondary sm:text-sm"
               data-filter-select={filter.id}
+              aria-label={filter.label}
             >
               {filter.options.map((option) => (
                 <option value={option.value} selected={filter.defaultValue === option.value}>
@@ -66,6 +63,7 @@ const componentId = `filter-${Math.random().toString(36).substring(2, 9)}`;
                 data-filter-tag={filter.id}
                 data-value={option.value}
                 data-active="false"
+                aria-label={option.label}
               >
                 {option.label}
                 {showCount && option.count !== undefined && <span class="ml-1 text-xs rounded-full bg-gray-100 dark:bg-gray-700 px-1.5">{option.count}</span>}
@@ -86,6 +84,7 @@ const componentId = `filter-${Math.random().toString(36).substring(2, 9)}`;
                   class="h-4 w-4 rounded border-gray-300 dark:border-gray-700 text-wakfu-primary dark:text-wakfu-secondary focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary"
                   data-filter-checkbox={filter.id}
                   checked={Array.isArray(filter.defaultValue) && filter.defaultValue.includes(option.value)}
+                  aria-label={option.label}
                 />
                 <label for={`filter-${filter.id}-${option.value}`} class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                   {option.label}
@@ -108,6 +107,7 @@ const componentId = `filter-${Math.random().toString(36).substring(2, 9)}`;
                   class="h-4 w-4 border-gray-300 dark:border-gray-700 text-wakfu-primary dark:text-wakfu-secondary focus:ring-wakfu-primary dark:focus:ring-wakfu-secondary"
                   data-filter-radio={filter.id}
                   checked={filter.defaultValue === option.value}
+                  aria-label={option.label}
                 />
                 <label for={`filter-${filter.id}-${option.value}`} class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                   {option.label}
@@ -125,6 +125,7 @@ const componentId = `filter-${Math.random().toString(36).substring(2, 9)}`;
     <button 
       type="button" 
       class="reset-filters mt-6 text-sm font-medium text-wakfu-primary dark:text-wakfu-secondary hover:underline"
+      aria-label="Réinitialiser les filtres"
     >
       Réinitialiser les filtres
     </button>
@@ -132,157 +133,100 @@ const componentId = `filter-${Math.random().toString(36).substring(2, 9)}`;
 </div>
 
 <script define:vars={{ componentId, filters }}>
+import { initFilterState, updateFilterState } from '../../lib/utils/filterState';
+/**
+ * @typedef {import('../../lib/utils/filterState').FilterDef} FilterDef
+ * @typedef {import('../../lib/utils/filterState').FilterState} FilterState
+ */
 document.addEventListener('DOMContentLoaded', () => {
   const filterContainer = document.getElementById(componentId);
   if (!filterContainer) return;
-  
-  // Obtenir tous les éléments de filtre
   const selects = filterContainer.querySelectorAll('[data-filter-select]');
   const tags = filterContainer.querySelectorAll('[data-filter-tag]');
   const checkboxes = filterContainer.querySelectorAll('[data-filter-checkbox]');
   const radios = filterContainer.querySelectorAll('[data-filter-radio]');
   const resetButton = filterContainer.querySelector('.reset-filters');
-  
-  // Stocker l'état des filtres
-  const filterState = {};
-  
-  // Initialiser l'état des filtres
-  filters.forEach(filter => {
-    if (filter.defaultValue) {
-      filterState[filter.id] = filter.defaultValue;
-    } else {
-      filterState[filter.id] = filter.type === 'checkbox' ? [] : '';
-    }
-  });
-  
-  // Fonction pour déclencher l'événement de changement de filtre
+
+  let filterState = initFilterState(filters);
+
   function triggerFilterChange() {
-    const event = new CustomEvent('filter-change', { 
+    const event = new CustomEvent('filter-change', {
       detail: { filters: filterState },
       bubbles: true
     });
     filterContainer.dispatchEvent(event);
   }
-  
-  // Écouter les changements de select
+
   selects.forEach(select => {
     const filterId = select.dataset.filterSelect;
     select.addEventListener('change', () => {
-      filterState[filterId] = select.value;
+      filterState = updateFilterState(filterState, filterId, select.value, 'select');
       triggerFilterChange();
     });
   });
-  
-  // Écouter les clics sur les tags
+
   tags.forEach(tag => {
     const filterId = tag.dataset.filterTag;
     const value = tag.dataset.value;
-    
     tag.addEventListener('click', () => {
       const isActive = tag.dataset.active === 'true';
-      
-      // Mettre à jour l'état du tag
       tag.dataset.active = isActive ? 'false' : 'true';
-      
-      // Mettre à jour l'apparence
       if (isActive) {
         tag.classList.remove('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
       } else {
         tag.classList.add('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
       }
-      
-      // Mettre à jour l'état du filtre
-      if (Array.isArray(filterState[filterId])) {
-        if (isActive) {
-          filterState[filterId] = filterState[filterId].filter(v => v !== value);
-        } else {
-          filterState[filterId].push(value);
-        }
-      } else {
-        filterState[filterId] = isActive ? '' : value;
-        
-        // Si c'est un filtre de type tag unique, désactiver les autres tags
-        if (!isActive) {
-          tags.forEach(otherTag => {
-            if (otherTag.dataset.filterTag === filterId && otherTag !== tag) {
-              otherTag.dataset.active = 'false';
-              otherTag.classList.remove('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
-            }
-          });
-        }
+      filterState = updateFilterState(filterState, filterId, value, 'tag', !isActive);
+      // Désactiver les autres tags si tag unique
+      if (!isActive) {
+        tags.forEach(otherTag => {
+          if (otherTag.dataset.filterTag === filterId && otherTag !== tag) {
+            otherTag.dataset.active = 'false';
+            otherTag.classList.remove('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
+          }
+        });
       }
-      
       triggerFilterChange();
     });
   });
-  
-  // Écouter les changements de checkbox
+
   checkboxes.forEach(checkbox => {
     const filterId = checkbox.dataset.filterCheckbox;
     const value = checkbox.value;
-    
     checkbox.addEventListener('change', () => {
-      if (!Array.isArray(filterState[filterId])) {
-        filterState[filterId] = [];
-      }
-      
-      if (checkbox.checked) {
-        filterState[filterId].push(value);
-      } else {
-        filterState[filterId] = filterState[filterId].filter(v => v !== value);
-      }
-      
+      filterState = updateFilterState(filterState, filterId, value, 'checkbox', checkbox.checked);
       triggerFilterChange();
     });
   });
-  
-  // Écouter les changements de radio
+
   radios.forEach(radio => {
     const filterId = radio.dataset.filterRadio;
-    
     radio.addEventListener('change', () => {
       if (radio.checked) {
-        filterState[filterId] = radio.value;
+        filterState = updateFilterState(filterState, filterId, radio.value, 'radio');
         triggerFilterChange();
       }
     });
   });
-  
-  // Réinitialiser les filtres
+
   resetButton?.addEventListener('click', () => {
-    // Réinitialiser les select
+    filterState = initFilterState(filters);
     selects.forEach(select => {
       select.selectedIndex = 0;
-      filterState[select.dataset.filterSelect] = select.value;
     });
-    
-    // Réinitialiser les tags
     tags.forEach(tag => {
       tag.dataset.active = 'false';
       tag.classList.remove('bg-wakfu-primary', 'dark:bg-wakfu-secondary', 'text-white', 'border-wakfu-primary', 'dark:border-wakfu-secondary');
-      filterState[tag.dataset.filterTag] = '';
     });
-    
-    // Réinitialiser les checkbox
     checkboxes.forEach(checkbox => {
       checkbox.checked = false;
-      const filterId = checkbox.dataset.filterCheckbox;
-      if (!filterState[filterId]) filterState[filterId] = [];
-      else filterState[filterId] = [];
     });
-    
-    // Réinitialiser les radio
     radios.forEach(radio => {
       radio.checked = radio.getAttribute('data-default') === 'true';
-      if (radio.checked) {
-        filterState[radio.dataset.filterRadio] = radio.value;
-      }
     });
-    
     triggerFilterChange();
   });
-  
-  // Déclencher un événement initial pour définir l'état par défaut
+
   triggerFilterChange();
 });
 </script>

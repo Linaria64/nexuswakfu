@@ -200,21 +200,54 @@ const playerLabels = {
 
   {/* Modals for each dungeon - Restore basic loop */}
   
+  <script type="module" client:load>
+    window.donjonModalState = {};
+    window.openDonjonModal = (slug) => {
+      window.donjonModalState[slug] = true;
+      document.getElementById(`modal-donjon-${slug}`)?.classList.remove('pointer-events-none', 'opacity-0');
+    };
+    window.closeDonjonModal = (slug) => {
+      window.donjonModalState[slug] = false;
+      document.getElementById(`modal-donjon-${slug}`)?.classList.add('pointer-events-none', 'opacity-0');
+    };
+  </script>
+
   {allDungeons.map((donjon) => {
-      const { Content } = donjon; // Keep access to Content, even if not used yet
-      return (
-        <Modal id={`modal-donjon-${donjon.slug}`} title={donjon.data.name} size="full">
-          {/* Refined content structure for UI/UX */}
-          <div class="p-6"> {/* Main padding */}
-            {/* Strategy Section */}
+    const { Content } = donjon;
+    return (
+      <div>
+        <Modal
+          isOpen={false}
+          title={donjon.data.name}
+          onClose={() => window.closeDonjonModal(donjon.slug)}
+          size="full"
+          className={"pointer-events-none opacity-0 transition-all duration-300"}
+          id={`modal-donjon-${donjon.slug}`}
+        >
+          <div class="p-6">
             <h2 class="text-2xl font-bold mb-4 text-[var(--color-text-h2)]">Stratégie</h2>
-            <div class="prose prose-invert max-w-none mb-8"> {/* Apply prose only here, add bottom margin */}
+            <div class="prose prose-invert max-w-none mb-8">
               <Content />
             </div>
           </div>
         </Modal>
-      );
+      </div>
+    );
   })}
+
+  <script type="module" client:load>
+    document.querySelectorAll('[data-modal-target]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const target = btn.getAttribute('data-modal-target');
+        document.getElementById(target)?.classList.remove('pointer-events-none', 'opacity-0');
+      });
+    });
+    document.querySelectorAll('.modal .btn[aria-label="Fermer la modale"]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        btn.closest('.modal')?.classList.add('pointer-events-none', 'opacity-0');
+      });
+    });
+  </script>
 
   <script>
     // Updated filter script

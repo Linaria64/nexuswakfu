@@ -47,11 +47,28 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
 ---
 
 <div class={`boss-display-container ${bossDisplayId} mb-12`}>
-  <h2 class="boss-title text-3xl font-bold text-center mb-6">
+  <h1 class="boss-title text-3xl font-bold text-center mb-6">
     <span class="inline-block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
       Boss du Donjon: {boss.name}
     </span>
-  </h2>
+  </h1>
+  {sortedLevels.length > 1 && (
+    <nav class="level-selector flex justify-center gap-2 mb-6" aria-label="Sélection du niveau du boss">
+      {sortedLevels.map((level, idx) => (
+        <button
+          key={level.level}
+          type="button"
+          class={`level-btn px-3 py-1 rounded font-semibold border border-cyan-600 bg-cyan-900/40 text-cyan-200 hover:bg-cyan-700/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 transition-colors ${idx === 0 ? 'active' : ''}`}
+          data-level={level.level}
+          aria-pressed={idx === 0 ? 'true' : 'false'}
+          aria-label={`Afficher le niveau ${level.level}`}
+          tabIndex={0}
+        >
+          Niveau {level.level}
+        </button>
+      ))}
+    </nav>
+  )}
   
   <div class="boss-container glass-card">
     <div class="boss-header">
@@ -66,32 +83,40 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
       </div>
       
       <div class="boss-info">
-        <h3 class="boss-name">{boss.name}</h3>
+        <h2 class="boss-name">{boss.name}</h2>
         <p class="boss-title">{currentLevel.description}</p>
         
-        <div class="boss-stats">
-          <div class="stat-item">
-            <span class="stat-icon hp"></span>
-            <span class="stat-value">{currentLevel.hp}</span>
-            <span class="stat-label">PV</span>
+        <div class="boss-stats-container">
+          <div class="boss-stat">
+            <div class="stat-icon hp-icon">❤️</div>
+            <div class="stat-value-container">
+              <div class="stat-label">HP</div>
+              <div class="stat-value hp" id={`boss-hp-${bossDisplayId}-${currentLevel.level}`} data-base-hp={currentLevel.hp}>{currentLevel.hp.toLocaleString()}</div>
+            </div>
           </div>
-          <div class="stat-item">
-            <span class="stat-icon ap"></span>
-            <span class="stat-value">{currentLevel.ap}</span>
-            <span class="stat-label">PA</span>
+
+          <div class="boss-stat">
+            <div class="stat-icon ap-icon">🎯</div>
+            <div class="stat-value-container">
+              <div class="stat-label">PA</div>
+              <div class="stat-value">{currentLevel.ap}</div>
+            </div>
           </div>
-          <div class="stat-item">
-            <span class="stat-icon mp"></span>
-            <span class="stat-value">{currentLevel.mp}</span>
-            <span class="stat-label">PM</span>
+
+          <div class="boss-stat">
+            <div class="stat-icon mp-icon">👣</div>
+            <div class="stat-value-container">
+              <div class="stat-label">PM</div>
+              <div class="stat-value">{currentLevel.mp}</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     
-    <div class="boss-details">
+    <div class="boss-details" aria-live="polite">
       <div class="boss-resistances">
-        <h4 class="details-title">Résistances</h4>
+        <h3 class="details-title">Résistances</h3>
         <div class="resistances-grid">
           <div class={`resistance-item ${currentLevel.resistances.water > 0 ? 'positive' : 'negative'}`}>
             <span class="element-icon water"></span>
@@ -113,17 +138,27 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
       </div>
       
       <div class="boss-spells">
-        <h4 class="details-title">Sorts</h4>
+        <h3 class="details-title">Sorts</h3>
         <div class="spells-container">
           {currentLevel.spells.map((spell) => (
             <div class={`spell-card ${spell.damageType}`}>
               <div class="spell-header">
-                <h5 class="spell-name">{spell.name}</h5>
+                <h3 class="spell-name">{spell.name}</h3>
                 {spell.baseDamage && (
-                  <span class="spell-damage">{spell.baseDamage} dégâts</span>
+                  <span class="spell-damage" data-base-damage={spell.baseDamage}>
+                    <span class="base-damage">{spell.baseDamage.toLocaleString()}</span>
+                    <span class="stasis-bonus hidden"></span>
+                    <span class="total-damage"></span>
+                    dégâts
+                  </span>
                 )}
               </div>
-              <p class="spell-description">{spell.description}</p>
+              
+              {spell.description && (
+                <p class="spell-description" data-base-damage={spell.damageInDescription || spell.baseDamage || 0}>
+                  {spell.description}
+                </p>
+              )}
               <span class="spell-type">{spell.damageType}</span>
             </div>
           ))}
@@ -136,6 +171,8 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
       baseHp={sortedLevels[0].hp} 
       bossDisplayId={bossDisplayId} 
       targetHpElementId={`boss-hp-${bossDisplayId}-${sortedLevels[0].level}`}
+      resistances={sortedLevels[0].resistances}
+      maxStasis={1000}
     />
   </div>
 </div>
@@ -145,54 +182,85 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
   document.addEventListener('DOMContentLoaded', () => {
     const bossContainer = document.querySelector(`.boss-display-container.${bossDisplayId}`);
     if (!bossContainer) return;
-
-    const levelSelectors = bossContainer.querySelectorAll('.level-selector');
+    
+    const levelButtons = bossContainer.querySelectorAll('.level-selector button');
     const levelContainers = bossContainer.querySelectorAll('.boss-level-container');
     
-    // Fonction pour mettre à jour le StasisCalculator
-    function updateStasisCalculator(levelIndex) {
-      const level = levels[levelIndex];
-      if (!level) return;
-      
-      const targetHpId = `boss-hp-${bossDisplayId}-${level.level}`;
-      const hpElement = document.getElementById(targetHpId);
-      
-      // Créer un événement personnalisé pour informer le calculateur Stasis
-      const event = new CustomEvent('boss-level-changed', {
-        detail: {
-          bossDisplayId,
-          newLevelData: level,
-          targetHpElementId: targetHpId
+    // Ajouter les écouteurs d'événements pour chaque bouton de niveau
+    levelButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Gestion ARIA pressed
+        levelButtons.forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+        button.setAttribute('aria-pressed', 'true');
+      });
+      // Accessibilité clavier : Entrée/Espace
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
         }
       });
+      const level = parseInt(button.dataset.level);
       
-      document.dispatchEvent(event);
-    }
-
-    // Ajouter les écouteurs d'événements aux sélecteurs de niveau
-    levelSelectors.forEach((button) => {
-      button.addEventListener('click', () => {
-        const levelIndex = parseInt(button.dataset.levelIndex, 10);
+      // Mettre à jour les classes actives
+      levelButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      
+      // Afficher le conteneur de niveau correspondant
+      levelContainers.forEach(container => {
+        const containerLevel = parseInt(container.dataset.level);
+        if (containerLevel === level) {
+          container.classList.add('active');
+          
+          // Obtenir l'ID de l'élément HP pour ce niveau
+          const hpElementId = `boss-hp-${bossDisplayId}-${level}`;
+          
+          // Récupérer les données du niveau sélectionné
+          const levelData = levels.find(l => l.level === level);
+          
+          if (levelData) {
+            // Force stasis calculator to update with new level data
+            document.dispatchEvent(new CustomEvent('boss-level-changed', {
+              detail: {
+                bossDisplayId,
+                newLevelData: levelData,
+                targetHpElementId: hpElementId
         
-        // Mettre à jour la classe active des boutons
-        levelSelectors.forEach(btn => btn.classList.remove('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500'));
-        button.classList.add('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500');
-        
-        // Afficher le container du niveau sélectionné et cacher les autres
-        levelContainers.forEach((container, idx) => {
-          container.classList.toggle('hidden', idx !== levelIndex);
-          container.classList.toggle('active', idx === levelIndex);
+        // Afficher le conteneur de niveau correspondant
+        levelContainers.forEach(container => {
+          const containerLevel = parseInt(container.dataset.level);
+          if (containerLevel === level) {
+            container.classList.add('active');
+            
+            // Obtenir l'ID de l'élément HP pour ce niveau
+            const hpElementId = `boss-hp-${bossDisplayId}-${level}`;
+            
+            // Récupérer les données du niveau sélectionné
+            const levelData = levels.find(l => l.level === level);
+            
+            if (levelData) {
+              // Force stasis calculator to update with new level data
+              document.dispatchEvent(new CustomEvent('boss-level-changed', {
+                detail: {
+                  bossDisplayId,
+                  newLevelData: levelData,
+                  targetHpElementId: hpElementId
+                }
+              }));
+              
+              // Also trigger the stasis level slider change if it exists
+              const stasisSlider = document.getElementById(`${bossDisplayId}-stasis-slider`);
+              if (stasisSlider) {
+                const event = new Event('input');
+                stasisSlider.dispatchEvent(event);
+              }
+            }
+          } else {
+            container.classList.remove('active');
+          }
         });
-        
-        // Mettre à jour le calculateur Stasis
-        updateStasisCalculator(levelIndex);
       });
     });
-
-    // Activer le premier niveau par défaut
-    if (levelSelectors.length > 0) {
-      levelSelectors[0].classList.add('bg-cyan-500/20', 'text-cyan-400', 'border-cyan-500');
-    }
   });
 </script>
 
@@ -265,7 +333,11 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
   }
   
   .boss-level-container {
-    transition: all 0.5s ease;
+    display: none;
+  }
+  
+  .boss-level-container.active {
+    display: block;
   }
   
   .boss-image-container {
@@ -350,12 +422,12 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
     margin-bottom: 1rem;
   }
   
-  .boss-stats {
+  .boss-stats-container {
     display: flex;
     gap: 1.5rem;
   }
   
-  .stat-item {
+  .boss-stat {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -369,10 +441,8 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
     background-size: contain;
   }
   
-  .stat-value {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: rgb(255, 255, 255);
+  .stat-value-container {
+    flex: 1;
   }
   
   .stat-label {
@@ -507,6 +577,23 @@ const sortedLevels = [...boss.levels].sort((a, b) => a.level - b.level);
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     color: rgba(255, 255, 255, 0.7);
+    font-family: 'Orbitron', monospace;
+  }
+  
+  .spell-damage .base-damage {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .spell-damage .stasis-bonus {
+    color: rgb(16, 185, 129);
+  }
+  
+  .spell-damage .total-damage {
+    color: rgb(6, 182, 212);
+  }
+  
+  .spell-damage .hidden {
+    display: none;
   }
   
   .spell-description {

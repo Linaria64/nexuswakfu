@@ -1,5 +1,5 @@
 /* Base */
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -8,48 +8,64 @@
 
 @layer base {
   :root {
-    --color-primary: 199 100% 50%; /* Vibrant Cyan/Blue */
-    --color-secondary: 320 100% 55%; /* Vibrant Magenta/Pink */
-    --color-accent: 45 100% 50%; /* Vibrant Gold/Yellow */
-
-    --color-text-base: theme('colors.gray.100'); /* Brighter base text */
-    --color-text-muted: theme('colors.gray.400');
-    --color-text-inverted: theme('colors.gray.950');
-
-    --color-bg-base: 240 10% 5%; /* Slightly bluer deep dark */
-    --color-bg-alt: 240 5% 10%; /* Slightly lighter dark blue */
-    --color-bg-glass: theme('colors.black / 0.3'); /* Slightly less opaque glass */
-    --color-border-glass: theme('colors.white / 0.1');
-    --color-border-muted: theme('colors.gray.800');
-    --color-border-highlight: theme('colors.white / 0.2');
+    /* Wakfu-inspired glassmorphism palette */
+    --color-primary: 175 90% 55%; /* Cyan Wakfu */
+    --color-secondary: 260 65% 60%; /* Violet Wakfu */
+    --color-accent: 46 92% 62%;   /* Gold accent */
+    --color-success: 156 60% 45%; /* Emerald green */
+    --color-danger: 7 80% 54%;    /* Orange/Red */
+    --color-bg-base: 218 38% 11%; /* Deep blue (Wakfu night) */
+    --color-bg-alt: 218 34% 16%;  /* Slightly lighter blue */
+    --color-glass: rgba(25,36,47,0.65); /* Wakfu glass dark */
+    --color-glass-light: rgba(25,36,47,0.35); /* For hover/active */
+    --color-glass-border: rgba(6,182,212,0.20); /* Cyan border glass */
+    --color-glow-cyan: 0 0 16px 0 rgba(6,182,212,0.35);
+    --color-glow-green: 0 0 16px 0 rgba(16,185,129,0.22);
+    --color-glow-gold: 0 0 12px 0 rgba(250,204,21,0.18);
+    --color-text-base: #e0f7fa;
+    --color-text-muted: #b2d8d8;
+    --color-text-inverted: #1a222b;
+    --color-border-highlight: rgba(6,182,212,0.4);
+    --color-border-glass: rgba(255,255,255,0.08);
+    --color-border-muted: #222e39;
+    --font-heading: 'Orbitron', 'Nunito', Arial, sans-serif;
+    --font-body: 'Nunito', Arial, sans-serif;
+    --radius: 18px;
+    --shadow-glass: 0 8px 32px 0 rgba(6,182,212,0.07);
+    --shadow-glow: 0 0 16px 0 rgba(6,182,212,0.28);
   }
 
   html,
   body {
     @apply min-h-screen;
   }
-
   body {
-    /* Subtle noise background + refined gradient */
-    background-image: linear-gradient(to bottom right, hsl(var(--color-bg-base)), hsl(var(--color-bg-alt))), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.01' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
-    @apply text-[var(--color-text-base)] font-sans;
-    background-attachment: fixed; 
+    background: linear-gradient(135deg, hsl(var(--color-bg-base)), hsl(var(--color-bg-alt)) 60%, #1b2535 100%);
+    color: var(--color-text-base);
+    font-family: var(--font-body);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight text-white; /* Ensure headings are white */
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-text-base);
+    letter-spacing: 0.03em;
+    line-height: 1.1;
   }
-
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    font-size: 2.7rem;
+    text-shadow: 0 2px 16px rgba(6,182,212,0.13);
+    margin-bottom: 0.6em;
   }
-
   h2 {
-    @apply text-3xl md:text-4xl;
+    font-size: 2.1rem;
+    margin-bottom: 0.5em;
   }
-
   h3 {
-    @apply text-2xl md:text-3xl;
+    font-size: 1.4rem;
+    margin-bottom: 0.3em;
   }
 
   /* Custom scrollbar */
@@ -66,44 +82,21 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-600/80;
   }
-}
-
-@layer utilities {
-  .text-primary {
-    color: hsl(var(--color-primary));
-  }
-  .bg-primary {
-    background-color: hsl(var(--color-primary));
-  }
-  .border-primary {
-     border-color: hsl(var(--color-primary));
-  }
-  
-  .text-secondary {
-    color: hsl(var(--color-secondary));
-  }
-  .bg-secondary {
-    background-color: hsl(var(--color-secondary));
-  }
-  .border-secondary {
-     border-color: hsl(var(--color-secondary));
-  }
-  
-  .text-accent {
-    color: hsl(var(--color-accent));
-  }
-  .bg-accent {
-    background-color: hsl(var(--color-accent));
-  }
-  .border-accent {
-     border-color: hsl(var(--color-accent));
-  }
 
   .glass {
-    /* Add a subtle inner shadow for more depth */
-    @apply bg-[var(--color-bg-glass)] backdrop-blur-lg border border-[var(--color-border-glass)] shadow-lg shadow-black/20;
+    background: var(--color-glass);
+    border-radius: var(--radius);
+    border: 1.5px solid var(--color-glass-border);
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: background 0.24s, box-shadow 0.24s;
   }
-  
+  .glass:hover, .glass:focus-within {
+    background: var(--color-glass-light);
+    box-shadow: var(--shadow-glow);
+  }
+
   /* Add Glow utilities */
   .glow-primary {
     --glow-color: hsl(var(--color-primary) / 0.5);
@@ -117,22 +110,98 @@
     --glow-color: hsl(var(--color-accent) / 0.5);
     box-shadow: 0 0 12px -2px var(--glow-color), 0 0 5px -3px var(--glow-color);
   }
-  
-  /* Example gradient text */
-  .text-gradient-primary {
-    @apply bg-gradient-to-r from-[hsl(var(--color-primary))] to-[hsl(var(--color-secondary))] text-transparent bg-clip-text;
+
+  .text-primary {
+    color: hsl(var(--color-primary));
   }
-  .text-gradient-accent {
-    @apply bg-gradient-to-r from-[hsl(var(--color-accent))] to-orange-400 text-transparent bg-clip-text;
+  .bg-primary {
+    background-color: hsl(var(--color-primary));
+  }
+  .border-primary {
+     border-color: hsl(var(--color-primary));
   }
 
-  /* Add custom select arrow */
-  .custom-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right 0.75rem center;
-    background-repeat: no-repeat;
-    background-size: 1.5em 1.5em;
-    padding-right: 2.5rem;
+  .text-secondary {
+    color: hsl(var(--color-secondary));
+  }
+  .bg-secondary {
+    background-color: hsl(var(--color-secondary));
+  }
+  .border-secondary {
+     border-color: hsl(var(--color-secondary));
+  }
+
+  .text-accent {
+    color: hsl(var(--color-accent));
+  }
+  .bg-accent {
+    background-color: hsl(var(--color-accent));
+  }
+  .border-accent {
+     border-color: hsl(var(--color-accent));
+  }
+}
+
+@layer components {
+  /* Themed Buttons */
+  .btn {
+    padding: 0.7em 2.1em;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-family: var(--font-heading);
+    background: var(--color-glass);
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-glass-border);
+    box-shadow: var(--shadow-glass);
+    transition: all 0.18s cubic-bezier(.4,0,.2,1);
+    cursor: pointer;
+    outline: none;
+  }
+  .btn:hover, .btn:focus-visible {
+    background: var(--color-glass-light);
+    color: var(--color-accent);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(6,182,212,0.12), var(--shadow-glow);
+  }
+
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-[hsl(var(--color-primary)/0.8)] to-[hsl(var(--color-secondary)/0.8)] text-white border border-transparent hover:from-[hsl(var(--color-primary))] hover:to-[hsl(var(--color-secondary))] hover:shadow-lg hover:glow-primary focus:ring-cyan-500/50;
+  }
+  .btn-secondary {
+    @apply btn bg-[hsl(var(--color-accent)/0.8)] text-black hover:bg-accent hover:shadow-md hover:glow-accent focus:ring-yellow-500/50;
+  }
+  .btn-outline {
+    @apply btn border border-[var(--color-border-muted)] text-[var(--color-text-muted)] hover:border-[var(--color-border-highlight)] hover:text-[var(--color-text-base)] hover:bg-white/5 focus:ring-gray-500/50;
+  }
+  .btn-ghost {
+     @apply btn text-[var(--color-text-muted)] hover:bg-white/5 hover:text-[var(--color-text-base)] focus:ring-gray-500/50;
+  }
+
+  /* Themed Inputs */
+  .input-glass {
+    width: 100%;
+    padding: 0.8em 1.2em;
+    border-radius: var(--radius);
+    background: var(--color-glass);
+    border: 1.5px solid var(--color-glass-border);
+    color: var(--color-text-base);
+    font-family: var(--font-body);
+    font-size: 1em;
+    transition: background 0.22s, border 0.22s;
+    outline: none;
+  }
+  .input-glass:focus {
+    border-color: var(--color-primary);
+    background: var(--color-glass-light);
+    box-shadow: 0 0 0 2px rgba(6,182,212,0.11), var(--shadow-glow);
+  }
+  .input-glass::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
+  .select-glass {
+     @apply input-glass appearance-none;
+     /* Ajoutez ici vos styles personnalisés de select si besoin */
   }
 }
 
@@ -161,35 +230,53 @@
 @layer components {
   /* Themed Buttons */
   .btn {
-    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--color-bg-base)];
+    padding: 0.7em 2.1em;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-family: var(--font-heading);
+    background: var(--color-glass);
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-glass-border);
+    box-shadow: var(--shadow-glass);
+    transition: all 0.18s cubic-bezier(.4,0,.2,1);
+    cursor: pointer;
+    outline: none;
   }
-  .btn-primary {
-    @apply btn bg-gradient-to-r from-[hsl(var(--color-primary)/0.8)] to-[hsl(var(--color-secondary)/0.8)] text-white border border-transparent hover:from-[hsl(var(--color-primary))] hover:to-[hsl(var(--color-secondary))] hover:shadow-lg hover:glow-primary focus:ring-cyan-500/50;
-  }
-  .btn-secondary {
-    @apply btn bg-[hsl(var(--color-accent)/0.8)] text-black hover:bg-accent hover:shadow-md hover:glow-accent focus:ring-yellow-500/50;
-  }
-  .btn-outline {
-    @apply btn border border-[var(--color-border-muted)] text-[var(--color-text-muted)] hover:border-[var(--color-border-highlight)] hover:text-[var(--color-text-base)] hover:bg-white/5 focus:ring-gray-500/50;
-  }
-  .btn-ghost {
-     @apply btn text-[var(--color-text-muted)] hover:bg-white/5 hover:text-[var(--color-text-base)] focus:ring-gray-500/50;
+  .btn:hover, .btn:focus-visible {
+    background: var(--color-glass-light);
+    color: var(--color-accent);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(6,182,212,0.12), var(--shadow-glow);
   }
 
   /* Themed Inputs */
   .input-glass {
-    @apply w-full p-3 rounded-lg glass border-[var(--color-border-highlight)] focus:border-primary focus:ring-1 focus:ring-cyan-500/50 outline-none transition-all placeholder-gray-500 text-[var(--color-text-base)];
+    width: 100%;
+    padding: 0.8em 1.2em;
+    border-radius: var(--radius);
+    background: var(--color-glass);
+    border: 1.5px solid var(--color-glass-border);
+    color: var(--color-text-base);
+    font-family: var(--font-body);
+    font-size: 1em;
+    transition: background 0.22s, border 0.22s;
+    outline: none;
   }
-  .select-glass {
-     @apply input-glass appearance-none custom-select; /* Assumes .custom-select adds the arrow */
+  .input-glass:focus {
+    border-color: var(--color-primary);
+    background: var(--color-glass-light);
+    box-shadow: 0 0 0 2px rgba(6,182,212,0.11), var(--shadow-glow);
   }
-  
-  /* Other common components can be added here */
-  
+  .input-glass::placeholder {
+    color: var(--color-text-muted);
+  }
+  /* Other common components can be added ici */
+
   .container { /* Keep container as it's structural */
     @apply max-w-7xl mx-auto px-4 sm:px-6;
   }
 }
+
 
 /* Modal styles - REMOVING as Modal.astro handles its styling */
 /*
