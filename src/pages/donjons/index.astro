@@ -139,112 +139,126 @@ const playerLabels = {
           const difficulty = difficultyLabels[donjon.data.difficulty] || difficultyLabels.medium;
           const playersText = playerLabels[donjon.data.players] || 'Groupe';
           const animationDelay = `${index * 0.05}s`;
+          const { Content } = donjon;
           return (
-            <div 
-               class="dungeon-card flex flex-col glass rounded-xl overflow-hidden transition-all duration-300 hover:border-[var(--color-border-highlight)] hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 animate-fade-up"
-               style={`animation-delay: ${animationDelay};`}
-               data-level={donjon.data.level}
-               data-difficulty={donjon.data.difficulty}
-            >
-              <div class="relative">
-                <img 
-                  src={donjon.data.image?.src || "/images/donjons/default.jpg"} 
-                  alt={donjon.data.image?.alt || donjon.data.name}
-                  class="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-                {/* Subtle overlay */}
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-3">
-                  <h3 class="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-200 line-clamp-1">
-                    {donjon.data.name}
-                  </h3>
-                </div>
-              </div>
-              
-              <div class="p-4 flex flex-col flex-grow">
-                <div class="flex items-center justify-between mb-2 text-xs flex-wrap gap-1">
-                  <span class={`px-2 py-0.5 rounded-full border font-medium ${difficulty.color}`}>
-                    {difficulty.label}
-                  </span>
-                   <span class="px-2 py-0.5 rounded-full border border-[var(--color-border-muted)] text-[var(--color-text-muted)] font-medium">
-                    Niv. {donjon.data.level}
-                  </span>
-                  <span class="px-2 py-0.5 rounded-full border border-[var(--color-border-muted)] text-[var(--color-text-muted)] font-medium">
-                     {playersText}
-                  </span>
+            <div class="contents" key={donjon.slug}>
+              <div 
+                class="dungeon-card flex flex-col glass rounded-xl overflow-hidden transition-all duration-300 hover:border-[var(--color-border-highlight)] hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 animate-fade-up"
+                style={`animation-delay: ${animationDelay};`}
+                data-level={donjon.data.level}
+                data-difficulty={donjon.data.difficulty}
+              >
+                <div class="relative h-48 overflow-hidden">
+                  <img 
+                    src={donjon.data.image ? donjon.data.image.src : "/images/donjons/default.jpg"}
+                    alt={donjon.data.image ? donjon.data.image.alt : donjon.data.name}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                    <h3 class="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-200 line-clamp-1">
+                      {donjon.data.name}
+                    </h3>
+                  </div>
                 </div>
                 
-                <p class="text-[var(--color-text-muted)] text-sm line-clamp-3 flex-grow mb-3">
-                  {donjon.data.description}
-                </p>
-                
-                <div class="text-xs border-t border-[var(--color-border-muted)] pt-2 mt-auto">
-                   <span class="text-gray-500">Boss: </span>
-                   <span class="text-[var(--color-text-muted)]">{donjon.data.bosses?.[0]?.name || 'Inconnu'}</span>
-                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                  <div class="flex items-center justify-between mb-2 text-xs flex-wrap gap-1">
+                    <span class={`px-2 py-0.5 rounded-full border font-medium ${difficulty.color}`}>
+                      {difficulty.label}
+                    </span>
+                     <span class="px-2 py-0.5 rounded-full border border-[var(--color-border-muted)] text-[var(--color-text-muted)] font-medium">
+                      Niv. {donjon.data.level}
+                    </span>
+                    <span class="px-2 py-0.5 rounded-full border border-[var(--color-border-muted)] text-[var(--color-text-muted)] font-medium">
+                       {playersText}
+                    </span>
+                  </div>
+                  
+                  <p class="text-[var(--color-text-muted)] text-sm line-clamp-3 flex-grow mb-3">
+                    {donjon.data.description}
+                  </p>
+                  
+                  <div class="text-xs border-t border-[var(--color-border-muted)] pt-2 mt-auto">
+                     <span class="text-gray-500">Boss: </span>
+                     <span class="text-[var(--color-text-muted)]">{donjon.data.bosses?.[0]?.name || 'Inconnu'}</span>
+                  </div>
 
-                <button 
-                  class="btn btn-outline w-full mt-4 text-xs py-2" 
-                  data-modal-target={`modal-donjon-${donjon.slug}`}
-                >
-                  En savoir plus
-                </button>
+                  <button 
+                    class="btn btn-glass border border-wakfu-secondary text-wakfu-secondary hover:bg-wakfu-secondary/10 w-full mt-4 text-sm py-2 rounded-lg font-medium flex items-center justify-center gap-2 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-wakfu-secondary" 
+                    type="button"
+                    onclick={`document.getElementById('guide-content-${donjon.slug}').classList.toggle('hidden')`}
+                    aria-expanded="false"
+                    aria-controls={`guide-content-${donjon.slug}`}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    {typeof Content === 'function' ? 'Voir le guide' : 'Guide non disponible'}
+                  </button>
+                </div>
               </div>
+
+              {typeof Content === 'function' && (
+                <div 
+                  id={`guide-content-${donjon.slug}`} 
+                  class="hidden col-span-full mt-4 p-6 rounded-lg border border-wakfu-primary/30 bg-[var(--color-bg-base)]"
+                >
+                  <Content />
+                </div>
+              )}
             </div>
           );
         })}
       </div>
-    </div>
   </div>
 
-  {/* Modals for each dungeon - Restore basic loop */}
-  
-  <script type="module" client:load>
-    window.donjonModalState = {};
-    window.openDonjonModal = (slug) => {
-      window.donjonModalState[slug] = true;
-      document.getElementById(`modal-donjon-${slug}`)?.classList.remove('pointer-events-none', 'opacity-0');
-    };
-    window.closeDonjonModal = (slug) => {
-      window.donjonModalState[slug] = false;
-      document.getElementById(`modal-donjon-${slug}`)?.classList.add('pointer-events-none', 'opacity-0');
-    };
-  </script>
 
-  {allDungeons.map((donjon) => {
-    const { Content } = donjon;
-    return (
-      <div>
-        <Modal
-          isOpen={false}
-          title={donjon.data.name}
-          onClose={() => window.closeDonjonModal(donjon.slug)}
-          size="full"
-          className={"pointer-events-none opacity-0 transition-all duration-300"}
-          id={`modal-donjon-${donjon.slug}`}
-        >
-          <div class="p-6">
-            <h2 class="text-2xl font-bold mb-4 text-[var(--color-text-h2)]">Stratégie</h2>
-            <div class="prose prose-invert max-w-none mb-8">
-              <Content />
-            </div>
-          </div>
-        </Modal>
-      </div>
-    );
-  })}
 
   <script type="module" client:load>
-    document.querySelectorAll('[data-modal-target]').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const target = btn.getAttribute('data-modal-target');
-        document.getElementById(target)?.classList.remove('pointer-events-none', 'opacity-0');
+    document.addEventListener('DOMContentLoaded', () => {
+      // Gestionnaire pour ouvrir les modales
+      document.querySelectorAll('[data-modal-open]').forEach(button => {
+        button.addEventListener('click', () => {
+          const modalId = button.getAttribute('data-modal-open');
+          const modal = document.getElementById(modalId);
+          
+          if (modal) {
+            console.log('Opening modal:', modalId);
+            // Ouvrir ce modal
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            document.body.style.overflow = 'hidden';
+            
+            // Focus sur le premier élément focusable après ouverture
+            setTimeout(() => {
+              const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+              if (focusableElements.length > 0) {
+                focusableElements[0].focus();
+              }
+            }, 100);
+          }  
+        });
       });
-    });
-    document.querySelectorAll('.modal .btn[aria-label="Fermer la modale"]').forEach(btn => {
-      btn.addEventListener('click', e => {
-        btn.closest('.modal')?.classList.add('pointer-events-none', 'opacity-0');
+      
+      // Gestionnaire pour fermer les modales
+      document.querySelectorAll('[data-modal-close]').forEach(element => {
+        element.addEventListener('click', () => {
+          const modal = element.closest('.modal');
+          if (modal) {
+            modal.classList.add('pointer-events-none', 'opacity-0');
+            document.body.style.overflow = '';
+          }
+        });
+      });
+      
+      // Fermer avec Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const openModal = document.querySelector('.modal:not(.pointer-events-none)');
+          if (openModal) {
+            openModal.classList.add('pointer-events-none', 'opacity-0');
+            document.body.style.overflow = '';
+          }
+        }
       });
     });
   </script>
@@ -312,5 +326,17 @@ const playerLabels = {
       opacity: 1;
       transform: translateY(0);
     }
-  } 
+  }
+  
+  /* Styles pour le contenu MDX */
+  .prose .glass-card,
+  .prose .glass {
+    background: rgba(30, 41, 59, 0.4) !important;
+    border: 1px solid rgba(148, 163, 184, 0.1) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: 0.75rem !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+    width: 100% !important;
+  }
 </style> 
