@@ -201,9 +201,21 @@ const playerLabels = {
               {typeof Content === 'function' && (
                 <div 
                   id={`guide-content-${donjon.slug}`} 
-                  class="hidden col-span-full mt-4 p-6 rounded-lg border border-wakfu-primary/30 bg-[var(--color-bg-base)]"
+                  class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm"
                 >
-                  <Content />
+                  <div class="relative min-h-screen flex items-center justify-center p-4">
+                    <div class="relative w-full max-w-4xl p-6 rounded-lg border border-wakfu-primary/30 bg-[var(--color-bg-base)]">
+                      <button 
+                        class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                        onclick={`document.getElementById('guide-content-${donjon.slug}').classList.add('hidden')`}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                      <Content />
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
