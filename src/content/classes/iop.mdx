@@ -1,70 +1,104 @@
 ---
+# Informations de base de la classe
 id: "iop"
 name: "Iop"
 role: "DPT mêlée"
 specialty: "Combat rapproché et dégâts bruts"
+
+# Descriptions
 description: "Les Iops sont des guerriers courageux qui se jettent dans la mêlée sans réfléchir. Maîtres des armes et des dégâts directs, ils excellent dans le combat au corps à corps."
 detailedDescription: "Les Iops sont les maîtres incontestés du combat rapproché dans Wakfu. Leur style de jeu direct et agressif en fait des combattants redoutables, capables d'infliger des dégâts massifs en peu de temps. Leur courage légendaire et leur détermination leur permettent de se sortir des situations les plus périlleuses."
+
+# Images
 icon:
   src: "/images/classes/iop/icon.webp"
   alt: "Icône de la classe Iop"
 image:
   src: "/images/classes/iop/banner.webp"
   alt: "Bannière de la classe Iop"
+
+# Caractéristiques
 difficulty: 2
 combatStyle: "Corps à corps"
 strengths: "Dégâts directs élevés, Mobilité en combat, Bonne survie, Facile à jouer"
 weaknesses: "Peu de contrôle, Faible à distance, Dépendant des critiques"
+# Compétences principales
 mainSpells:
+  # Sort niveau 1
   - name: "Colère de Iop"
     description: "Inflige des dégâts puissants en zone autour du lanceur"
     level: 1
     image:
       src: "/images/classes/iop/colere-iop.webp"
       alt: "Colère de Iop"
+  
+  # Sort niveau 5
   - name: "Épée Céleste"
     description: "Invoque une épée qui attaque les ennemis proches"
     level: 5
     image:
       src: "/images/classes/iop/epee-celeste.webp"
       alt: "Épée Céleste"
+  
+  # Sort niveau 15
   - name: "Bond"
     description: "Se téléporte vers la cible et inflige des dégâts"
     level: 15
     image:
       src: "/images/classes/iop/bond.webp"
       alt: "Bond"
+
+# Passif unique de la classe
 uniquePassive:
   name: "Furie du Iop"
   description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+# Passifs
 passiveSpells:
+  # Passif offensif principal
   - name: "Épée Divine"
     description: "Augmente les dégâts d'épée de 15% et les chances de coup critique de 5%"
+    category: "Offensif"
     image:
       src: "/images/classes/iop/epee-divine.webp"
       alt: "Épée Divine"
+  
+  # Passif défensif
   - name: "Vigueur"
     description: "Augmente les points de vie maximum de 10%"
+    category: "Défensif"
     image:
       src: "/images/classes/iop/vigueur.webp"
       alt: "Vigueur"
+  
+  # Passif de pénétration
   - name: "Maître d'Armes"
     description: "Les attaques au corps à corps ignorent 10% de la résistance ennemie"
+    category: "Offensif"
     image:
       src: "/images/classes/iop/maitre-armes.webp"
       alt: "Maître d'Armes"
+  
+  # Passif situationnel
   - name: "Colère"
     description: "Après avoir subi des dégâts, vos prochaines attaques infligent 8% de dégâts supplémentaires pendant 1 tour"
+    category: "Réactif"
     image:
       src: "/images/classes/iop/colere.webp"
       alt: "Colère"
+
+# Builds recommandés
 builds:
+  # Build offensif
   - name: "Guerrier Furieux"
     type: "DPT Critique"
     minLevel: 50
     description: "Build axé sur les dégâts critiques et l'exploitation du passif unique"
+    playstyle: "Agressif"
+  
+  # Build défensif
   - name: "Chevalier Tank"
     type: "Tank/DPT"
     minLevel: 100
     description: "Build plus défensif avec une bonne survie tout en maintenant des dégâts décents"
+    playstyle: "Défensif"
 ---
