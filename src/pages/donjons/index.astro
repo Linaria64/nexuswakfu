@@ -202,6 +202,11 @@ const playerLabels = {
                 <div 
                   id={`guide-content-${donjon.slug}`} 
                   class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm"
+                  onclick={(e) => {
+                    if (e.target.id === `guide-content-${donjon.slug}`) {
+                      e.currentTarget.classList.add('hidden');
+                    }
+                  }}
                 >
                   <div class="relative min-h-screen flex items-center justify-center p-4">
                     <div class="relative w-full max-w-4xl p-6 rounded-lg border border-wakfu-primary/30 bg-[var(--color-bg-base)]">

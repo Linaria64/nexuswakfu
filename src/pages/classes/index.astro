@@ -9,7 +9,7 @@ const classes = (await getCollection('classes')).sort((a, b) => a.data.name.loca
 // Extraire les rôles uniques pour les options de filtre
 const uniqueRoles = [...new Set(classes.map(clazz => clazz.data.role))].filter(Boolean).sort();
 
-// Définir les couleurs pour chaque rôle (optional - can be simplified if not heavily used)
+// Définir les couleurs pour chaque rôle
 const roleColors = {
   'Tank': 'text-blue-300 bg-blue-900/50 border-blue-500/50',
   'Support': 'text-green-300 bg-green-900/50 border-green-500/50',
@@ -18,49 +18,6 @@ const roleColors = {
   'DPT mêlée': 'text-yellow-300 bg-yellow-900/50 border-yellow-500/50',
   'Tank/DPT': 'text-purple-300 bg-purple-900/50 border-purple-500/50',
   'Healer, Support': 'text-emerald-300 bg-emerald-900/50 border-emerald-500/50',
-};
-
-// Exemple de données de sorts et passifs pour chaque classe
-const spellsAndPassives = {
-  "iop": {
-    spells: [
-      { name: "Colère de Iop", description: "Inflige des dégâts en zone autour du lanceur", element: "Feu", level: 1 },
-      { name: "Épée Céleste", description: "Invoque une épée qui attaque les ennemis proches", element: "Air", level: 5 },
-      { name: "Bond", description: "Se téléporte vers la cible et inflige des dégâts", element: "Terre", level: 15 },
-      { name: "Épée de Jugement", description: "Attaque puissante à distance avec bonus de dégâts critiques", element: "Feu", level: 25 }
-    ],
-    passives: [
-      { name: "Maître d'Armes", description: "Augmente les dégâts d'épée de 15%" },
-      { name: "Vigueur", description: "Augmente les points de vie maximum de 10%" },
-      { name: "Furie", description: "Les attaques critiques génèrent un point de Furie, augmentant les dégâts" }
-    ]
-  },
-  "cra": {
-    spells: [
-      { name: "Flèche Puissante", description: "Attaque à distance avec bonus de portée", element: "Neutre", level: 1 },
-      { name: "Flèche Explosive", description: "Inflige des dégâts en zone au point d'impact", element: "Feu", level: 5 },
-      { name: "Flèche Glacée", description: "Ralentit la cible et inflige des dégâts", element: "Eau", level: 15 },
-      { name: "Flèche Perforante", description: "Traverse les ennemis et les obstacles", element: "Air", level: 25 }
-    ],
-    passives: [
-      { name: "Œil de Lynx", description: "Augmente la portée des sorts de 2 cases" },
-      { name: "Concentration", description: "Augmente les chances de coup critique de 10%" },
-      { name: "Maître Archer", description: "Les attaques à distance ignorent 15% de la résistance ennemie" }
-    ]
-  },
-  "eniripsa": {
-    spells: [
-      { name: "Mot Curatif", description: "Soigne un allié", element: "Eau", level: 1 },
-      { name: "Mot Revigorant", description: "Soigne et donne un bonus de PM", element: "Eau", level: 5 },
-      { name: "Mot de Jouvence", description: "Soigne en zone autour de la cible", element: "Eau", level: 15 },
-      { name: "Mot Vampirique", description: "Vole de la vie à l'ennemi", element: "Feu", level: 25 }
-    ],
-    passives: [
-      { name: "Bénédiction", description: "Augmente les soins prodigués de 20%" },
-      { name: "Aura Apaisante", description: "Les alliés proches regagnent 5% de PV par tour" },
-      { name: "Maître Guérisseur", description: "Les sorts de soin peuvent devenir critiques, augmentant leur effet de 50%" }
-    ]
-  }
 };
 ---
 
@@ -72,7 +29,7 @@ const spellsAndPassives = {
       Explorez les 18 classes uniques de Wakfu. Découvrez leurs sorts, passifs et styles de jeu pour trouver celle qui vous correspond.
     </p>
 
-    <!-- Filtres de classes - Using new component styles -->
+    <!-- Filtres de classes -->
     <div class="mb-10 p-6 rounded-xl glass shadow-lg">
       <h2 class="text-2xl font-semibold mb-5 text-white">Filtrer les classes</h2>
       
@@ -80,10 +37,12 @@ const spellsAndPassives = {
         <div>
           <label class="block mb-2 text-primary font-medium">Recherche par nom</label>
           <div class="relative">
-            <input type="text" id="search-input" placeholder="Ex: Iop, Cra..." class="input-glass pl-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-3.5 text-gray-500 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+            <input 
+              type="text" 
+              id="search-input" 
+              class="input-glass w-full" 
+              placeholder="Rechercher une classe..."
+            />
           </div>
         </div>
         
@@ -95,26 +54,17 @@ const spellsAndPassives = {
           </select>
         </div>
         
-        <div>
-          <label class="block mb-2 text-primary font-medium">Difficulté</label>
-          <select id="difficulty-filter" class="select-glass">
-            <option value="" class="bg-gray-900">Toutes</option>
-            <option value="1" class="bg-gray-900">★☆☆☆☆ (Facile)</option>
-            <option value="2" class="bg-gray-900">★★☆☆☆ (Moyenne)</option>
-            <option value="3" class="bg-gray-900">★★★☆☆ (Difficile)</option>
-             <option value="4" class="bg-gray-900">★★★★☆ (Très Difficile)</option>
-              <option value="5" class="bg-gray-900">★★★★★ (Expert)</option>
-          </select>
-        </div>
+        <!-- Filtre de difficulté supprimé -->
       </div>
     </div>
 
     <!-- Liste des classes - Glassmorphism Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12" id="classes-container">
       {classes.map((clazz, index) => {
-        const difficultyStars = '★'.repeat(clazz.data.difficulty) + '☆'.repeat(5 - clazz.data.difficulty);
+
         const roleStyle = roleColors[clazz.data.role] || 'text-gray-300 bg-gray-700/50 border-gray-500/50';
         const animationDelay = `${index * 0.07}s`;
+        
         return (
           <div 
             class="class-card glass rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] hover:-translate-y-1 animate-fade-up"
@@ -126,28 +76,24 @@ const spellsAndPassives = {
                 <img 
                   src={clazz.data.icon.src} 
                   alt={clazz.data.icon.alt}
-                  class="w-16 h-16 rounded-lg border-2 border-[var(--color-border-highlight)]"
-                  loading="lazy"
+                  class="w-16 h-16 rounded-lg border border-[var(--color-border-muted)]"
                 />
                 <div>
-                  <h3 class="text-2xl font-bold text-white mb-1">{clazz.data.name}</h3>
-                  <div class="flex flex-wrap gap-2 mt-1">
-                    <span class={`text-xs px-2.5 py-1 rounded-full border ${roleStyle} role-tag`}>
-                      {clazz.data.role}
-                    </span>
-                    <span class="text-xs px-2.5 py-1 rounded-full border text-accent bg-accent/20 border-accent/50 difficulty-tag" data-difficulty={clazz.data.difficulty}>
-                      {difficultyStars}
-                    </span>
-                  </div>
+                  <h3 class="text-xl font-bold text-white">{clazz.data.name}</h3>
+                  <span class="inline-block px-2 py-1 rounded-full text-xs role-tag {roleStyle} mt-1">{clazz.data.role}</span>
                 </div>
               </div>
+              
+              {/* Description */}
+              <p class="text-[var(--color-text-muted)] mb-4">{clazz.data.description}</p>
+              
+              {/* Étiquettes */}
+              <div class="flex justify-between items-center mb-6">
+                <span class="badge-text {roleStyle} role-tag">{clazz.data.role}</span>
+                <div class="text-xs text-primary">{clazz.data.specialty}</div>
+              </div>
 
-              {/* Description courte */}
-              <p class="text-[var(--color-text-muted)] mb-5 text-sm line-clamp-3">
-                {clazz.data.description}
-              </p>
-
-              {/* Bouton voir plus - Using new btn-primary */}
+              {/* Bouton voir plus */}
               <button
                 class="btn btn-primary w-full group"
                 data-modal-target={`modal-${clazz.data.id}`}
@@ -159,105 +105,147 @@ const spellsAndPassives = {
               </button>
             </div>
           </div>
-        )
+        );
       })}
     </div>
   </div>
 
-  {/* Modals pour chaque classe (content inside Modal.astro will be styled) */}
-  {classes.map((clazz) => (
-    <Modal
-      id={`modal-${clazz.data.id}`}
-      title={clazz.data.name}
-      size="full"
-    >
-      {/* Content is now more detailed and styled within Modal.astro */}
-      <div class="space-y-6">
-        {/* En-tête dans la modale */}
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 pb-6 border-b border-[var(--color-border-muted)]">
-          <img 
-            src={clazz.data.image.src} 
-            alt={clazz.data.image.alt}
-            class="w-24 h-24 rounded-lg border-2 border-[var(--color-border-highlight)] flex-shrink-0 shadow-lg"
-          />
-          <div class="flex-grow">
-            <h2 class="text-3xl font-bold text-gradient-primary mb-2">{clazz.data.name}</h2>
-            <div class="flex flex-wrap gap-3">
-              <span class={`px-3 py-1 rounded-full border text-sm ${roleColors[clazz.data.role] || 'text-gray-300 bg-gray-700/50 border-gray-500/50'}`}>
-                {clazz.data.role}
-              </span>
-              <span class="px-3 py-1 rounded-full border text-sm text-accent bg-accent/20 border-accent/50">
-                 {'★'.repeat(clazz.data.difficulty) + '☆'.repeat(5 - clazz.data.difficulty)} ({clazz.data.difficulty}/5)
-              </span>
-               <span class="px-3 py-1 rounded-full border text-sm text-secondary bg-secondary/20 border-secondary/50">
-                 {clazz.data.combatStyle}
-              </span>
+  {/* Modales pour chaque classe */}
+  {classes.map(clazz => {
+    const roleStyle = roleColors[clazz.data.role] || 'text-gray-300 bg-gray-700/50 border-gray-500/50';
+    
+    return (
+      <Modal
+        id={`modal-${clazz.data.id}`}
+        title={clazz.data.name}
+        size="xl"
+      >
+        {/* Structure plus horizontale avec 2 colonnes principales */}
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          {/* Colonne 1: Informations générales */}
+          <div class="xl:col-span-1 space-y-6">
+            {/* En-tête avec icône et description */}
+            <div class="flex flex-col space-y-4">
+              <div class="flex items-start gap-4">
+                <img 
+                  src={clazz.data.icon.src} 
+                  alt={clazz.data.icon.alt}
+                  class="w-16 h-16 rounded-lg border border-[var(--color-border-muted)]"
+                />
+                <div>
+                  <h2 class="text-2xl font-bold text-white">{clazz.data.name}</h2>
+                  <span class="inline-block px-3 py-1 rounded-full text-sm {roleStyle}">{clazz.data.role}</span>
+                </div>
+              </div>
+              
+              <div>
+                <span class="text-primary text-sm">Style:</span>
+                <span class="text-white text-sm ml-1">{clazz.data.combatStyle}</span>
+              </div>
+            </div>
+            
+            {/* Forces et Faiblesses */}
+            <div class="space-y-4">
+              <div class="glass p-3 rounded-xl">
+                <h4 class="text-base font-semibold text-primary mb-1">Forces</h4>
+                <ul class="list-disc list-inside text-sm text-[var(--color-text-muted)]">
+                  {clazz.data.strengths.split(', ').map(strength => (
+                    <li>{strength}</li>
+                  ))}
+                </ul>
+              </div>
+              <div class="glass p-3 rounded-xl">
+                <h4 class="text-base font-semibold text-red-400 mb-1">Faiblesses</h4>
+                <ul class="list-disc list-inside text-sm text-[var(--color-text-muted)]">
+                  {clazz.data.weaknesses.split(', ').map(weakness => (
+                    <li>{weakness}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            
+            {/* Passif unique */}
+            <div>
+              <h3 class="text-xl font-semibold mb-2 text-primary">Passif Unique</h3>
+              <div class="glass p-3 rounded-xl">
+                <h4 class="text-base font-semibold text-white mb-1">{clazz.data.uniquePassive.name}</h4>
+                <p class="text-sm text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+              </div>
+            </div>
+
+            {/* Builds recommandés */}
+            <div>
+              <h3 class="text-xl font-semibold mb-2 text-primary">Builds</h3>
+              <div class="space-y-3">
+                {clazz.data.builds.map(build => (
+                  <div class="glass p-3 rounded-xl">
+                    <div>
+                      <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-semibold text-white text-sm">{build.name}</h5>
+                        <span class="text-xs text-primary">Niv. {build.minLevel}+</span>
+                      </div>
+                      <div class="text-xs text-primary mb-1">{build.type}</div>
+                      <p class="text-xs text-[var(--color-text-muted)]">{build.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Colonne 2+3: Sorts principaux et passifs */}
+          <div class="xl:col-span-2 space-y-6">
+            {/* Sorts principaux */}
+            <div>
+              <h3 class="text-xl font-semibold mb-3 text-primary">Sorts Principaux</h3>
+              <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                {clazz.data.mainSpells.map(spell => (
+                  <div class="glass p-3 rounded-xl">
+                    <div class="flex gap-3">
+                      <img 
+                        src={spell.image.src} 
+                        alt={spell.image.alt}
+                        class="w-10 h-10 rounded-md border border-[var(--color-border-muted)] flex-shrink-0"
+                      />
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <h5 class="font-semibold text-white text-sm">{spell.name}</h5>
+                          <span class="text-xs text-primary">Niv. {spell.level}</span>
+                        </div>
+                        <p class="text-xs text-[var(--color-text-muted)]">{spell.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Sorts passifs */}
+            <div>
+              <h3 class="text-xl font-semibold mb-3 text-primary">Sorts Passifs</h3>
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {clazz.data.passiveSpells.map(spell => (
+                  <div class="glass p-3 rounded-xl">
+                    <div class="flex gap-3">
+                      <img 
+                        src={spell.image.src} 
+                        alt={spell.image.alt}
+                        class="w-10 h-10 rounded-md border border-[var(--color-border-muted)] flex-shrink-0"
+                      />
+                      <div>
+                        <h5 class="font-semibold text-white text-sm mb-1">{spell.name}</h5>
+                        <p class="text-xs text-[var(--color-text-muted)]">{spell.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Description détaillée */}
-        <div class="prose prose-invert max-w-none prose-p:text-[var(--color-text-muted)] prose-headings:text-primary prose-a:text-primary hover:prose-a:text-primary/80 prose-strong:text-white">
-          <h3 class="!text-2xl !mb-3 !text-primary">À propos du {clazz.data.name}</h3>
-          <p>{clazz.data.detailedDescription}</p>
-        </div>
-
-        {/* Forces et Faiblesses */}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="glass p-5 rounded-lg border-[var(--color-border-highlight)]">
-            <h4 class="text-xl font-semibold mb-3 text-green-400">Points Forts</h4>
-            <ul class="list-disc list-inside text-[var(--color-text-muted)] space-y-1 pl-2">
-              {clazz.data.strengths.split(',').map(s => s.trim()).map(strength => <li>{strength}</li>)}
-            </ul>
-          </div>
-          <div class="glass p-5 rounded-lg border-[var(--color-border-highlight)]">
-            <h4 class="text-xl font-semibold mb-3 text-red-400">Points Faibles</h4>
-             <ul class="list-disc list-inside text-[var(--color-text-muted)] space-y-1 pl-2">
-              {clazz.data.weaknesses.split(',').map(s => s.trim()).map(weakness => <li>{weakness}</li>)}
-            </ul>
-          </div>
-        </div>
-
-        {/* Sorts Principaux */}
-        <div>
-          <h3 class="text-2xl font-semibold mb-4 text-primary">Sorts Emblématiques</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {clazz.data.mainSpells.map((spell) => (
-              <div class="glass rounded-lg p-4 border-[var(--color-border-highlight)] flex items-start gap-4 transition-all hover:border-primary/50 hover:shadow-primary/10">
-                <img 
-                  src={spell.image.src} 
-                  alt={spell.image.alt}
-                  class="w-14 h-14 rounded-md border border-[var(--color-border-muted)] flex-shrink-0 mt-1"
-                />
-                <div>
-                  <h5 class="font-semibold text-white">{spell.name}</h5>
-                  <span class="text-xs text-gray-500 block mb-1">Niveau {spell.level}</span>
-                  <p class="text-sm text-[var(--color-text-muted)]">{spell.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Builds Recommandés */}
-        <div>
-           <h3 class="text-2xl font-semibold mb-4 text-primary">Builds Recommandés</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {clazz.data.builds.map((build) => (
-              <div class="glass rounded-lg p-5 border-[var(--color-border-highlight)] transition-all hover:border-secondary/50 hover:shadow-secondary/10">
-                <h4 class="text-lg font-semibold text-white mb-2">{build.name}</h4>
-                <div class="flex flex-wrap items-center gap-3 mb-3">
-                  <span class="px-2.5 py-0.5 rounded-full bg-gray-600/50 text-gray-300 text-xs border border-[var(--color-border-muted)]">{build.type}</span>
-                  <span class="text-xs text-gray-500">Niveau Min. {build.minLevel}</span>
-                </div>
-                <p class="text-sm text-[var(--color-text-muted)]">{build.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Modal>
-  ))}
+      </Modal>
+    );
+  })}
 </MainLayout>
 
 <style>
@@ -280,26 +268,21 @@ const spellsAndPassives = {
   function initializeFilters() {
     const searchInput = document.getElementById('search-input');
     const roleFilter = document.getElementById('role-filter');
-    const difficultyFilter = document.getElementById('difficulty-filter');
-    const classCards = document.querySelectorAll('.class-card'); // Target the container div
+    // Filtre de difficulté supprimé
+    const classCards = document.querySelectorAll('.class-card');
 
     function filterClasses() {
       const searchTerm = searchInput.value.toLowerCase();
       const roleValue = roleFilter.value;
-      const difficultyValue = difficultyFilter.value;
 
       classCards.forEach(card => {
         const title = card.querySelector('h3').textContent.toLowerCase();
         const role = card.querySelector('.role-tag').textContent.trim();
-        // Get difficulty from data attribute for reliability
-        const difficulty = card.querySelector('.difficulty-tag')?.dataset.difficulty;
         
         const matchesSearch = title.includes(searchTerm);
         const matchesRole = !roleValue || role === roleValue;
-        const matchesDifficulty = !difficultyValue || !difficulty || difficulty === difficultyValue;
         
-        // Use hidden class for better compatibility with animations/transitions
-        if (matchesSearch && matchesRole && matchesDifficulty) {
+        if (matchesSearch && matchesRole) {
             card.classList.remove('hidden');
         } else {
             card.classList.add('hidden');
@@ -307,22 +290,14 @@ const spellsAndPassives = {
       });
     }
 
-    if (searchInput && roleFilter && difficultyFilter) {
+    if (searchInput && roleFilter) {
       searchInput.addEventListener('input', filterClasses);
       roleFilter.addEventListener('change', filterClasses);
-      difficultyFilter.addEventListener('change', filterClasses);
-      
-      // Initial filter call in case of pre-filled values (e.g., browser back button)
-      filterClasses(); 
+      filterClasses();
     }
   }
 
-  // Animation des cartes (Animation is now handled by CSS)
-  // function initializeCardAnimations() { ... removed ... }
-
-  // Initialize everything when the DOM is loaded
   document.addEventListener('DOMContentLoaded', () => {
     initializeFilters();
-    // Card animation starts automatically via CSS
   });
-</script> 
+</script>

@@ -1,62 +1,48 @@
 ---
 interface Props {
-  isOpen: boolean;
-  title?: string;
-  onClose: () => void;
+  id: string;
+  title: string;
   size?: 'sm' | 'md' | 'lg' | 'full';
-  className?: string;
 }
 
-const { isOpen, title, onClose, size = 'md', className = '' } = Astro.props;
+const { id, title, size = 'md' } = Astro.props;
 
 const sizeClasses = {
   sm: 'max-w-sm',
   md: 'max-w-lg',
   lg: 'max-w-2xl',
-  full: 'max-w-full',
+  full: 'max-w-4xl',
 };
 ---
 
 <div 
-  class={`modal fixed inset-0 z-50 flex items-center justify-center ${isOpen ? '' : 'pointer-events-none opacity-0'} ${className}`} 
+  id={id}
+  class="modal fixed inset-0 z-50 flex items-center justify-center pointer-events-none opacity-0" 
   aria-modal="true" 
   role="dialog" 
   tabindex="-1"
 >
   <div 
-    class="modal-overlay fixed inset-0 bg-black/60 backdrop-blur-lg transition-opacity duration-300" 
-    on:click={onClose}
+    class="modal-overlay fixed inset-0 bg-black/60 backdrop-blur-lg transition-opacity duration-300"
   ></div>
   <div 
-    class={`modal-content glass-card relative w-full mx-auto animate-fadeInUp ${sizeClasses[size]}`}
+    class={`modal-content glass relative w-full mx-4 rounded-xl shadow-2xl overflow-y-auto ${sizeClasses[size]}`}
   >
-    {/* Modal Header */}
-    <div class="absolute top-0 right-0 pt-4 pr-4">
-      <button 
-        class="absolute top-5 right-5 btn btn-glass bg-transparent text-primary hover:text-accent focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-all" 
-        aria-label="Fermer la modale" 
-        on:click={onClose}
-      >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          class="h-7 w-7" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path 
-            stroke-linecap="round" 
-            stroke-linejoin="round" 
-            stroke-width="2" 
-            d="M6 18L18 6M6 6l12 12" 
-          />
-        </svg>
-      </button>
-    </div>
-    
-    {/* Modal Body - Slot for content */}
-    <div class="modal-body">
+    <div class="p-6">
       {/* Title is now usually part of the slotted content for better layout control */}
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-white">{title}</h2>
+        <button 
+          class="text-gray-400 hover:text-white transition-colors" 
+          data-modal-close
+          aria-label="Fermer"
+        >
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
       <slot />
     </div>
   </div>
@@ -105,57 +91,40 @@ const sizeClasses = {
 </style>
 
 <script>
-  import { openModal, closeModal, trapFocus } from '../../lib/utils/modal';
-
-  let lastFocusedElement = null;
-
-  function initializeModalListeners() {
-    document.body.addEventListener('click', (e) => {
-      const target = e.target;
-      // Modal trigger
-      const triggerButton = target.closest('[data-modal-target]');
-      if (triggerButton) {
-        const modalId = triggerButton.getAttribute('data-modal-target');
+  // Gestionnaire pour les modales
+  document.addEventListener('DOMContentLoaded', () => {
+    // Ouvrir la modale
+    document.querySelectorAll('[data-modal-target]').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const modalId = trigger.getAttribute('data-modal-target');
         const modal = document.getElementById(modalId);
-        lastFocusedElement = document.activeElement;
-        openModal(modal);
-        // Focus trap
-        if (modal) trapFocus(modal);
-      }
-      // Modal close (button or overlay)
-      const closeButton = target.closest('.close-modal');
-      const modalOverlay = target.closest('.modal');
-      if (closeButton) {
-        const modalToClose = closeButton.closest('.modal');
-        closeModal(modalToClose);
-        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-          lastFocusedElement.focus();
+        if (modal) {
+          modal.classList.remove('pointer-events-none', 'opacity-0');
+          document.body.style.overflow = 'hidden';
         }
-      } else if (modalOverlay && target === modalOverlay) {
-        closeModal(modalOverlay);
-        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-          lastFocusedElement.focus();
+      });
+    });
+
+    // Fermer la modale
+    document.querySelectorAll('[data-modal-close]').forEach(closeBtn => {
+      closeBtn.addEventListener('click', () => {
+        const modal = closeBtn.closest('.modal');
+        if (modal) {
+          modal.classList.add('pointer-events-none', 'opacity-0');
+          document.body.style.overflow = '';
         }
-      }
-    }, { capture: false });
-    // Escape key
+      });
+    });
+
+    // Fermer avec Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        const openModalElement = document.querySelector('.modal.is-open');
-        if (openModalElement) {
-          closeModal(openModalElement);
-          if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-            lastFocusedElement.focus();
-          }
+        const modal = document.querySelector('.modal:not(.pointer-events-none)');
+        if (modal) {
+          modal.classList.add('pointer-events-none', 'opacity-0');
+          document.body.style.overflow = '';
         }
       }
     });
-  }
-  if (typeof window !== 'undefined') {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializeModalListeners);
-    } else {
-      initializeModalListeners();
-    }
-  }
+  });
 </script>

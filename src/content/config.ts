@@ -21,6 +21,12 @@ const classesCollection = defineCollection({
     combatStyle: z.string(),
     strengths: z.string(),
     weaknesses: z.string(),
+    // Passif unique de la classe
+    uniquePassive: z.object({
+      name: z.string(),
+      description: z.string()
+    }),
+    // Sorts principaux de la classe
     mainSpells: z.array(
       z.object({
         name: z.string(),
@@ -29,6 +35,15 @@ const classesCollection = defineCollection({
         image: imageSchema.optional(),
       })
     ),
+    // Sorts passifs
+    passiveSpells: z.array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        image: imageSchema.optional(),
+      })
+    ),
+    // Builds recommandés
     builds: z.array(
       z.object({
         name: z.string(),
