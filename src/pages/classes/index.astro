@@ -6,8 +6,7 @@ import Modal from '../../components/ui/Modal.astro';
 // Récupérer les classes depuis la collection
 const classes = (await getCollection('classes')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 
-// Extraire les rôles uniques pour les options de filtre
-const uniqueRoles = [...new Set(classes.map(clazz => clazz.data.role))].filter(Boolean).sort();
+
 
 // Définir les couleurs pour chaque rôle
 const roleColors = {
@@ -29,34 +28,7 @@ const roleColors = {
       Explorez les 18 classes uniques de Wakfu. Découvrez leurs sorts, passifs et styles de jeu pour trouver celle qui vous correspond.
     </p>
 
-    <!-- Filtres de classes -->
-    <div class="mb-10 p-6 rounded-xl glass shadow-lg">
-      <h2 class="text-2xl font-semibold mb-5 text-white">Filtrer les classes</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div>
-          <label class="block mb-2 text-primary font-medium">Recherche par nom</label>
-          <div class="relative">
-            <input 
-              type="text" 
-              id="search-input" 
-              class="input-glass w-full" 
-              placeholder="Rechercher une classe..."
-            />
-          </div>
-        </div>
-        
-        <div>
-          <label class="block mb-2 text-primary font-medium">Rôle</label>
-          <select id="role-filter" class="select-glass">
-            <option value="" class="bg-gray-900">Tous les rôles</option>
-            {uniqueRoles.map(role => <option value={role} class="bg-gray-900">{role}</option>)}
-          </select>
-        </div>
-        
-        <!-- Filtre de difficulté supprimé -->
-      </div>
-    </div>
+
 
     <!-- Liste des classes - Glassmorphism Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12" id="classes-container">
@@ -315,41 +287,4 @@ const roleColors = {
   }
 </style>
 
-<script>
-  // Filtrage des classes
-  function initializeFilters() {
-    const searchInput = document.getElementById('search-input');
-    const roleFilter = document.getElementById('role-filter');
-    // Filtre de difficulté supprimé
-    const classCards = document.querySelectorAll('.class-card');
 
-    function filterClasses() {
-      const searchTerm = searchInput.value.toLowerCase();
-      const roleValue = roleFilter.value;
-
-      classCards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const role = card.querySelector('.role-tag').textContent.trim();
-        
-        const matchesSearch = title.includes(searchTerm);
-        const matchesRole = !roleValue || role === roleValue;
-        
-        if (matchesSearch && matchesRole) {
-            card.classList.remove('hidden');
-        } else {
-            card.classList.add('hidden');
-        }
-      });
-    }
-
-    if (searchInput && roleFilter) {
-      searchInput.addEventListener('input', filterClasses);
-      roleFilter.addEventListener('change', filterClasses);
-      filterClasses();
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    initializeFilters();
-  });
-</script>
