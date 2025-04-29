@@ -85,7 +85,7 @@ const roleColors = {
               </div>
               
               {/* Description */}
-              <p class="text-[var(--color-text-muted)] mb-4">{clazz.data.description}</p>
+              <p class="text-[var(--color-text-muted)] mb-4">{clazz.data.description || 'Aucune description disponible'}</p>
               
               {/* Étiquettes */}
               <div class="flex justify-between items-center mb-6">
@@ -95,11 +95,11 @@ const roleColors = {
 
               {/* Bouton voir plus */}
               <button
-                class="btn btn-primary w-full group"
+                class="btn btn-primary text-sm py-1.5 px-3 mx-auto flex items-center gap-1 group"
                 data-modal-target={`modal-${clazz.data.id}`}
               >
                 En savoir plus
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </button>
@@ -142,7 +142,7 @@ const roleColors = {
               </div>
               
               <div class="text-sm text-[var(--color-text-muted)]">
-                {clazz.data.detailedDescription?.substring(0, 120)}...
+                {clazz.data.detailedDescription ? `${clazz.data.detailedDescription.substring(0, 120)}...` : 'Aucune description détaillée disponible'}
               </div>
             </div>
             
@@ -156,7 +156,7 @@ const roleColors = {
                   Forces
                 </h4>
                 <ul class="list-disc list-inside text-sm text-[var(--color-text-muted)]">
-                  {clazz.data.strengths.split(', ').map(strength => (
+                  {clazz.data.strengths?.split(', ').map(strength => (
                     <li>{strength}</li>
                   ))}
                 </ul>
@@ -169,7 +169,7 @@ const roleColors = {
                   Faiblesses
                 </h4>
                 <ul class="list-disc list-inside text-sm text-[var(--color-text-muted)]">
-                  {clazz.data.weaknesses.split(', ').map(weakness => (
+                  {clazz.data.weaknesses?.split(', ').map(weakness => (
                     <li>{weakness}</li>
                   ))}
                 </ul>
@@ -184,17 +184,18 @@ const roleColors = {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-yellow-400">
                     <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
                   </svg>
-                  <h4 class="text-base font-semibold text-yellow-300">{clazz.data.uniquePassive.name}</h4>
+                  <h4 class="text-base font-semibold text-yellow-300">{clazz.data.uniquePassive?.name || 'Passif unique'}</h4>
                 </div>
-                <p class="text-sm text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                <p class="text-sm text-[var(--color-text-muted)]">{clazz.data.uniquePassive?.description || 'Aucune description disponible'}</p>
               </div>
             </div>
 
             {/* Builds recommandés */}
-            <div>
-              <h3 class="text-xl font-semibold mb-2 text-primary">Builds</h3>
-              <div class="space-y-3">
-                {clazz.data.builds.map(build => (
+            {clazz.data.builds && clazz.data.builds.length > 0 && (
+              <div>
+                <h3 class="text-xl font-semibold mb-2 text-primary">Builds</h3>
+                <div class="space-y-3">
+                {clazz.data.builds?.map(build => (
                   <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
                     <div>
                       <div class="flex items-center justify-between mb-1">
@@ -219,6 +220,7 @@ const roleColors = {
                 ))}
               </div>
             </div>
+            )}
           </div>
           
           {/* Sorts principaux et passifs */}
@@ -227,7 +229,7 @@ const roleColors = {
             <div>
               <h3 class="text-xl font-semibold mb-3 text-primary">Sorts Principaux</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {clazz.data.mainSpells.map(spell => (
+                {clazz.data.mainSpells?.map(spell => (
                   <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
                     <div class="flex gap-3">
                       <img 
@@ -254,9 +256,9 @@ const roleColors = {
               
               {/* Regrouper les passifs par catégorie */}
               {['Offensif', 'Défensif', 'Réactif'].map(category => {
-                const passivesInCategory = clazz.data.passiveSpells.filter(spell => 
+                const passivesInCategory = clazz.data.passiveSpells?.filter(spell => 
                   spell.category === category || (!spell.category && category === 'Offensif')
-                );
+                ) || [];
                 
                 if (passivesInCategory.length === 0) return null;
                 
@@ -271,7 +273,7 @@ const roleColors = {
                     </div>
                     
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                      {passivesInCategory.map(spell => (
+                      {passivesInCategory?.map(spell => (
                         <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
                           <div class="flex gap-3">
                             <img 
