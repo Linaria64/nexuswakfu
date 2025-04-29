@@ -52,8 +52,8 @@ const features = [
       <img src="/images/wakfu-background.jpg" alt="Wakfu World" class="w-full h-full object-cover opacity-40">
     </div>
     
-    <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
-      <h1 class="text-6xl md:text-7xl font-bold mb-6 text-white">
+    <div class="relative z-10 text-center px-4 max-w-5xl mx-auto" style="margin-top: -5rem;">
+      <h1 class="text-6xl md:text-7xl font-bold mb-8 text-white font-heading title-fade-in">
         <span class="text-wakfu-secondary">Nexus</span> Wakfu
       </h1>
       <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
@@ -357,6 +357,18 @@ const features = [
       transform: scale(1);
     }
   }
+  
+  /* Simple fade-in for the whole title */
+  .title-fade-in {
+    opacity: 0;
+    animation: fadeInTitle 1.5s ease 0.5s forwards; /* Fade in over 1.5s after 0.5s delay */
+  }
+
+  @keyframes fadeInTitle {
+    to {
+      opacity: 1;
+    }
+  }
 </style>
 
 <script>
@@ -371,4 +383,4 @@ const features = [
       });
     }
   });
-</script> 
+</script>
