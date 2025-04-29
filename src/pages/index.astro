@@ -60,9 +60,6 @@ const features = [
         Plongez dans l'univers magique du World of Twelve. Explorez, combattez et façonnez le monde qui vous entoure dans ce MMORPG tactique unique où chaque décision compte.
       </p>
       <div class="flex flex-wrap gap-6 justify-center">
-        <a href="/classes" class="btn-primary text-lg px-8 py-4">
-          Découvrir les Classes
-        </a>
         <a href="https://naquos.github.io/Gearfu/?itemsId=5580,30223" target="_blank" rel="noopener noreferrer" class="btn-secondary text-lg px-8 py-4">
           Tri Gearfu
         </a>
@@ -93,9 +90,15 @@ const features = [
       <div class="max-w-4xl mx-auto text-center mb-16">
         <h2 class="text-4xl font-bold mb-6 text-white">L'Histoire de <span class="text-wakfu-secondary">Wakfu</span></h2>
         <div class="h-1 w-20 bg-wakfu-secondary mx-auto mb-8"></div>
-        <p class="text-xl text-gray-300 leading-relaxed">
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">
           Bienvenue dans le Monde des Douze durant l'Ère du Wakfu, environ 1000 ans après les événements connus des héros de l'Ère des Dofus.
         </p>
+        <a href="/quetes" class="btn-primary text-lg px-8 py-4 inline-flex items-center gap-2">
+          Explorer les Quêtes
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </a>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -131,42 +134,47 @@ const features = [
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row items-center justify-between mb-12">
         <div>
-          <h2 class="text-4xl font-bold mb-4 text-white">Classes <span class="text-wakfu-secondary">Populaires</span></h2>
+          <h2 class="text-4xl font-bold mb-4 text-white">Classes du <span class="text-wakfu-secondary">Jeu</span></h2>
           <div class="h-1 w-20 bg-wakfu-secondary"></div>
         </div>
-        <a href="/classes" class="group flex items-center text-wakfu-secondary hover:text-wakfu-primary transition-colors mt-4 md:mt-0">
-          Voir toutes les classes
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-2 transition-transform" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </a>
+        <div class="mt-4 md:mt-0">
+          <a href="/classes" class="btn-primary text-base px-5 py-2 inline-flex items-center gap-2 hover:shadow-glow">
+            Découvrir les Classes
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {classes.slice(0, 4).map(wakfuClass => (
-          <a 
-            href={`/classes/${wakfuClass.slug}/`}
-            class="group bg-gray-900 rounded-xl overflow-hidden hover:bg-gray-800 transition-colors"
-          >
-            <div class="relative">
-              <img 
-                src={wakfuClass.data.image?.src || "/images/classes/default.jpg"} 
-                alt={wakfuClass.data.name}
-                class="w-full h-48 object-cover"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+      <div class="class-carousel relative overflow-hidden">
+        <div class="carousel-inner flex transition-transform duration-500" id="classCarousel">
+          {classes.map(wakfuClass => (
+            <div 
+              class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 group cursor-default"
+            >
+              <div class="bg-gray-900 rounded-xl overflow-hidden hover:bg-gray-800 transition-colors h-full">
+                <div class="relative">
+                  <img 
+                    src={wakfuClass.data.image?.src || "/images/classes/default.jpg"} 
+                    alt={wakfuClass.data.name}
+                    class="w-full h-48 object-cover"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                  <h3 class="text-xl font-bold mb-2 text-white group-hover:text-wakfu-secondary transition-colors">
+                    {wakfuClass.data.name}
+                  </h3>
+                  <p class="text-sm text-wakfu-secondary mb-3">{wakfuClass.data.role}</p>
+                  <p class="text-gray-400 line-clamp-2">
+                    {wakfuClass.data.description}
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 text-white group-hover:text-wakfu-secondary transition-colors">
-                {wakfuClass.data.name}
-              </h3>
-              <p class="text-sm text-wakfu-secondary mb-3">{wakfuClass.data.role}</p>
-              <p class="text-gray-400 line-clamp-2">
-                {wakfuClass.data.description}
-              </p>
-            </div>
-          </a>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -246,4 +254,46 @@ const features = [
   .btn-outline::before {
     background: linear-gradient(135deg, rgba(96, 165, 250, 0.5) 0%, rgba(59, 130, 246, 0.5) 100%);
   }
-</style> 
+  
+  /* Styles pour le carousel */
+  .class-carousel {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+  
+  .carousel-inner {
+    width: 100%;
+    animation: scrollCarousel 30s linear infinite;
+  }
+  
+  .hover\:shadow-glow:hover {
+    box-shadow: 0 0 15px 3px rgba(56, 189, 248, 0.6);
+  }
+  
+  @keyframes scrollCarousel {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-100% / 2));
+    }
+  }
+  
+  .carousel-inner:hover {
+    animation-play-state: paused;
+  }
+</style>
+
+<script>
+  // Duplicate items to create infinite scroll effect
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('classCarousel');
+    if (carousel) {
+      const items = carousel.querySelectorAll('.carousel-item');
+      items.forEach(item => {
+        const clone = item.cloneNode(true);
+        carousel.appendChild(clone);
+      });
+    }
+  });
+</script> 
