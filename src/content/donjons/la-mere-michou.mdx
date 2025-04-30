@@ -1,0 +1,88 @@
+---
+# Informations de base du donjon
+id: "mere-michou"
+name: "Chez la Mère Michou"
+description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
+
+# Caractéristiques
+level: 9
+difficulty: "easy"
+players: "group" # Utiliser 'solo', 'group', ou 'both'
+region: "Astrub"
+
+# Images
+icon:
+  src: "/images/donjons/mere-michou/icon.jpg"
+  alt: "Icône du donjon Chez la Mère Michou"
+image:
+  src: "/images/donjons/mere-michou/banner.jpg"
+  alt: "Bannière du donjon Chez la Mère Michou"
+
+# Bosses
+bosses:
+  - name: "Mère Michou"
+    description: "La maîtresse des Chachas."
+    hp: 500
+    masteries:
+        fire: 20
+        water: 10
+        earth: 15
+        air: 5
+    resistances:
+        fire: 10
+        water: 25
+        earth: 0
+        air: 5
+    # bossImage: { src: "/path/to/image.jpg", alt: "Mère Michou" } # Optional
+
+# Stratégie
+strategy: |
+  Points clés :
+  - Évitez les cases de bordure qui soignent les ennemis.
+  - Surveillez les tours de recharge des sorts du boss.
+  - Les Chachas sont faibles à l'eau et au feu.
+  - Le boss est faible à la terre.
+
+# Stèles (Optional)
+steles:
+  - name: "Stèle d'Agression"
+    description: "Les ennemis infligent 20% de dégâts supplémentaires."
+  - name: "Stèle de Vitalité"
+    description: "Les ennemis ont 30% de points de vie supplémentaires."
+
+# Récompenses
+rewards:
+  - name: "Amulette Michou"
+    type: "equipment"
+  - name: "Poils de Chacha"
+    type: "resource"
+  - name: "Anneau Vital"
+    type: "equipment"
+  - name: "Griffe de Chacha"
+    type: "resource"
+
+# Monstres
+monsters:
+  - name: "Chacha"
+    level: 9
+    elements: ["terre"]
+    weaknesses: ["eau", "feu"]
+  - name: "Chacha Blanc"
+    level: 9
+    elements: ["eau"]
+    weaknesses: ["eau"]
+  - name: "Maine Cooyne"
+    level: 10
+    elements: ["feu"]
+    weaknesses: ["terre"]
+
+# Mécaniques
+mechanics:
+  - name: "Cases de bordure"
+    description: "Les cases de bordure soignent les chachas et infligent des dégâts à vos personnages"
+  - name: "Cases Maudites"
+    description: "Certaines cases sur les bords soignent les ennemis qui finissent leur tour dessus."
+  - name: "Invocation de Chachas"
+    description: "La Mère Michou peut invoquer des Chachas supplémentaires."
+
+---

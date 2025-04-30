@@ -59,60 +59,67 @@ const classesCollection = defineCollection({
 const donjonCollection = defineCollection({
   type: 'content',
   schema: z.object({
+    // --- Core Fields ---
+    id: z.string().optional(), // Optional ID from MDX
     name: z.string(),
+    description: z.string().optional(),
     level: z.number(),
     difficulty: z.enum(['easy', 'medium', 'hard', 'extreme']),
-    players: z.enum(['3', '6', 'group']),
+    players: z.enum(['solo', 'group', 'both', '3', '6']), // Allow flexibility
     region: z.string(),
-    description: z.string().optional(),
-    image: imageSchema,
-    rewards: z.array(z.string()),
+
+    // --- Images ---
+    icon: imageSchema.optional(),
+    image: imageSchema.optional(),
+
+    // --- Bosses ---
     bosses: z.array(
       z.object({
         name: z.string(),
-        levels: z.array(
-          z.object({
-            level: z.number(),
-            hp: z.number(),
-            ap: z.number(),
-            mp: z.number(),
-            description: z.string(),
-            bossImage: imageSchema,
-            resistances: z.object({
-              water: z.number(),
-              earth: z.number(),
-              air: z.number(),
-              fire: z.number(),
-            }),
-            spells: z.array(
-              z.object({
-                name: z.string(),
-                description: z.string(),
-                baseDamage: z.number().nullable(),
-                damageType: z.enum(['direct', 'indirect', 'poison', 'heal', 'buff', 'debuff', 'other']),
-              })
-            )
-          })
-        )
-      })
-    ),
-    rooms: z.array(
-      z.object({
-        roomNumber: z.number(),
-        mobs: z.array(
-          z.object({
-            name: z.string(),
-            mechanics: z.string().optional(),
-            spells: z.array(
-              z.object({
-                name: z.string(),
-                description: z.string()
-              })
-            ).optional()
-          })
-        )
+        description: z.string().optional(),
+        hp: z.number().optional(),
+        masteries: z.object({
+            fire: z.number().optional(),
+            water: z.number().optional(),
+            earth: z.number().optional(),
+            air: z.number().optional(),
+        }).optional(),
+        resistances: z.object({
+            fire: z.number().optional(),
+            water: z.number().optional(),
+            earth: z.number().optional(),
+            air: z.number().optional(),
+        }).optional(),
+        bossImage: imageSchema.optional()
       })
     ).optional(),
+
+    // --- Strategy & Steles ---
+    strategy: z.string().optional(),
+    steles: z.array(z.object({
+        name: z.string(),
+        description: z.string()
+    })).optional(),
+
+    // --- Rewards ---
+    rewards: z.array(z.object({
+        name: z.string(),
+        type: z.enum(['equipment', 'resource'])
+    })).optional(),
+
+    // --- Other Dungeon Info (Optional) ---
+    monsters: z.array(z.object({ // Non-boss monsters
+      name: z.string(),
+      level: z.number().optional(),
+      elements: z.array(z.string()).optional(),
+      weaknesses: z.array(z.string()).optional(),
+    })).optional(),
+
+    mechanics: z.array(z.object({ // Special rules/mechanics
+      name: z.string(),
+      description: z.string()
+    })).optional(),
+
   }),
 });
 

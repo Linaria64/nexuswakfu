@@ -1,87 +1,73 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import defaultDungeonImage from '@assets/images/donjons/default.jpg';
+import { difficultyLabels } from '../../utils/constants';
 
 interface Props {
   dungeon: CollectionEntry<'donjons'>;
 }
 
 const { dungeon } = Astro.props;
-const imageUrl = dungeon.data.image.startsWith('/') 
-  ? defaultDungeonImage 
-  : dungeon.data.image;
+const difficultyInfo = difficultyLabels[dungeon.data.difficulty] || difficultyLabels.medium;
 
-const difficultyColor = {
-  easy: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300',
-  medium: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300',
-  hard: 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300',
-  extreme: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
-};
+// Add fallbacks for potentially missing image/icon data
+const imageSrc = dungeon.data.image?.src ?? '/images/donjons/default-banner.jpg'; 
+const imageAlt = dungeon.data.image?.alt ?? dungeon.data.name ?? 'Bannière par défaut';
+const iconSrc = dungeon.data.icon?.src ?? '/images/donjons/default-icon.png';
+const iconAlt = dungeon.data.icon?.alt ?? 'Icône par défaut';
 
-const difficultyText = {
-  easy: 'Facile',
-  medium: 'Moyen',
-  hard: 'Difficile',
-  extreme: 'Extrême'
-};
-
-const playersText = {
-  solo: 'Solo',
-  group: 'Groupe',
-  both: 'Solo/Groupe'
-};
 ---
 
-<a 
-  href={`/donjons/${dungeon.slug}/`}
-  class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group"
->
+<a href={`/donjons/${dungeon.slug}`} class="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 relative flex flex-col h-full">
   <div class="relative">
-    <Image 
-      src={imageUrl}
-      alt={dungeon.data.name}
+    <Image
+      src={imageSrc}
+      alt={imageAlt}
       width={600}
       height={300}
       class="w-full h-48 object-cover"
     />
     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-      <div class="flex justify-between items-end">
-        <h3 class="text-white font-bold text-xl">{dungeon.data.name}</h3>
-        <span class="bg-wakfu-primary/90 text-white text-sm py-1 px-2 rounded-md">
-          Niv. {dungeon.data.level}
+      <h3 class="text-white text-xl font-bold truncate">{dungeon.data.name}</h3>
+    </div>
+    <div class={`absolute top-2 right-2 text-xs font-semibold px-2 py-1 rounded border ${difficultyInfo.color} border-opacity-50`}>
+      {difficultyInfo.label}
+    </div>
+  </div>
+
+  <div class="p-6 flex flex-col flex-grow">
+    <div class="flex items-center mb-4">
+      <div class={`bg-gray-500/20 dark:bg-gray-700/30 p-2 rounded-full mr-3 flex-shrink-0`}>
+        <Image
+          src={iconSrc}
+          alt={iconAlt}
+          width={32}
+          height={32}
+          class="w-8 h-8"
+        />
+      </div>
+      <div class="flex flex-col min-w-0">
+        <span class="text-gray-600 dark:text-gray-400 font-medium truncate">
+          Niveau {dungeon.data.level}
+        </span>
+        <span class="text-gray-500 dark:text-gray-500 text-sm truncate">
+          {dungeon.data.region}
         </span>
       </div>
     </div>
-  </div>
-  
-  <div class="p-4">
-    <div class="flex items-center mb-3 space-x-2">
-      <span class={`px-2 py-1 rounded text-xs ${difficultyColor[dungeon.data.difficulty]}`}>
-        {difficultyText[dungeon.data.difficulty]}
-      </span>
-      <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs text-gray-800 dark:text-gray-300">
-        {playersText[dungeon.data.players]}
-      </span>
-      <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs text-gray-800 dark:text-gray-300">
-        {dungeon.data.region}
-      </span>
-    </div>
-    
-    <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-3">
+
+    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
       {dungeon.data.description}
     </p>
-    
-    <div class="flex justify-between items-center">
-      <div class="flex items-center space-x-1">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-wakfu-secondary">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
-        </svg>
-        <span class="text-sm text-gray-600 dark:text-gray-400">{dungeon.data.rewards.length} récompenses</span>
+
+    <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+        {/* Placeholder for potential future info, e.g., player count */}
+        {/* <span class="mr-1">👥</span> {dungeon.data.players === 'solo' ? 'Solo' : dungeon.data.players === 'both' ? 'Solo/Groupe' : 'Groupe'} */}
       </div>
       <span class="text-wakfu-primary dark:text-wakfu-secondary font-medium text-sm group-hover:underline">
-        Voir le guide →
+        Voir les détails →
       </span>
     </div>
   </div>
-</a> 
+</a>

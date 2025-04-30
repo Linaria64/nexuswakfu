@@ -2,6 +2,8 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 import Modal from '../../components/ui/Modal.astro';
+import DungeonCard from '../../components/cards/DungeonCard.astro';
+import { difficultyLabels } from '../../utils/constants';
 
     // 1. Fetch all entries from the collection
     const allDungeonsRaw = await getCollection('donjons');
@@ -22,13 +24,6 @@ import Modal from '../../components/ui/Modal.astro';
         };
       })
     );
-// Keep difficulty labels definition
-const difficultyLabels = {
-  'easy': { label: 'Facile', color: 'bg-green-500/20 text-green-300 border-green-500/50', class: 'easy' },
-  'medium': { label: 'Moyen', color: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/50', class: 'medium' },
-  'hard': { label: 'Difficile', color: 'bg-orange-500/20 text-orange-300 border-orange-500/50', class: 'hard' },
-  'extreme': { label: 'Extrême', color: 'bg-red-500/20 text-red-300 border-red-500/50', class: 'extreme' }
-};
 
 // Keep player labels if needed, or format directly
 const playerLabels = {
@@ -139,97 +134,18 @@ const playerLabels = {
           const difficulty = difficultyLabels[donjon.data.difficulty] || difficultyLabels.medium;
           const playersText = playerLabels[donjon.data.players] || 'Groupe';
           const animationDelay = `${index * 0.05}s`;
-          const { Content } = donjon;
           return (
-            <div class="contents" key={donjon.slug}>
-              <div 
-                class="dungeon-card flex flex-col glass rounded-xl overflow-hidden transition-all duration-300 hover:border-[var(--color-border-highlight)] hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 animate-fade-up"
-                style={`animation-delay: ${animationDelay};`}
-                data-level={donjon.data.level}
-                data-difficulty={donjon.data.difficulty}
-              >
-                <div class="relative h-48 overflow-hidden">
-                  <img 
-                    src={donjon.data.image ? donjon.data.image.src : "/images/donjons/default.jpg"}
-                    alt={donjon.data.image ? donjon.data.image.alt : donjon.data.name}
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
-                    <h3 class="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-200 line-clamp-1">
-                      {donjon.data.name}
-                    </h3>
-                  </div>
-                </div>
-                
-                <div class="p-4 flex flex-col flex-grow">
-                  <div class="flex items-center justify-between mb-2 text-xs flex-wrap gap-1">
-                    <span class={`px-2 py-0.5 rounded-full border font-medium ${difficulty.color}`}>
-                      {difficulty.label}
-                    </span>
-                     <span class="px-2 py-0.5 rounded-full border border-[var(--color-border-muted)] text-[var(--color-text-muted)] font-medium">
-                      Niv. {donjon.data.level}
-                    </span>
-                    <span class="px-2 py-0.5 rounded-full border border-[var(--color-border-muted)] text-[var(--color-text-muted)] font-medium">
-                       {playersText}
-                    </span>
-                  </div>
-                  
-                  <p class="text-[var(--color-text-muted)] text-sm line-clamp-3 flex-grow mb-3">
-                    {donjon.data.description}
-                  </p>
-                  
-                  <div class="text-xs border-t border-[var(--color-border-muted)] pt-2 mt-auto">
-                     <span class="text-gray-500">Boss: </span>
-                     <span class="text-[var(--color-text-muted)]">{donjon.data.bosses?.[0]?.name || 'Inconnu'}</span>
-                  </div>
-
-                  <button 
-                    class="btn btn-glass border border-wakfu-secondary text-wakfu-secondary hover:bg-wakfu-secondary/10 w-full mt-4 text-sm py-2 rounded-lg font-medium flex items-center justify-center gap-2 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-wakfu-secondary" 
-                    type="button"
-                    onclick={`document.getElementById('guide-content-${donjon.slug}').classList.toggle('hidden')`}
-                    aria-expanded="false"
-                    aria-controls={`guide-content-${donjon.slug}`}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    {typeof Content === 'function' ? 'Voir le guide' : 'Guide non disponible'}
-                  </button>
-                </div>
-              </div>
-
-              {typeof Content === 'function' && (
-                <div 
-                  id={`guide-content-${donjon.slug}`} 
-                  class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm"
-                  onclick={(e) => {
-                    if (e.target.id === `guide-content-${donjon.slug}`) {
-                      e.currentTarget.classList.add('hidden');
-                    }
-                  }}
-                >
-                  <div class="relative min-h-screen flex items-center justify-center p-4">
-                    <div class="relative w-full max-w-4xl p-6 rounded-lg border border-wakfu-primary/30 bg-[var(--color-bg-base)]">
-                      <button 
-                        class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-                        onclick={`document.getElementById('guide-content-${donjon.slug}').classList.add('hidden')`}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
-                      <Content />
-                    </div>
-                  </div>
-                </div>
-              )}
+            <div class="dungeon-card" 
+                 data-level={donjon.data.level} 
+                 data-difficulty={donjon.data.difficulty}
+                 style={`animation-delay: ${animationDelay};`}
+            >
+              <DungeonCard dungeon={donjon} />
             </div>
           );
         })}
       </div>
   </div>
-
-
 
   <script type="module" client:load>
     document.addEventListener('DOMContentLoaded', () => {
@@ -336,6 +252,10 @@ const playerLabels = {
     opacity: 0;
     transform: translateY(15px);
     animation: fadeUp 0.4s ease-out forwards;
+    animation-name: fadeUp;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
   }
 
   @keyframes fadeUp {
@@ -356,4 +276,4 @@ const playerLabels = {
     margin-bottom: 1rem !important;
     width: 100% !important;
   }
-</style> 
+</style>
