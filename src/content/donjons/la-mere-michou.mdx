@@ -35,14 +35,6 @@ bosses:
         air: 5
     # bossImage: { src: "/path/to/image.jpg", alt: "Mère Michou" } # Optional
 
-# Stratégie
-strategy: |
-  Points clés :
-  - Évitez les cases de bordure qui soignent les ennemis.
-  - Surveillez les tours de recharge des sorts du boss.
-  - Les Chachas sont faibles à l'eau et au feu.
-  - Le boss est faible à la terre.
-
 # Stèles (Optional)
 steles:
   - name: "Stèle d'Agression"
@@ -50,16 +42,13 @@ steles:
   - name: "Stèle de Vitalité"
     description: "Les ennemis ont 30% de points de vie supplémentaires."
 
-# Récompenses
-rewards:
-  - name: "Amulette Michou"
-    type: "equipment"
-  - name: "Poils de Chacha"
-    type: "resource"
-  - name: "Anneau Vital"
-    type: "equipment"
-  - name: "Griffe de Chacha"
-    type: "resource"
+# Stratégie
+strategy: |
+  Points clés :
+  - Évitez les cases de bordure qui soignent les ennemis.
+  - Surveillez les tours de recharge des sorts du boss.
+  - Les Chachas sont faibles à l'eau et au feu.
+  - Le boss est faible à la terre.
 
 # Monstres
 monsters:
@@ -84,5 +73,16 @@ mechanics:
     description: "Certaines cases sur les bords soignent les ennemis qui finissent leur tour dessus."
   - name: "Invocation de Chachas"
     description: "La Mère Michou peut invoquer des Chachas supplémentaires."
+
+# Récompenses
+rewards:
+  - name: "Amulette Michou"
+    type: "equipment"
+  - name: "Poils de Chacha"
+    type: "resource"
+  - name: "Anneau Vital"
+    type: "equipment"
+  - name: "Griffe de Chacha"
+    type: "resource"
 
 ---

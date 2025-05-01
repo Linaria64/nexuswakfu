@@ -1,0 +1,91 @@
+---
+# Informations de base de la classe
+id: "Pandawa"
+name: "Pandawa"
+description: "Pandawa use des boissons fermentées, elle y puise force et philosophie.
+Les Pandawas sont des Guerriers porteurs qui savent faire des folies de leurs corps ! Ils pourront même en faire avec le corps des autres."
+  
+role: "DPT distance"
+specialty: "Combat distance et dégâts bruts"
+
+
+# Image
+icon:
+  src: "/images/classes/pandaa.png"
+  alt: "Icône de la classe Panda"
+image:
+  src: "/images/classes/pandaa.png"
+  alt: "Bannière de la classe Panda"
+portrait:
+  src: "/images/classes/pandaa.png"
+  alt: "Portrait d'un personnage Panda"
+
+# Caractéristiques
+difficulty: 2
+combatStyle: "Corps à distance"
+strengths: "Dégâts directs élevés, Mobilité en combat, Bonne survie, Facile à jouer"
+weaknesses: "Peu de contrôle, Faible à distance, Dépendant des critiques"
+# Compétences principales
+mainSpells:
+  # Sort niveau 1
+  - name: "Colère de Cra"
+    description: "Inflige des dégâts puissants en zone autour du lanceur"
+    level: 1
+    image:
+      src: "/images/classes/cra/colere-cra.webp"
+      alt: "Colère de Cra"
+  
+  # Sort niveau 5
+  - name: "Épée Céleste"
+    description: "Invoque une épée qui attaque les ennemis proches"
+    level: 5
+    image:
+      src: "/images/classes/cra/epee-celeste.webp"
+      alt: "Épée Céleste"
+  
+  # Sort niveau 15
+  - name: "Bond"
+    description: "Se téléporte vers la cible et inflige des dégâts"
+    level: 15
+    image:
+      src: "/images/classes/cra/bond.webp"
+      alt: "Bond"
+
+# Passif unique de la classe
+uniquePassive:
+  name: "Furie du Cra"
+  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+# Passifs
+passiveSpells:
+  # Passif offensif principal
+  - name: "Épée Divine"
+    description: "Augmente les dégâts d'épée de 15% et les chances de coup critique de 5%"
+    category: "Offensif"
+    image:
+      src: "/images/classes/cra/epee-divine.webp"
+      alt: "Épée Divine"
+  
+  # Passif défensif
+  - name: "Vigueur"
+    description: "Augmente les points de vie maximum de 10%"
+    category: "Défensif"
+    image:
+      src: "/images/classes/cra/vigueur.webp"
+      alt: "Vigueur"
+  
+  # Passif de pénétration
+  - name: "Maître d'Armes"
+    description: "Les attaques au corps à corps ignorent 10% de la résistance ennemie"
+    category: "Offensif"
+    image:
+      src: "/images/classes/cra/maitre-armes.webp"
+      alt: "Maître d'Armes" 
+  
+  # Passif situationnel
+  - name: "Colère"
+    description: "Après avoir subi des dégâts, vos prochaines attaques infligent 8% de dégâts supplémentaires pendant 1 tour"
+    category: "Réactif"
+    image:
+      src: "/images/classes/cra/colere.webp"
+      alt: "Colère"
+---
