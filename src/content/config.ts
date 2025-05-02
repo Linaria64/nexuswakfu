@@ -16,6 +16,7 @@ const classesCollection = defineCollection({
     image: imageSchema,
     description: z.string().optional(),
     detailedDescription: z.string().optional(),
+    gameplayDescription: z.string().optional(),
     role: z.string(),
     difficulty: z.number().min(1).max(5).optional(),
     combatStyle: z.string().optional(),
