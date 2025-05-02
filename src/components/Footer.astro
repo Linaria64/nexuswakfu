@@ -4,11 +4,9 @@ const currentYear = new Date().getFullYear();
 // Liens du pied de page
 const footerLinks = [
   { text: 'Accueil', href: '/' },
-  { text: 'Classes', href: '/classes/' },
-  { text: 'Métiers', href: '/metiers/' },
-  { text: 'Donjons', href: '/donjons/' },
-  { text: 'Guides', href: '/guides/' },
-  { text: 'Découverte', href: '/decouverte/' }
+  { text: 'Classes', href: '/classes' },
+  { text: 'Métiers', href: '/metiers' },
+  { text: 'Donjons', href: '/donjons' },
 ];
 ---
 
@@ -17,8 +15,8 @@ const footerLinks = [
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       <div class="md:col-span-2">
         <a href="/" class="flex items-center text-xl font-bold text-white mb-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-wakfu-secondary" tabindex="0">
-          <span class="text-wakfu-secondary">Wakfu</span>
-          <span class="ml-1">Sage</span>
+          <span class="text-wakfu-secondary">Nexus</span>
+          <span class="ml-1">Wakfu</span>
         </a>
         <p class="text-gray-400 max-w-md">
           Guide complet non-officiel pour le MMORPG tactique Wakfu. Stratégies, builds, astuces et ressources pour tous les joueurs.
@@ -83,7 +81,7 @@ const footerLinks = [
     
     <div class="mt-8 pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
       <p class="text-gray-500 text-sm">
-        &copy; {currentYear} The Wakfu Sage. Tous droits réservés.
+        &copy; {currentYear} The Nexus Wakfu. Tous droits réservés.
       </p>
       <p class="text-gray-500 text-sm mt-2 md:mt-0">
         Wakfu est une marque déposée d'Ankama Games. Ce site n'est pas affilié à Ankama.
