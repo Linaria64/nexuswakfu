@@ -11,6 +11,15 @@ interface Quest {
     description?: string;
 }
 
+interface Artifact {
+    name: string;
+    imageUrl: string;
+    location: string;
+    questLevel: number;
+    description: string;
+    relatedQuest?: string;
+}
+
 const mainQuests: Quest[] = [
     {
         title: "Introduction Astrub",
@@ -92,6 +101,80 @@ const sideQuests: Quest[] = [
         level: 22,
         description: "Participez au festival annuel des lumières",
     },
+];
+
+// Artefacts de Wakfu (basé sur l'image fournie)
+const artifacts: Artifact[] = [
+    {
+        name: "Boussole de Tristepin",
+        imageUrl: "/images/artifacts/boussole.png",
+        location: "Chef Chafer",
+        questLevel: 13,
+        description: "Pour récupérer la Boussole vous devez être niveau 13 et compléter la quête principale du Chef Chafer."
+    },
+    {
+        name: "Ocarina",
+        imageUrl: "/images/artifacts/ocarina.png",
+        location: "Quête Principale des Nations",
+        questLevel: 43,
+        description: "Pour récupérer l'Ocarina, vous devez être niveau 43 et compléter la Quête Principale des Nations."
+    },
+    {
+        name: "Sceptre Oscuro",
+        imageUrl: "/images/artifacts/sceptre.png",
+        location: "Domaine Sauvage",
+        questLevel: 50,
+        description: "Pour récupérer le Sceptre vous devez être niveau 50 et vous rendre au Domaine Sauvage et compléter la quête principale."
+    },
+    {
+        name: "Pacotilles d'Olfio",
+        imageUrl: "/images/artifacts/pacotilles.png",
+        location: "Koko",
+        questLevel: 55,
+        description: "Pour récupérer les Pacotilles d'Olfio, vous devez être niveau 55 et vous rendre à Koko et compléter la quête principale."
+    },
+    {
+        name: "Baguette Rikiki",
+        imageUrl: "/images/artifacts/baguette.png",
+        location: "La Dimension",
+        questLevel: 60,
+        description: "Pour récupérer la Baguette Rikiki, vous devez vous diriger vers l'Île des Wabbits. Le boss vous aura besoin d'un groupe de 5+ personnages (minimum 4pc de faire le donjon normalement) et pour le coffre secret il faudra le trouver dans l'affaire du Srambad."
+    },
+    {
+        name: "Amulette Luminescente",
+        imageUrl: "/images/artifacts/amulette.png",
+        location: "Bilbiza",
+        questLevel: 33,
+        description: "Pour récupérer l'Amulette Luminescente, vous devez être niveau 33 et vous rendre à Bilbiza et compléter la quête principale. Note : Si vous l'avez déjà complétée, il vous suffit de refaire l'étape de 'Show Gola' à votre draine dans la Dimension."
+    },
+    {
+        name: "Sablier Abiotique",
+        imageUrl: "/images/artifacts/sablier.png",
+        location: "Saharach",
+        questLevel: 15,
+        description: "Pour récupérer les Sablier Abiotique, vous devez être niveau ~15 et vous rendre à Saharach et compléter la quête principale."
+    },
+    {
+        name: "Arc d'Archechmè",
+        imageUrl: "/images/artifacts/arc.png",
+        location: "Île des Wabbits",
+        questLevel: 70,
+        description: "Pour récupérer l'Arc d'Archechmè Pour récupérer l'Arc d'archechmè Wabbl, vous devez être niveau 70 et vous rendre à l'Île des Wabbits et compléter la quête principale."
+    },
+    {
+        name: "S.I.E",
+        imageUrl: "/images/artifacts/sie.png",
+        location: "Enutrosor",
+        questLevel: 140,
+        description: "Pour récupérer le S.I.E., vous devez être niveau 140 et vous rendre à Enutrosor et compléter la quête principale."
+    },
+    {
+        name: "Sablier de Xelor",
+        imageUrl: "/images/artifacts/sablier-xelor.png",
+        location: "Adamaï",
+        questLevel: 155,
+        description: "Pour récupérer le Sablier, vous devez être niveau 155 et vous rendre au Katuram Passé et compléter la quête principale."
+    }
 ];
 
 // Combine all quests for potential future use
@@ -180,6 +263,73 @@ const allQuests = [...mainQuests, ...sideQuests];
             </div>
         </section>
 
+        <!-- Artefacts Carousel -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold mb-6 text-amber-500 border-b-2 border-amber-500 pb-2">
+                Artefacts Légendaires
+            </h2>
+            
+            <!-- Carousel container -->
+            <div class="carousel-container relative overflow-hidden rounded-xl artifact-carousel">
+                <!-- Background gradient for glassmorphism effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-amber-700/10 backdrop-blur-sm z-0"></div>
+                
+                <!-- Carousel track -->
+                <div class="carousel-track flex transition-transform duration-500 ease-out">
+                    {artifacts.map((artifact, index) => (
+                        <div class="carousel-slide w-full flex-shrink-0 p-4">
+                            <div class="glass-card h-full relative overflow-hidden rounded-xl shadow-xl border border-amber-500/30 hover:border-amber-500/70 transition-all hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-1">
+                                <!-- Card content -->
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-amber-400 mb-2 flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        {artifact.name}
+                                    </h3>
+                                    
+                                    <!-- Niveau requis -->
+                                    <div class="bg-amber-900/30 text-amber-300 text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center mb-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
+                                        </svg>
+                                        Niveau {artifact.questLevel}
+                                    </div>
+                                    
+                                    <div class="mt-2">
+                                        <p class="text-sm text-amber-100 mb-1">Location:</p>
+                                        <p class="text-sm text-gray-300 mb-4">{artifact.location}</p>
+                                    </div>
+                                    
+                                    <p class="text-sm text-gray-300">{artifact.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                
+                <!-- Carousel controls -->
+                <button class="carousel-button prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/50 hover:bg-amber-600/90 text-white z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                
+                <button class="carousel-button next absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/50 hover:bg-amber-600/90 text-white z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+                
+                <!-- Carousel indicators -->
+                <div class="carousel-indicators flex justify-center mt-4 space-x-2 absolute bottom-4 left-0 right-0">
+                    {artifacts.map((_, index) => (
+                        <button class="carousel-indicator w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all duration-200" data-index={index}></button>
+                    ))}
+                </div>
+            </div>
+        </section>
+        
         <!-- Side Quests Carousel -->
         <section>
             <h2 class="text-3xl font-semibold mb-6 text-secondary-600 border-b-2 border-secondary-500 pb-2">
@@ -260,6 +410,164 @@ const allQuests = [...mainQuests, ...sideQuests];
     </main>
 </MainLayout>
 
+<script>
+    // Initialisation de tous les carrousels
+    document.addEventListener('DOMContentLoaded', () => {
+        // Sélectionner tous les carrousels
+        const carousels = document.querySelectorAll('.carousel-container');
+        
+        carousels.forEach(carousel => {
+            const track = carousel.querySelector('.carousel-track');
+            const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+            const prevButton = carousel.querySelector('.prev');
+            const nextButton = carousel.querySelector('.next');
+            const indicators = Array.from(carousel.querySelectorAll('.carousel-indicator'));
+            
+            if (!track || slides.length === 0) return;
+            
+            let currentIndex = 0;
+            const slideWidth = 100; // En pourcentage
+            
+            // Initialiser les indicateurs
+            if (indicators.length > 0) {
+                indicators[0].classList.add('active');
+                indicators[0].style.backgroundColor = carousel.classList.contains('artifact-carousel') ? 
+                                                  'rgba(245, 158, 11, 0.9)' : // Ambre pour le carousel d'artefacts
+                                                  'rgba(59, 130, 246, 0.9)'; // Bleu pour les autres carousels
+            }
+            
+            // Fonction pour aller à une diapositive spécifique
+            const goToSlide = (index) => {
+                // Gestion des limites
+                if (index < 0) {
+                    index = slides.length - 1;
+                } else if (index >= slides.length) {
+                    index = 0;
+                }
+                
+                currentIndex = index;
+                
+                // Déplacer le track
+                track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+                
+                // Mettre à jour les indicateurs
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === currentIndex);
+                    indicator.style.backgroundColor = i === currentIndex ? 
+                                                   (carousel.classList.contains('artifact-carousel') ? 
+                                                    'rgba(245, 158, 11, 0.9)' : 'rgba(59, 130, 246, 0.9)') : 
+                                                   '';
+                    indicator.style.width = i === currentIndex ? '10px' : '8px';
+                    indicator.style.height = i === currentIndex ? '10px' : '8px';
+                });
+            };
+            
+            // Ajouter les écouteurs d'événements pour les boutons
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    goToSlide(currentIndex - 1);
+                });
+            }
+            
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    goToSlide(currentIndex + 1);
+                });
+            }
+            
+            // Ajouter les écouteurs d'événements pour les indicateurs
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+            });
+            
+            // Ajouter la navigation par glisser-déposer (swipe)
+            let startX, moveX, isDragging = false;
+            const threshold = 100; // Distance minimale pour changer de diapositive
+            
+            const handleStart = (clientX) => {
+                startX = clientX;
+                isDragging = true;
+                track.style.transition = 'none'; // Désactiver la transition pendant le glissement
+            };
+            
+            track.addEventListener('mousedown', (e) => {
+                handleStart(e.clientX);
+            });
+            
+            track.addEventListener('touchstart', (e) => {
+                handleStart(e.touches[0].clientX);
+            });
+            
+            const handleMove = (clientX) => {
+                if (!isDragging) return;
+                moveX = clientX;
+                const diff = moveX - startX;
+                const currentOffset = -currentIndex * slideWidth;
+                const newOffset = currentOffset + (diff / track.offsetWidth) * 100;
+                track.style.transform = `translateX(${newOffset}%)`;
+            };
+            
+            track.addEventListener('mousemove', (e) => {
+                handleMove(e.clientX);
+            });
+            
+            track.addEventListener('touchmove', (e) => {
+                handleMove(e.touches[0].clientX);
+            });
+            
+            const handleEnd = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                track.style.transition = 'transform 500ms ease-out';
+                
+                if (moveX && Math.abs(moveX - startX) > threshold) {
+                    if (moveX > startX) {
+                        goToSlide(currentIndex - 1); // Glissement vers la droite
+                    } else {
+                        goToSlide(currentIndex + 1); // Glissement vers la gauche
+                    }
+                } else {
+                    goToSlide(currentIndex); // Revenir à la position actuelle
+                }
+                
+                startX = null;
+                moveX = null;
+            };
+            
+            track.addEventListener('mouseup', handleEnd);
+            track.addEventListener('touchend', handleEnd);
+            track.addEventListener('mouseleave', handleEnd);
+            
+            // Défilement automatique
+            const autoplayInterval = 7000; // 7 secondes entre chaque diapositive
+            let autoplayTimer;
+            
+            const startAutoplay = () => {
+                autoplayTimer = setInterval(() => {
+                    goToSlide(currentIndex + 1);
+                }, autoplayInterval);
+            };
+            
+            const stopAutoplay = () => {
+                clearInterval(autoplayTimer);
+            };
+            
+            // Démarrer le défilement automatique
+            startAutoplay();
+            
+            // Arrêter le défilement automatique lors de l'interaction
+            carousel.addEventListener('mouseenter', stopAutoplay);
+            carousel.addEventListener('mouseleave', startAutoplay);
+            carousel.addEventListener('touchstart', stopAutoplay);
+            carousel.addEventListener('touchend', () => {
+                setTimeout(startAutoplay, 3000); // Redémarrer après 3 secondes d'inactivité
+            });
+        });
+    });
+</script>
+
 <style>
     /* Styles pour le carrousel glassmorphism */
     .carousel-container {
@@ -296,24 +604,52 @@ const allQuests = [...mainQuests, ...sideQuests];
     }
     
     /* Cartes pour quêtes principales - dégradé bleu avec opacité 70% */
-    section:first-of-type .glass-card {
+    section:nth-of-type(1) .glass-card {
         background: linear-gradient(135deg, rgba(56, 189, 248, 0.7) 0%, rgba(37, 99, 235, 0.7) 100%);
         border: 1px solid rgba(96, 165, 250, 0.4);
     }
     
+    /* Cartes pour artefacts - dégradé ambre/doré avec opacité 70% */
+    section:nth-of-type(2) .glass-card {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.7) 0%, rgba(217, 119, 6, 0.7) 100%);
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        box-shadow: 0 8px 32px rgba(245, 158, 11, 0.15);
+    }
+    
+    /* Effet de survol pour les cartes d'artefacts */
+    section:nth-of-type(2) .glass-card:hover {
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: 0 10px 40px rgba(245, 158, 11, 0.25);
+    }
+    
+    /* Badge de niveau pour les artefacts */
+    section:nth-of-type(2) .glass-card .bg-amber-900/30 {
+        transition: all 0.3s ease;
+    }
+    
+    section:nth-of-type(2) .glass-card:hover .bg-amber-900/30 {
+        background-color: rgba(180, 83, 9, 0.5);
+    }
+    
     /* Cartes pour quêtes secondaires - dégradé orange avec opacité 70% */
-    section:last-of-type .glass-card {
+    section:nth-of-type(3) .glass-card {
         background: linear-gradient(135deg, rgba(251, 146, 60, 0.7) 0%, rgba(194, 65, 12, 0.7) 100%);
         border: 1px solid rgba(251, 146, 60, 0.4);
     }
     
     /* Styles pour le mode sombre */
-    .dark section:first-of-type .glass-card {
+    .dark section:nth-of-type(1) .glass-card {
         background: linear-gradient(135deg, rgba(56, 189, 248, 0.7) 0%, rgba(37, 99, 235, 0.7) 100%);
         border: 1px solid rgba(96, 165, 250, 0.2);
     }
     
-    .dark section:last-of-type .glass-card {
+    .dark section:nth-of-type(2) .glass-card {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.6) 0%, rgba(180, 83, 9, 0.6) 100%);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        box-shadow: 0 8px 32px rgba(245, 158, 11, 0.1);
+    }
+    
+    .dark section:nth-of-type(3) .glass-card {
         background: linear-gradient(135deg, rgba(251, 146, 60, 0.7) 0%, rgba(194, 65, 12, 0.7) 100%);
         border: 1px solid rgba(251, 146, 60, 0.2);
     }

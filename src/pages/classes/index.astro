@@ -205,7 +205,7 @@ const roleColors = {
 
             {/* Gameplay de base */}
             <div class="space-y-4">
-              <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
+              <div class="glass p-3 rounded-xl no-hover">
                 <h4 class="text-base font-semibold text-cyan-400 mb-3 flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
                     <path d="M10 3.75a2 2 0 10-4 0 2 2 0 004 0zM17.25 4.5a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM5 3.75a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 01.75.75zM4.25 17a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM17.25 17a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM9 10a.75.75 0 01-.75.75h-5.5a.75.75 0 010-1.5h5.5A.75.75 0 019 10zM17.25 10.75a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM14 10a2 2 0 10-4 0 2 2 0 004 0zM10 16.25a2 2 0 10-4 0 2 2 0 004 0z" />
@@ -285,7 +285,7 @@ const roleColors = {
               </div>
               
               {/* Mécaniques clés */}
-              <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
+              <div class="glass p-3 rounded-xl no-hover">
                 <h4 class="text-base font-semibold text-emerald-400 mb-3 flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
                     <path d="M10.75 16.82A7.462 7.462 0 0115 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0018 15.06v-11a.75.75 0 00-.546-.721A9.006 9.006 0 0015 3a8.963 8.963 0 00-4.25 1.065V16.82zM9.25 4.065A8.963 8.963 0 005 3c-.85 0-1.673.118-2.454.339A.75.75 0 002 4.06v11c0 .332.217.626.536.72A8.961 8.961 0 005 16.5c1.756 0 3.356-.565 4.25-1.48V4.065z" />
@@ -324,135 +324,186 @@ const roleColors = {
               </div>
               
               {/* Progression par niveau */}
-              <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
-                <h4 class="text-base font-semibold text-primary mb-3 flex items-center gap-1">
+              <div class="glass p-3 rounded-xl no-hover">
+                <h4 class="text-base font-semibold text-primary mb-4 flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5.59L7.3 9.24a.75.75 0 00-1.1 1.02l3.25 3.5a.75.75 0 001.1 0l3.25-3.5a.75.75 0 10-1.1-1.02l-1.95 2.1V5z" clip-rule="evenodd" />
                   </svg>
                   Progression par niveau
                 </h4>
                 
-                <div class="mb-4">
-                  <div class="flex justify-between mb-2">
-                    <span class="text-sm font-semibold text-amber-400">Niveau 20</span>
-                    <span class="text-xs text-[var(--color-text-muted)]">Débutant</span>
-                  </div>
-                  
-                  <div class="glass bg-black/20 p-2 rounded-lg mb-1">
-                    {clazz.slug === 'cra' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Concentrez-vous sur les sorts <span class="text-white">Distance</span> et <span class="text-white">Dégâts critiques</span></p>
-                        <p class="text-xs">3 à l'arc élémentaire, 3 en flèche empoisonnée, 3 en flèche précise</p>
-                      </>
-                    )}
+                {/* Niveau 20 - Débutant */}
+                <div class="mb-6 relative">
+                  <div class="glass bg-gradient-to-b from-amber-900/30 to-black/40 p-3 pt-7 rounded-xl border border-amber-500/30 shadow-lg relative overflow-hidden card-niveau hover:border-amber-500/70 transition-all">
+                    {/* Cercle lumineux en arrière-plan */}
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-amber-500/5 blur-xl"></div>
                     
-                    {clazz.slug === 'iop' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Concentrez-vous sur les sorts <span class="text-white">Tête Brûlée</span> et <span class="text-white">Concentration</span></p>
-                        <p class="text-xs">3 en bond, 3 en colère de iop, 3 en charge</p>
-                      </>
-                    )}
+                    {/* En-tête avec niveau et difficulté */}
+                    <div class="flex flex-col items-center justify-center mb-4 relative z-10">
+                      <div class="text-2xl font-bold text-amber-400 mb-1 text-center">Niveau 20</div>
+                      <div class="px-3 py-1 bg-amber-900/50 text-amber-300 text-xs rounded-full shadow-sm inline-block">
+                        Débutant
+                      </div>
+                    </div>
                     
-                    {clazz.slug === 'eniripsa' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Balance entre <span class="text-white">Soins</span> et <span class="text-white">Dégâts</span></p>
-                        <p class="text-xs">3 en mot interdit, 3 en mot stimulant, 3 en mot revitalisant</p>
-                      </>
-                    )}
+                    {/* Contenu */}
+                    <div class="bg-black/30 p-3 rounded-lg mb-4 border-l-2 border-amber-500/50">
+                      {clazz.slug === 'cra' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Concentrez-vous sur les sorts <span class="text-white">Distance</span> et <span class="text-white">Dégâts critiques</span></p>
+                          <p class="text-xs">3 à l'arc élémentaire, 3 en flèche empoisonnée, 3 en flèche précise</p>
+                        </>
+                      )}
+                      
+                      {clazz.slug === 'iop' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Concentrez-vous sur les sorts <span class="text-white">Tête Brûlée</span> et <span class="text-white">Concentration</span></p>
+                          <p class="text-xs">3 en bond, 3 en colère de iop, 3 en charge</p>
+                        </>
+                      )}
+                      
+                      {clazz.slug === 'eniripsa' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Balance entre <span class="text-white">Soins</span> et <span class="text-white">Dégâts</span></p>
+                          <p class="text-xs">3 en mot interdit, 3 en mot stimulant, 3 en mot revitalisant</p>
+                        </>
+                      )}
+                      
+                      {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Débloquez vos sorts de base</p>
+                          <p class="text-xs">3 points dans chacun de vos 3 sorts principaux pour débuter</p>
+                        </>
+                      )}
+                    </div>
                     
-                    {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Débloquez vos sorts de base</p>
-                        <p class="text-xs">3 points dans chacun de vos 3 sorts principaux pour débuter</p>
-                      </>
-                    )}
-                  </div>
-                  
-                  <div class="text-xs text-primary mb-4 flex justify-end">
-                    <a href="https://www.zenithwakfu.com/builds/wakfu/debutant" target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:underline">
-                      <span>Plus de détails</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-                
-                <div class="mb-4">
-                  <div class="flex justify-between mb-2">
-                    <span class="text-sm font-semibold text-orange-400">Niveau 50</span>
-                    <span class="text-xs text-[var(--color-text-muted)]">Intermédiaire</span>
-                  </div>
-                  
-                  <div class="glass bg-black/20 p-2 rounded-lg mb-1">
-                    {clazz.slug === 'cra' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Développez vos <span class="text-white">Balises</span> et <span class="text-white">Contrôle</span></p>
-                        <p class="text-xs">Ajoutez 3 en balise de recall, 3 en flèche explosive, 3 points dans vos passifs</p>
-                      </>
-                    )}
-                    
-                    {clazz.slug === 'iop' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Renforcez vos <span class="text-white">Attaques de zone</span> et <span class="text-white">Sauts</span></p>
-                        <p class="text-xs">3 en intimidation, 3 en coup de pression, 3 en Uppercut</p>
-                      </>
-                    )}
-                    
-                    {clazz.slug === 'eniripsa' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Améliorez vos <span class="text-white">Buffs d'équipe</span></p>
-                        <p class="text-xs">3 en mot de jouvence, 3 en mot d'amitié, 3 en mot d'énergie</p>
-                      </>
-                    )}
-                    
-                    {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Développez votre spécialisation</p>
-                        <p class="text-xs">Augmentez 3 sorts complémentaires et commencez à investir dans vos sorts passifs</p>
-                      </>
-                    )}
+                    {/* Bouton centré */}
+                    <div class="flex justify-center">
+                      <a href="https://www.zenithwakfu.com/builds/wakfu/debutant" target="_blank" rel="noopener" class="text-xs px-4 py-1.5 bg-primary/20 text-primary rounded-full inline-flex items-center gap-1 shadow-sm border border-primary/30 transition-all duration-300 hover:border-primary hover:shadow-[0_0_5px_#66ccff,0_0_10px_#0088cc,0_0_15px_#0066ff] hover:bg-primary/10 hover:scale-105">
+                        <span>Builder Zenith</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
                 
-                <div class="mb-1">
-                  <div class="flex justify-between mb-2">
-                    <span class="text-sm font-semibold text-red-400">Niveau 80</span>
-                    <span class="text-xs text-[var(--color-text-muted)]">Avancé</span>
-                  </div>
-                  
-                  <div class="glass bg-black/20 p-2 rounded-lg mb-1">
-                    {clazz.slug === 'cra' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Finalisez votre <span class="text-white">Spécialisation</span></p>
-                        <p class="text-xs">Maxez vos passifs uniques, 3 en flèche brûlante, 3 en flèche d'immobilisation</p>
-                      </>
-                    )}
+                {/* Niveau 50 - Intermédiaire */}
+                <div class="mb-6 relative">
+                  <div class="glass bg-gradient-to-b from-orange-900/30 to-black/40 p-3 pt-7 rounded-xl border border-orange-500/30 shadow-lg relative overflow-hidden card-niveau hover:border-orange-500/70 transition-all">
+                    {/* Cercle lumineux en arrière-plan */}
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-orange-500/5 blur-xl"></div>
                     
-                    {clazz.slug === 'iop' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Affinez vos <span class="text-white">Compétences offensives</span></p>
-                        <p class="text-xs">Maxez virulence et puissance, 3 en défi, 3 en dévouement</p>
-                      </>
-                    )}
+                    {/* En-tête avec niveau et difficulté */}
+                    <div class="flex flex-col items-center justify-center mb-4 relative z-10">
+                      <div class="text-2xl font-bold text-orange-400 mb-1 text-center">Niveau 50</div>
+                      <div class="px-3 py-1 bg-orange-900/50 text-orange-300 text-xs rounded-full shadow-sm inline-block">
+                        Intermédiaire
+                      </div>
+                    </div>
                     
-                    {clazz.slug === 'eniripsa' && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Maîtrisez la <span class="text-white">Gestion de ressources</span></p>
-                        <p class="text-xs">3 en ralentissement, maxez vos sorts de soins principaux et vos passifs</p>
-                      </>
-                    )}
+                    {/* Contenu */}
+                    <div class="bg-black/30 p-3 rounded-lg mb-4 border-l-2 border-orange-500/50">
+                      {clazz.slug === 'cra' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Développez vos <span class="text-white">Balises</span> et <span class="text-white">Contrôle</span></p>
+                          <p class="text-xs">Ajoutez 3 en balise de recall, 3 en flèche explosive, 3 points dans vos passifs</p>
+                        </>
+                      )}
+                      
+                      {clazz.slug === 'iop' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Renforcez vos <span class="text-white">Attaques de zone</span> et <span class="text-white">Sauts</span></p>
+                          <p class="text-xs">3 en intimidation, 3 en coup de pression, 3 en Uppercut</p>
+                        </>
+                      )}
+                      
+                      {clazz.slug === 'eniripsa' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Améliorez vos <span class="text-white">Buffs d'équipe</span></p>
+                          <p class="text-xs">3 en mot de jouvence, 3 en mot d'amitié, 3 en mot d'énergie</p>
+                        </>
+                      )}
+                      
+                      {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Développez votre spécialisation</p>
+                          <p class="text-xs">Augmentez 3 sorts complémentaires et commencez à investir dans vos sorts passifs</p>
+                        </>
+                      )}
+                    </div>
                     
-                    {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
-                      <>
-                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Perfectionnez votre personnage</p>
-                        <p class="text-xs">Finalisez vos sorts principaux et maximisez vos passifs clés</p>
-                      </>
-                    )}
+                    {/* Bouton centré */}
+                    <div class="flex justify-center">
+                      <a href="https://www.zenithwakfu.com/builds/wakfu/intermediaire" target="_blank" rel="noopener" class="text-xs px-4 py-1.5 bg-primary/20 text-primary rounded-full inline-flex items-center gap-1 shadow-sm border border-primary/30 transition-all duration-300 hover:border-primary hover:shadow-[0_0_5px_#66ccff,0_0_10px_#0088cc,0_0_15px_#0066ff] hover:bg-primary/10 hover:scale-105">
+                        <span>Builder Zenith</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
                 
-                <p class="text-xs text-center text-[var(--color-text-muted)] mt-3 italic">
+                {/* Niveau 80 - Avancé */}
+                <div class="mb-4 relative">
+                  <div class="glass bg-gradient-to-b from-red-900/30 to-black/40 p-3 pt-7 rounded-xl border border-red-500/30 shadow-lg relative overflow-hidden card-niveau hover:border-red-500/70 transition-all">
+                    {/* Cercle lumineux en arrière-plan */}
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-red-500/5 blur-xl"></div>
+                    
+                    {/* En-tête avec niveau et difficulté */}
+                    <div class="flex flex-col items-center justify-center mb-4 relative z-10">
+                      <div class="text-2xl font-bold text-red-400 mb-1 text-center">Niveau 80</div>
+                      <div class="px-3 py-1 bg-red-900/50 text-red-300 text-xs rounded-full shadow-sm inline-block">
+                        Avancé
+                      </div>
+                    </div>
+                    
+                    {/* Contenu */}
+                    <div class="bg-black/30 p-3 rounded-lg mb-4 border-l-2 border-red-500/50">
+                      {clazz.slug === 'cra' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Finalisez votre <span class="text-white">Spécialisation</span></p>
+                          <p class="text-xs">Maxez vos passifs uniques, 3 en flèche brûlante, 3 en flèche d'immobilisation</p>
+                        </>
+                      )}
+                      
+                      {clazz.slug === 'iop' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Affinez vos <span class="text-white">Compétences offensives</span></p>
+                          <p class="text-xs">Maxez virulence et puissance, 3 en défi, 3 en dévouement</p>
+                        </>
+                      )}
+                      
+                      {clazz.slug === 'eniripsa' && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Maîtrisez la <span class="text-white">Gestion de ressources</span></p>
+                          <p class="text-xs">3 en ralentissement, maxez vos sorts de soins principaux et vos passifs</p>
+                        </>
+                      )}
+                      
+                      {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
+                        <>
+                          <p class="text-xs text-[var(--color-text-muted)] mb-1">Perfectionnez votre personnage</p>
+                          <p class="text-xs">Finalisez vos sorts principaux et maximisez vos passifs clés</p>
+                        </>
+                      )}
+                    </div>
+                    
+                    {/* Bouton centré */}
+                    <div class="flex justify-center">
+                      <a href="https://www.zenithwakfu.com/builds/wakfu/avance" target="_blank" rel="noopener" class="text-xs px-4 py-1.5 bg-primary/20 text-primary rounded-full inline-flex items-center gap-1 shadow-sm border border-primary/30 transition-all duration-300 hover:border-primary hover:shadow-[0_0_5px_#66ccff,0_0_10px_#0088cc,0_0_15px_#0066ff] hover:bg-primary/10 hover:scale-105">
+                        <span>Builder Zenith</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                
+                <p class="text-xs text-center text-[var(--color-text-muted)] mt-4 italic bg-black/20 p-2 rounded-lg">
                   Après le niveau 80, vous aurez suffisamment d'expérience pour développer votre propre style de jeu.
                 </p>
               </div>
@@ -466,7 +517,7 @@ const roleColors = {
                 <h3 class="text-xl font-semibold mb-2 text-primary">Builds</h3>
                 <div class="space-y-3">
                 {clazz.data.builds?.map(build => (
-                  <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
+                  <div class="glass p-3 rounded-xl no-hover">
                     <div>
                       <div class="flex items-center justify-between mb-1">
                         <div class="flex items-center gap-2">
@@ -501,6 +552,16 @@ const roleColors = {
 </MainLayout>
 
 <style>
+  /* Effet hover personnalisé pour les cartes de progression */
+  .card-niveau {
+    transition: all 0.3s ease;
+  }
+  
+  .card-niveau:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 165, 0, 0.1);
+  }
+  
   .animate-fade-up {
     opacity: 0;
     transform: translateY(20px);
