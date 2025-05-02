@@ -221,63 +221,182 @@ const roleColors = {
                     <>
                       <p>Les Crâs sont des archers redoutables qui excellent dans les attaques à distance. Ils peuvent infliger de lourds dégâts de zone ou sur une cible unique, tout en gardant une bonne mobilité. Leurs balises permettent de contrôler le champ de bataille en réduisant la mobilité des adversaires.</p>
                       
-                      <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
-                        <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: Furie du Cra</h5>
-                        <p class="text-xs text-[var(--color-text-muted)]">Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois.</p>
-                      </div>
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
                     </>
                   )}
                   
                   {clazz.slug === 'iop' && (
-                    <p>Les Iops sont des combattants puissants spécialisés dans les dégâts de mêlée. Leur force réside dans leur capacité à infliger des dégâts massifs aux ennemis proches. Ils compensent leur manque de portée par une grande mobilité et des sorts de saut.</p>
+                    <>
+                      <p>Les Iops sont des combattants puissants spécialisés dans les dégâts de mêlée. Leur force réside dans leur capacité à infliger des dégâts massifs aux ennemis proches. Ils compensent leur manque de portée par une grande mobilité et des sorts de saut.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'eniripsa' && (
-                    <p>Les Eniripsas sont les soigneurs principaux de Wakfu. Ils peuvent se spécialiser dans les soins, les buffs d'équipe ou les attaques magiques. Leur polyvalence leur permet de s'adapter à diverses situations de combat, mais ils brillent particulièrement en groupe.</p>
+                    <>
+                      <p>Les Eniripsas sont les soigneurs principaux de Wakfu. Ils peuvent se spécialiser dans les soins, les buffs d'équipe ou les attaques magiques. Leur polyvalence leur permet de s'adapter à diverses situations de combat, mais ils brillent particulièrement en groupe.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'sacrieur' && (
-                    <p>Les Sacrieurs sont des tanks agressifs qui utilisent leurs propres points de vie comme ressource. Ils peuvent absorber d'énormes quantités de dégâts et les convertir en puissance offensive, ce qui en fait d'excellents combattants de première ligne.</p>
+                    <>
+                      <p>Les Sacrieurs sont des tanks agressifs qui utilisent leurs propres points de vie comme ressource. Ils peuvent absorber d'énormes quantités de dégâts et les convertir en puissance offensive, ce qui en fait d'excellents combattants de première ligne.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'osamodas' && (
-                    <p>Les Osamodas sont des invocateurs qui combattent aux côtés de créatures qu'ils contrôlent. Leur force réside dans la diversité de leurs invocations et leur capacité à contrôler plusieurs unités simultanément, offrant une grande flexibilité tactique.</p>
+                    <>
+                      <p>Les Osamodas sont des invocateurs qui combattent aux côtés de créatures qu'ils contrôlent. Leur force réside dans la diversité de leurs invocations et leur capacité à contrôler plusieurs unités simultanément, offrant une grande flexibilité tactique.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'feca' && (
-                    <p>Les Fécas sont spécialisés dans la protection et les armures. Ils peuvent créer des glyphes sur le terrain et offrir divers boucliers à leurs alliés, faisant d'eux d'excellents protecteurs d'équipe et contrôleurs de zone.</p>
+                    <>
+                      <p>Les Fécas sont spécialisés dans la protection et les armures. Ils peuvent créer des glyphes sur le terrain et offrir divers boucliers à leurs alliés, faisant d'eux d'excellents protecteurs d'équipe et contrôleurs de zone.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'xelor' && (
-                    <p>Les Xelors manipulent le temps et l'espace. Ils peuvent ralentir leurs ennemis, se téléporter sur le champ de bataille, et infligent des dégâts qui augmentent avec le temps. Leur gameplay complexe offre de nombreuses possibilités tactiques.</p>
+                    <>
+                      <p>Les Xelors manipulent le temps et l'espace. Ils peuvent ralentir leurs ennemis, se téléporter sur le champ de bataille, et infligent des dégâts qui augmentent avec le temps. Leur gameplay complexe offre de nombreuses possibilités tactiques.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'ecaflip' && (
-                    <p>Les Ecaflips sont des joueurs qui misent sur la chance. Leurs sorts peuvent avoir des effets aléatoires extrêmement puissants. Ils peuvent jouer à distance ou en mêlée, et excellent dans les situations où la chance peut inverser le cours du combat.</p>
+                    <>
+                      <p>Les Ecaflips sont des joueurs qui misent sur la chance. Leurs sorts peuvent avoir des effets aléatoires extrêmement puissants. Ils peuvent jouer à distance ou en mêlée, et excellent dans les situations où la chance peut inverser le cours du combat.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'pandawa' && (
-                    <p>Les Pandawas sont polyvalents, capables de soulever et lancer des alliés ou des ennemis. Ils peuvent également consommer de l'alcool pour renforcer leurs capacités, passant de la mêlée aux attaques à distance selon les besoins.</p>
+                    <>
+                      <p>Les Pandawas sont polyvalents, capables de soulever et lancer des alliés ou des ennemis. Ils peuvent également consommer de l'alcool pour renforcer leurs capacités, passant de la mêlée aux attaques à distance selon les besoins.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'sram' && (
-                    <p>Les Srams sont des assassins furtifs utilisant pièges et poisons. Ils peuvent devenir invisibles pour se repositionner et infliger d'importants dégâts critiques. Cette classe excelle dans la surprise et l'élimination rapide de cibles isolées.</p>
+                    <>
+                      <p>Les Srams sont des assassins furtifs utilisant pièges et poisons. Ils peuvent devenir invisibles pour se repositionner et infliger d'importants dégâts critiques. Cette classe excelle dans la surprise et l'élimination rapide de cibles isolées.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'sadida' && (
-                    <p>Les Sadidas utilisent des poupées et contrôlent la nature. Ils peuvent planter des ronces, invoquer des poupées et manipuler le terrain. Cette classe excelle dans le contrôle de zone et l'usure avec ses dégâts sur la durée.</p>
+                    <>
+                      <p>Les Sadidas utilisent des poupées et contrôlent la nature. Ils peuvent planter des ronces, invoquer des poupées et manipuler le terrain. Cette classe excelle dans le contrôle de zone et l'usure avec ses dégâts sur la durée.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'enutrof' && (
-                    <p>Les Enutrofs sont experts en fouille et collection de butins. Ils manipulent la terre et peuvent immobiliser leurs ennemis tout en générant des ressources supplémentaires. Leur style de jeu mêle contrôle et support.</p>
+                    <>
+                      <p>Les Enutrofs sont experts en fouille et collection de butins. Ils manipulent la terre et peuvent immobiliser leurs ennemis tout en générant des ressources supplémentaires. Leur style de jeu mêle contrôle et support.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {clazz.slug === 'zobal' && (
-                    <p>Les Zobals sont des maîtres du déguisement qui changent de masques pour alterner entre différents rôles. Chaque masque offre des aptitudes uniques, leur permettant de s'adapter rapidement à diverses situations de combat.</p>
+                    <>
+                      <p>Les Zobals sont des maîtres du déguisement qui changent de masques pour alterner entre différents rôles. Chaque masque offre des aptitudes uniques, leur permettant de s'adapter rapidement à diverses situations de combat.</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                   
                   {!['cra', 'iop', 'eniripsa', 'sacrieur', 'osamodas', 'feca', 'xelor', 'ecaflip', 'pandawa', 'sram', 'sadida', 'enutrof', 'zobal'].includes(clazz.slug) && (
-                    <p>{clazz.data.description || clazz.data.specialty}</p>
+                    <>
+                      <p>{clazz.data.description || clazz.data.specialty}</p>
+                      
+                      {clazz.data.uniquePassive && (
+                        <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                          <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: {clazz.data.uniquePassive.name}</h5>
+                          <p class="text-xs text-[var(--color-text-muted)]">{clazz.data.uniquePassive.description}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
                 

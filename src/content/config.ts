@@ -17,10 +17,10 @@ const classesCollection = defineCollection({
     description: z.string().optional(),
     detailedDescription: z.string().optional(),
     role: z.string(),
-    difficulty: z.number().min(1).max(5),
-    combatStyle: z.string(),
-    strengths: z.string(),
-    weaknesses: z.string(),
+    difficulty: z.number().min(1).max(5).optional(),
+    combatStyle: z.string().optional(),
+    strengths: z.string().optional(),
+    weaknesses: z.string().optional(),
     // Passif unique de la classe
     uniquePassive: z.object({
       name: z.string(),
@@ -42,7 +42,7 @@ const classesCollection = defineCollection({
         level: z.number(),
         image: imageSchema.optional(),
       })
-    ),
+    ).optional(),
     // Sorts passifs
     passiveSpells: z.array(
       z.object({
@@ -50,7 +50,7 @@ const classesCollection = defineCollection({
         description: z.string(),
         image: imageSchema.optional(),
       })
-    ),
+    ).optional(),
     // Builds recommandés
     builds: z.array(
       z.object({
