@@ -203,101 +203,85 @@ const roleColors = {
           {/* Informations générales */}
           <div class="space-y-6">
 
-            {/* Approches de jeu */}
+            {/* Gameplay de base */}
             <div class="space-y-4">
               <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
                 <h4 class="text-base font-semibold text-cyan-400 mb-3 flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
                     <path d="M10 3.75a2 2 0 10-4 0 2 2 0 004 0zM17.25 4.5a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM5 3.75a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 01.75.75zM4.25 17a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM17.25 17a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM9 10a.75.75 0 01-.75.75h-5.5a.75.75 0 010-1.5h5.5A.75.75 0 019 10zM17.25 10.75a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM14 10a2 2 0 10-4 0 2 2 0 004 0zM10 16.25a2 2 0 10-4 0 2 2 0 004 0z" />
                   </svg>
-                  Approches de jeu
+                  Gameplay de base
                 </h4>
                 
-                {/* Rôle principal et style */}
-                <div class="flex items-center gap-2 mb-2">
-                  <span class={`text-xs px-2 py-1 rounded-full ${(
-                    clazz.data.role === 'DPT distance' ? 'bg-orange-600/30 text-orange-300' :
-                    clazz.data.role === 'DPT mêlée' ? 'bg-yellow-600/30 text-yellow-300' :
-                    clazz.data.role === 'Tank' ? 'bg-blue-600/30 text-blue-300' :
-                    clazz.data.role === 'Support' ? 'bg-green-600/30 text-green-300' :
-                    clazz.data.role === 'Healer, Support' ? 'bg-emerald-600/30 text-emerald-300' :
-                    'bg-gray-600/30 text-gray-300'
-                  )}`}>{clazz.data.role}</span>
-                  <span class="text-xs px-2 py-1 rounded-full bg-indigo-600/30 text-indigo-300">{clazz.data.combatStyle}</span>
-                </div>
+
                 
-                <p class="text-sm text-[var(--color-text-muted)] mb-3">
-                  {clazz.data.specialty} | <span class="text-xs">Difficulté: {clazz.data.difficulty}/5</span>
-                </p>
-                
-                {/* Builds recommandés adaptés à chaque classe */}
-                <h5 class="text-sm font-semibold text-white mb-2">Builds recommandés</h5>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                  {/* Build par défaut pour toutes les classes */}
-                  <div class="border-l-2 border-primary pl-2">
-                    <div class="text-xs font-semibold text-primary">{clazz.data.name.charAt(0).toUpperCase() + clazz.data.name.slice(1)} {clazz.data.combatStyle.toLowerCase()}</div>
-                    <p class="text-xs text-[var(--color-text-muted)]">Build classique équilibré pour PvE</p>
-                  </div>
-                  
-                  {/* Builds spécifiques par classe */}
+                {/* Résumé du gameplay de base par classe */}
+                <div class="text-sm text-[var(--color-text-muted)] mb-4">
                   {clazz.slug === 'cra' && (
-                    <div class="border-l-2 border-amber-500 pl-2">
-                      <div class="text-xs font-semibold text-amber-400">Cra Critique</div>
-                      <p class="text-xs text-[var(--color-text-muted)]">Maximise les dégâts critiques et la précision</p>
-                    </div>
-                  )}
-                  
-                  {clazz.slug === 'eniripsa' && (
-                    <div class="border-l-2 border-green-500 pl-2">
-                      <div class="text-xs font-semibold text-green-400">Eniripsa Soigneur</div>
-                      <p class="text-xs text-[var(--color-text-muted)]">Maximise les soins et buffs d'équipe</p>
-                    </div>
+                    <>
+                      <p>Les Crâs sont des archers redoutables qui excellent dans les attaques à distance. Ils peuvent infliger de lourds dégâts de zone ou sur une cible unique, tout en gardant une bonne mobilité. Leurs balises permettent de contrôler le champ de bataille en réduisant la mobilité des adversaires.</p>
+                      
+                      <div class="mt-2 p-2 border border-amber-500/30 rounded-lg bg-amber-950/20">
+                        <h5 class="text-xs font-semibold text-amber-400 mb-1">Passif unique: Furie du Cra</h5>
+                        <p class="text-xs text-[var(--color-text-muted)]">Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois.</p>
+                      </div>
+                    </>
                   )}
                   
                   {clazz.slug === 'iop' && (
-                    <div class="border-l-2 border-red-500 pl-2">
-                      <div class="text-xs font-semibold text-red-400">Iop Berserk</div>
-                      <p class="text-xs text-[var(--color-text-muted)]">DPS mêlée pur avec sacrifice en PV</p>
-                    </div>
+                    <p>Les Iops sont des combattants puissants spécialisés dans les dégâts de mêlée. Leur force réside dans leur capacité à infliger des dégâts massifs aux ennemis proches. Ils compensent leur manque de portée par une grande mobilité et des sorts de saut.</p>
+                  )}
+                  
+                  {clazz.slug === 'eniripsa' && (
+                    <p>Les Eniripsas sont les soigneurs principaux de Wakfu. Ils peuvent se spécialiser dans les soins, les buffs d'équipe ou les attaques magiques. Leur polyvalence leur permet de s'adapter à diverses situations de combat, mais ils brillent particulièrement en groupe.</p>
+                  )}
+                  
+                  {clazz.slug === 'sacrieur' && (
+                    <p>Les Sacrieurs sont des tanks agressifs qui utilisent leurs propres points de vie comme ressource. Ils peuvent absorber d'énormes quantités de dégâts et les convertir en puissance offensive, ce qui en fait d'excellents combattants de première ligne.</p>
+                  )}
+                  
+                  {clazz.slug === 'osamodas' && (
+                    <p>Les Osamodas sont des invocateurs qui combattent aux côtés de créatures qu'ils contrôlent. Leur force réside dans la diversité de leurs invocations et leur capacité à contrôler plusieurs unités simultanément, offrant une grande flexibilité tactique.</p>
                   )}
                   
                   {clazz.slug === 'feca' && (
-                    <div class="border-l-2 border-blue-500 pl-2">
-                      <div class="text-xs font-semibold text-blue-400">Feca Protecteur</div>
-                      <p class="text-xs text-[var(--color-text-muted)]">Tank défensif avec armures et glyphes</p>
-                    </div>
+                    <p>Les Fécas sont spécialisés dans la protection et les armures. Ils peuvent créer des glyphes sur le terrain et offrir divers boucliers à leurs alliés, faisant d'eux d'excellents protecteurs d'équipe et contrôleurs de zone.</p>
+                  )}
+                  
+                  {clazz.slug === 'xelor' && (
+                    <p>Les Xelors manipulent le temps et l'espace. Ils peuvent ralentir leurs ennemis, se téléporter sur le champ de bataille, et infligent des dégâts qui augmentent avec le temps. Leur gameplay complexe offre de nombreuses possibilités tactiques.</p>
                   )}
                   
                   {clazz.slug === 'ecaflip' && (
-                    <div class="border-l-2 border-purple-500 pl-2">
-                      <div class="text-xs font-semibold text-purple-400">Ecaflip Chance</div>
-                      <p class="text-xs text-[var(--color-text-muted)]">Build basé sur les effets aléatoires</p>
-                    </div>
+                    <p>Les Ecaflips sont des joueurs qui misent sur la chance. Leurs sorts peuvent avoir des effets aléatoires extrêmement puissants. Ils peuvent jouer à distance ou en mêlée, et excellent dans les situations où la chance peut inverser le cours du combat.</p>
                   )}
                   
                   {clazz.slug === 'pandawa' && (
-                    <div class="border-l-2 border-amber-500 pl-2">
-                      <div class="text-xs font-semibold text-amber-400">Pandawa Barrique</div>
-                      <p class="text-xs text-[var(--color-text-muted)]">Spécialisation dans le positionnement</p>
-                    </div>
+                    <p>Les Pandawas sont polyvalents, capables de soulever et lancer des alliés ou des ennemis. Ils peuvent également consommer de l'alcool pour renforcer leurs capacités, passant de la mêlée aux attaques à distance selon les besoins.</p>
                   )}
                   
-                  {/* Build PvP par défaut */}
-                  <div class="border-l-2 border-purple-500 pl-2">
-                    <div class="text-xs font-semibold text-purple-400">{clazz.data.name.charAt(0).toUpperCase() + clazz.data.name.slice(1)} PvP</div>
-                    <p class="text-xs text-[var(--color-text-muted)]">Optimisé pour le combat contre d'autres joueurs</p>
-                  </div>
+                  {clazz.slug === 'sram' && (
+                    <p>Les Srams sont des assassins furtifs utilisant pièges et poisons. Ils peuvent devenir invisibles pour se repositionner et infliger d'importants dégâts critiques. Cette classe excelle dans la surprise et l'élimination rapide de cibles isolées.</p>
+                  )}
+                  
+                  {clazz.slug === 'sadida' && (
+                    <p>Les Sadidas utilisent des poupées et contrôlent la nature. Ils peuvent planter des ronces, invoquer des poupées et manipuler le terrain. Cette classe excelle dans le contrôle de zone et l'usure avec ses dégâts sur la durée.</p>
+                  )}
+                  
+                  {clazz.slug === 'enutrof' && (
+                    <p>Les Enutrofs sont experts en fouille et collection de butins. Ils manipulent la terre et peuvent immobiliser leurs ennemis tout en générant des ressources supplémentaires. Leur style de jeu mêle contrôle et support.</p>
+                  )}
+                  
+                  {clazz.slug === 'zobal' && (
+                    <p>Les Zobals sont des maîtres du déguisement qui changent de masques pour alterner entre différents rôles. Chaque masque offre des aptitudes uniques, leur permettant de s'adapter rapidement à diverses situations de combat.</p>
+                  )}
+                  
+                  {!['cra', 'iop', 'eniripsa', 'sacrieur', 'osamodas', 'feca', 'xelor', 'ecaflip', 'pandawa', 'sram', 'sadida', 'enutrof', 'zobal'].includes(clazz.slug) && (
+                    <p>{clazz.data.description || clazz.data.specialty}</p>
+                  )}
                 </div>
                 
-                {/* Lien vers Zenith Wakfu */}
-                <div class="text-xs text-center mt-2">
-                  <a href={`https://www.zenithwakfu.com/builds/wakfu/${clazz.slug}`} target="_blank" rel="noopener" class="text-primary hover:underline inline-flex items-center gap-1">
-                    <span>Voir plus de builds sur Zenith Wakfu</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                    </svg>
-                  </a>
-                </div>
+
               </div>
               
               {/* Mécaniques clés */}
@@ -474,19 +458,7 @@ const roleColors = {
               </div>
             </div>
             
-            {/* Passif unique */}
-            <div>
-              <h3 class="text-xl font-semibold mb-2 text-primary">Passif Unique</h3>
-              <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
-                <div class="flex items-center gap-2 mb-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-yellow-400">
-                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                  </svg>
-                  <h4 class="text-base font-semibold text-yellow-300">{clazz.data.uniquePassive?.name || 'Passif unique'}</h4>
-                </div>
-                <p class="text-sm text-[var(--color-text-muted)]">{clazz.data.uniquePassive?.description || 'Aucune description disponible'}</p>
-              </div>
-            </div>
+
 
             {/* Builds recommandés */}
             {clazz.data.builds && clazz.data.builds.length > 0 && (
