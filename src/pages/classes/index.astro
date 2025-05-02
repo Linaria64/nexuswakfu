@@ -4,10 +4,47 @@ import { getCollection } from 'astro:content';
 import Modal from '../../components/ui/Modal.astro';
 import { Image } from 'astro:assets';
 
-// Importer les images d'aptitude pour éviter les requêtes multiples
+// Importer les images d'aptitude par défaut pour éviter les requêtes multiples
 import dpsIcon from '../../assets/images/ability/dps.png';
 import tankIcon from '../../assets/images/ability/tank.png';
 import controleIcon from '../../assets/images/ability/controle.png';
+import healthIcon from '../../assets/images/ability/health.png';
+import placementIcon from '../../assets/images/ability/placement.png';
+import specialiteIcon from '../../assets/images/ability/specialite.png';
+import entraveIcon from '../../assets/images/ability/entrave.png';
+import invocationIcon from '../../assets/images/ability/invocation.png';
+
+// Fonction pour récupérer l'icône d'aptitude en fonction du type
+const getAbilityIcon = (type: string) => {
+  switch (type.toLowerCase()) {
+    case 'dps': return dpsIcon;
+    case 'tank': return tankIcon;
+    case 'controle': return controleIcon;
+    case 'soutien': return controleIcon; // Alias pour controle
+    case 'health': return healthIcon;
+    case 'placement': return placementIcon;
+    case 'specialite': return specialiteIcon;
+    case 'entrave': return entraveIcon;
+    case 'invocation': return invocationIcon;
+    default: return dpsIcon;
+  }
+};
+
+// Fonction pour récupérer la couleur de fond en fonction du type
+const getAbilityBgColor = (type: string) => {
+  switch (type.toLowerCase()) {
+    case 'dps': return 'bg-orange-500/20 hover:bg-orange-500/30';
+    case 'tank': return 'bg-blue-500/20 hover:bg-blue-500/30';
+    case 'controle': return 'bg-green-500/20 hover:bg-green-500/30';
+    case 'soutien': return 'bg-green-500/20 hover:bg-green-500/30'; // Alias pour controle
+    case 'health': return 'bg-red-500/20 hover:bg-red-500/30';
+    case 'placement': return 'bg-purple-500/20 hover:bg-purple-500/30';
+    case 'specialite': return 'bg-amber-500/20 hover:bg-amber-500/30';
+    case 'entrave': return 'bg-indigo-500/20 hover:bg-indigo-500/30';
+    case 'invocation': return 'bg-teal-500/20 hover:bg-teal-500/30';
+    default: return 'bg-gray-500/20 hover:bg-gray-500/30';
+  }
+};
 
 // Récupérer les classes depuis la collection
 const classes = (await getCollection('classes')).sort((a, b) => a.data.name.localeCompare(b.data.name));
@@ -67,34 +104,62 @@ const roleColors = {
               
               {/* Étiquettes */}
               <div class="flex flex-col items-center gap-4 mb-6">
-                <div class="flex gap-3 justify-center">
-                  <Image 
-                    src={dpsIcon} 
-                    alt="DPS" 
-                    width={36}
-                    height={36}
-                    format="webp"
-                    loading="lazy"
-                    class="w-9 h-9 rounded-full border-2 border-[var(--color-border-muted)] hover:scale-110 transition-transform" 
-                  />
-                  <Image 
-                    src={tankIcon} 
-                    alt="Tank" 
-                    width={36}
-                    height={36}
-                    format="webp"
-                    loading="lazy"
-                    class="w-9 h-9 rounded-full border-2 border-[var(--color-border-muted)] hover:scale-110 transition-transform" 
-                  />
-                  <Image 
-                    src={controleIcon} 
-                    alt="Contrôle" 
-                    width={36}
-                    height={36}
-                    format="webp"
-                    loading="lazy"
-                    class="w-9 h-9 rounded-full border-2 border-[var(--color-border-muted)] hover:scale-110 transition-transform" 
-                  />
+                <div class="flex gap-4 justify-center">
+                  {clazz.data.abilities ? (
+                    // Utiliser les aptitudes spécifiques définies dans le frontmatter de la classe
+                    <>
+                      {clazz.data.abilities.map(ability => (
+                        <div class={`ability-icon-wrapper ${getAbilityBgColor(ability.type)}`}>
+                          <Image 
+                            src={ability.image.src} 
+                            alt={ability.name} 
+                            width={32}
+                            height={32}
+                            format="webp"
+                            loading="lazy"
+                            class="ability-icon" 
+                          />
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    // Utiliser les aptitudes par défaut
+                    <>
+                      <div class="ability-icon-wrapper bg-orange-500/20 hover:bg-orange-500/30">
+                        <Image 
+                          src={dpsIcon} 
+                          alt="DPS" 
+                          width={32}
+                          height={32}
+                          format="webp"
+                          loading="lazy"
+                          class="ability-icon" 
+                        />
+                      </div>
+                      <div class="ability-icon-wrapper bg-blue-500/20 hover:bg-blue-500/30">
+                        <Image 
+                          src={tankIcon} 
+                          alt="Tank" 
+                          width={32}
+                          height={32}
+                          format="webp"
+                          loading="lazy"
+                          class="ability-icon" 
+                        />
+                      </div>
+                      <div class="ability-icon-wrapper bg-green-500/20 hover:bg-green-500/30">
+                        <Image 
+                          src={controleIcon} 
+                          alt="Contrôle" 
+                          width={32}
+                          height={32}
+                          format="webp"
+                          loading="lazy"
+                          class="ability-icon" 
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div class="text-xs text-primary">{clazz.data.specialty}</div>
               </div>
@@ -147,34 +212,62 @@ const roleColors = {
                 <div>
                   <h2 class="text-2xl font-bold text-white">{clazz.data.name}</h2>
                   <div class="mt-4 flex flex-col items-center gap-3">
-                    <div class="flex gap-3 justify-center">
-                      <Image 
-                        src={dpsIcon} 
-                        alt="DPS" 
-                        width={40}
-                        height={40}
-                        format="webp"
-                        loading="lazy"
-                        class="w-10 h-10 rounded-full border-2 border-[var(--color-border-muted)] hover:scale-110 transition-transform" 
-                      />
-                      <Image 
-                        src={tankIcon} 
-                        alt="Tank" 
-                        width={40}
-                        height={40}
-                        format="webp"
-                        loading="lazy"
-                        class="w-10 h-10 rounded-full border-2 border-[var(--color-border-muted)] hover:scale-110 transition-transform" 
-                      />
-                      <Image 
-                        src={controleIcon} 
-                        alt="Contrôle" 
-                        width={40}
-                        height={40}
-                        format="webp"
-                        loading="lazy"
-                        class="w-10 h-10 rounded-full border-2 border-[var(--color-border-muted)] hover:scale-110 transition-transform" 
-                      />
+                    <div class="flex gap-4 justify-center">
+                      {clazz.data.abilities ? (
+                        // Utiliser les aptitudes spécifiques définies dans le frontmatter de la classe
+                        <>
+                          {clazz.data.abilities.map(ability => (
+                            <div class={`ability-icon-wrapper ${getAbilityBgColor(ability.type)}`}>
+                              <Image 
+                                src={ability.image.src} 
+                                alt={ability.name} 
+                                width={36}
+                                height={36}
+                                format="webp"
+                                loading="lazy"
+                                class="ability-icon" 
+                              />
+                            </div>
+                          ))}
+                        </>
+                      ) : (
+                        // Utiliser les aptitudes par défaut
+                        <>
+                          <div class="ability-icon-wrapper bg-orange-500/20 hover:bg-orange-500/30">
+                            <Image 
+                              src={dpsIcon} 
+                              alt="DPS" 
+                              width={36}
+                              height={36}
+                              format="webp"
+                              loading="lazy"
+                              class="ability-icon" 
+                            />
+                          </div>
+                          <div class="ability-icon-wrapper bg-blue-500/20 hover:bg-blue-500/30">
+                            <Image 
+                              src={tankIcon} 
+                              alt="Tank" 
+                              width={36}
+                              height={36}
+                              format="webp"
+                              loading="lazy"
+                              class="ability-icon" 
+                            />
+                          </div>
+                          <div class="ability-icon-wrapper bg-green-500/20 hover:bg-green-500/30">
+                            <Image 
+                              src={controleIcon} 
+                              alt="Contrôle" 
+                              width={36}
+                              height={36}
+                              format="webp"
+                              loading="lazy"
+                              class="ability-icon" 
+                            />
+                          </div>
+                        </>
+                      )}
                     </div>
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs bg-gray-700 text-white border border-gray-600">{clazz.data.combatStyle}</span>
                   </div>
@@ -360,5 +453,35 @@ const roleColors = {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  .ability-icon-wrapper {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .ability-icon-wrapper:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .ability-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: 
+      drop-shadow(0 0 1px black) 
+      drop-shadow(0 0 1px black) 
+      drop-shadow(0 0 2px rgba(0, 0, 0, 0.8)) 
+      contrast(1.6) 
+      brightness(0.85) 
+      saturate(1.2);
   }
 </style>

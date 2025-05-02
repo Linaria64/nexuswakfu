@@ -26,6 +26,14 @@ const classesCollection = defineCollection({
       name: z.string(),
       description: z.string()
     }),
+    // Aptitudes spécifiques à la classe
+    abilities: z.array(
+      z.object({
+        type: z.string(),
+        name: z.string(),
+        image: imageSchema
+      })
+    ).optional(),
     // Sorts principaux de la classe
     mainSpells: z.array(
       z.object({
