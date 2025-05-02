@@ -203,33 +203,274 @@ const roleColors = {
           {/* Informations générales */}
           <div class="space-y-6">
 
-            {/* Forces et Faiblesses */}
+            {/* Approches de jeu */}
             <div class="space-y-4">
               <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
-                <h4 class="text-base font-semibold text-emerald-400 mb-1 flex items-center gap-1">
+                <h4 class="text-base font-semibold text-cyan-400 mb-3 flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    <path d="M10 3.75a2 2 0 10-4 0 2 2 0 004 0zM17.25 4.5a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM5 3.75a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 01.75.75zM4.25 17a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM17.25 17a.75.75 0 000-1.5h-5.5a.75.75 0 000 1.5h5.5zM9 10a.75.75 0 01-.75.75h-5.5a.75.75 0 010-1.5h5.5A.75.75 0 019 10zM17.25 10.75a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5h1.5zM14 10a2 2 0 10-4 0 2 2 0 004 0zM10 16.25a2 2 0 10-4 0 2 2 0 004 0z" />
                   </svg>
-                  Forces
+                  Approches de jeu
                 </h4>
-                <ul class="list-disc list-inside text-sm text-[var(--color-text-muted)]">
-                  {clazz.data.strengths?.split(', ').map(strength => (
-                    <li>{strength}</li>
-                  ))}
-                </ul>
+                
+                {/* Rôle principal et style */}
+                <div class="flex items-center gap-2 mb-2">
+                  <span class={`text-xs px-2 py-1 rounded-full ${(
+                    clazz.data.role === 'DPT distance' ? 'bg-orange-600/30 text-orange-300' :
+                    clazz.data.role === 'DPT mêlée' ? 'bg-yellow-600/30 text-yellow-300' :
+                    clazz.data.role === 'Tank' ? 'bg-blue-600/30 text-blue-300' :
+                    clazz.data.role === 'Support' ? 'bg-green-600/30 text-green-300' :
+                    clazz.data.role === 'Healer, Support' ? 'bg-emerald-600/30 text-emerald-300' :
+                    'bg-gray-600/30 text-gray-300'
+                  )}`}>{clazz.data.role}</span>
+                  <span class="text-xs px-2 py-1 rounded-full bg-indigo-600/30 text-indigo-300">{clazz.data.combatStyle}</span>
+                </div>
+                
+                <p class="text-sm text-[var(--color-text-muted)] mb-3">
+                  {clazz.data.specialty} | <span class="text-xs">Difficulté: {clazz.data.difficulty}/5</span>
+                </p>
+                
+                {/* Builds recommandés adaptés à chaque classe */}
+                <h5 class="text-sm font-semibold text-white mb-2">Builds recommandés</h5>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                  {/* Build par défaut pour toutes les classes */}
+                  <div class="border-l-2 border-primary pl-2">
+                    <div class="text-xs font-semibold text-primary">{clazz.data.name.charAt(0).toUpperCase() + clazz.data.name.slice(1)} {clazz.data.combatStyle.toLowerCase()}</div>
+                    <p class="text-xs text-[var(--color-text-muted)]">Build classique équilibré pour PvE</p>
+                  </div>
+                  
+                  {/* Builds spécifiques par classe */}
+                  {clazz.slug === 'cra' && (
+                    <div class="border-l-2 border-amber-500 pl-2">
+                      <div class="text-xs font-semibold text-amber-400">Cra Critique</div>
+                      <p class="text-xs text-[var(--color-text-muted)]">Maximise les dégâts critiques et la précision</p>
+                    </div>
+                  )}
+                  
+                  {clazz.slug === 'eniripsa' && (
+                    <div class="border-l-2 border-green-500 pl-2">
+                      <div class="text-xs font-semibold text-green-400">Eniripsa Soigneur</div>
+                      <p class="text-xs text-[var(--color-text-muted)]">Maximise les soins et buffs d'équipe</p>
+                    </div>
+                  )}
+                  
+                  {clazz.slug === 'iop' && (
+                    <div class="border-l-2 border-red-500 pl-2">
+                      <div class="text-xs font-semibold text-red-400">Iop Berserk</div>
+                      <p class="text-xs text-[var(--color-text-muted)]">DPS mêlée pur avec sacrifice en PV</p>
+                    </div>
+                  )}
+                  
+                  {clazz.slug === 'feca' && (
+                    <div class="border-l-2 border-blue-500 pl-2">
+                      <div class="text-xs font-semibold text-blue-400">Feca Protecteur</div>
+                      <p class="text-xs text-[var(--color-text-muted)]">Tank défensif avec armures et glyphes</p>
+                    </div>
+                  )}
+                  
+                  {clazz.slug === 'ecaflip' && (
+                    <div class="border-l-2 border-purple-500 pl-2">
+                      <div class="text-xs font-semibold text-purple-400">Ecaflip Chance</div>
+                      <p class="text-xs text-[var(--color-text-muted)]">Build basé sur les effets aléatoires</p>
+                    </div>
+                  )}
+                  
+                  {clazz.slug === 'pandawa' && (
+                    <div class="border-l-2 border-amber-500 pl-2">
+                      <div class="text-xs font-semibold text-amber-400">Pandawa Barrique</div>
+                      <p class="text-xs text-[var(--color-text-muted)]">Spécialisation dans le positionnement</p>
+                    </div>
+                  )}
+                  
+                  {/* Build PvP par défaut */}
+                  <div class="border-l-2 border-purple-500 pl-2">
+                    <div class="text-xs font-semibold text-purple-400">{clazz.data.name.charAt(0).toUpperCase() + clazz.data.name.slice(1)} PvP</div>
+                    <p class="text-xs text-[var(--color-text-muted)]">Optimisé pour le combat contre d'autres joueurs</p>
+                  </div>
+                </div>
+                
+                {/* Lien vers Zenith Wakfu */}
+                <div class="text-xs text-center mt-2">
+                  <a href={`https://www.zenithwakfu.com/builds/wakfu/${clazz.slug}`} target="_blank" rel="noopener" class="text-primary hover:underline inline-flex items-center gap-1">
+                    <span>Voir plus de builds sur Zenith Wakfu</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                    </svg>
+                  </a>
+                </div>
               </div>
+              
+              {/* Mécaniques clés */}
               <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
-                <h4 class="text-base font-semibold text-red-400 mb-1 flex items-center gap-1">
+                <h4 class="text-base font-semibold text-emerald-400 mb-3 flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                    <path d="M10.75 16.82A7.462 7.462 0 0115 15.5c.71 0 1.396.098 2.046.282A.75.75 0 0018 15.06v-11a.75.75 0 00-.546-.721A9.006 9.006 0 0015 3a8.963 8.963 0 00-4.25 1.065V16.82zM9.25 4.065A8.963 8.963 0 005 3c-.85 0-1.673.118-2.454.339A.75.75 0 002 4.06v11c0 .332.217.626.536.72A8.961 8.961 0 005 16.5c1.756 0 3.356-.565 4.25-1.48V4.065z" />
                   </svg>
-                  Faiblesses
+                  Mécaniques clés
                 </h4>
-                <ul class="list-disc list-inside text-sm text-[var(--color-text-muted)]">
-                  {clazz.data.weaknesses?.split(', ').map(weakness => (
-                    <li>{weakness}</li>
-                  ))}
-                </ul>
+                
+                {clazz.data.abilities ? (
+                  <div class="space-y-3">
+                    {clazz.data.abilities.map(ability => (
+                      <div class="flex gap-2">
+                        <div class={`ability-icon-wrapper ${getAbilityBgColor(ability.type)} tooltip-container flex-shrink-0`}>
+                          <Image 
+                            src={ability.image.src} 
+                            alt={ability.image.alt}
+                            width={30}
+                            height={30}
+                            class="ability-icon"
+                            loading="lazy"
+                            format="webp"
+                          />
+                        </div>
+                        <div class="text-xs text-[var(--color-text-muted)]">
+                          {ability.name}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p class="text-sm text-[var(--color-text-muted)]">
+                    {clazz.slug === 'cra' ? 
+                      "Les Crâs excellent dans le positionnement stratégique et le contrôle de zone. Utilisez leurs sorts à distance et balises pour contrôler le champ de bataille." :
+                      "Cette classe possède des mécaniques uniques qui lui permettent de se démarquer au combat. Explorez ses compétences pour maîtriser son gameplay."}
+                  </p>
+                )}
+              </div>
+              
+              {/* Progression par niveau */}
+              <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
+                <h4 class="text-base font-semibold text-primary mb-3 flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5.59L7.3 9.24a.75.75 0 00-1.1 1.02l3.25 3.5a.75.75 0 001.1 0l3.25-3.5a.75.75 0 10-1.1-1.02l-1.95 2.1V5z" clip-rule="evenodd" />
+                  </svg>
+                  Progression par niveau
+                </h4>
+                
+                <div class="mb-4">
+                  <div class="flex justify-between mb-2">
+                    <span class="text-sm font-semibold text-amber-400">Niveau 20</span>
+                    <span class="text-xs text-[var(--color-text-muted)]">Débutant</span>
+                  </div>
+                  
+                  <div class="glass bg-black/20 p-2 rounded-lg mb-1">
+                    {clazz.slug === 'cra' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Concentrez-vous sur les sorts <span class="text-white">Distance</span> et <span class="text-white">Dégâts critiques</span></p>
+                        <p class="text-xs">3 à l'arc élémentaire, 3 en flèche empoisonnée, 3 en flèche précise</p>
+                      </>
+                    )}
+                    
+                    {clazz.slug === 'iop' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Concentrez-vous sur les sorts <span class="text-white">Tête Brûlée</span> et <span class="text-white">Concentration</span></p>
+                        <p class="text-xs">3 en bond, 3 en colère de iop, 3 en charge</p>
+                      </>
+                    )}
+                    
+                    {clazz.slug === 'eniripsa' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Balance entre <span class="text-white">Soins</span> et <span class="text-white">Dégâts</span></p>
+                        <p class="text-xs">3 en mot interdit, 3 en mot stimulant, 3 en mot revitalisant</p>
+                      </>
+                    )}
+                    
+                    {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Débloquez vos sorts de base</p>
+                        <p class="text-xs">3 points dans chacun de vos 3 sorts principaux pour débuter</p>
+                      </>
+                    )}
+                  </div>
+                  
+                  <div class="text-xs text-primary mb-4 flex justify-end">
+                    <a href="https://www.zenithwakfu.com/builds/wakfu/debutant" target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:underline">
+                      <span>Plus de détails</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                
+                <div class="mb-4">
+                  <div class="flex justify-between mb-2">
+                    <span class="text-sm font-semibold text-orange-400">Niveau 50</span>
+                    <span class="text-xs text-[var(--color-text-muted)]">Intermédiaire</span>
+                  </div>
+                  
+                  <div class="glass bg-black/20 p-2 rounded-lg mb-1">
+                    {clazz.slug === 'cra' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Développez vos <span class="text-white">Balises</span> et <span class="text-white">Contrôle</span></p>
+                        <p class="text-xs">Ajoutez 3 en balise de recall, 3 en flèche explosive, 3 points dans vos passifs</p>
+                      </>
+                    )}
+                    
+                    {clazz.slug === 'iop' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Renforcez vos <span class="text-white">Attaques de zone</span> et <span class="text-white">Sauts</span></p>
+                        <p class="text-xs">3 en intimidation, 3 en coup de pression, 3 en Uppercut</p>
+                      </>
+                    )}
+                    
+                    {clazz.slug === 'eniripsa' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Améliorez vos <span class="text-white">Buffs d'équipe</span></p>
+                        <p class="text-xs">3 en mot de jouvence, 3 en mot d'amitié, 3 en mot d'énergie</p>
+                      </>
+                    )}
+                    
+                    {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Développez votre spécialisation</p>
+                        <p class="text-xs">Augmentez 3 sorts complémentaires et commencez à investir dans vos sorts passifs</p>
+                      </>
+                    )}
+                  </div>
+                </div>
+                
+                <div class="mb-1">
+                  <div class="flex justify-between mb-2">
+                    <span class="text-sm font-semibold text-red-400">Niveau 80</span>
+                    <span class="text-xs text-[var(--color-text-muted)]">Avancé</span>
+                  </div>
+                  
+                  <div class="glass bg-black/20 p-2 rounded-lg mb-1">
+                    {clazz.slug === 'cra' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Finalisez votre <span class="text-white">Spécialisation</span></p>
+                        <p class="text-xs">Maxez vos passifs uniques, 3 en flèche brûlante, 3 en flèche d'immobilisation</p>
+                      </>
+                    )}
+                    
+                    {clazz.slug === 'iop' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Affinez vos <span class="text-white">Compétences offensives</span></p>
+                        <p class="text-xs">Maxez virulence et puissance, 3 en défi, 3 en dévouement</p>
+                      </>
+                    )}
+                    
+                    {clazz.slug === 'eniripsa' && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Maîtrisez la <span class="text-white">Gestion de ressources</span></p>
+                        <p class="text-xs">3 en ralentissement, maxez vos sorts de soins principaux et vos passifs</p>
+                      </>
+                    )}
+                    
+                    {!['cra', 'iop', 'eniripsa'].includes(clazz.slug) && (
+                      <>
+                        <p class="text-xs text-[var(--color-text-muted)] mb-1">Perfectionnez votre personnage</p>
+                        <p class="text-xs">Finalisez vos sorts principaux et maximisez vos passifs clés</p>
+                      </>
+                    )}
+                  </div>
+                </div>
+                
+                <p class="text-xs text-center text-[var(--color-text-muted)] mt-3 italic">
+                  Après le niveau 80, vous aurez suffisamment d'expérience pour développer votre propre style de jeu.
+                </p>
               </div>
             </div>
             
@@ -280,85 +521,7 @@ const roleColors = {
             )}
           </div>
           
-          {/* Sorts principaux et passifs */}
-          <div class="space-y-6">
-            {/* Sorts principaux */}
-            <div>
-              <h3 class="text-xl font-semibold mb-3 text-primary">Sorts Principaux</h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {clazz.data.mainSpells?.map(spell => (
-                  <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
-                    <div class="flex gap-3">
-                      <Image 
-                        src={spell.image.src} 
-                        alt={spell.image.alt}
-                        width={40}
-                        height={40}
-                        format="webp"
-                        loading="lazy"
-                        class="w-10 h-10 rounded-md border border-[var(--color-border-muted)] flex-shrink-0"
-                      />
-                      <div>
-                        <div class="flex items-center gap-2">
-                          <h5 class="font-semibold text-white text-sm">{spell.name}</h5>
-                          <span class="text-xs px-1.5 py-0.5 rounded-full bg-primary/20 text-primary">Niv. {spell.level}</span>
-                        </div>
-                        <p class="text-xs text-[var(--color-text-muted)] mt-1">{spell.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Sorts passifs par catégorie */}
-            <div>
-              <h3 class="text-xl font-semibold mb-3 text-primary">Sorts Passifs</h3>
-              
-              {/* Regrouper les passifs par catégorie */}
-              {['Offensif', 'Défensif', 'Réactif'].map(category => {
-                const passivesInCategory = clazz.data.passiveSpells?.filter(spell => 
-                  spell.category === category || (!spell.category && category === 'Offensif')
-                ) || [];
-                
-                if (passivesInCategory.length === 0) return null;
-                
-                return (
-                  <div class="mb-4">
-                    <div class="flex items-center gap-2 mb-2">
-                      <div class={`w-3 h-3 rounded-full ${
-                        category === 'Offensif' ? 'bg-red-400' : 
-                        category === 'Défensif' ? 'bg-blue-400' : 'bg-amber-400'
-                      }`}></div>
-                      <h4 class="text-sm font-semibold text-white">{category}</h4>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                      {passivesInCategory?.map(spell => (
-                        <div class="glass p-3 rounded-xl hover:shadow-primary/20 hover:border-[var(--color-border-highlight)] transition-all duration-300">
-                          <div class="flex gap-3">
-                            <Image 
-                              src={spell.image.src} 
-                              alt={spell.image.alt}
-                              width={40}
-                              height={40}
-                              format="webp"
-                              loading="lazy"
-                              class="w-10 h-10 rounded-md border border-[var(--color-border-muted)] flex-shrink-0"
-                            />
-                            <div>
-                              <h5 class="font-semibold text-white text-sm mb-1">{spell.name}</h5>
-                              <p class="text-xs text-[var(--color-text-muted)]">{spell.description}</p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         </div>
       </Modal>
     );
