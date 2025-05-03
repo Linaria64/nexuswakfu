@@ -58,22 +58,53 @@ const donjonCollection = defineCollection({
     level: z.number(),
     image: imageSchema,
     description: z.string(),
+    difficulty: z.enum(['easy', 'medium', 'hard', 'extreme']),
+    players: z.enum(['solo', 'group', 'both']),
+    region: z.string(),
     boss: z.string(),
-    rewards: z.array(z.string()),
-    requirements: z.array(z.string()).optional(),
+    bosses: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+      hp: z.number(),
+      masteries: z.object({
+        fire: z.number(),
+        water: z.number(),
+        earth: z.number(),
+        air: z.number(),
+      }),
+      resistances: z.object({
+        fire: z.number(),
+        water: z.number(),
+        earth: z.number(),
+        air: z.number(),
+      }),
+    })).optional(),
+    mechanics: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+    })).optional(),
+    rewards: z.array(z.object({
+      name: z.string(),
+      type: z.enum(['equipment', 'resource']),
+      description: z.string(),
+      dropRate: z.number(),
+      image: imageSchema.optional(),
+      icon: imageSchema.optional(),
+      stats: z.array(z.string()).optional(),
+    })).optional(),
     strategy: z.object({
       phases: z.array(z.object({
         title: z.string(),
         description: z.string(),
-      })).optional(),
-      tips: z.array(z.string()).optional(),
+      })),
+      tips: z.array(z.string()),
     }).optional(),
-    drops: z.array(z.object({
+    steles: z.array(z.object({
       name: z.string(),
-      dropRate: z.string(),
-      image: imageSchema.optional(),
-      description: z.string().optional(),
+      description: z.string(),
+      icon: imageSchema.optional(),
     })).optional(),
+    requirements: z.array(z.string()),
   }),
 });
 

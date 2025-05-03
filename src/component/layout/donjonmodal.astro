@@ -3,6 +3,7 @@ import ItemModal from './itemmodal.astro';
 
 interface Props {
   donjonData: {
+    id: string;
     data: {
       name: string;
       description: string;
@@ -10,6 +11,7 @@ interface Props {
       difficulty: 'easy' | 'medium' | 'hard' | 'extreme';
       players: 'solo' | 'group' | 'both';
       region: string;
+      boss: string;
       bosses?: Array<{
         name: string;
         description: string;
@@ -31,7 +33,21 @@ interface Props {
         name: string;
         description: string;
       }>;
-      rewards?: Array<string>;
+      rewards?: Array<{
+        name: string;
+        type: 'equipment' | 'resource';
+        description: string;
+        dropRate: number;
+        image?: {
+          src: string;
+          alt: string;
+        };
+        icon?: {
+          src: string;
+          alt: string;
+        };
+        stats?: Array<string>;
+      }>;
       strategy?: {
         phases: Array<{
           title: string;
@@ -160,12 +176,12 @@ const { donjonData, isOpen, onClose } = Astro.props;
             )}
 
             {/* Colonne Stèles */}
-            {donjonData.data.steles && (
+            {donjonData.data.steles && donjonData.data.steles.length > 0 && (
               <div>
                 <h4 class="text-lg font-semibold text-white/80 mb-3">Stèles</h4>
                 <div class="space-y-4">
                   {donjonData.data.steles.map((stele) => (
-                    <div class="glass-card p-4">
+                    <div class="glass-card p-4 hover:bg-white/5 transition-colors">
                       <h4 class="text-lg font-semibold text-cyan-400 mb-2">{stele.name}</h4>
                       <p class="text-white/90">{stele.description}</p>
                     </div>
@@ -203,7 +219,7 @@ const { donjonData, isOpen, onClose } = Astro.props;
       )}
 
       <!-- Récompenses -->
-      {donjonData.data.rewards && (
+      {donjonData && donjonData.data && donjonData.data.rewards && donjonData.data.rewards.length > 0 && (
         <div class="mb-8">
           <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Récompenses</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -307,7 +323,7 @@ const { donjonData, isOpen, onClose } = Astro.props;
 </div>
 
 <!-- Item Modals -->
-{donjonData.data.rewards?.map((reward) => (
+{donjonData && donjonData.data && donjonData.data.rewards?.map((reward) => (
   <ItemModal
     item={reward}
     isOpen={false}
