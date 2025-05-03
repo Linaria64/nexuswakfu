@@ -46,6 +46,11 @@ interface Props {
         };
         stats?: string[];
       }>;
+      strategy?: string;
+      steles?: Array<{
+        name: string;
+        description: string;
+      }>;
     };
   };
   isOpen: boolean;
@@ -142,18 +147,48 @@ const { donjonData, isOpen, onClose } = Astro.props;
         </div>
       )}
 
-      <!-- Mécaniques -->
-      {donjonData.data.mechanics && (
+      <!-- Stratégie et Mécaniques -->
+      {(donjonData.data.mechanics || donjonData.data.strategy || donjonData.data.steles) && (
         <div class="mb-8">
-          <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Mécaniques</h3>
-          <div class="space-y-4">
-            {donjonData.data.mechanics.map((mechanic) => (
-              <div class="glass-card p-4">
-                <h4 class="text-lg font-semibold text-cyan-400 mb-2">{mechanic.name}</h4>
-                <p class="text-white/90">{mechanic.description}</p>
+          <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Stratégie</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Colonne Mécaniques */}
+            {donjonData.data.mechanics && (
+              <div>
+                <h4 class="text-lg font-semibold text-white/80 mb-3">Mécaniques</h4>
+                <div class="space-y-4">
+                  {donjonData.data.mechanics.map((mechanic) => (
+                    <div class="glass-card p-4">
+                      <h4 class="text-lg font-semibold text-cyan-400 mb-2">{mechanic.name}</h4>
+                      <p class="text-white/90">{mechanic.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+            )}
+
+            {/* Colonne Stèles */}
+            {donjonData.data.steles && (
+              <div>
+                <h4 class="text-lg font-semibold text-white/80 mb-3">Stèles</h4>
+                <div class="space-y-4">
+                  {donjonData.data.steles.map((stele) => (
+                    <div class="glass-card p-4">
+                      <h4 class="text-lg font-semibold text-cyan-400 mb-2">{stele.name}</h4>
+                      <p class="text-white/90">{stele.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+
+          {/* Description de la stratégie */}
+          {donjonData.data.strategy && (
+            <div class="mt-6">
+              <p class="text-white/90 glass-card p-4">{donjonData.data.strategy}</p>
+            </div>
+          )}
         </div>
       )}
 
@@ -161,49 +196,99 @@ const { donjonData, isOpen, onClose } = Astro.props;
       {donjonData.data.rewards && (
         <div class="mb-8">
           <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Récompenses</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {donjonData.data.rewards.map((reward) => (
-              <div class="glass-card p-4">
-                <div class="flex items-center gap-4 mb-2 cursor-pointer hover:bg-white/5 rounded-lg p-2 transition-colors" 
-                     onclick={`console.log('Clicking item:', '${reward.name}'); openItemModal('${reward.name}')`}>
-                  {reward.image && (
-                    <img 
-                      src={reward.image.src} 
-                      alt={reward.image.alt} 
-                      class="w-12 h-12 rounded-lg"
-                    />
-                  )}
-                  <div class="flex-1">
-                    <div class="flex items-center gap-2">
-                      {reward.icon && (
-                        <img 
-                          src={reward.icon.src} 
-                          alt={reward.icon.alt} 
-                          class="w-6 h-6"
-                        />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Colonne Équipements */}
+            <div>
+              <h4 class="text-lg font-semibold text-white/80 mb-3">Équipements</h4>
+              <div class="space-y-4">
+                {donjonData.data.rewards
+                  .filter(reward => reward.type === 'equipment')
+                  .map((reward) => (
+                    <div class="glass-card p-4">
+                      <div class="flex items-center gap-4 mb-2 cursor-pointer hover:bg-white/5 rounded-lg p-2 transition-colors" 
+                           onclick={`openItemModal('${reward.name}')`}>
+                        {reward.image && (
+                          <img 
+                            src={reward.image.src} 
+                            alt={reward.image.alt} 
+                            class="w-12 h-12 rounded-lg"
+                          />
+                        )}
+                        <div class="flex-1">
+                          <div class="flex items-center gap-2">
+                            {reward.icon && (
+                              <img 
+                                src={reward.icon.src} 
+                                alt={reward.icon.alt} 
+                                class="w-6 h-6"
+                              />
+                            )}
+                            <h4 class="text-lg font-semibold text-cyan-400">{reward.name}</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text-white/90 mb-2">{reward.description}</p>
+                      {reward.stats && (
+                        <ul class="space-y-1 mb-2">
+                          {reward.stats.map((stat) => (
+                            <li class="text-white/80">{stat}</li>
+                          ))}
+                        </ul>
                       )}
-                      <h4 class="text-lg font-semibold text-cyan-400">{reward.name}</h4>
+                      {Number(reward.dropRate) > 0 && (
+                        <div class="flex justify-end mt-2">
+                          <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
+                            Taux de drop : {reward.dropRate}%
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <p class="text-white/60">{reward.type}</p>
-                  </div>
-                </div>
-                <p class="text-white/90 mb-2">{reward.description}</p>
-                {reward.stats && (
-                  <ul class="space-y-1 mb-2">
-                    {reward.stats.map((stat) => (
-                      <li class="text-white/80">{stat}</li>
-                    ))}
-                  </ul>
-                )}
-                {Number(reward.dropRate) > 0 && (
-                  <div class="flex justify-end mt-2">
-                    <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
-                      Taux de drop : {reward.dropRate}%
-                    </span>
-                  </div>
-                )}
+                  ))}
               </div>
-            ))}
+            </div>
+
+            {/* Colonne Ressources */}
+            <div>
+              <h4 class="text-lg font-semibold text-white/80 mb-3">Ressources</h4>
+              <div class="space-y-4">
+                {donjonData.data.rewards
+                  .filter(reward => reward.type === 'resource')
+                  .map((reward) => (
+                    <div class="glass-card p-4">
+                      <div class="flex items-center gap-4 mb-2 cursor-pointer hover:bg-white/5 rounded-lg p-2 transition-colors" 
+                           onclick={`openItemModal('${reward.name}')`}>
+                        {reward.image && (
+                          <img 
+                            src={reward.image.src} 
+                            alt={reward.image.alt} 
+                            class="w-12 h-12 rounded-lg"
+                          />
+                        )}
+                        <div class="flex-1">
+                          <div class="flex items-center gap-2">
+                            {reward.icon && (
+                              <img 
+                                src={reward.icon.src} 
+                                alt={reward.icon.alt} 
+                                class="w-6 h-6"
+                              />
+                            )}
+                            <h4 class="text-lg font-semibold text-cyan-400">{reward.name}</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text-white/90 mb-2">{reward.description}</p>
+                      {Number(reward.dropRate) > 0 && (
+                        <div class="flex justify-end mt-2">
+                          <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
+                            Taux de drop : {reward.dropRate}%
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -224,9 +309,7 @@ const { donjonData, isOpen, onClose } = Astro.props;
   // Définir les fonctions globalement
   if (typeof window !== 'undefined') {
     window.openItemModal = (itemName) => {
-      console.log('Opening modal for:', itemName);
       const modal = document.querySelector(`[data-item-modal="${itemName}"]`);
-      console.log('Found modal:', modal);
       if (modal) {
         modal.classList.remove('hidden');
         modal.classList.add('flex');
@@ -234,7 +317,6 @@ const { donjonData, isOpen, onClose } = Astro.props;
     };
 
     window.closeItemModal = (itemName) => {
-      console.log('Closing modal for:', itemName);
       const modal = document.querySelector(`[data-item-modal="${itemName}"]`);
       if (modal) {
         modal.classList.remove('flex');

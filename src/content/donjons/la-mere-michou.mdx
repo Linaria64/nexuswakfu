@@ -39,18 +39,26 @@ bosses:
 
 # Stèles (Optional)
 steles:
-  - name: "Stèle d'Agression"
-    description: "Les ennemis infligent 20% de dégâts supplémentaires."
-  - name: "Stèle de Vitalité"
-    description: "Les ennemis ont 30% de points de vie supplémentaires."
+  - name: "Stèle de Soin"
+    description: "Restaure 100 PV à tous les alliés dans une zone de 2 cases."
+  - name: "Stèle de Protection"
+    description: "Confère un bouclier de 50 PV aux alliés adjacents."
+  - name: "Stèle d'Affaiblissement"
+    description: "Réduit les résistances des ennemis de 10% dans une zone de 3 cases."
 
 # Stratégie
-strategy: |
-  Points clés :
-  - Évitez les cases de bordure qui soignent les ennemis.
-  - Surveillez les tours de recharge des sorts du boss.
-  - Les Chachas sont faibles à l'eau et au feu.
-  - Le boss est faible à la terre.
+strategy: "La Mère Michou est un boss qui demande une bonne gestion du placement et des ressources. Il est important de bien gérer les cases maudites et de se concentrer sur l'élimination rapide des Chachas invoqués."
+
+# Mécaniques
+mechanics:
+  - name: "Cases de bordure"
+    description: "Les cases de bordure soignent les chachas et infligent des dégâts à vos personnages"
+  - name: "Cases Maudites"
+    description: "Certaines cases sur les bords soignent les ennemis qui finissent leur tour dessus."
+  - name: "Invocation de Chachas"
+    description: "La Mère Michou peut invoquer des Chachas supplémentaires."
+  - name: "Attaques en ligne"
+    description: "La plupart des attaques de la Mère Michou sont en ligne droite, il faut donc éviter de s'aligner avec elle."
 
 # Monstres
 monsters:
@@ -67,17 +75,9 @@ monsters:
     elements: ["feu"]
     weaknesses: ["terre"]
 
-# Mécaniques
-mechanics:
-  - name: "Cases de bordure"
-    description: "Les cases de bordure soignent les chachas et infligent des dégâts à vos personnages"
-  - name: "Cases Maudites"
-    description: "Certaines cases sur les bords soignent les ennemis qui finissent leur tour dessus."
-  - name: "Invocation de Chachas"
-    description: "La Mère Michou peut invoquer des Chachas supplémentaires."
-
 # Récompenses
 rewards:
+  # Équipements
   - name: "Amulette Michou"
     type: "equipment"
     description: "Un précieux artefact qui augmente les points de vie."
@@ -92,5 +92,43 @@ rewards:
       - "Vitalité: +25"
       - "Agilité: +10"
       - "Résistance Élémentaire: +3%"
+
+  - name: "Casque de la Mère"
+    type: "equipment"
+    description: "Un casque légendaire forgé dans les cuisines de Michou."
+    dropRate: 8
+    image:
+      src: "/images/ability/tank.png"
+      alt: "Casque de la Mère - Vue détaillée"
+    icon:
+      src: "/images/ability/control.png"
+      alt: "Icône d'équipement"
+    stats:
+      - "Armure: +45"
+      - "Résistance: +15"
+      - "Vitalité: +30"
+
+  # Ressources
+  - name: "Recette Secrète"
+    type: "resource"
+    description: "Une recette mystérieuse écrite de la main de la Mère Michou."
+    dropRate: 25
+    image:
+      src: "/images/ability/specialite.png"
+      alt: "Recette Secrète - Vue détaillée"
+    icon:
+      src: "/images/ability/soutien.png"
+      alt: "Icône de ressource"
+
+  - name: "Ingrédient Rare"
+    type: "resource"
+    description: "Un ingrédient mystérieux utilisé dans les meilleures recettes."
+    dropRate: 20
+    image:
+      src: "/images/ability/dps.png"
+      alt: "Ingrédient Rare - Vue détaillée"
+    icon:
+      src: "/images/ability/invocation.png"
+      alt: "Icône de ressource"
 
 ---
