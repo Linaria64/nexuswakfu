@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { difficultyLabels } from '../../utils/constants';
+import { getDifficultyInfo, getPlayersText } from '../../utils/dungeonUtils';
 
 interface Props {
   dungeon: CollectionEntry<'donjons'>;
@@ -9,7 +9,8 @@ interface Props {
 }
 
 const { dungeon, modalId } = Astro.props;
-const difficultyInfo = difficultyLabels[dungeon.data.difficulty] || difficultyLabels.medium;
+const difficultyInfo = getDifficultyInfo(dungeon.data.difficulty);
+const playersText = getPlayersText(dungeon.data.players, dungeon.data.playersCount);
 
 // Add fallbacks for potentially missing image/icon data
 const imageSrc = dungeon.data.image?.src ?? '/images/donjons/default-banner.jpg';
@@ -66,18 +67,34 @@ const iconAlt = dungeon.data.icon?.alt ?? 'Icône par défaut';
       {dungeon.data.description}
     </p>
 
+    <!-- Badges pour les salles et le nombre de joueurs -->
+    <div class="flex flex-wrap gap-2 mb-4">
+      {dungeon.data.playersCount && (
+        <span class="text-xs px-2 py-0.5 bg-indigo-900/60 text-indigo-200 rounded-full border border-indigo-700/50 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          {dungeon.data.playersCount} joueurs
+        </span>
+      )}
+      
+      {dungeon.data.rooms && (
+        <span class="text-xs px-2 py-0.5 bg-pink-900/60 text-pink-200 rounded-full border border-pink-700/50 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          {dungeon.data.rooms} salle{dungeon.data.rooms > 1 ? 's' : ''}
+        </span>
+      )}
+    </div>
+    
     <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
-      <!-- Type d'équipe si disponible -->
+      <!-- Type d'équipe avec le nombre exact de joueurs -->
       <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
-        {dungeon.data.players === 'solo' && 
-          <span class="flex items-center"><span class="mr-1">👤</span> Solo</span>
-        }
-        {dungeon.data.players === 'group' && 
-          <span class="flex items-center"><span class="mr-1">👥</span> Groupe</span>
-        }
-        {dungeon.data.players === 'both' && 
-          <span class="flex items-center"><span class="mr-1">👥</span> Solo/Groupe</span>
-        }
+        <span class="flex items-center">
+          <span class="mr-1">{dungeon.data.players === 'solo' ? '👤' : '👥'}</span> 
+          {playersText}
+        </span>
       </div>
       
       <!-- Bouton pour ouvrir la modale -->
