@@ -1,4 +1,6 @@
 ---
+import ItemModal from './itemmodal.astro';
+
 interface Props {
   donjonData: {
     data: {
@@ -162,7 +164,8 @@ const { donjonData, isOpen, onClose } = Astro.props;
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {donjonData.data.rewards.map((reward) => (
               <div class="glass-card p-4">
-                <div class="flex items-center gap-4 mb-2">
+                <div class="flex items-center gap-4 mb-2 cursor-pointer hover:bg-white/5 rounded-lg p-2 transition-colors" 
+                     onclick={`console.log('Clicking item:', '${reward.name}'); openItemModal('${reward.name}')`}>
                   {reward.image && (
                     <img 
                       src={reward.image.src} 
@@ -208,22 +211,60 @@ const { donjonData, isOpen, onClose } = Astro.props;
   </div>
 </div>
 
-<script>
-  document.addEventListener('astro:page-load', () => {
-    // Observer pour gérer le scroll du body
-    const modals = document.querySelectorAll('[data-modal]');
-    
-    modals.forEach(modal => {
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-            const isHidden = modal.classList.contains('hidden');
-            document.body.style.overflow = isHidden ? '' : 'hidden';
-          }
-        });
-      });
+<!-- Item Modals -->
+{donjonData.data.rewards?.map((reward) => (
+  <ItemModal
+    item={reward}
+    isOpen={false}
+    onClose={`closeItemModal('${reward.name}')`}
+  />
+))}
 
+<script is:inline>
+  // Définir les fonctions globalement
+  if (typeof window !== 'undefined') {
+    window.openItemModal = (itemName) => {
+      console.log('Opening modal for:', itemName);
+      const modal = document.querySelector(`[data-item-modal="${itemName}"]`);
+      console.log('Found modal:', modal);
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    };
+
+    window.closeItemModal = (itemName) => {
+      console.log('Closing modal for:', itemName);
+      const modal = document.querySelector(`[data-item-modal="${itemName}"]`);
+      if (modal) {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      }
+    };
+  }
+
+  // Observer pour gérer le scroll du body
+  document.addEventListener('astro:page-load', () => {
+    const modals = document.querySelectorAll('.modal-container');
+    
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const modal = mutation.target;
+          const isVisible = modal.classList.contains('flex');
+          document.body.style.overflow = isVisible ? 'hidden' : '';
+        }
+      });
+    });
+
+    modals.forEach((modal) => {
       observer.observe(modal, { attributes: true });
+    });
+
+    // Empêcher la propagation du clic sur les modals
+    const glassCards = document.querySelectorAll('.glass-card');
+    glassCards.forEach(card => {
+      card.addEventListener('click', (e) => e.stopPropagation());
     });
   });
 </script>
