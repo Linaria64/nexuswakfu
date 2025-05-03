@@ -1,0 +1,207 @@
+---
+interface Props {
+  donjonData: {
+    data: {
+      name: string;
+      description: string;
+      level: number;
+      difficulty: 'easy' | 'medium' | 'hard' | 'extreme';
+      players: 'solo' | 'group' | 'both';
+      region: string;
+      bosses?: Array<{
+        name: string;
+        description: string;
+        hp: number;
+        masteries: {
+          fire: number;
+          water: number;
+          earth: number;
+          air: number;
+        };
+        resistances: {
+          fire: number;
+          water: number;
+          earth: number;
+          air: number;
+        };
+      }>;
+      mechanics?: Array<{
+        name: string;
+        description: string;
+      }>;
+      rewards?: Array<{
+        name: string;
+        type: string;
+        description: string;
+        image?: {
+          src: string;
+          alt: string;
+        };
+        stats?: string[];
+      }>;
+    };
+  };
+  isOpen: boolean;
+  onClose: string;
+}
+
+const { donjonData, isOpen, onClose } = Astro.props;
+---
+
+<div class={`fixed inset-0 z-50 ${isOpen ? 'flex' : 'hidden'} items-center justify-center modal-container`} data-modal={donjonData.data.name}>
+  <!-- Overlay - Ajout de onclick pour fermer en cliquant sur le fond -->
+  <div 
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm modal-overlay"
+    onclick={onClose}
+  ></div>
+
+  <!-- Modal -->
+  <div class="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card bg-white/10 m-4">
+    <!-- Header -->
+    <div class="sticky top-0 z-20 flex items-center justify-between p-6 border-b border-white/10 bg-black/50 backdrop-blur-md">
+      <h2 class="text-3xl font-bold text-cyan-400">{donjonData.data.name}</h2>
+      <button
+        onclick={onClose}
+        class="p-2 text-white/60 hover:text-white transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6">
+      <!-- Description -->
+      <div class="mb-8">
+        <p class="text-white/90">{donjonData.data.description}</p>
+      </div>
+
+      <!-- Caractéristiques -->
+      <div class="mb-8">
+        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Caractéristiques</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="glass-card p-4">
+            <p class="text-white/60">Niveau</p>
+            <p class="text-white font-semibold">{donjonData.data.level}</p>
+          </div>
+          <div class="glass-card p-4">
+            <p class="text-white/60">Difficulté</p>
+            <p class="text-white font-semibold capitalize">{donjonData.data.difficulty}</p>
+          </div>
+          <div class="glass-card p-4">
+            <p class="text-white/60">Joueurs</p>
+            <p class="text-white font-semibold">{donjonData.data.players === 'group' ? '3' : donjonData.data.players === 'both' ? '3-6' : donjonData.data.players}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boss -->
+      {donjonData.data.bosses && (
+        <div class="mb-8">
+          <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Boss</h3>
+          <div class="space-y-6">
+            {donjonData.data.bosses.map((boss) => (
+              <div class="glass-card p-4">
+                <h4 class="text-xl font-semibold text-cyan-400 mb-2">{boss.name}</h4>
+                <p class="text-white/90 mb-4">{boss.description}</p>
+                
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <h5 class="text-white/60 mb-2">Maîtrises</h5>
+                    <ul class="space-y-1">
+                      {Object.entries(boss.masteries).map(([element, value]) => (
+                        <li class="text-white">
+                          {element.charAt(0).toUpperCase() + element.slice(1)}: {value}%
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 class="text-white/60 mb-2">Résistances</h5>
+                    <ul class="space-y-1">
+                      {Object.entries(boss.resistances).map(([element, value]) => (
+                        <li class="text-white">
+                          {element.charAt(0).toUpperCase() + element.slice(1)}: {value}%
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Mécaniques -->
+      {donjonData.data.mechanics && (
+        <div class="mb-8">
+          <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Mécaniques</h3>
+          <div class="space-y-4">
+            {donjonData.data.mechanics.map((mechanic) => (
+              <div class="glass-card p-4">
+                <h4 class="text-lg font-semibold text-cyan-400 mb-2">{mechanic.name}</h4>
+                <p class="text-white/90">{mechanic.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Récompenses -->
+      {donjonData.data.rewards && (
+        <div class="mb-8">
+          <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Récompenses</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {donjonData.data.rewards.map((reward) => (
+              <div class="glass-card p-4">
+                <div class="flex items-center gap-4 mb-2">
+                  {reward.image && (
+                    <img 
+                      src={reward.image.src} 
+                      alt={reward.image.alt} 
+                      class="w-12 h-12 rounded-lg"
+                    />
+                  )}
+                  <div>
+                    <h4 class="text-lg font-semibold text-cyan-400">{reward.name}</h4>
+                    <p class="text-white/60">{reward.type}</p>
+                  </div>
+                </div>
+                <p class="text-white/90 mb-2">{reward.description}</p>
+                {reward.stats && (
+                  <ul class="space-y-1">
+                    {reward.stats.map((stat) => (
+                      <li class="text-white/80">{stat}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // Observer pour gérer le scroll du body
+    const modals = document.querySelectorAll('[data-modal]');
+    
+    modals.forEach(modal => {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            const isHidden = modal.classList.contains('hidden');
+            document.body.style.overflow = isHidden ? '' : 'hidden';
+          }
+        });
+      });
+
+      observer.observe(modal, { attributes: true });
+    });
+  });
+</script>
