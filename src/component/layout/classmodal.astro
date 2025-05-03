@@ -38,8 +38,11 @@ const { isOpen, onClose, classData } = Astro.props;
 ---
 
 <div class={`fixed inset-0 z-50 ${isOpen ? 'flex' : 'hidden'} items-center justify-center modal-container`} data-modal={classData.data.name}>
-  <!-- Overlay -->
-  <div class="fixed inset-0 bg-black/70 backdrop-blur-sm modal-overlay"></div>
+  <!-- Overlay - Ajout de onclick pour fermer en cliquant sur le fond -->
+  <div 
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm modal-overlay"
+    onclick={onClose}
+  ></div>
 
   <!-- Modal -->
   <div class="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card bg-white/10 m-4">

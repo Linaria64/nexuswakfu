@@ -155,18 +155,6 @@ function processClassData(classItem: CollectionEntry<'classes'>) {
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    // Close modal when clicking outside
-    document.addEventListener('click', (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target?.classList.contains('modal-overlay')) {
-        const modal = target.closest('.modal-container');
-        if (modal) {
-          const name = modal.getAttribute('data-modal');
-          if (name) window.closeModal(name);
-        }
-      }
-    });
-
     // Close modal with Escape key
     document.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
