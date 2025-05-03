@@ -4,13 +4,11 @@ import { getCollection } from 'astro:content';
 
 // Récupérer les données des collections
 const classes = await getCollection('classes');
-const metiers = await getCollection('metiers');
 const donjons = await getCollection('donjons');
 
 // Définir les statistiques du site
 const stats = [
   { label: "Classes", value: classes.length, icon: "👤" },
-  { label: "Métiers", value: metiers.length, icon: "🛠️" },
   { label: "Donjons", value: donjons.filter(d => d.data && d.data.name).length, icon: "🏰" },
   { label: "Quêtes", value: "50+", icon: "📜" }
 ];
@@ -28,12 +26,6 @@ const features = [
     description: "Stratégies et astuces pour tous les donjons du niveau 1 au 230",
     icon: "🏰",
     link: "/donjons/"
-  },
-  {
-    title: "Métiers",
-    description: "Guides des métiers de récolte et d'artisanat",
-    icon: "🛠️",
-    link: "/metiers/"
   },
   {
     title: "Quêtes",
