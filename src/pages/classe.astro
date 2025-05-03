@@ -1,9 +1,72 @@
 ---
 import Layout from '../component/layout.astro';
 import { getCollection } from 'astro:content';
+import ClassModal from '../component/layout/classmodal.astro';
 
 // Récupérer toutes les classes
 const classes = await getCollection('classes');
+
+// Types
+interface Ability {
+  type: string;
+  name: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+}
+
+interface Spell {
+  name?: string;
+  description?: string;
+  image?: {
+    src?: string;
+    alt?: string;
+  };
+}
+
+// Fonction pour s'assurer que l'image a les propriétés requises
+function ensureImage(image: any, defaultAlt: string) {
+  if (!image) return undefined;
+  return {
+    src: image.src || '',
+    alt: image.alt || defaultAlt
+  };
+}
+
+// Fonction pour traiter les données de classe
+function processClassData(classItem: any) {
+  return {
+    data: {
+      name: classItem.data.name || '',
+      description: classItem.data.description || '',
+      abilities: classItem.data.abilities?.map((ability: Ability) => ({
+        type: ability.type || '',
+        name: ability.name || '',
+        image: {
+          src: ability.image?.src || '',
+          alt: ability.image?.alt || ability.name || ''
+        }
+      })) || [],
+      uniquePassive: classItem.data.uniquePassive && {
+        name: classItem.data.uniquePassive.name || '',
+        description: classItem.data.uniquePassive.description || '',
+        image: classItem.data.uniquePassive.image && {
+          src: classItem.data.uniquePassive.image.src || '',
+          alt: classItem.data.uniquePassive.image.alt || classItem.data.uniquePassive.name || ''
+        }
+      },
+      passiveSpells: classItem.data.passiveSpells?.map((spell: Spell) => ({
+        name: spell.name || '',
+        description: spell.description || '',
+        image: {
+          src: spell.image?.src || '',
+          alt: spell.image?.alt || spell.name || ''
+        }
+      })) || []
+    }
+  };
+}
 ---
 
 <Layout title="Classes">
@@ -36,8 +99,8 @@ const classes = await getCollection('classes');
                     title={ability.name}
                   >
                     <img 
-                      src={ability.image.src} 
-                      alt={ability.image.alt}
+                      src={ability.image?.src} 
+                      alt={ability.image?.alt || ability.name}
                       class="w-8 h-8 rounded-full bg-white/10 p-1"
                     />
                   </div>
@@ -45,16 +108,66 @@ const classes = await getCollection('classes');
               </div>
             </div>
             <div class="p-4 border-t border-white/10 bg-white/5">
-              <a 
-                href={`/classes/${classItem.slug}`}
+              <button 
                 class="glass-button glass-cyan w-full text-center"
+                onclick={`openModal('${classItem.data.name}')`}
               >
                 En savoir plus
-              </a>
+              </button>
             </div>
           </div>
         ))}
       </div>
     </div>
   </div>
+
+  <!-- Modals -->
+  {classes.map((classItem) => (
+    <ClassModal
+      isOpen={false}
+      onClose={`closeModal('${classItem.data.name}')`}
+      classData={processClassData(classItem)}
+    />
+  ))}
 </Layout>
+
+<script>
+  function openModal(name: string) {
+    const modal = document.querySelector(`[data-modal="${name}"]`) as HTMLElement;
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  }
+
+  function closeModal(name: string) {
+    const modal = document.querySelector(`[data-modal="${name}"]`) as HTMLElement;
+    if (modal) {
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+  }
+
+  // Close modal when clicking outside
+  document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target?.classList.contains('modal-overlay')) {
+      const modal = target.closest('.modal-container');
+      if (modal) {
+        const name = modal.getAttribute('data-modal');
+        if (name) closeModal(name);
+      }
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      const openModal = document.querySelector('.modal-container.flex');
+      if (openModal) {
+        const name = openModal.getAttribute('data-modal');
+        if (name) closeModal(name);
+      }
+    }
+  });
+</script>
