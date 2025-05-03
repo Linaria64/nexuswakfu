@@ -64,7 +64,8 @@ function processClassData(classItem: CollectionEntry<'classes'>) {
           src: spell.image?.src || '',
           alt: spell.image?.alt || spell.name || ''
         }
-      })) || []
+      })) || [],
+      levelProgression: classItem.data.levelProgression || {}
     }
   };
 }

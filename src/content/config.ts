@@ -52,15 +52,21 @@ const classesCollection = defineCollection({
         image: imageSchema.optional(),
       })
     ).optional(),
-    // Builds recommandés
-    builds: z.array(
+
+    // Progression des stats par niveau
+    levelProgression: z.record(
+      z.union([z.string(), z.number()]).transform((val) => Number(val)),
       z.object({
-        name: z.string(),
-        type: z.string(),
-        minLevel: z.number(),
-        description: z.string(),
+        stats: z.array(z.string()),
+        items: z.array(z.object({
+          name: z.string(),
+          type: z.string(),
+          stats: z.array(z.string()).optional(),
+          source: z.string().optional()
+        }))
       })
     ).optional(),
+
   }),
 });
 

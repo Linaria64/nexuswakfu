@@ -6,7 +6,7 @@ interface Props {
     data: {
       name: string;
       description: string;
-      abilities: Array<{
+      abilities?: Array<{
         type: string;
         name: string;
         image: {
@@ -22,7 +22,7 @@ interface Props {
           alt: string;
         };
       };
-      passiveSpells: Array<{
+      passiveSpells?: Array<{
         name: string;
         description: string;
         image: {
@@ -30,11 +30,33 @@ interface Props {
           alt: string;
         };
       }>;
+      levelProgression?: Record<string | number, {
+        stats: Array<string>;
+        items: Array<{
+          name: string;
+          type: string;
+          stats?: Array<string>;
+          source?: string;
+        }>;
+      }>;
     };
   };
 }
 
 const { isOpen, onClose, classData } = Astro.props;
+
+// Debug: Afficher la structure complète des données
+console.log('classData structure:', JSON.stringify(classData, null, 2));
+
+// Extraire les niveaux de progression s'ils existent
+const progression = classData?.data?.levelProgression;
+console.log('progression:', progression);
+
+const progressionLevels = progression 
+  ? Object.keys(progression).map(Number).sort((a, b) => a - b)
+  : [];
+
+console.log('progressionLevels:', progressionLevels);
 ---
 
 <div class={`fixed inset-0 z-50 ${isOpen ? 'flex' : 'hidden'} items-center justify-center modal-container`} data-modal={classData.data.name}>
@@ -127,6 +149,58 @@ const { isOpen, onClose, classData } = Astro.props;
                 <p class="text-white/90">{spell.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Progression par niveau -->
+      {progression && progressionLevels.length > 0 && (
+        <div class="mb-8">
+          <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Progression</h3>
+          <div class="space-y-8">
+            {progressionLevels.map((level) => {
+              const levelData = progression[level];
+              if (!levelData) return null;
+              
+              return (
+                <div class="glass-card p-6">
+                  <h4 class="text-xl font-semibold text-cyan-400 mb-4">Niveau {level}</h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Stats */}
+                    <div>
+                      <h5 class="text-lg font-semibold text-white/80 mb-3">Stats Cibles</h5>
+                      <ul class="space-y-2">
+                        {levelData.stats.map((stat) => (
+                          <li class="text-white/90">{stat}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    {/* Items */}
+                    <div>
+                      <h5 class="text-lg font-semibold text-white/80 mb-3">Équipement Recommandé</h5>
+                      <div class="space-y-4">
+                        {levelData.items.map((item) => (
+                          <div class="glass-card p-3">
+                            <h6 class="font-semibold text-cyan-400">{item.name}</h6>
+                            <p class="text-white/60 text-sm">{item.type}</p>
+                            {item.stats && (
+                              <ul class="mt-2 space-y-1">
+                                {item.stats.map((stat) => (
+                                  <li class="text-white/80 text-sm">{stat}</li>
+                                ))}
+                              </ul>
+                            )}
+                            {item.source && (
+                              <p class="mt-2 text-sm text-cyan-400/80">Source: {item.source}</p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
