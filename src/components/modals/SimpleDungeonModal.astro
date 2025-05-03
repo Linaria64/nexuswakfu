@@ -20,9 +20,46 @@ const iconAlt = data.icon?.alt ?? `Icône du donjon ${data.name}`;
 const imageSrc = data.image?.src ?? '/images/donjons/default-banner.jpg';
 const imageAlt = data.image?.alt ?? `Bannière du donjon ${data.name}`;
 
-// Fonction pour obtenir l'image de la récompense
-function getRewardImagePath(reward: any) {
-  return reward.image?.src;
+// Fonction pour déterminer l'image à utiliser en fonction du type et du nom de la récompense
+function getRewardImage(reward: any) {
+  // Si la récompense a une image définie dans le MDX, l'utiliser en priorité
+  if (reward.image && reward.image.src) {
+    return reward.image.src;
+  }
+  
+  // Map des images spécifiques par nom d'item (insensible à la casse)
+  const specificItemImages = {
+    // Équipements
+    "amulette michou": "/images/classes/eniripsa.png",
+    "un anneau": "/images/classes/sacrieur.png",
+    "cape de chacha": "/images/classes/ecaflip.png",
+    
+    // Ressources
+    "poils de chacha": "/images/classes/cra.png",
+    "plume enchantée": "/images/classes/osamodas.png",
+    
+    // Tokens et autres
+    "jeton michou": "/images/classes/xelor.png"
+  };
+  
+  // Vérifier si l'item a une image spécifique associée par son nom
+  const itemName = reward.name?.toLowerCase() || '';
+  if (specificItemImages[itemName]) {
+    return specificItemImages[itemName];
+  }
+  
+  // Images par défaut selon le type (si pas d'association par nom)
+  const defaultImages = {
+    equipment: "/images/classes/zobal.png",
+    resource: "/images/classes/eniripsa.png", 
+    cosmetic: "/images/classes/steamer.png",
+    token: "/images/classes/xelor.png",
+    default: "/images/classes/zobal.png"
+  };
+  
+  // Retourner l'image par défaut selon le type, ou l'image générique si type inconnu
+  const type = reward.type?.toLowerCase() || 'default';
+  return defaultImages[type] || defaultImages.default;
 }
 
 // Fonction pour mapper le type de récompense à un style et un texte
@@ -206,7 +243,7 @@ function getRewardTypeInfo(type: string | undefined) {
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {data.rewards.map((reward, index) => {
                 const typeInfo = getRewardTypeInfo(reward.type);
-                const imagePath = getRewardImagePath(reward);
+                // L'accès à l'image se fait directement via reward.image.src
                 const isEquipment = reward.type?.toLowerCase() === 'equipment';
                 const popupId = `reward-details-${modalId}-${index}`;
                 
@@ -218,18 +255,14 @@ function getRewardTypeInfo(type: string | undefined) {
                       data-target={popupId}
                     >
                       <div class="w-16 h-16 mr-4 flex-shrink-0 overflow-hidden rounded-lg border-2 border-white/30 bg-gray-700 flex items-center justify-center">
-                        {imagePath ? (
-                          <img
-                            src={imagePath}
-                            alt={reward.image?.alt || reward.name || 'Reward Image'}
-                            class="max-w-full max-h-full object-contain"
-                            loading="lazy"
-                            width="64" 
-                            height="64" 
-                          />
-                        ) : (
-                          <div class="text-gray-400 text-xs text-center">Voir image</div>
-                        )}
+                        <img 
+                          src={getRewardImage(reward)}
+                          alt={reward.name || 'Image de récompense'}
+                          class="w-full h-full object-cover rounded"
+                          loading="lazy"
+                          width="64"
+                          height="64"
+                        />
                       </div>
                       <div class="flex-grow">
                         <h3 class="text-lg font-bold text-white leading-tight">{reward.name}</h3>
@@ -254,16 +287,14 @@ function getRewardTypeInfo(type: string | undefined) {
                       class="equipment-details hidden absolute z-50 w-80 p-4 bg-gray-900/95 backdrop-blur-md border border-amber-700/50 rounded-lg shadow-xl right-0 bottom-full mb-2"
                     >
                       {/* Affichage large de l'image */}
-                      {reward.image?.src && (
-                        <div class="mb-4 overflow-hidden rounded-lg border-2 border-amber-600/30 flex justify-center bg-gradient-to-b from-amber-900/20 to-gray-900/40 p-3">
-                          <img
-                            src={reward.image.src}
-                            alt={reward.image.alt || reward.name}
-                            class="max-w-full max-h-48 object-contain" 
-                            loading="lazy"
-                          />
-                        </div>
-                      )}
+                      <div class="mb-4 overflow-hidden rounded-lg border-2 border-amber-600/30 flex justify-center bg-gradient-to-b from-amber-900/20 to-gray-900/40 p-3">
+                        <img
+                          src={getRewardImage(reward)}
+                          alt={reward.name || 'Image de récompense'}
+                          class="max-w-full max-h-48 object-contain transition-all duration-300 hover:scale-105" 
+                          loading="lazy"
+                        />
+                      </div>
                       
                       {/* Entête du popup */}
                       <div class="flex items-center mb-3 pb-2 border-b border-amber-700/30">
