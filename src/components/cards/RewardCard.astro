@@ -1,0 +1,51 @@
+---
+// Composant pour afficher une récompense individuelle
+interface Props {
+  name: string;
+  type: string;
+  description?: string;
+  stats?: string[];
+}
+
+const { name, type, description, stats } = Astro.props;
+
+// Définir une couleur de fond en fonction du type
+const typeColors = {
+  equipment: "bg-blue-500/30 border-blue-500/50 hover:bg-blue-500/40",
+  resource: "bg-green-500/30 border-green-500/50 hover:bg-green-500/40",
+  default: "bg-purple-500/30 border-purple-500/50 hover:bg-purple-500/40"
+};
+
+const cardColor = typeColors[type] || typeColors.default;
+---
+
+<div class={`reward-card ${cardColor} rounded-lg border p-4 transition-all shadow-md overflow-hidden relative`}>
+  <div class="flex justify-between items-center mb-3">
+    <h3 class="text-lg font-bold text-white">{name}</h3>
+    <span class="text-xs text-gray-300 capitalize py-1 px-2 bg-gray-800/50 rounded-md">{type}</span>
+  </div>
+  
+  {description && (
+    <p class="text-sm text-gray-300 mb-3">{description}</p>
+  )}
+  
+  {stats && stats.length > 0 && (
+    <div class="stats-list border-t border-white/10 pt-2">
+      {stats.map(stat => (
+        <p class="text-xs text-blue-200 mb-1">• {stat}</p>
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .reward-card {
+    min-height: 80px;
+  }
+  
+  .reward-card:hover {
+    transform: translateY(-2px);
+  }
+  
+
+</style>
