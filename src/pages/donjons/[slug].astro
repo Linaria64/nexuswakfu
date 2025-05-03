@@ -1,6 +1,5 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content';
-import MainLayout from '@layouts/MainLayout.astro';
 import { getDifficultyInfo, getPlayersText } from '@utils/dungeonUtils';
 import { Image } from 'astro:assets';
 
@@ -52,8 +51,7 @@ function getRewardTypeInfo(type: string | undefined) {
 
 ---
 
-<MainLayout title={data.name} description={data.description}>
-  <article class="py-12 px-4">
+<article class="py-12 px-4">
     <div class="container mx-auto max-w-4xl animate-fade-up">
 
       <!-- === NEW HEADER SECTION START === -->
@@ -378,5 +376,3 @@ function getRewardTypeInfo(type: string | undefined) {
     });
   });
 </script>
-
-</MainLayout>

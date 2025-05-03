@@ -132,40 +132,10 @@ const donjonCollection = defineCollection({
   }),
 });
 
-// Définition du schéma pour les métiers
-const metierCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    id: z.string(),
-    title: z.string(),
-    category: z.enum(['récolte', 'artisanat']),
-    difficulty: z.number().min(1).max(5),
-    profitability: z.number().min(1).max(5),
-  }),
-});
-
-// Définition du schéma pour les guides
-const guideCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    category: z.enum(['debutant', 'combats', 'equipement', 'avance', 'economie', 'classes']).optional(),
-    image: z.string().optional(),
-    class: z.string().optional(),
-    featured: z.boolean().optional().default(false),
-    author: z.object({
-      name: z.string(),
-      avatar: z.string().optional(),
-    }).optional(),
-    toc: z.boolean().optional().default(true),
-  }),
-});
+// Les collections de métiers et guides ont été supprimées
 
 // Export des collections
 export const collections = {
   'classes': classesCollection,
   'donjons': donjonCollection,
-  'metiers': metierCollection,
-  'guides': guideCollection,
 }; 

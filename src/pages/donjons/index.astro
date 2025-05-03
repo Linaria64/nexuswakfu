@@ -1,5 +1,4 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 import EnhancedDungeonCard from '../../components/cards/EnhancedDungeonCard.astro';
 import SimpleDungeonModal from '../../components/modals/SimpleDungeonModal.astro';
@@ -49,8 +48,7 @@ const uniqueRegions = [...new Set(allDungeons.map(dungeon => dungeon.data.region
 
 ---
 
-<MainLayout title="Donjons de Wakfu" description="Guides et stratégies pour tous les donjons de Wakfu, du niveau 1 à 230">
-  <div class="min-h-screen">
+<div class="min-h-screen">
     <!-- Hero Section - Apply Glass Theme -->
     <div class="relative py-20 overflow-hidden">
       <div class="absolute inset-0 z-0">
@@ -426,4 +424,4 @@ const uniqueRegions = [...new Set(allDungeons.map(dungeon => dungeon.data.region
       width: 100% !important;
     }
   </style>
-</MainLayout>
+</div>

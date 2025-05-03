@@ -1,5 +1,4 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
 import { Image } from 'astro:assets';
 
 interface Artifact {
@@ -96,52 +95,66 @@ const artifacts: Artifact[] = [
 ];
 ---
 
-<MainLayout title="Artefacts Légendaires - Nexus Wakfu">
-    <main class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold text-center mb-8">Artefacts Légendaires</h1>
+<div class="min-h-screen">
+    <!-- Header avec effet glassmorphism -->
+        <div class="relative mb-12">
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-teal-500/10 rounded-xl backdrop-blur-md -z-10"></div>
+            <div class="border border-white/10 rounded-xl p-8 shadow-lg bg-white/5">
+                <h1 class="text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-200">
+                    Artefacts Légendaires
+                </h1>
+                <p class="text-center text-gray-300 mt-4 max-w-2xl mx-auto">
+                    Découvrez les artefacts légendaires du monde de Wakfu, objets mystiques liés aux divinités et essentiels à votre progression.
+                </p>
+            </div>
+        </div>
         
-        <!-- Artefacts Carousel -->
+        <!-- Artefacts Carousel - Version glassmorphism modernisée -->
         <section class="mb-16">
-            <!-- Carousel container -->
+            <!-- Carousel container -->            
             <div class="carousel-container relative overflow-hidden rounded-xl artifact-carousel">
-                <!-- Background gradient for glassmorphism effect -->
-                <div class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-amber-700/10 backdrop-blur-sm z-0"></div>
+                <!-- Background glassmorphism effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20 backdrop-blur-md z-0 border border-white/10 shadow-xl"></div>
                 
                 <!-- Carousel track -->
                 <div class="carousel-track flex transition-transform duration-500 ease-out">
                     {artifacts.map((artifact, index) => (
                         <div class="carousel-slide w-full flex-shrink-0 p-4">
                             <a href={artifact.methodWakfuUrl} target="_blank" rel="noopener noreferrer" class="block h-full">
-                                <div class="glass-card h-full relative overflow-hidden rounded-xl shadow-xl border border-amber-500/30 hover:border-amber-500/70 transition-all hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-1">
+                                <div class="h-full relative overflow-hidden rounded-xl transition-all duration-300 group backdrop-blur-sm bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(86,153,255,0.15)] hover:-translate-y-1">
                                     <!-- Card content -->
                                     <div class="p-6">
-                                        <h3 class="text-xl font-bold text-amber-400 mb-2 flex items-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <h3 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-purple-300 mb-2 flex items-center gap-2 group-hover:from-blue-200 group-hover:to-indigo-300 transition-all duration-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400 group-hover:text-indigo-300 transition-colors" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                             </svg>
                                             {artifact.name}
                                         </h3>
                                         
                                         <!-- Niveau requis -->
-                                        <div class="bg-amber-900/30 text-amber-300 text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center mb-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                        <div class="backdrop-blur-sm bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-full inline-flex items-center mb-3 border border-white/10 shadow-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-400" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
                                             </svg>
                                             Niveau {artifact.questLevel}
                                         </div>
                                         
-                                        <div class="mt-2">
-                                            <p class="text-sm text-amber-100 mb-1">Location:</p>
-                                            <p class="text-sm text-gray-300 mb-4">{artifact.location}</p>
+                                        <div class="mt-3 mb-4 relative">
+                                            <div class="absolute -left-2 top-0 w-1 h-full bg-gradient-to-b from-blue-400/30 to-purple-500/30 rounded-full"></div>
+                                            <p class="text-sm text-blue-200 font-medium mb-1 ml-2">Emplacement:</p>
+                                            <p class="text-sm text-gray-300 ml-2 group-hover:text-gray-200 transition-colors">{artifact.location}</p>
                                         </div>
                                         
-                                        <p class="text-sm text-gray-300">{artifact.description}</p>
+                                        <!-- Description avec effet glassmorphism -->
+                                        <div class="p-3 bg-gradient-to-r from-blue-900/10 to-indigo-900/10 backdrop-blur-sm rounded-lg border border-white/5 mt-1">
+                                            <p class="text-sm text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors">{artifact.description}</p>
+                                        </div>
                                     </div>
 
-                                    <div class="mt-2 text-center pt-2 border-t border-amber-500/20 p-3">
-                                        <span class="text-amber-300 font-medium inline-flex items-center justify-center text-sm">
+                                    <div class="mt-4 text-center pt-2 border-t border-white/10 p-3">
+                                        <span class="inline-flex items-center justify-center text-sm px-4 py-2 bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-600/40 hover:to-indigo-600/40 rounded-full text-blue-200 hover:text-blue-100 backdrop-blur-sm border border-white/10 shadow-sm transition-all duration-300 group-hover:shadow-[0_0_10px_rgba(59,130,246,0.3)]">
                                             Voir guide Method Wakfu
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                             </svg>
                                         </span>
@@ -152,29 +165,31 @@ const artifacts: Artifact[] = [
                     ))}
                 </div>
                 
-                <!-- Carousel controls -->
-                <button class="carousel-button prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/50 hover:bg-amber-600/90 text-white z-10 rounded-full p-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- Carousel controls avec style glassmorphism -->
+                <button class="carousel-button prev absolute top-1/2 left-4 transform -translate-y-1/2 backdrop-blur-md bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-500/40 hover:to-indigo-500/40 text-white z-10 rounded-full p-3 border border-white/10 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
                 
-                <button class="carousel-button next absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/50 hover:bg-amber-600/90 text-white z-10 rounded-full p-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button class="carousel-button next absolute top-1/2 right-4 transform -translate-y-1/2 backdrop-blur-md bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-500/40 hover:to-indigo-500/40 text-white z-10 rounded-full p-3 border border-white/10 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>
                 
-                <!-- Carousel indicators -->
-                <div class="carousel-indicators flex justify-center mt-4 space-x-2 absolute bottom-4 left-0 right-0">
-                    {artifacts.map((_, index) => (
-                        <button class="carousel-indicator w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all duration-200" data-index={index}></button>
-                    ))}
+                <!-- Carousel indicators avec effet glassmorphism -->
+                <div class="carousel-indicators flex justify-center mt-4 space-x-2 absolute bottom-6 left-0 right-0 px-4 py-2">
+                    <div class="backdrop-blur-md bg-black/10 rounded-full px-3 py-1.5 inline-flex items-center space-x-3 border border-white/10 shadow-lg">
+                        {artifacts.map((_, index) => (
+                            <button class="carousel-indicator w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-200 hover:scale-125" data-index={index}></button>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-</MainLayout>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -203,10 +218,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update indicators
             indicators.forEach((indicator, index) => {
                 if (index === currentSlide) {
-                    indicator.classList.add('bg-amber-500', 'w-6');
+                    indicator.classList.add('bg-blue-400', 'scale-125');
+                    indicator.classList.remove('bg-white/30');
                 } else {
-                    indicator.classList.remove('bg-amber-500', 'w-6');
-                    indicator.classList.add('bg-gray-300', 'dark:bg-gray-600');
+                    indicator.classList.remove('bg-blue-400', 'scale-125');
+                    indicator.classList.add('bg-white/30');
                 }
             });
         }
