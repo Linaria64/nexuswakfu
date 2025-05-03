@@ -17,12 +17,65 @@ const typeColors = {
 };
 
 const cardColor = typeColors[type] || typeColors.default;
+
+// Fonction pour déterminer quelle image utiliser en fonction de la récompense
+function getImageForReward(rewardName, rewardType) {
+  // Images pour les équipements spécifiques
+  if (rewardName.toLowerCase().includes('amulette') || rewardName.toLowerCase().includes('michou')) {
+    return '/images/classes/eca.png';
+  }
+  
+  if (rewardName.toLowerCase().includes('anneau')) {
+    return '/images/classes/steamer.png';
+  }
+  
+  // Images par défaut selon le type
+  if (rewardType === 'equipment') {
+    return '/images/classes/feca.png';
+  }
+  
+  if (rewardType === 'resource' && rewardName.toLowerCase().includes('poil')) {
+    return '/images/classes/sacrieur.png';
+  }
+  
+  if (rewardType === 'resource' && rewardName.toLowerCase().includes('griffe')) {
+    return '/images/classes/osa.png';
+  }
+  
+  // Par défaut
+  return '/images/classes/sram.png';
+}
 ---
 
 <div class={`reward-card ${cardColor} rounded-lg border p-4 transition-all shadow-md overflow-hidden relative`}>
-  <div class="flex justify-between items-center mb-3">
-    <h3 class="text-lg font-bold text-white">{name}</h3>
-    <span class="text-xs text-gray-300 capitalize py-1 px-2 bg-gray-800/50 rounded-md">{type}</span>
+  <div class="flex items-center mb-3">
+    <!-- Image de classe basée sur le type d'équipement -->
+    <div class="w-16 h-16 mr-4 rounded-lg overflow-hidden border-2 border-white/20 flex-shrink-0 shadow-glow">
+      {name.toLowerCase().includes('amulette') && (
+        <img src="/images/classes/eca.png" alt="Image de l'amulette" width="64" height="64" class="w-full h-full object-cover" />
+      )}
+      
+      {name.toLowerCase().includes('anneau') && (
+        <img src="/images/classes/steamer.png" alt="Image de l'anneau" width="64" height="64" class="w-full h-full object-cover" />
+      )}
+      
+      {name.toLowerCase().includes('poil') && (
+        <img src="/images/classes/sacrieur.png" alt="Image des poils" width="64" height="64" class="w-full h-full object-cover" />
+      )}
+      
+      {name.toLowerCase().includes('griffe') && (
+        <img src="/images/classes/osa.png" alt="Image des griffes" width="64" height="64" class="w-full h-full object-cover" />
+      )}
+      
+      {!name.toLowerCase().includes('amulette') && !name.toLowerCase().includes('anneau') && 
+       !name.toLowerCase().includes('poil') && !name.toLowerCase().includes('griffe') && (
+        <img src="/images/classes/sram.png" alt="Image par défaut" width="64" height="64" class="w-full h-full object-cover" />
+      )}
+    </div>
+    <div>
+      <h3 class="text-lg font-bold text-white">{name}</h3>
+      <span class="text-xs text-gray-300 capitalize py-1 px-2 bg-gray-800/50 rounded-md">{type}</span>
+    </div>
   </div>
   
   {description && (

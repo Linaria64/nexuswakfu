@@ -1,9 +1,8 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content';
 import MainLayout from '@layouts/MainLayout.astro';
-import { Image } from 'astro:assets';
 import { getDifficultyInfo, getPlayersText } from '@utils/dungeonUtils';
-import RewardCard from '@components/cards/RewardCard.astro';
+import { Image } from 'astro:assets';
 
 // Define the type for the dungeon entry props
 interface Props {
@@ -28,6 +27,29 @@ const playersText = getPlayersText(data.players);
 // Handle potential missing icon
 const iconSrc = data.icon?.src || '/placeholder-icon.png'; // Provide a fallback path if needed
 const iconAlt = `Icône du donjon ${data.name}`;
+
+// Function to get the correct image path (ensure this matches your data structure)
+function getRewardImagePath(reward: any) {
+  // Example: assumes reward.image.src has the path like '/images/items/some_item.png'
+  return reward.image?.src;
+}
+
+// Function to map reward type to display text and color
+function getRewardTypeInfo(type: string | undefined) {
+  switch (type?.toLowerCase()) {
+    case 'equipment':
+      return { text: 'Équipement', style: 'bg-blue-500/20 border-blue-500/50' };
+    case 'resource':
+      return { text: 'Ressource', style: 'bg-green-500/20 border-green-500/50' };
+    case 'cosmetic':
+      return { text: 'Cosmétique', style: 'bg-purple-500/20 border-purple-500/50' };
+    case 'token':
+         return { text: 'Jeton', style: 'bg-yellow-500/20 border-yellow-500/50' };
+    default:
+      return { text: 'Récompense', style: 'bg-gray-800/50 border-gray-500/50' };
+  }
+}
+
 ---
 
 <MainLayout title={data.name} description={data.description}>
@@ -182,36 +204,179 @@ const iconAlt = `Icône du donjon ${data.name}`;
         </div>
       )}
 
-      <!-- Rewards Section -->
-      {data.rewards && data.rewards.length > 0 && (
-        <div>
-          <h2 class="text-2xl font-bold mb-4 text-secondary border-b-2 border-secondary/30 pb-2">Récompenses Potentielles</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {data.rewards.map(reward => (
-              <RewardCard 
-                name={reward.name}
-                type={reward.type}
-                description={reward.description}
-                stats={reward.stats}
-              />
-            ))}
-          </div>
+      <!-- Rewards Section - VERSION HTML IMG -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4 text-secondary border-b-2 border-secondary/30 pb-2">Récompenses du Donjon</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+          {data.rewards && data.rewards.length > 0 ? (
+            data.rewards.map((reward, index) => {
+              const typeInfo = getRewardTypeInfo(reward.type);
+              const imagePath = getRewardImagePath(reward);
+              const isEquipment = reward.type?.toLowerCase() === 'equipment';
+              const popupId = `reward-details-${index}`;
+              
+              return (
+                <div class={`rounded-lg border ${typeInfo.style} p-4 shadow-lg flex flex-col ${isEquipment ? 'relative equipment-wrapper' : ''}`}>
+                  {/* Carte de récompense cliquable pour les équipements */}
+                  <div 
+                    class={`flex items-center mb-3 ${isEquipment ? 'cursor-pointer equipment-toggle' : ''}`}
+                    {...isEquipment && { 'data-target': popupId }}
+                  >
+                    <div class="w-16 h-16 mr-4 flex-shrink-0 overflow-hidden rounded-lg border-2 border-white/30 bg-gray-700 flex items-center justify-center">
+                      {imagePath ? (
+                        <img
+                          src={imagePath}
+                          alt={reward.image?.alt || reward.name || 'Reward Image'}
+                          class="max-w-full max-h-full object-contain"
+                          loading="lazy"
+                          width="64" 
+                          height="64" 
+                        />
+                      ) : (
+                        <div class="text-gray-400 text-xs text-center">Pas d'image</div>
+                      )}
+                    </div>
+                    <div class="flex-grow">
+                      <h3 class="text-lg font-bold text-white leading-tight">{reward.name}</h3>
+                      <span class={`text-xs ${typeInfo.style.includes('blue') ? 'text-blue-300' : typeInfo.style.includes('green') ? 'text-green-300' : typeInfo.style.includes('purple') ? 'text-purple-300' : typeInfo.style.includes('yellow') ? 'text-yellow-300' : 'text-gray-300'} bg-gray-800/60 rounded px-2 py-0.5 mt-1 inline-block`}>
+                        {typeInfo.text}
+                      </span>
+                    </div>
+                    {isEquipment && (
+                      <div class="text-amber-400 ml-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {reward.description && (
+                    <p class="text-gray-300 text-sm mt-auto pt-2 border-t border-gray-700">{reward.description}</p>
+                  )}
+                  
+                  {/* Popup pour les équipements */}
+                  {isEquipment && reward.stats && (
+                    <div 
+                      id={popupId} 
+                      class="equipment-details hidden absolute z-50 w-80 p-4 bg-gray-900/95 backdrop-blur-md border border-amber-700/50 rounded-lg shadow-xl right-0 bottom-full mb-2"
+                    >
+                      {/* Entête du popup */}
+                      <div class="flex items-center mb-3 pb-2 border-b border-amber-700/30">
+                        {imagePath && (
+                          <div class="w-12 h-12 mr-3 flex-shrink-0 overflow-hidden rounded-lg border border-amber-700/50">
+                            <img
+                              src={imagePath}
+                              alt={reward.image?.alt || reward.name}
+                              class="w-full h-full object-contain"
+                              loading="lazy"
+                            />
+                          </div>
+                        )}
+                        <div>
+                          <h4 class="text-amber-300 font-bold">{reward.name}</h4>
+                          <span class="text-xs text-amber-200/70">{typeInfo.text}</span>
+                        </div>
+                      </div>
+                      
+                      {/* Stats de l'équipement */}
+                      <div class="space-y-1 text-sm">
+                        {reward.stats.map(stat => (
+                          <p class="text-amber-100">{stat}</p>
+                        ))}
+                      </div>
+                      
+                      {/* Description */}
+                      {reward.description && (
+                        <div class="mt-3 pt-2 border-t border-amber-700/30">
+                          <p class="text-gray-300 text-xs italic">{reward.description}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <p class="text-gray-400 col-span-full">Aucune récompense notable répertoriée pour ce donjon.</p>
+          )}
         </div>
-      )}
+      </div>
 
     </div>
   </article>
-</MainLayout>
 
 <style>
-/* Masquer les icônes des récompenses */
-.icon-container,
-[class*="rounded-full"],
-[class*="rounded-md"],
-.w-10.h-10,
-.w-12.h-12,
-.w-16.h-16,
-.rounded-full.overflow-hidden {
-  display: none !important;
-}
+  /* Styles pour les popups d'équipement */
+  .equipment-wrapper {
+    position: relative;
+  }
+  
+  .equipment-toggle {
+    cursor: pointer;
+  }
+  
+  .equipment-details {
+    position: absolute;
+    z-index: 100;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  
+  .equipment-details.hidden {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+  
+  .equipment-details.block {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 </style>
+
+<script>
+  // Script pour gérer l'affichage des détails des équipements
+  document.addEventListener('DOMContentLoaded', () => {
+    const equipButtons = document.querySelectorAll('.equipment-toggle');
+    
+    equipButtons.forEach(button => {
+      const targetId = button.getAttribute('data-target');
+      const target = document.getElementById(targetId);
+      
+      if (!target) return;
+      
+      // Montrer/cacher les détails au clic
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isVisible = target.classList.contains('block');
+        
+        // Fermer tous les popups
+        document.querySelectorAll('.equipment-details').forEach(popup => {
+          popup.classList.remove('block');
+          popup.classList.add('hidden');
+        });
+        
+        // Ouvrir celui-ci s'il était fermé
+        if (!isVisible) {
+          target.classList.remove('hidden');
+          target.classList.add('block');
+        }
+      });
+    });
+    
+    // Fermer les popups quand on clique ailleurs
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.equipment-details').forEach(popup => {
+        popup.classList.remove('block');
+        popup.classList.add('hidden');
+      });
+    });
+  });
+</script>
+
+</MainLayout>

@@ -2,7 +2,6 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 import EnhancedDungeonCard from '../../components/cards/EnhancedDungeonCard.astro';
-import DungeonDetailsModal from '../../components/modals/DungeonDetailsModal.astro';
 import { difficultyLabels } from '../../utils/constants';
 
 // 1. Fetch all entries from the collection
@@ -157,8 +156,8 @@ const uniqueRegions = [...new Set(allDungeons.map(dungeon => dungeon.data.region
                 <EnhancedDungeonCard dungeon={donjon} modalId={modalId} />
               </div>
               
-              <!-- Modal pour afficher les détails du donjon -->
-              <DungeonDetailsModal dungeon={donjon} modalId={modalId} />
+              <!-- Lien vers la page de détail au lieu du modal -->
+              <!-- Le modal a été remplacé par un lien direct vers la page de détail -->
             </>
           );
         })}

@@ -97,17 +97,17 @@ const iconAlt = dungeon.data.icon?.alt ?? 'Icône par défaut';
         </span>
       </div>
       
-      <!-- Bouton pour ouvrir la modale -->
-      <button 
+      <!-- Lien direct vers la page du donjon -->
+      <a 
+        href={`/donjons/${dungeon.slug}`}
         class="text-wakfu-primary dark:text-wakfu-secondary font-medium text-sm group-hover:underline flex items-center"
-        data-modal-open={modalId}
         aria-label={`Voir les détails de ${dungeon.data.name}`}
       >
         Détails
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
-      </button>
+      </a>
     </div>
   </div>
 </div>
