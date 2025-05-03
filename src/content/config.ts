@@ -1,9 +1,23 @@
-import { defineCollection, reference, z } from 'astro:content';
+import { defineCollection, z } from 'astro:content';
 
 // Schéma de base pour les images
 const imageSchema = z.object({
   src: z.string(),
   alt: z.string().optional(),
+});
+
+// Schéma pour les items de progression
+const progressionItemSchema = z.object({
+  name: z.string(),
+  type: z.string(),
+  stats: z.array(z.string()).optional(),
+  source: z.string().optional()
+});
+
+// Schéma pour un niveau de progression
+const levelProgressionSchema = z.object({
+  stats: z.array(z.string()),
+  items: z.array(progressionItemSchema)
 });
 
 // Définition du schéma pour les classes
@@ -12,22 +26,18 @@ const classesCollection = defineCollection({
   schema: z.object({
     id: z.string(),
     name: z.string(),
+    role: z.string(),
     icon: imageSchema,
     image: imageSchema,
     description: z.string().optional(),
-    detailedDescription: z.string().optional(),
+    specialty: z.string().optional(),
     gameplayDescription: z.string().optional(),
-    role: z.string(),
-    difficulty: z.number().min(1).max(5).optional(),
-    combatStyle: z.string().optional(),
-    strengths: z.string().optional(),
-    weaknesses: z.string().optional(),
-    // Passif unique de la classe
+    portrait: imageSchema.optional(),
     uniquePassive: z.object({
       name: z.string(),
-      description: z.string()
-    }),
-    // Aptitudes spécifiques à la classe
+      description: z.string(),
+      image: imageSchema.optional()
+    }).optional(),
     abilities: z.array(
       z.object({
         type: z.string(),
@@ -35,118 +45,39 @@ const classesCollection = defineCollection({
         image: imageSchema
       })
     ).optional(),
-    // Sorts principaux de la classe
-    mainSpells: z.array(
-      z.object({
-        name: z.string(),
-        description: z.string(),
-        level: z.number(),
-        image: imageSchema.optional(),
-      })
-    ).optional(),
-    // Sorts passifs
-    passiveSpells: z.array(
-      z.object({
-        name: z.string(),
-        description: z.string(),
-        image: imageSchema.optional(),
-      })
-    ).optional(),
-
-    // Progression des stats par niveau
-    levelProgression: z.record(
-      z.union([z.string(), z.number()]).transform((val) => Number(val)),
-      z.object({
-        stats: z.array(z.string()),
-        items: z.array(z.object({
-          name: z.string(),
-          type: z.string(),
-          stats: z.array(z.string()).optional(),
-          source: z.string().optional()
-        }))
-      })
-    ).optional(),
-
+    levelProgression: z.record(z.string(), levelProgressionSchema).optional(),
   }),
 });
 
-// Définition du schéma pour les donjons
+// Collection des donjons
 const donjonCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    // --- Core Fields ---
-    id: z.string().optional(), // Optional ID from MDX
+    id: z.string(),
     name: z.string(),
-    description: z.string().optional(),
     level: z.number(),
-    difficulty: z.enum(['easy', 'medium', 'hard', 'extreme']),
-    players: z.enum(['solo', 'group', 'both', '3', '6']), // Allow flexibility
-    region: z.string(),
-
-    // --- Images ---
-    icon: imageSchema.optional(),
-    image: imageSchema.optional(),
-
-    // --- Bosses ---
-    bosses: z.array(
-      z.object({
-        name: z.string(),
-        description: z.string().optional(),
-        hp: z.number().optional(),
-        masteries: z.object({
-            fire: z.number().optional(),
-            water: z.number().optional(),
-            earth: z.number().optional(),
-            air: z.number().optional(),
-        }).optional(),
-        resistances: z.object({
-            fire: z.number().optional(),
-            water: z.number().optional(),
-            earth: z.number().optional(),
-            air: z.number().optional(),
-        }).optional(),
-        bossImage: imageSchema.optional()
-      })
-    ).optional(),
-
-    // --- Strategy & Steles ---
-    strategy: z.string().optional(),
-    steles: z.array(z.object({
-        name: z.string(),
-        description: z.string()
-    })).optional(),
-
-    // --- Rewards ---
-    rewards: z.array(z.object({
-        name: z.string(),
-        type: z.enum(['equipment', 'resource']),
+    image: imageSchema,
+    description: z.string(),
+    boss: z.string(),
+    rewards: z.array(z.string()),
+    requirements: z.array(z.string()).optional(),
+    strategy: z.object({
+      phases: z.array(z.object({
+        title: z.string(),
         description: z.string(),
-        dropRate: z.number().optional(),
-        image: imageSchema.optional(),
-        icon: imageSchema.optional(),
-        stats: z.array(z.string()).optional()
-    })).optional(),
-
-    // --- Other Dungeon Info (Optional) ---
-    monsters: z.array(z.object({ // Non-boss monsters
+      })).optional(),
+      tips: z.array(z.string()).optional(),
+    }).optional(),
+    drops: z.array(z.object({
       name: z.string(),
-      level: z.number().optional(),
-      elements: z.array(z.string()).optional(),
-      weaknesses: z.array(z.string()).optional(),
+      dropRate: z.string(),
+      image: imageSchema.optional(),
+      description: z.string().optional(),
     })).optional(),
-
-    mechanics: z.array(z.object({ // Special rules/mechanics
-      name: z.string(),
-      description: z.string()
-    })).optional(),
-
   }),
 });
 
-// Les collections de métiers et guides ont été supprimées
-
-// Export des collections
 export const collections = {
-  'classes': classesCollection,
-  'donjons': donjonCollection,
-}; 
+  classes: classesCollection,
+  donjons: donjonCollection,
+};

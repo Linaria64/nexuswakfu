@@ -1,134 +1,54 @@
 ---
-# Informations de base du donjon
 id: "mere-michou"
 name: "Chez la Mère Michou"
-description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
-
-# Caractéristiques
 level: 9
-difficulty: "easy"
-players: "group" # Utiliser 'solo', 'group', ou 'both'
-playersCount: 3 # Nombre exact de joueurs requis (3 ou 6)
-rooms: 2 # Nombre de salles dans le donjon
-region: "Astrub"
-
-# Images
-icon:
-  src: "/images/donjons/mere-michou/icon.jpg"
-  alt: "Icône du donjon Chez la Mère Michou"
 image:
   src: "/images/donjons/mere-michou/banner.jpg"
   alt: "Bannière du donjon Chez la Mère Michou"
-
-# Bosses
+description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
+difficulty: "easy"
+players: "group"
+region: "Astrub"
+boss: "Mère Michou"
 bosses:
-  - name: "Mère zebi"
-    description: "La maîtresse des Chachas."
-    hp: 500
+  - name: "Mère Michou"
+    description: "La maîtresse des lieux, entourée de ses fidèles Chachas. Elle utilise des attaques de zone et peut invoquer des Chachas supplémentaires."
+    hp: 2000
     masteries:
-        fire: 20
-        water: 10
-        earth: 15
-        air: 5
+      fire: 25
+      water: 15
+      earth: 20
+      air: 10
     resistances:
-        fire: 10
-        water: 25
-        earth: 0
-        air: 5
-    # bossImage: { src: "/path/to/image.jpg", alt: "Mère Michou" } # Optional
-
-# Stèles (Optional)
-steles:
-  - name: "Stèle de Soin"
-    description: "Restaure 100 PV à tous les alliés dans une zone de 2 cases."
-  - name: "Stèle de Protection"
-    description: "Confère un bouclier de 50 PV aux alliés adjacents."
-  - name: "Stèle d'Affaiblissement"
-    description: "Réduit les résistances des ennemis de 10% dans une zone de 3 cases."
-
-# Stratégie
-strategy: "La Mère Michou est un boss qui demande une bonne gestion du placement et des ressources. Il est important de bien gérer les cases maudites et de se concentrer sur l'élimination rapide des Chachas invoqués."
-
-# Mécaniques
+      fire: 10
+      water: 20
+      earth: 15
+      air: 5
 mechanics:
-  - name: "Cases de bordure"
-    description: "Les cases de bordure soignent les chachas et infligent des dégâts à vos personnages"
-  - name: "Cases Maudites"
-    description: "Certaines cases sur les bords soignent les ennemis qui finissent leur tour dessus."
   - name: "Invocation de Chachas"
-    description: "La Mère Michou peut invoquer des Chachas supplémentaires."
-  - name: "Attaques en ligne"
-    description: "La plupart des attaques de la Mère Michou sont en ligne droite, il faut donc éviter de s'aligner avec elle."
-
-# Monstres
-monsters:
-  - name: "Chacha"
-    level: 9
-    elements: ["terre"]
-    weaknesses: ["eau", "feu"]
-  - name: "Chacha Blanc"
-    level: 9
-    elements: ["eau"]
-    weaknesses: ["eau"]
-  - name: "Maine Cooyne"
-    level: 10
-    elements: ["feu"]
-    weaknesses: ["terre"]
-
-# Récompenses
-rewards:
-  # Équipements
-  - name: "Amulette Michou"
-    type: "equipment"
-    description: "Un précieux artefact qui augmente les points de vie."
-    dropRate: 15
-    image:
-      src: "/images/ability/health.png"
-      alt: "Amulette Michou - Vue détaillée"
-    icon:
-      src: "/images/ability/specialite.png"
-      alt: "Icône d'équipement"
-    stats:
-      - "Vitalité: +25"
-      - "Agilité: +10"
-      - "Résistance Élémentaire: +3%"
-
-  - name: "Casque de la Mère"
-    type: "equipment"
-    description: "Un casque légendaire forgé dans les cuisines de Michou."
-    dropRate: 8
-    image:
-      src: "/images/ability/tank.png"
-      alt: "Casque de la Mère - Vue détaillée"
-    icon:
-      src: "/images/ability/control.png"
-      alt: "Icône d'équipement"
-    stats:
-      - "Armure: +45"
-      - "Résistance: +15"
-      - "Vitalité: +30"
-
-  # Ressources
-  - name: "Recette Secrète"
-    type: "resource"
-    description: "Une recette mystérieuse écrite de la main de la Mère Michou."
-    dropRate: 25
-    image:
-      src: "/images/ability/specialite.png"
-      alt: "Recette Secrète - Vue détaillée"
-    icon:
-      src: "/images/ability/soutien.png"
-      alt: "Icône de ressource"
-
-  - name: "Ingrédient Rare"
-    type: "resource"
-    description: "Un ingrédient mystérieux utilisé dans les meilleures recettes."
-    dropRate: 20
-    image:
-      src: "/images/ability/dps.png"
-      alt: "Ingrédient Rare - Vue détaillée"
-    icon:
-      src: "/images/ability/invocation.png"
-      alt: "Icône de ressource"
-
+    description: "La Mère Michou invoque régulièrement des Chachas qui doivent être éliminés rapidement."
+  - name: "Attaque de Zone"
+    description: "Une attaque qui touche tous les joueurs dans une zone et peut les étourdir."
+rewards: [
+  "Amulette Michou (15% de chance)",
+  "Casque de la Mère (8% de chance)",
+  "Recette Secrète (25% de chance)",
+  "Ingrédient Rare (20% de chance)"
+]
+strategy:
+  phases:
+    - title: "Phase 1 - Les Chachas"
+      description: "Commencez par éliminer les Chachas un par un. Ils sont faibles individuellement mais peuvent être dangereux en groupe. Concentrez vos attaques sur un seul Chacha à la fois."
+    - title: "Phase 2 - La Mère Michou"
+      description: "La Mère Michou devient plus agressive et invoque plus fréquemment des Chachas. Elle utilise des attaques de zone qui peuvent étourdir. Gardez vos distances et éliminez les Chachas invoqués rapidement."
+  tips:
+    - "Gardez un personnage à distance pour gérer les invocations"
+    - "Évitez de vous regrouper pour limiter les dégâts de zone"
+    - "Priorisez les soins sur le tank pendant la phase 2"
+    - "Utilisez des sorts de contrôle sur les Chachas"
+requirements: [
+  "Niveau 9 minimum",
+  "Groupe de 3 joueurs",
+  "Au moins un soigneur recommandé"
+]
 ---
