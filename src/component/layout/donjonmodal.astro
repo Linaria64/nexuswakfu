@@ -222,6 +222,7 @@ const { donjonData, isOpen, onClose } = Astro.props;
                             src={reward.image.src} 
                             alt={reward.image.alt} 
                             class="w-12 h-12 rounded-lg"
+                            loading="lazy"
                           />
                         )}
                         <div class="flex-1">
@@ -231,27 +232,26 @@ const { donjonData, isOpen, onClose } = Astro.props;
                                 src={reward.icon.src} 
                                 alt={reward.icon.alt} 
                                 class="w-6 h-6"
+                                loading="lazy"
                               />
                             )}
                             <h4 class="text-lg font-semibold text-cyan-400">{reward.name}</h4>
                           </div>
+                          {reward.stats && (
+                            <ul class="mt-2 space-y-1">
+                              {reward.stats.map(stat => (
+                                <li class="text-sm text-white/80">{stat}</li>
+                              ))}
+                            </ul>
+                          )}
                         </div>
                       </div>
                       <p class="text-white/90 mb-2">{reward.description}</p>
-                      {reward.stats && (
-                        <ul class="space-y-1 mb-2">
-                          {reward.stats.map((stat) => (
-                            <li class="text-white/80">{stat}</li>
-                          ))}
-                        </ul>
-                      )}
-                      {Number(reward.dropRate) > 0 && (
-                        <div class="flex justify-end mt-2">
-                          <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
-                            Taux de drop : {reward.dropRate}%
-                          </span>
-                        </div>
-                      )}
+                      <div class="flex justify-end mt-2">
+                        <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
+                          Taux de drop : {reward.dropRate}%
+                        </span>
+                      </div>
                     </div>
                   ))}
               </div>
@@ -272,6 +272,7 @@ const { donjonData, isOpen, onClose } = Astro.props;
                             src={reward.image.src} 
                             alt={reward.image.alt} 
                             class="w-12 h-12 rounded-lg"
+                            loading="lazy"
                           />
                         )}
                         <div class="flex-1">
@@ -281,6 +282,7 @@ const { donjonData, isOpen, onClose } = Astro.props;
                                 src={reward.icon.src} 
                                 alt={reward.icon.alt} 
                                 class="w-6 h-6"
+                                loading="lazy"
                               />
                             )}
                             <h4 class="text-lg font-semibold text-cyan-400">{reward.name}</h4>
@@ -288,13 +290,11 @@ const { donjonData, isOpen, onClose } = Astro.props;
                         </div>
                       </div>
                       <p class="text-white/90 mb-2">{reward.description}</p>
-                      {Number(reward.dropRate) > 0 && (
-                        <div class="flex justify-end mt-2">
-                          <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
-                            Taux de drop : {reward.dropRate}%
-                          </span>
-                        </div>
-                      )}
+                      <div class="flex justify-end mt-2">
+                        <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
+                          Taux de drop : {reward.dropRate}%
+                        </span>
+                      </div>
                     </div>
                   ))}
               </div>

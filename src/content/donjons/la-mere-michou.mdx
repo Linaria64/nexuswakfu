@@ -29,12 +29,54 @@ mechanics:
     description: "La Mère Michou invoque régulièrement des Chachas qui doivent être éliminés rapidement."
   - name: "Attaque de Zone"
     description: "Une attaque qui touche tous les joueurs dans une zone et peut les étourdir."
-rewards: [
-  "Amulette Michou (15% de chance)",
-  "Casque de la Mère (8% de chance)",
-  "Recette Secrète (25% de chance)",
-  "Ingrédient Rare (20% de chance)"
-]
+rewards:
+  - name: "Amulette Michou"
+    type: "equipment"
+    description: "Une amulette qui augmente les caractéristiques de base et offre un bonus aux dégâts contre les créatures de type Chacha."
+    dropRate: 15
+    image:
+      src: "/images/items/amulette-michou.webp"
+      alt: "Amulette Michou"
+    icon:
+      src: "/images/icons/amulette.webp"
+      alt: "Icône Amulette"
+    stats:
+      - "+20 Intelligence"
+      - "+15 Chance"
+      - "+5% Dégâts contre les Chachas"
+  - name: "Casque de la Mère"
+    type: "equipment"
+    description: "Un casque rare qui améliore la résistance aux dégâts et donne un bonus de sagesse."
+    dropRate: 8
+    image:
+      src: "/images/items/casque-mere.webp"
+      alt: "Casque de la Mère"
+    icon:
+      src: "/images/icons/casque.webp"
+      alt: "Icône Casque"
+    stats:
+      - "+25 Sagesse"
+      - "+10% Résistance"
+  - name: "Recette Secrète"
+    type: "resource"
+    description: "Une recette permettant de cuisiner un plat spécial qui attire les Chachas."
+    dropRate: 25
+    image:
+      src: "/images/items/recette.webp"
+      alt: "Recette Secrète"
+    icon:
+      src: "/images/icons/recette.webp"
+      alt: "Icône Recette"
+  - name: "Ingrédient Rare"
+    type: "resource"
+    description: "Un ingrédient mystérieux utilisé dans diverses recettes de cuisine."
+    dropRate: 20
+    image:
+      src: "/images/items/ingredient.webp"
+      alt: "Ingrédient Rare"
+    icon:
+      src: "/images/icons/ingredient.webp"
+      alt: "Icône Ingrédient"
 strategy:
   phases:
     - title: "Phase 1 - Les Chachas"
