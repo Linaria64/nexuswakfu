@@ -341,20 +341,79 @@ const imageAlt = data.image?.alt ?? `Bannière du donjon ${data.name}`;
                       {equipments.length === 0 ? (
                         <p class="text-sm text-gray-400 italic">Aucun équipement disponible</p>
                       ) : (
-                        <div class="grid grid-cols-1 gap-3">
-                          {equipments.map(reward => (
-                            <div class="bg-gray-800/30 p-3 rounded-lg border border-yellow-800/30 hover:border-yellow-600/30 transition-colors duration-300 flex items-center">
-                              <div class="w-10 h-10 rounded-full mr-3 flex-shrink-0 flex items-center justify-center text-amber-300 bg-gradient-to-br from-amber-900/50 to-yellow-800/40 border border-amber-700/30">
-                                🛡️
-                              </div>
-                              <div class="flex-1">
-                                <span class="text-sm font-medium text-amber-200 block">{reward.name}</span>
-                                {reward.description && (
-                                  <span class="text-xs text-gray-400 mt-1 block">{reward.description}</span>
-                                )}
-                              </div>
-                            </div>
-                          ))}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {equipments.map((reward, index) => {
+                            const equipModalId = `equip-details-${modalId}-${index}`;
+                            return (
+                              <>
+                                <div class="equipment-wrapper relative">
+                                  <button 
+                                    class="equipment-toggle equipment-item text-left bg-gray-800/30 p-3 rounded-lg border border-yellow-800/30 hover:border-yellow-600/30 hover:bg-yellow-900/10 transition-colors duration-300 flex items-center w-full"
+                                    data-target={equipModalId}
+                                  >
+                                    <div class="w-10 h-10 rounded-full mr-3 flex-shrink-0 flex items-center justify-center text-amber-300 bg-gradient-to-br from-amber-900/50 to-yellow-800/40 border border-amber-700/30">
+                                      🛡️
+                                    </div>
+                                    <div class="flex-1">
+                                      <span class="text-sm font-medium text-amber-200 block">{reward.name}</span>
+                                      {reward.description && (
+                                        <span class="text-xs text-gray-400 mt-1 block">{reward.description}</span>
+                                      )}
+                                    </div>
+                                    <div class="text-amber-400 ml-2">
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                      </svg>
+                                    </div>
+                                  </button>
+                                  
+                                  {/* Popup détails pour l'équipement */}
+                                  <div 
+                                    id={equipModalId} 
+                                    class="equipment-details hidden absolute z-50 w-80 p-4 bg-gray-900/95 backdrop-blur-md border border-amber-700/50 rounded-lg shadow-xl right-0 top-full mt-2"
+                                  >
+                                    {/* Image de l'équipement */}
+                                    {reward.image && (
+                                      <div class="mb-4 overflow-hidden rounded-lg shadow-lg border-2 border-amber-600/50 flex justify-center bg-gradient-to-b from-amber-900/30 to-gray-900/50 p-2">
+                                        <img 
+                                          src={reward.image} 
+                                          alt={`Image de ${reward.name}`} 
+                                          class="max-w-full max-h-48 object-contain" 
+                                        />
+                                      </div>
+                                    )}
+                                    
+                                    {/* Titre */}
+                                    <h3 class="text-lg font-bold text-amber-200 mb-2 flex items-center">
+                                      <span class="mr-2">🛡️</span> {reward.name}
+                                    </h3>
+                                    
+                                    {/* Description */}
+                                    {reward.description && (
+                                      <div class="mb-4">
+                                        <h4 class="text-sm font-semibold text-amber-300 mb-1">Description :</h4>
+                                        <p class="text-sm text-gray-300 italic">"{reward.description}"</p>
+                                      </div>
+                                    )}
+                                    
+                                    {/* Statistiques */}
+                                    {reward.stats && reward.stats.length > 0 && (
+                                      <div class="p-3 bg-amber-950/30 rounded border border-amber-700/20">
+                                        <h4 class="text-sm font-semibold text-amber-300 mb-2">Statistiques :</h4>
+                                        <ul class="text-sm text-gray-300 space-y-2 pl-1">
+                                          {reward.stats.map(stat => (
+                                            <li class="flex items-baseline">
+                                              <span class="text-amber-400 mr-2">•</span> {stat}
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </>
+                            );
+                          })}
                         </div>
                       )}
                     </div>
@@ -441,4 +500,79 @@ const imageAlt = data.image?.alt ?? `Bannière du donjon ${data.name}`;
     background: rgba(30, 41, 59, 0.4);
     backdrop-filter: blur(12px);
   }
+  /* Style pour les mini-modals des équipements */
+  .equipment-item:hover {
+    z-index: 10;
+  }
+  
+  /* Styles pour les popups d'équipement */
+  .equipment-wrapper {
+    position: relative;
+  }
+  
+  .equipment-toggle {
+    cursor: pointer;
+  }
+  
+  .equipment-details {
+    position: absolute;
+    z-index: 100;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  
+  .equipment-details.hidden {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+  
+  .equipment-details.block {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 </style>
+
+<script>
+  // Script pour gérer l'affichage des détails des équipements
+  document.addEventListener('DOMContentLoaded', () => {
+    const equipButtons = document.querySelectorAll('.equipment-toggle');
+    
+    equipButtons.forEach(button => {
+      const targetId = button.getAttribute('data-target');
+      const target = document.getElementById(targetId);
+      
+      if (!target) return;
+      
+      // Montrer/cacher les détails au clic
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isVisible = target.classList.contains('block');
+        
+        // Fermer tous les popups
+        document.querySelectorAll('.equipment-details').forEach(popup => {
+          popup.classList.remove('block');
+          popup.classList.add('hidden');
+        });
+        
+        // Ouvrir celui-ci s'il était fermé
+        if (!isVisible) {
+          target.classList.remove('hidden');
+          target.classList.add('block');
+        }
+      });
+    });
+    
+    // Fermer les popups quand on clique ailleurs
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.equipment-details').forEach(popup => {
+        popup.classList.remove('block');
+        popup.classList.add('hidden');
+      });
+    });
+  });
+</script>
+
