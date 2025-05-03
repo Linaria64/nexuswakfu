@@ -113,7 +113,12 @@ const donjonCollection = defineCollection({
     // --- Rewards ---
     rewards: z.array(z.object({
         name: z.string(),
-        type: z.enum(['equipment', 'resource'])
+        type: z.enum(['equipment', 'resource']),
+        description: z.string(),
+        dropRate: z.number().optional(),
+        image: imageSchema.optional(),
+        icon: imageSchema.optional(),
+        stats: z.array(z.string()).optional()
     })).optional(),
 
     // --- Other Dungeon Info (Optional) ---

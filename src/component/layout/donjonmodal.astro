@@ -33,7 +33,12 @@ interface Props {
         name: string;
         type: string;
         description: string;
+        dropRate?: number;
         image?: {
+          src: string;
+          alt: string;
+        };
+        icon?: {
           src: string;
           alt: string;
         };
@@ -46,10 +51,11 @@ interface Props {
 }
 
 const { donjonData, isOpen, onClose } = Astro.props;
+
 ---
 
 <div class={`fixed inset-0 z-50 ${isOpen ? 'flex' : 'hidden'} items-center justify-center modal-container`} data-modal={donjonData.data.name}>
-  <!-- Overlay - Ajout de onclick pour fermer en cliquant sur le fond -->
+  <!-- Overlay -->
   <div 
     class="fixed inset-0 bg-black/70 backdrop-blur-sm modal-overlay"
     onclick={onClose}
@@ -164,18 +170,34 @@ const { donjonData, isOpen, onClose } = Astro.props;
                       class="w-12 h-12 rounded-lg"
                     />
                   )}
-                  <div>
-                    <h4 class="text-lg font-semibold text-cyan-400">{reward.name}</h4>
+                  <div class="flex-1">
+                    <div class="flex items-center gap-2">
+                      {reward.icon && (
+                        <img 
+                          src={reward.icon.src} 
+                          alt={reward.icon.alt} 
+                          class="w-6 h-6"
+                        />
+                      )}
+                      <h4 class="text-lg font-semibold text-cyan-400">{reward.name}</h4>
+                    </div>
                     <p class="text-white/60">{reward.type}</p>
                   </div>
                 </div>
                 <p class="text-white/90 mb-2">{reward.description}</p>
                 {reward.stats && (
-                  <ul class="space-y-1">
+                  <ul class="space-y-1 mb-2">
                     {reward.stats.map((stat) => (
                       <li class="text-white/80">{stat}</li>
                     ))}
                   </ul>
+                )}
+                {Number(reward.dropRate) > 0 && (
+                  <div class="flex justify-end mt-2">
+                    <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
+                      Taux de drop : {reward.dropRate}%
+                    </span>
+                  </div>
                 )}
               </div>
             ))}
