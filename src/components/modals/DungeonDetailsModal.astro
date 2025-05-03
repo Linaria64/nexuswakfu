@@ -327,8 +327,16 @@ const imageAlt = data.image?.alt ?? `Bannière du donjon ${data.name}`;
               </h3>
             </div>
             <div class="p-4">
+
               <!-- Séparer les récompenses en deux catégories -->
               {(() => {
+                // Mappage direct d'icônes et couleurs par nom d'équipement
+                const equipmentIconMap = {
+                  "Amulette Michou": { icon: "A", color: "text-red-500" },
+                  "Anneau Vital": { icon: "V", color: "text-amber-400" },
+                  // Ajouter d'autres équipements au besoin
+                };
+                
                 const equipments = data.rewards.filter(r => r.type === 'equipment');
                 const resources = data.rewards.filter(r => r.type === 'resource');
                 return (
@@ -351,8 +359,14 @@ const imageAlt = data.image?.alt ?? `Bannière du donjon ${data.name}`;
                                     class="equipment-toggle equipment-item text-left bg-gray-800/30 p-3 rounded-lg border border-yellow-800/30 hover:border-yellow-600/30 hover:bg-yellow-900/10 transition-colors duration-300 flex items-center w-full"
                                     data-target={equipModalId}
                                   >
-                                    <div class="w-10 h-10 rounded-full mr-3 flex-shrink-0 flex items-center justify-center text-amber-300 bg-gradient-to-br from-amber-900/50 to-yellow-800/40 border border-amber-700/30">
-                                      🛡️
+                                    <div class="w-10 h-10 rounded-full mr-3 flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-amber-900/50 to-yellow-800/40 border border-amber-700/30 overflow-hidden">
+                                      {reward.icon ? (
+                                        <span class={`text-sm font-bold ${reward.iconColor || 'text-amber-300'}`}>{reward.icon}</span>
+                                      ) : equipmentIconMap[reward.name] ? (
+                                        <span class={`text-sm font-bold ${equipmentIconMap[reward.name].color}`}>{equipmentIconMap[reward.name].icon}</span>
+                                      ) : (
+                                        <span class="text-amber-300">🛡️</span>
+                                      )}
                                     </div>
                                     <div class="flex-1">
                                       <span class="text-sm font-medium text-amber-200 block">{reward.name}</span>
@@ -385,7 +399,16 @@ const imageAlt = data.image?.alt ?? `Bannière du donjon ${data.name}`;
                                     
                                     {/* Titre */}
                                     <h3 class="text-lg font-bold text-amber-200 mb-2 flex items-center">
-                                      <span class="mr-2">🛡️</span> {reward.name}
+                                      <span class="mr-2 bg-gradient-to-br from-amber-900/50 to-yellow-800/40 border border-amber-700/30 rounded-full w-6 h-6 flex items-center justify-center">
+                                        {reward.icon ? (
+                                          <span class={`text-xs font-bold ${reward.iconColor || 'text-amber-300'}`}>{reward.icon}</span>
+                                        ) : equipmentIconMap[reward.name] ? (
+                                          <span class={`text-xs font-bold ${equipmentIconMap[reward.name].color}`}>{equipmentIconMap[reward.name].icon}</span>
+                                        ) : (
+                                          <span class="text-amber-300">🛡️</span>
+                                        )}
+                                      </span>
+                                      {reward.name}
                                     </h3>
                                     
                                     {/* Description */}
