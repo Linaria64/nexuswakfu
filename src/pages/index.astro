@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Layout from '../component/layout.astro';
 
 // Récupérer les données des collections
 const classes = await getCollection('classes');
@@ -38,6 +39,7 @@ const features = [
 ];
 ---
 
+<Layout title="Accueil">
 <div class="min-h-screen">
   <!-- Hero Section avec effet glassmorphism inspiré du design de référence -->
   <div class="relative min-h-screen flex items-center justify-center overflow-hidden">

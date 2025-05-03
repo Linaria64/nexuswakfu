@@ -1,0 +1,33 @@
+---
+// src/layouts/Layout.astro
+import Navigation from '../component/layout/navigation.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title,
+  description = "Guide complet pour Wakfu - Classes, Donjons, Quêtes et plus encore"
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | NexusWakfu</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-slate-900 text-white min-h-screen">
+    <Navigation />
+    
+    <!-- Ajouter un padding-top pour compenser la navbar fixed -->
+    <main class="pt-16">
+      <slot />
+    </main>
+  </body>
+</html>
