@@ -327,18 +327,66 @@ const imageAlt = data.image?.alt ?? `Bannière du donjon ${data.name}`;
               </h3>
             </div>
             <div class="p-4">
-              <div class="grid grid-cols-1 gap-3">
-                {data.rewards.map(reward => (
-                  <div class="bg-gray-800/30 p-3 rounded-lg border border-yellow-800/30 hover:border-yellow-600/30 transition-colors duration-300 flex flex-col items-center text-center">
-                    <div class="w-12 h-12 rounded-full mb-2 flex items-center justify-center text-amber-300 bg-gradient-to-br from-amber-900/50 to-yellow-800/40 border border-amber-700/30">
-                      {reward.type === 'equipment' ? '🛡️' : '💎'}
+              <!-- Séparer les récompenses en deux catégories -->
+              {(() => {
+                const equipments = data.rewards.filter(r => r.type === 'equipment');
+                const resources = data.rewards.filter(r => r.type === 'resource');
+                return (
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Colonne Équipements */}
+                    <div class="space-y-4">
+                      <h4 class="font-bold text-amber-200 text-lg border-b border-amber-700/30 pb-2 flex items-center">
+                        <span class="mr-2">🛡️</span> Équipements
+                      </h4>
+                      {equipments.length === 0 ? (
+                        <p class="text-sm text-gray-400 italic">Aucun équipement disponible</p>
+                      ) : (
+                        <div class="grid grid-cols-1 gap-3">
+                          {equipments.map(reward => (
+                            <div class="bg-gray-800/30 p-3 rounded-lg border border-yellow-800/30 hover:border-yellow-600/30 transition-colors duration-300 flex items-center">
+                              <div class="w-10 h-10 rounded-full mr-3 flex-shrink-0 flex items-center justify-center text-amber-300 bg-gradient-to-br from-amber-900/50 to-yellow-800/40 border border-amber-700/30">
+                                🛡️
+                              </div>
+                              <div class="flex-1">
+                                <span class="text-sm font-medium text-amber-200 block">{reward.name}</span>
+                                {reward.description && (
+                                  <span class="text-xs text-gray-400 mt-1 block">{reward.description}</span>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <span class="text-sm font-medium text-amber-200">{reward.name}</span>
-                    <span class="text-xs text-amber-400/80 capitalize mt-1 bg-amber-950/30 px-2 py-0.5 rounded-full">
-                      {reward.type === 'equipment' ? 'Équipement' : 'Ressource'}
-                    </span>
+                    
+                    {/* Colonne Ressources */}
+                    <div class="space-y-4">
+                      <h4 class="font-bold text-amber-200 text-lg border-b border-amber-700/30 pb-2 flex items-center">
+                        <span class="mr-2">💎</span> Ressources
+                      </h4>
+                      {resources.length === 0 ? (
+                        <p class="text-sm text-gray-400 italic">Aucune ressource disponible</p>
+                      ) : (
+                        <div class="grid grid-cols-1 gap-3">
+                          {resources.map(reward => (
+                            <div class="bg-gray-800/30 p-3 rounded-lg border border-yellow-800/30 hover:border-yellow-600/30 transition-colors duration-300 flex items-center">
+                              <div class="w-10 h-10 rounded-full mr-3 flex-shrink-0 flex items-center justify-center text-amber-300 bg-gradient-to-br from-amber-900/50 to-yellow-800/40 border border-amber-700/30">
+                                💎
+                              </div>
+                              <div class="flex-1">
+                                <span class="text-sm font-medium text-amber-200 block">{reward.name}</span>
+                                {reward.description && (
+                                  <span class="text-xs text-gray-400 mt-1 block">{reward.description}</span>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                ))}
+                )
+              })()}
               </div>
             </div>
           </div>
