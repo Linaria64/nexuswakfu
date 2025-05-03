@@ -132,9 +132,8 @@ const { isOpen, onClose, classData } = Astro.props;
 </div>
 
 <script>
-  // Prevent scrolling when modal is open
   document.addEventListener('astro:page-load', () => {
-    const body = document.body;
+    // Observer pour gérer le scroll du body
     const modals = document.querySelectorAll('[data-modal]');
     
     modals.forEach(modal => {
@@ -142,7 +141,7 @@ const { isOpen, onClose, classData } = Astro.props;
         mutations.forEach((mutation) => {
           if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
             const isHidden = modal.classList.contains('hidden');
-            body.style.overflow = isHidden ? '' : 'hidden';
+            document.body.style.overflow = isHidden ? '' : 'hidden';
           }
         });
       });

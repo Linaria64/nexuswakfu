@@ -2,6 +2,7 @@
 import Layout from '../component/layout.astro';
 import { getCollection } from 'astro:content';
 import ClassModal from '../component/layout/classmodal.astro';
+import type { CollectionEntry } from 'astro:content';
 
 // Récupérer toutes les classes
 const classes = await getCollection('classes');
@@ -35,7 +36,7 @@ function ensureImage(image: any, defaultAlt: string) {
 }
 
 // Fonction pour traiter les données de classe
-function processClassData(classItem: any) {
+function processClassData(classItem: CollectionEntry<'classes'>) {
   return {
     data: {
       name: classItem.data.name || '',
@@ -110,7 +111,7 @@ function processClassData(classItem: any) {
             <div class="p-4 border-t border-white/10 bg-white/5">
               <button 
                 class="glass-button glass-cyan w-full text-center"
-                onclick={`openModal('${classItem.data.name}')`}
+                onclick={`window.openModal('${classItem.data.name}')`}
               >
                 En savoir plus
               </button>
@@ -125,49 +126,56 @@ function processClassData(classItem: any) {
   {classes.map((classItem) => (
     <ClassModal
       isOpen={false}
-      onClose={`closeModal('${classItem.data.name}')`}
+      onClose={`window.closeModal('${classItem.data.name}')`}
       classData={processClassData(classItem)}
     />
   ))}
 </Layout>
 
-<script>
-  function openModal(name: string) {
-    const modal = document.querySelector(`[data-modal="${name}"]`) as HTMLElement;
+<script is:inline>
+  // Définir les fonctions sur window avant tout
+  window.openModal = function(name) {
+    const modal = document.querySelector(`[data-modal="${name}"]`);
     if (modal) {
       modal.classList.remove('hidden');
       modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
     }
-  }
+  };
 
-  function closeModal(name: string) {
-    const modal = document.querySelector(`[data-modal="${name}"]`) as HTMLElement;
+  window.closeModal = function(name) {
+    const modal = document.querySelector(`[data-modal="${name}"]`);
     if (modal) {
       modal.classList.remove('flex');
       modal.classList.add('hidden');
+      document.body.style.overflow = '';
     }
-  }
+  };
+</script>
 
-  // Close modal when clicking outside
-  document.addEventListener('click', (e: MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (target?.classList.contains('modal-overlay')) {
-      const modal = target.closest('.modal-container');
-      if (modal) {
-        const name = modal.getAttribute('data-modal');
-        if (name) closeModal(name);
+<script>
+  document.addEventListener('astro:page-load', () => {
+    // Close modal when clicking outside
+    document.addEventListener('click', (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target?.classList.contains('modal-overlay')) {
+        const modal = target.closest('.modal-container');
+        if (modal) {
+          const name = modal.getAttribute('data-modal');
+          if (name) window.closeModal(name);
+        }
       }
-    }
-  });
+    });
 
-  // Close modal with Escape key
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      const openModal = document.querySelector('.modal-container.flex');
-      if (openModal) {
-        const name = openModal.getAttribute('data-modal');
-        if (name) closeModal(name);
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        const openModal = document.querySelector('.modal-container.flex');
+        if (openModal) {
+          const name = openModal.getAttribute('data-modal');
+          if (name) window.closeModal(name);
+        }
       }
-    }
+    });
   });
 </script>
