@@ -17,8 +17,9 @@ const currentYear = new Date().getFullYear();
 // Liens du pied de page
 const footerLinks = [
   { text: 'Accueil', href: '/' },
-  { text: 'Classes', href: '/classes' },
-  { text: 'Donjons', href: '/donjons' },
+  { text: 'Classes', href: '/classe' },
+  { text: 'Donjons', href: '/donjon' },
+  { text: 'Quêtes', href: '/quetes' },
 ];
 ---
 
@@ -39,29 +40,33 @@ const footerLinks = [
       <slot />
     </main>
 
-    <footer class="py-8 bg-gray-900 border-t border-gray-800" role="contentinfo">
-      <div class="container mx-auto">
+    <footer class="py-6 relative overflow-hidden z-10 flex flex-col bg-gradient-to-b from-blue-800 via-indigo-900 to-purple-900" role="contentinfo">
+      <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div class="md:col-span-2">
-            <a href="/" class="flex items-center text-xl font-bold text-white mb-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-wakfu-secondary" tabindex="0">
-              <span class="text-wakfu-secondary">Nexus</span>
-              <span class="ml-1">Wakfu</span>
+            <a href="/" class="flex items-center text-xl font-bold mb-4 group transition-all duration-300 w-fit">
+              <span class="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">Nexus</span>
+              <span class="ml-1 text-white group-hover:text-cyan-100 transition-colors">Wakfu</span>
+              <span class="block h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-cyan-400 to-indigo-400 transition-all duration-300 mt-0.5"></span>
             </a>
-            <p class="text-gray-400 max-w-md">
+            <p class="text-gray-300 max-w-md">
               Guide complet non-officiel pour le MMORPG tactique Wakfu. Stratégies, builds, astuces et ressources pour tous les joueurs.
             </p>
           </div>
           
           <div>
-            <h3 class="text-white font-medium mb-4">Navigation</h3>
-            <ul class="space-y-2">
+            <h3 class="text-white font-medium mb-4 relative inline-block">
+              Navigation
+              <span class="absolute -bottom-1 left-0 w-1/2 h-0.5 bg-gradient-to-r from-cyan-400 to-transparent"></span>
+            </h3>
+            <ul class="space-y-3">
               {footerLinks.map(link => (
                 <li>
                   <a 
                     href={link.href} 
-                    class="text-gray-400 hover:text-wakfu-secondary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-wakfu-secondary"
-                    tabindex="0"
+                    class="text-gray-300 hover:text-cyan-400 transition-colors flex items-center group"
                   >
+                    <span class="w-0 h-0.5 bg-cyan-400 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-2"></span>
                     {link.text}
                   </a>
                 </li>
@@ -70,19 +75,22 @@ const footerLinks = [
           </div>
           
           <div>
-            <h3 class="text-white font-medium mb-4">Ressources</h3>
-            <ul class="space-y-2">
+            <h3 class="text-white font-medium mb-4 relative inline-block">
+              Ressources
+              <span class="absolute -bottom-1 left-0 w-1/2 h-0.5 bg-gradient-to-r from-cyan-400 to-transparent"></span>
+            </h3>
+            <ul class="space-y-3">
               <li>
                 <a 
                   href="https://www.wakfu.com/fr/mmorpg" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  class="text-gray-400 hover:text-wakfu-secondary transition-colors flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-wakfu-secondary"
+                  class="text-gray-300 hover:text-cyan-400 transition-colors flex items-center group"
                   aria-label="Site officiel Wakfu (nouvel onglet)"
-                  tabindex="0"
                 >
+                  <span class="w-0 h-0.5 bg-cyan-400 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-2"></span>
                   Site officiel
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
                     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
                   </svg>
@@ -93,12 +101,12 @@ const footerLinks = [
                   href="https://www.wakfu.com/fr/forum" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  class="text-gray-400 hover:text-wakfu-secondary transition-colors flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-wakfu-secondary"
+                  class="text-gray-300 hover:text-cyan-400 transition-colors flex items-center group"
                   aria-label="Forums Wakfu (nouvel onglet)"
-                  tabindex="0"
                 >
+                  <span class="w-0 h-0.5 bg-cyan-400 group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-2"></span>
                   Forums 
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
                     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
                   </svg>
@@ -108,11 +116,11 @@ const footerLinks = [
           </div>
         </div>
         
-        <div class="mt-8 pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-          <p class="text-gray-500 text-sm">
+        <div class="mt-10 pt-6 border-t border-indigo-500/20 flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 text-sm">
             &copy; {currentYear} The Nexus Wakfu. Tous droits réservés.
           </p>
-          <p class="text-gray-500 text-sm mt-2 md:mt-0">
+          <p class="text-gray-400 text-sm mt-2 md:mt-0">
             Wakfu est une marque déposée d'Ankama Games. Ce site n'est pas affilié à Ankama.
           </p>
         </div>

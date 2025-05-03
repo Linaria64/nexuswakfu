@@ -13,14 +13,18 @@ const currentPath = Astro.url.pathname;
 
 <nav class="fixed top-0 left-0 right-0 z-50">
   <!-- Conteneur principal avec effet glassmorphism -->
-  <div class="bg-slate-900/70 backdrop-blur-md border-b border-white/10">
+  <div class="py-4 relative overflow-hidden z-10 flex flex-col bg-gradient-to-b from-blue-800 via-indigo-900 to-purple-900">
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <!-- Logo et nom du site -->
-        <a href="/" class="flex items-center space-x-3 text-white hover:text-cyan-400 transition-colors">
-          <span class="text-xl font-bold">
-            <span class="text-cyan-400">Nexus</span>Wakfu
-          </span>
+        <a href="/" class="flex items-center space-x-2 text-white group transition-all duration-300">
+          <div class="relative">
+            <span class="text-xl font-bold flex items-center">
+              <span class="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">Nexus</span>
+              <span class="text-white group-hover:text-cyan-100 transition-colors">Wakfu</span>
+            </span>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-indigo-400 group-hover:w-full transition-all duration-300"></span>
+          </div>
         </a>
 
         <!-- Navigation principale -->
@@ -31,8 +35,8 @@ const currentPath = Astro.url.pathname;
               class={`
                 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
                 ${currentPath === item.href
-                  ? 'bg-white/10 text-cyan-400'
-                  : 'text-white/70 hover:text-white hover:bg-white/5'
+                  ? 'bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 text-cyan-400 border border-indigo-500/20'
+                  : 'text-white/80 hover:text-white hover:bg-white/10 hover:shadow-md hover:shadow-cyan-500/10'
                 }
               `}
             >
@@ -49,12 +53,12 @@ const currentPath = Astro.url.pathname;
             rel="noopener noreferrer"
             class="
               px-4 py-2 rounded-lg
-              bg-gradient-to-r from-cyan-500/20 to-blue-500/20
-              hover:from-cyan-500/30 hover:to-blue-500/30
+              bg-gradient-to-r from-cyan-500/20 to-indigo-500/20
+              hover:from-cyan-500/30 hover:to-indigo-500/30
               border border-cyan-500/30
               text-cyan-400 text-sm font-medium
-              transition-all duration-200
-              hover:scale-105
+              transition-all duration-300
+              hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/10
               flex items-center space-x-2
             "
           >
@@ -68,7 +72,7 @@ const currentPath = Astro.url.pathname;
         <!-- Bouton menu mobile -->
         <button
           type="button"
-          class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-white/80 hover:text-white hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-indigo-500/10 transition-all duration-200"
           aria-controls="mobile-menu"
           aria-expanded="false"
           id="mobile-menu-button"
@@ -83,15 +87,15 @@ const currentPath = Astro.url.pathname;
 
     <!-- Menu mobile -->
     <div class="md:hidden hidden" id="mobile-menu">
-      <div class="px-2 pt-2 pb-3 space-y-1 bg-slate-900/70 backdrop-blur-md border-t border-white/5">
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-slate-900/80 backdrop-blur-xl border-t border-indigo-500/20">
         {navItems.map(item => (
           <a
             href={item.href}
             class={`
-              block px-3 py-2 rounded-lg text-base font-medium transition-colors
+              block px-3 py-2 rounded-lg text-base font-medium transition-all duration-200
               ${currentPath === item.href
-                ? 'bg-white/10 text-cyan-400'
-                : 'text-white/70 hover:text-white hover:bg-white/5'
+                ? 'bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 text-cyan-400 border border-indigo-500/20'
+                : 'text-white/80 hover:text-white hover:bg-white/10'
               }
             `}
           >
@@ -104,11 +108,12 @@ const currentPath = Astro.url.pathname;
           target="_blank"
           rel="noopener noreferrer"
           class="
-            block px-3 py-2 rounded-lg
-            bg-gradient-to-r from-cyan-500/20 to-blue-500/20
+            block px-3 py-2 mt-2 rounded-lg
+            bg-gradient-to-r from-cyan-500/20 to-indigo-500/20
+            hover:from-cyan-500/30 hover:to-indigo-500/30
             border border-cyan-500/30
             text-cyan-400 text-base font-medium
-            transition-colors
+            transition-all duration-200
           "
         >
           Tri GearFu
