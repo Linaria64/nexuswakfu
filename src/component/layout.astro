@@ -32,11 +32,10 @@ const footerLinks = [
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="bg-slate-900 text-white min-h-screen flex flex-col">
+  <body class="text-white min-h-screen flex flex-col bg-gradient-to-br from-[#485563] to-[#29323c]">
     <Navigation />
     
-    <!-- Ajouter un padding-top pour compenser la navbar fixed -->
-    <main class="pt-16 flex-grow">
+    <main class="flex-grow">
       <slot />
     </main>
 
