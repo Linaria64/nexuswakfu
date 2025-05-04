@@ -38,6 +38,13 @@ const classesCollection = defineCollection({
       description: z.string(),
       image: imageSchema.optional()
     }).optional(),
+    passiveSpells: z.array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        image: imageSchema.optional()
+      })
+    ).optional(),
     abilities: z.array(
       z.object({
         type: z.string(),

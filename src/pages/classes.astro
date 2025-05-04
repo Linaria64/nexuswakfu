@@ -11,19 +11,60 @@ const classes = await getCollection('classes');
 interface Ability {
   type: string;
   name: string;
-  image?: {
+  image: {
+    src: string;
+    alt?: string;
+  };
+}
+
+interface Spell {
+  name: string;
+  description: string;
+  image: {
     src: string;
     alt: string;
   };
 }
 
-interface Spell {
-  name?: string;
-  description?: string;
-  image?: {
-    src?: string;
+interface ClassData {
+  id: string;
+  name: string;
+  role: string;
+  icon: {
+    src: string;
     alt?: string;
   };
+  image: {
+    src: string;
+    alt?: string;
+  };
+  description?: string;
+  specialty?: string;
+  abilities?: Array<{
+    type: string;
+    name: string;
+    image: {
+      src: string;
+      alt?: string;
+    };
+  }>;
+  uniquePassive?: {
+    name: string;
+    description: string;
+    image?: {
+      src: string;
+      alt?: string;
+    };
+  };
+  passiveSpells?: Array<{
+    name: string;
+    description: string;
+    image: {
+      src: string;
+      alt: string;
+    };
+  }>;
+  levelProgression?: Record<string, any>;
 }
 
 // Fonction pour s'assurer que l'image a les propriétés requises
@@ -37,34 +78,43 @@ function ensureImage(image: any, defaultAlt: string) {
 
 // Fonction pour traiter les données de classe
 function processClassData(classItem: CollectionEntry<'classes'>) {
+  const abilities = classItem.data.abilities?.map((ability: any) => ({
+    type: ability.type || '',
+    name: ability.name || '',
+    image: {
+      src: ability.image?.src || '',
+      alt: ability.image?.alt || ability.name || ''
+    }
+  })) || [];
+
+  const passiveSpells = classItem.data.passiveSpells?.map((spell: any) => ({
+    name: spell.name || '',
+    description: spell.description || '',
+    image: {
+      src: spell.image?.src || '',
+      alt: spell.image?.alt || spell.name || ''
+    }
+  })) || [];
+
   return {
     data: {
+      id: classItem.data.id || '',
       name: classItem.data.name || '',
+      role: classItem.data.role || '',
+      icon: classItem.data.icon || { src: '', alt: '' },
+      image: classItem.data.image || { src: '', alt: '' },
       description: classItem.data.description || '',
-      abilities: classItem.data.abilities?.map((ability: Ability) => ({
-        type: ability.type || '',
-        name: ability.name || '',
-        image: {
-          src: ability.image?.src || '',
-          alt: ability.image?.alt || ability.name || ''
-        }
-      })) || [],
-      uniquePassive: classItem.data.uniquePassive && {
+      specialty: classItem.data.specialty || '',
+      abilities,
+      uniquePassive: classItem.data.uniquePassive ? {
         name: classItem.data.uniquePassive.name || '',
         description: classItem.data.uniquePassive.description || '',
-        image: classItem.data.uniquePassive.image && {
+        image: classItem.data.uniquePassive.image ? {
           src: classItem.data.uniquePassive.image.src || '',
           alt: classItem.data.uniquePassive.image.alt || classItem.data.uniquePassive.name || ''
-        }
-      },
-      passiveSpells: classItem.data.passiveSpells?.map((spell: Spell) => ({
-        name: spell.name || '',
-        description: spell.description || '',
-        image: {
-          src: spell.image?.src || '',
-          alt: spell.image?.alt || spell.name || ''
-        }
-      })) || [],
+        } : undefined
+      } : undefined,
+      passiveSpells,
       levelProgression: classItem.data.levelProgression || {}
     }
   };

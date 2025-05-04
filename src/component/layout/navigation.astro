@@ -1,10 +1,9 @@
 ---
 // Navigation.astro
 const navItems = [
-  { label: "Accueil", href: "/" },
+  { label: "Quêtes", href: "/quetes" },
   { label: "Classes", href: "/classe" },
-  { label: "Donjons", href: "/donjon" },
-  { label: "Quêtes", href: "/quetes" }
+  { label: "Donjons", href: "/donjon" }
 ];
 
 // Récupérer le chemin actuel pour le menu actif
@@ -15,58 +14,49 @@ const currentPath = Astro.url.pathname;
   <!-- Conteneur principal avec effet glassmorphism -->
   <div class="py-4 relative overflow-hidden z-10 flex flex-col bg-gradient-to-b from-blue-800 via-indigo-900 to-purple-900">
     <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo et nom du site -->
-        <a href="/" class="flex items-center space-x-2 text-white group transition-all duration-300">
-          <div class="relative">
-            <span class="text-xl font-bold flex items-center">
-              <span class="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">Nexus</span>
-              <span class="text-white group-hover:text-cyan-100 transition-colors">Wakfu</span>
-            </span>
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-indigo-400 group-hover:w-full transition-all duration-300"></span>
-          </div>
-        </a>
+      <div class="flex items-center justify-center h-16 space-x-4">
+        <!-- Navigation groupée -->
+        <div class="flex items-center space-x-4">
+          <!-- Élément de gauche -->
+          <a
+            href="/quetes"
+            class={`
+              px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+              ${currentPath === "/quetes"
+                ? 'bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 text-cyan-400 border border-indigo-500/20'
+                : 'text-white/80 hover:text-white hover:bg-white/10 hover:shadow-md hover:shadow-cyan-500/10'
+              }
+            `}
+          >
+            Quêtes
+          </a>
 
-        <!-- Navigation principale -->
-        <div class="hidden md:flex items-center space-x-1">
-          {navItems.map(item => (
+          <!-- Logo central -->
+          <a href="/" class="flex items-center space-x-2 text-white group transition-all duration-300">
+            <div class="relative">
+              <span class="text-xl font-bold flex items-center">
+                <span class="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">Nexus</span>
+                <span class="text-white group-hover:text-cyan-100 transition-colors">Wakfu</span>
+              </span>
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-indigo-400 group-hover:w-full transition-all duration-300"></span>
+            </div>
+          </a>
+
+          <!-- Éléments de droite -->
+          {["Classes", "Donjons"].map(label => (
             <a
-              href={item.href}
+              href={`/${label.toLowerCase()}`}
               class={`
                 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
-                ${currentPath === item.href
+                ${currentPath === `/${label.toLowerCase()}`
                   ? 'bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 text-cyan-400 border border-indigo-500/20'
                   : 'text-white/80 hover:text-white hover:bg-white/10 hover:shadow-md hover:shadow-cyan-500/10'
                 }
               `}
             >
-              {item.label}
+              {label}
             </a>
           ))}
-        </div>
-
-        <!-- Bouton GearFu -->
-        <div class="hidden md:flex items-center">
-          <a
-            href="https://naquos.github.io/Gearfu/?itemsId=5580,30223"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="
-              px-4 py-2 rounded-lg
-              bg-gradient-to-r from-cyan-500/20 to-indigo-500/20
-              hover:from-cyan-500/30 hover:to-indigo-500/30
-              border border-cyan-500/30
-              text-cyan-400 text-sm font-medium
-              transition-all duration-300
-              hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/10
-              flex items-center space-x-2
-            "
-          >
-            <span>Tri GearFu</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-          </a>
         </div>
 
         <!-- Bouton menu mobile -->
@@ -84,6 +74,7 @@ const currentPath = Astro.url.pathname;
         </button>
       </div>
     </div>
+    3
 
     <!-- Menu mobile -->
     <div class="md:hidden hidden" id="mobile-menu">
