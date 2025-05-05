@@ -5,72 +5,40 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 210 38% 95%;
-    --foreground: 210 40% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 84% 4.9%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 84% 4.9%;
 
-    --primary: 210 100% 50%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 160 59% 50%;
-    --secondary-foreground: 222 47.4% 11.2%;
-
-    --muted: 210 40% 90%;
-    --muted-foreground: 215 16.3% 46.9%;
-
-    --accent: 45 100% 50%;
-    --accent-foreground: 222 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 85%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 210 100% 50%;
-
-    --radius: 0.75rem;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground font-wakfu;
-  }
-}
-
-.hero-section {
-  @apply relative min-h-[600px] flex items-center justify-center text-white bg-wakfu-dark overflow-hidden;
-  background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), var(--hero-bg, url('/hero-background.jpg'));
-  background-size: cover;
-  background-position: center;
-}
-
-.navigation-item {
-  @apply px-4 py-2 text-wakfu-light hover:text-wakfu-gold transition-colors duration-200;
-}
-
-.card-hover {
-  @apply transform transition-all duration-300 hover:scale-105 hover:shadow-xl;
-}
-
-.content-section {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
-}
-
-.section-title {
-  @apply text-3xl font-bold text-wakfu-dark mb-8 text-center;
-}
-
-.guide-card {
-  @apply bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300;
+@plugin "daisyui/theme" {
+  name: "Glassmorphism";
+  default: true;
+  prefersdark: true;
+  color-scheme: "dark";
+  --color-base-100: oklch(14% 0.004 49.25);
+  --color-base-200: oklch(21% 0.006 56.043);
+  --color-base-300: oklch(26% 0.007 34.298);
+  --color-base-content: oklch(97% 0.001 106.424);
+  --color-primary: oklch(62% 0.214 259.815);
+  --color-primary-content: oklch(97% 0.014 254.604);
+  --color-secondary: oklch(68% 0.169 237.323);
+  --color-secondary-content: oklch(97% 0.013 236.62);
+  --color-accent: oklch(76% 0.188 70.08);
+  --color-accent-content: oklch(98% 0.022 95.277);
+  --color-neutral: oklch(37% 0.01 67.558);
+  --color-neutral-content: oklch(98% 0.001 106.423);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(29% 0.066 243.157);
+  --color-success: oklch(77% 0.152 181.912);
+  --color-success-content: oklch(27% 0.046 192.524);
+  --color-warning: oklch(85% 0.199 91.936);
+  --color-warning-content: oklch(28% 0.066 53.813);
+  --color-error: oklch(70% 0.191 22.216);
+  --color-error-content: oklch(25% 0.092 26.042);
+  --radius-selector: 1rem;
+  --radius-field: 0rem;
+  --radius-box: 2rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
