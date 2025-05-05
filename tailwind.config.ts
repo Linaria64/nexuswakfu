@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -7,7 +6,7 @@ export default {
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
+		"./src/**/*.{ts,tsx,astro,html,js,jsx,md,mdx,svelte,vue}",
 	],
 	prefix: "",
 	theme: {
@@ -120,5 +119,53 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("daisyui")
+	],
+	daisyui: {
+		themes: [
+			{
+				glassmorphism: {
+					"color-scheme": "dark",
+					"primary": "oklch(62% 0.214 259.815)",
+					"primary-content": "oklch(97% 0.014 254.604)",
+					"secondary": "oklch(68% 0.169 237.323)",
+					"secondary-content": "oklch(97% 0.013 236.62)",
+					"accent": "oklch(76% 0.188 70.08)",
+					"accent-content": "oklch(98% 0.022 95.277)",
+					"neutral": "oklch(37% 0.01 67.558)",
+					"neutral-content": "oklch(98% 0.001 106.423)",
+					"base-100": "oklch(14% 0.004 49.25)",
+					"base-200": "oklch(21% 0.006 56.043)",
+					"base-300": "oklch(26% 0.007 34.298)",
+					"base-content": "oklch(97% 0.001 106.424)",
+					"info": "oklch(74% 0.16 232.661)",
+					"info-content": "oklch(29% 0.066 243.157)",
+					"success": "oklch(77% 0.152 181.912)",
+					"success-content": "oklch(27% 0.046 192.524)",
+					"warning": "oklch(85% 0.199 91.936)",
+					"warning-content": "oklch(28% 0.066 53.813)",
+					"error": "oklch(70% 0.191 22.216)",
+					"error-content": "oklch(25% 0.092 26.042)",
+					"--rounded-box": "2rem",
+					"--rounded-btn": "1rem",
+					"--rounded-badge": "0.5rem",
+					"--animation-btn": "0.25s",
+					"--animation-input": "0.2s",
+					"--btn-focus-scale": "0.95",
+					"--border-btn": "1px",
+					"--tab-border": "1px",
+					"--tab-radius": "0.5rem",
+				},
+			},
+			"dark",
+			"light"
+		],
+		darkTheme: "glassmorphism",
+		base: true,
+		styled: true,
+		utils: true,
+		prefix: "",
+		logs: false,
+	},
 } satisfies Config;
