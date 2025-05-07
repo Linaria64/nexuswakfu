@@ -1,11 +1,11 @@
 ---
-import Layout from '../component/layout.astro';
-import { getCollection } from 'astro:content';
-import ClassModal from '../component/layout/classmodal.astro';
-import type { CollectionEntry } from 'astro:content';
+import Layout from "../layouts/layout.astro";
+import { getCollection } from "astro:content";
+import ClassModal from "../layouts/classmodal.astro";
+import type { CollectionEntry } from "astro:content";
 
 // Récupérer toutes les classes
-const classes = await getCollection('classes');
+const classes = await getCollection("classes");
 
 // Types
 interface Ability {
@@ -71,52 +71,61 @@ interface ClassData {
 function ensureImage(image: any, defaultAlt: string) {
   if (!image) return undefined;
   return {
-    src: image.src || '',
-    alt: image.alt || defaultAlt
+    src: image.src || "",
+    alt: image.alt || defaultAlt,
   };
 }
 
 // Fonction pour traiter les données de classe
-function processClassData(classItem: CollectionEntry<'classes'>) {
-  const abilities = classItem.data.abilities?.map((ability: any) => ({
-    type: ability.type || '',
-    name: ability.name || '',
-    image: {
-      src: ability.image?.src || '',
-      alt: ability.image?.alt || ability.name || ''
-    }
-  })) || [];
+function processClassData(classItem: CollectionEntry<"classes">) {
+  const abilities =
+    classItem.data.abilities?.map((ability: any) => ({
+      type: ability.type || "",
+      name: ability.name || "",
+      image: {
+        src: ability.image?.src || "",
+        alt: ability.image?.alt || ability.name || "",
+      },
+    })) || [];
 
-  const passiveSpells = classItem.data.passiveSpells?.map((spell: any) => ({
-    name: spell.name || '',
-    description: spell.description || '',
-    image: {
-      src: spell.image?.src || '',
-      alt: spell.image?.alt || spell.name || ''
-    }
-  })) || [];
+  const passiveSpells =
+    classItem.data.passiveSpells?.map((spell: any) => ({
+      name: spell.name || "",
+      description: spell.description || "",
+      image: {
+        src: spell.image?.src || "",
+        alt: spell.image?.alt || spell.name || "",
+      },
+    })) || [];
 
   return {
     data: {
-      id: classItem.data.id || '',
-      name: classItem.data.name || '',
-      role: classItem.data.role || '',
-      icon: classItem.data.icon || { src: '', alt: '' },
-      image: classItem.data.image || { src: '', alt: '' },
-      description: classItem.data.description || '',
-      specialty: classItem.data.specialty || '',
+      id: classItem.data.id || "",
+      name: classItem.data.name || "",
+      role: classItem.data.role || "",
+      icon: classItem.data.icon || { src: "", alt: "" },
+      image: classItem.data.image || { src: "", alt: "" },
+      description: classItem.data.description || "",
+      specialty: classItem.data.specialty || "",
       abilities,
-      uniquePassive: classItem.data.uniquePassive ? {
-        name: classItem.data.uniquePassive.name || '',
-        description: classItem.data.uniquePassive.description || '',
-        image: classItem.data.uniquePassive.image ? {
-          src: classItem.data.uniquePassive.image.src || '',
-          alt: classItem.data.uniquePassive.image.alt || classItem.data.uniquePassive.name || ''
-        } : undefined
-      } : undefined,
+      uniquePassive: classItem.data.uniquePassive
+        ? {
+            name: classItem.data.uniquePassive.name || "",
+            description: classItem.data.uniquePassive.description || "",
+            image: classItem.data.uniquePassive.image
+              ? {
+                  src: classItem.data.uniquePassive.image.src || "",
+                  alt:
+                    classItem.data.uniquePassive.image.alt ||
+                    classItem.data.uniquePassive.name ||
+                    "",
+                }
+              : undefined,
+          }
+        : undefined,
       passiveSpells,
-      levelProgression: classItem.data.levelProgression || {}
-    }
+      levelProgression: classItem.data.levelProgression || {},
+    },
   };
 }
 ---
@@ -129,88 +138,94 @@ function processClassData(classItem: CollectionEntry<'classes'>) {
           <span class="text-cyan-400">Classes</span>
           <span class="text-white"> de Wakfu</span>
         </h1>
-        <div class="glass-card bg-white/10 backdrop-blur-md max-w-2xl mx-auto p-6">
+        <div
+          class="glass-card bg-white/10 backdrop-blur-md max-w-2xl mx-auto p-6"
+        >
           <p class="text-lg text-white/90 leading-relaxed">
-            Découvrez les 18 classes uniques de Wakfu, leurs spécialités et leurs rôles dans le combat.
+            Découvrez les 18 classes uniques de Wakfu, leurs spécialités et
+            leurs rôles dans le combat.
           </p>
         </div>
       </div>
 
       <!-- Grille des classes -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {classes.map((classItem) => (
-          <div class="bg-white/5 hover:bg-white/10 transition-all duration-300 rounded-xl border border-white/10 overflow-hidden backdrop-blur-md shadow-lg">
-            <div class="p-6">
-              <h2 class="text-2xl font-bold mb-4 text-cyan-400">{classItem.data.name}</h2>
-              <p class="text-white/80 mb-4">{classItem.data.description}</p>
-              <div class="flex gap-2">
-                {classItem.data.abilities?.map((ability) => (
-                  <div 
-                    class="relative group"
-                    title={ability.name}
-                  >
-                    <img 
-                      src={ability.image?.src} 
-                      alt={ability.image?.alt || ability.name}
-                      class="w-8 h-8 rounded-full bg-white/10 p-1"
-                    />
-                  </div>
-                ))}
+        {
+          classes.map((classItem) => (
+            <div class="bg-white/5 hover:bg-white/10 transition-all duration-300 rounded-xl border border-white/10 overflow-hidden backdrop-blur-md shadow-lg">
+              <div class="p-6">
+                <h2 class="text-2xl font-bold mb-4 text-cyan-400">
+                  {classItem.data.name}
+                </h2>
+                <p class="text-white/80 mb-4">{classItem.data.description}</p>
+                <div class="flex gap-2">
+                  {classItem.data.abilities?.map((ability) => (
+                    <div class="relative group" title={ability.name}>
+                      <img
+                        src={ability.image?.src}
+                        alt={ability.image?.alt || ability.name}
+                        class="w-8 h-8 rounded-full bg-white/10 p-1"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div class="p-4 border-t border-white/10 bg-white/5">
+                <button
+                  class="glass-button glass-cyan w-full text-center"
+                  onclick={`window.openModal('${classItem.data.name}')`}
+                >
+                  En savoir plus
+                </button>
               </div>
             </div>
-            <div class="p-4 border-t border-white/10 bg-white/5">
-              <button 
-                class="glass-button glass-cyan w-full text-center"
-                onclick={`window.openModal('${classItem.data.name}')`}
-              >
-                En savoir plus
-              </button>
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </main>
 
   <!-- Modals -->
-  {classes.map((classItem) => (
-    <ClassModal
-      isOpen={false}
-      onClose={`window.closeModal('${classItem.data.name}')`}
-      classData={processClassData(classItem)}
-    />
-  ))}
+  {
+    classes.map((classItem) => (
+      <ClassModal
+        isOpen={false}
+        onClose={`window.closeModal('${classItem.data.name}')`}
+        classData={processClassData(classItem)}
+      />
+    ))
+  }
 </Layout>
 
 <script is:inline>
   // Définir les fonctions sur window avant tout
-  window.openModal = function(name) {
+  window.openModal = function (name) {
     const modal = document.querySelector(`[data-modal="${name}"]`);
     if (modal) {
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
     }
   };
 
-  window.closeModal = function(name) {
+  window.closeModal = function (name) {
     const modal = document.querySelector(`[data-modal="${name}"]`);
     if (modal) {
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
+      modal.classList.remove("flex");
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
     }
   };
 </script>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("astro:page-load", () => {
     // Close modal with Escape key
-    document.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        const openModal = document.querySelector('.modal-container.flex');
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        const openModal = document.querySelector(".modal-container.flex");
         if (openModal) {
-          const name = openModal.getAttribute('data-modal');
+          const name = openModal.getAttribute("data-modal");
           if (name) window.closeModal(name);
         }
       }

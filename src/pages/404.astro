@@ -1,78 +1,58 @@
 ---
-import Layout from '../component/layout.astro';
+import { Button } from "@/components/ui/button";
+import { A, P, Span, Titleh1 } from "@/components/ui/composant";
+import { Container } from "@/components/ui/container";
+import Layout from "../layouts/layout.astro";
 ---
 
-<Layout title="404 - T'es perdu ?">
-  <main class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-    <!-- Fond avec effet glassmorphism -->
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-cyan-500/20 z-0"></div>
-    <div class="absolute inset-0 backdrop-blur-3xl z-0"></div>
-    
-    <!-- Contenu -->
-    <div class="glass-card p-8 md:p-12 max-w-2xl w-full relative z-10 text-center transform hover:scale-105 transition-all duration-300">
-      <h1 class="text-6xl md:text-8xl font-bold text-white mb-6">
-        <span class="text-cyan-400 animate-pulse inline-block">404</span>
-      </h1>
-      
-      <p class="text-2xl md:text-3xl text-white/90 mb-8 font-bold">
-        T'ES PERDU SALE MERDE ?!
-      </p>
-      
-      <div class="flex flex-col items-center gap-6">
-        <p class="text-xl text-white/80 italic mb-8 animate-bounce">
-          ↓ Clique ici et retourne d'où tu viens, Sokiro ↓
-        </p>
-        
-        <a 
-          href="/" 
-          class="glass-button glass-button-primary px-8 py-4 text-xl font-bold hover:scale-110 transform transition-all duration-300 hover:bg-cyan-400/30"
-        >
-          DÉGAGE D'ICI !
-        </a>
-      </div>
-    </div>
+<Layout
+  class="flex flex-col w-full rounded-none border-none min-h-screen bg-gradient-to-br from-[#333] to-[#13099e]"
+>
+  <Button className="border border-amber-400">je test un nouveau boutton</Button
+  >
 
-    <!-- Éléments décoratifs flottants -->
-    <div class="absolute top-20 left-10 w-20 h-20 bg-red-500/20 rounded-full blur-xl animate-pulse"></div>
-    <div class="absolute bottom-20 right-10 w-32 h-32 bg-orange-500/20 rounded-full blur-xl animate-pulse delay-150"></div>
-    <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-500/20 rounded-full blur-xl animate-pulse delay-300"></div>
-  </main>
+  <Button variant="glassmorphism">je test un nouveau boutton</Button>
+
+  <!-- Fond avec effet glassmorphism -->
+  <Container
+    className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-cyan-500/20 z-0"
+  />
+  <Container className="absolute inset-0 backdrop-blur-3xl z-0" />
+
+  <!-- Contenu -->
+  <Container
+    className="glass-card p-8 md:p-12 max-w-2xl w-full relative z-10 text-center transform hover:scale-105 transition-all duration-300"
+  >
+    <Titleh1 className="text-6xl md:text-8xl font-bold text-white mb-6">
+      <Button variant={"glassmorphism"} className="border border-amber-400"
+        >404</Button
+      >
+      <Span className="text-cyan-400 animate-pulse inline-block">404</Span>
+    </Titleh1>
+
+    <P className="text-2xl md:text-3xl text-white/90 mb-8 font-bold">
+      T'ES PERDU SALE MERDE ?!
+    </P>
+
+    <Container className="flex flex-col items-center gap-6">
+      <P className="text-xl text-white/80 italic mb-8 animate-bounce">
+        ↓ Clique ici et retourne d'où tu viens, Sokiro ↓
+      </P>
+
+      <A href="/"> DÉGAGE D'ICI ! </A>
+    </Container>
+  </Container>
+
+  <Span>salut</Span>
+
+  <!-- Éléments décoratifs flottants -->
+  <Container
+    className="absolute top-20 left-10 w-20 h-20 bg-red-500/20 rounded-full blur-xl animate-pulse"
+  />
+  <Container
+    className="absolute bottom-20 right-10 w-32 h-32 bg-orange-500/20 rounded-full blur-xl animate-pulse delay-150"
+  />
+  <Container
+    className="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-500/20 rounded-full blur-xl animate-pulse delay-300"
+  />
 </Layout>
-
-<style>
-  .animate-pulse {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 0.2;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-  }
-  
-  .delay-150 {
-    animation-delay: 150ms;
-  }
-  
-  .delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .animate-bounce {
-    animation: bounce 1s infinite;
-  }
-
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-</style>

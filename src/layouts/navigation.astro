@@ -1,0 +1,77 @@
+---
+// Import the Container component
+import { Container } from "../components/ui/container";
+// Import the A component for links
+import { A } from "../components/ui/composant";
+// Import the Button component for buttons
+import { Button } from "../components/ui/button";
+---
+
+<header class="sticky top-0 z-40">
+  <Container
+    className="flex items-center gap-4 p-4 bg-gradient-to-br from-[#333]/50 to-[#13099e]/50 backdrop-blur-lg rounded-b-lg shadow-md"
+  >
+    <!-- Desktop navigation -->
+    <nav class="hidden md:flex items-center gap-6">
+      <A href="/">Home</A>
+      <A href="/quetes">Quetes</A>
+      <A href="/classes">Classes</A>
+      <A href="/donjons">Donjons</A>
+    </nav>
+
+    <!-- Mobile menu button -->
+    <Button
+      variant={"glassmorphism"}
+      type="button"
+      className="md:hidden text-gray-500 hover:text-gray-700"
+      id="mobile-menu-button"
+      aria-label="Toggle menu"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <!-- Mobile navigation - hidden by default -->
+        <div id="mobile-menu" class="hidden md:hidden py-4">
+          <nav class="flex flex-col gap-4">
+            <A
+              href="/"
+              className="text-sm font-medium transition-colors hover:text-primary"
+              >Home</A
+            >
+            <A
+              href="/about"
+              className="text-sm font-medium transition-colors hover:text-primary"
+              >About</A
+            >
+            <A
+              href="/services"
+              className="text-sm font-medium transition-colors hover:text-primary"
+              >Services</A
+            >
+            <A
+              href="/contact"
+              className="text-sm font-medium transition-colors hover:text-primary"
+              >Contact</A
+            >
+          </nav>
+        </div>
+      </svg>
+    </Button>
+
+    <script>
+      // Toggle mobile menu visibility
+      document.addEventListener("DOMContentLoaded", () => {
+        const menuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuButton?.addEventListener("click", () => {
+          mobileMenu?.classList.toggle("hidden");
+        });
+      });
+    </script>
+  </Container>
+</header>

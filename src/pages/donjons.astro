@@ -1,8 +1,8 @@
 ---
-import Layout from '../component/layout.astro';
-import { getCollection } from 'astro:content';
-import DonjonModal from '../component/layout/donjonmodal.astro';
-import type { CollectionEntry } from 'astro:content';
+import Layout from "../layouts/layout.astro";
+import { getCollection } from "astro:content";
+import DonjonModal from "../layouts/donjonmodal.astro";
+import type { CollectionEntry } from "astro:content";
 
 // Types
 interface DungeonData {
@@ -10,8 +10,8 @@ interface DungeonData {
   name: string;
   description: string;
   level: number;
-  difficulty: 'easy' | 'medium' | 'hard' | 'extreme';
-  players: 'solo' | 'group' | 'both';
+  difficulty: "easy" | "medium" | "hard" | "extreme";
+  players: "solo" | "group" | "both";
   region: string;
   boss: string;
   image?: {
@@ -46,12 +46,13 @@ interface DungeonData {
 }
 
 // Récupérer tous les donjons
-const donjons = await getCollection('donjons');
+const donjons = await getCollection("donjons");
 
 // Trier les donjons par niveau
 const sortedDungeons = donjons
-  .filter((donjon): donjon is CollectionEntry<'donjons'> & { data: DungeonData } => 
-    donjon.data && typeof donjon.data.level === 'number'
+  .filter(
+    (donjon): donjon is CollectionEntry<"donjons"> & { data: DungeonData } =>
+      donjon.data && typeof donjon.data.level === "number"
   )
   .sort((a, b) => a.data.level - b.data.level);
 
@@ -62,7 +63,6 @@ declare global {
     closeModal: (name: string) => void;
   }
 }
-
 ---
 
 <Layout title="Donjons">
@@ -74,87 +74,107 @@ declare global {
           <span class="text-cyan-400">Donjons</span>
           <span class="text-white"> de Wakfu</span>
         </h1>
-        <div class="glass-card bg-white/10 backdrop-blur-md max-w-2xl mx-auto p-6">
+        <div
+          class="glass-card bg-white/10 backdrop-blur-md max-w-2xl mx-auto p-6"
+        >
           <p class="text-lg text-white/90 leading-relaxed">
             Explorez les donjons du Monde des Douze, du niveau 1 au niveau 230.
-            Découvrez les stratégies, récompenses et astuces pour chaque instance.
+            Découvrez les stratégies, récompenses et astuces pour chaque
+            instance.
           </p>
         </div>
       </div>
 
       <!-- Grille des donjons -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sortedDungeons.map((donjon) => (
-          <div class="glass-card hover:scale-105 transition-transform duration-300">
-            {donjon.data.image ? (
-              <img
-                src={donjon.data.image.src}
-                alt={donjon.data.image.alt || donjon.data.name}
-                class="w-full h-48 object-cover rounded-t-lg"
-              />
-            ) : (
-              <div class="w-full h-48 bg-black/20 rounded-t-lg flex items-center justify-center">
-                <span class="text-white/40 text-lg">Image non disponible</span>
+        {
+          sortedDungeons.map((donjon) => (
+            <div class="glass-card hover:scale-105 transition-transform duration-300">
+              {donjon.data.image ? (
+                <img
+                  src={donjon.data.image.src}
+                  alt={donjon.data.image.alt || donjon.data.name}
+                  class="w-full h-48 object-cover rounded-t-lg"
+                />
+              ) : (
+                <div class="w-full h-48 bg-black/20 rounded-t-lg flex items-center justify-center">
+                  <span class="text-white/40 text-lg">
+                    Image non disponible
+                  </span>
+                </div>
+              )}
+              <div class="p-6">
+                <h2 class="text-2xl font-bold text-cyan-400 mb-2">
+                  {donjon.data.name}
+                </h2>
+                <div class="flex gap-4 mb-4">
+                  <span class="text-white/60">Niveau {donjon.data.level}</span>
+                  <span class="text-white/60">
+                    {donjon.data.players === "group"
+                      ? "3"
+                      : donjon.data.players === "both"
+                        ? "3-6"
+                        : donjon.data.players}{" "}
+                    joueurs
+                  </span>
+                </div>
+                <p class="text-white/80 mb-4 line-clamp-2">
+                  {donjon.data.description}
+                </p>
+                <button
+                  class="glass-button w-full"
+                  onclick={`window.openModal('${donjon.data.name}')`}
+                >
+                  En savoir plus
+                </button>
               </div>
-            )}
-            <div class="p-6">
-              <h2 class="text-2xl font-bold text-cyan-400 mb-2">{donjon.data.name}</h2>
-              <div class="flex gap-4 mb-4">
-                <span class="text-white/60">Niveau {donjon.data.level}</span>
-                <span class="text-white/60">{donjon.data.players === 'group' ? '3' : donjon.data.players === 'both' ? '3-6' : donjon.data.players} joueurs</span>
-              </div>
-              <p class="text-white/80 mb-4 line-clamp-2">{donjon.data.description}</p>
-              <button
-                class="glass-button w-full"
-                onclick={`window.openModal('${donjon.data.name}')`}
-              >
-                En savoir plus
-              </button>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </div>
 
-  {sortedDungeons.map((donjon) => (
-    <DonjonModal
-      donjonData={donjon}
-      isOpen={false}
-      onClose={`window.closeModal('${donjon.data.name}')`}
-    />
-  ))}
+  {
+    sortedDungeons.map((donjon) => (
+      <DonjonModal
+        donjonData={donjon}
+        isOpen={false}
+        onClose={`window.closeModal('${donjon.data.name}')`}
+      />
+    ))
+  }
 </Layout>
 
 <script is:inline>
   // Définir les fonctions sur window avant tout
-  window.openModal = function(name) {
+  window.openModal = function (name) {
     const modal = document.querySelector(`[data-modal="${name}"]`);
     if (modal) {
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
     }
   };
 
-  window.closeModal = function(name) {
+  window.closeModal = function (name) {
     const modal = document.querySelector(`[data-modal="${name}"]`);
     if (modal) {
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
+      modal.classList.remove("flex");
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
     }
   };
 </script>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("astro:page-load", () => {
     // Close modal with Escape key
-    document.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        const openModal = document.querySelector('.modal-container.flex');
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        const openModal = document.querySelector(".modal-container.flex");
         if (openModal) {
-          const name = openModal.getAttribute('data-modal');
+          const name = openModal.getAttribute("data-modal");
           if (name) window.closeModal(name);
         }
       }
