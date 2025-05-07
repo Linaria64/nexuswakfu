@@ -131,16 +131,14 @@ function processClassData(classItem: CollectionEntry<"classes">) {
 ---
 
 <Layout title="Classes">
-  <main class="min-h-screen bg-[#333] p-6">
+  <main class="min-h-screen p-6">
     <div class="glass-container">
       <div class="text-center mb-16">
         <h1 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
           <span class="text-cyan-400">Classes</span>
           <span class="text-white"> de Wakfu</span>
         </h1>
-        <div
-          class="glass-card bg-white/10 backdrop-blur-md max-w-2xl mx-auto p-6"
-        >
+        <div class="max-w-2xl mx-auto p-6">
           <p class="text-lg text-white/90 leading-relaxed">
             Découvrez les 18 classes uniques de Wakfu, leurs spécialités et
             leurs rôles dans le combat.
@@ -152,7 +150,7 @@ function processClassData(classItem: CollectionEntry<"classes">) {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           classes.map((classItem) => (
-            <div class="bg-white/5 hover:bg-white/10 transition-all duration-300 rounded-xl border border-white/10 overflow-hidden backdrop-blur-md shadow-lg">
+            <div class="glass-card hover:scale-105 transition-transform duration-300  rounded-lg bg-blue-400/10 shadow-lg">
               <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4 text-cyan-400">
                   {classItem.data.name}

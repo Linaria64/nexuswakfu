@@ -31,19 +31,17 @@ const footerLinks = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body
-    class="text-white min-h-screen flex flex-col bg-gradient-to-br from-[#485563] to-[#29323c]"
+    class="text-white min-h-screen flex flex-col bg-gradient-to-b from-[#1e2225] to-[#2E1437] backdrop-blur-md"
   >
     <Navigation />
 
-    <main
-      class="flex flex-col w-full rounded-none border-none min-h-screen bg-gradient-to-br from-[#333] to-[#13099e]"
-    >
+    <main class="flex flex-col w-full rounded-none border-none min-h-screen">
       <slot />
     </main>
 
     <footer>
       <Container
-        className="flex flex-col items-center justify-center w-full  p-6 mx-auto text-center bg-gradient-to-br from-[#333] to-[#13099e]"
+        className="flex flex-col items-center justify-center w-full  rounded-none p-6 mx-auto text-center"
       >
         <div>
           <Titleh3>NexusWakfu</Titleh3>
