@@ -1,4 +1,6 @@
 ---
+import { A, P, Titleh1 } from '@/components/ui/composant';
+import { Container } from '@/components/ui/container';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/layout.astro';
 
@@ -33,6 +35,21 @@ const features = [
 ---
 
 <Layout title="Accueil">
+
+
+<Container>
+  <Titleh1 className='w-1/2 mx-auto bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md'>
+    Bienvenue sur ce Fan Site 
+    <br/>
+    <P> Il permet de Centraliser les informations ( Gdoc ) est de Centraliser les Fan site déjà existant en un seul endroit ( Method wakfu , Zenith Builder ) <br/>
+    <P> Ce site est en constante évolution, n'hésitez pas à me faire part de vos retours ! Ceci est encore en développement.</P> <br>
+    <P >C'est un fan site pour la communauté donc vos retours et vos idées sont precieux Vous pouvez donc me donner vos idées  via mp : </P> <br>
+    <A  href='https://discord.gg/MZdymnpw'>Clique ici pour acceder au discord de Wakfu fr Mon pseudo : Novalia</A>
+   
+  </Titleh1>
+</Container>
+
+
 <div class="min-h-screen flex flex-col">
   <!-- Hero Section avec effet glassmorphism amélioré -->
   <div class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden ">
@@ -40,18 +57,6 @@ const features = [
     <!-- Motif géométrique subtil en arrière-plan -->
     <div class="absolute inset-0 opacity-5" style="background-image: url('/images/patterns/grid.svg'); background-size: 30px;"></div>
     
-    <!-- Formes décoratives en arrière-plan avec effet de profondeur -->
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
-      <!-- Bulles et formes organiques semi-transparentes avec meilleur contraste -->
-      <div class="absolute top-[5%] right-[10%] w-72 h-72 rounded-full bg-cyan-400/15 blur-2xl"></div>
-      <div class="absolute top-[15%] left-[8%] w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl"></div>
-      <div class="absolute bottom-[18%] right-[15%] w-80 h-80 rounded-full bg-purple-500/15 blur-2xl"></div>
-      <div class="absolute bottom-[10%] left-[12%] w-64 h-64 rounded-full bg-blue-400/15 blur-3xl"></div>
-      
-      <!-- Éléments avec animation améliorée -->
-      <div class="absolute top-1/4 right-1/4 w-32 h-32 rounded-full bg-cyan-300/15 blur-xl animate-pulse-slow"></div>
-      <div class="absolute bottom-1/3 left-1/3 w-40 h-40 rounded-full bg-indigo-300/15 blur-xl animate-pulse-slow" style="animation-delay: 1.5s;"></div>
-    </div>
     
     <div class="container  mx-auto relative z-10 flex flex-col items-center justify-center  px-4 rounded-md w3/4 border-white/20">
       <div class="flex flex-col items-center justify-center text-center max-w-4xl mx-auto w-full">
@@ -66,7 +71,7 @@ const features = [
         </div>
         
         <!-- Description avec effet glassmorphism amélioré -->
-        <div class="glass-card bg-white/10 backdrop-blur-md border border-white/20 shadow-lg shadow-cyan-900/10 rounded-xl max-w-2xl mx-auto mb-12 p-8">
+        <div class="glass-card bg-white/10 backdrop-blur-md border border-white/20 shadow-lg shadow-cyan-900/10 rounded-xl max-w-2xl mx-auto mb-12 p-8 bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md">
           <p class="text-lg md:text-xl text-white/90 leading-relaxed">
             Plongez dans l'univers magique du <span class="text-cyan-300 font-medium">Monde des Douzes</span>. Explorez, combattez et façonnez le monde qui vous entoure dans ce MMORPG tactique unique où chaque décision compte.
           </p>
@@ -122,13 +127,13 @@ const features = [
     <div class="flex justify-center items-center mt-16 z-20">
       <div class="container mx-auto px-6">
         <!-- Carte principale avec effet glassmorphism amélioré -->
-        <div class="glass-card bg-white/10 backdrop-blur-md border border-white/20 shadow-lg rounded-2xl p-4 mx-auto max-w-4xl">
+        <div>
           <!-- Effet de brillance subtil -->
           <div class=" inset-0 bg-gradient-to-tr from-cyan-500/0 via-white/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
           
           <div class="flex flex-row flex-wrap justify-around items-stretch">
             {stats.map((stat, index) => (
-              <div class="flex-1 p-4 min-w-[200px] group">
+              <div class="flex-1 p-4 min-w-[250px] max-h-[250px] group bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md">
                 <div class="flex flex-col items-center justify-center p-4 h-full rounded-xl bg-gradient-to-b from-white/5 to-white/0 group-hover:from-white/10 group-hover:to-white/5 transition-all duration-300 transform group-hover:-translate-y-1 border border-white/10 group-hover:border-white/20 shadow-lg">
                   <!-- Icône avec animation -->
                   <div class="text-5xl md:text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300 text-cyan-300 group-hover:text-cyan-200">{stat.icon}</div>
@@ -152,150 +157,68 @@ const features = [
 
   <!-- Section Lore avec glassmorphism moderne et épuré -->
   <section class="py-32 relative overflow-hidden z-10 flex flex-col ">
-      <!-- Motif hexagonal subtil en arrière-plan avec animation -->
-      <div class="absolute inset-0 opacity-5 animate-pulse-slow" style="background-image: url('/images/patterns/hexagon.svg'); background-size: 50px;"></div>
-      
-      <!-- Éléments décoratifs pour ajouter de la profondeur -->
-      <div class="absolute top-1/3 right-1/4 w-80 h-80 rounded-full bg-cyan-500/5 blur-3xl"></div>
-      <div class="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full bg-indigo-500/5 blur-3xl"></div>
-    
-    <div class="container mx-auto px-6 flex flex-col items-center">
-      <!-- Badge de catégorie avec effet glassmorphism amélioré -->
-      <div class="inline-block glass-card bg-white/10 backdrop-blur-md border border-white/20 px-8 py-3 mb-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">
-        <h2 class="text-lg font-medium text-cyan-300 uppercase tracking-widest">Univers</h2>
-      </div>
-      
-      <!-- Titre principal avec effet de texte amélioré -->
-      <div class="glass-card bg-gradient-to-b from-white/10 to-white/5 border border-white/20 rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1 flex flex-col flex-1 w-1/2">
-        <h3 class="text-4xl md:text-5xl font-bold tracking-tight text-center mb-6">
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-cyan-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">Le Monde</span>
-          <span class="text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]"> des Douze</span>
-        </h3>
+    <div class="py-32 relative overflow-hidden z-10 flex flex-col ">
+      <!-- En-tête moderne avec glassmorphism -->
+      <div class=" w-1/2 mx-auto bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md  overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 flex flex-col flex-1 min-w-[300px] max-w-[500px]text-center mb-16 ">
+        <!-- Titre principal avec effet glassmorphism subtil -->
+        <div class="inline-block px-8 py-3 mb-4 ">
+          <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
+             <span class="text-cyan-400">Explorer</span> le monde de Wakfu
+          </h2>
+        </div>
         
-        <!-- Description intégrée dans le même conteneur -->
-          <p class="text-lg text-white/90 leading-relaxed">
-            Découvrez l'univers fascinant de Wakfu, façonné par les <span class="text-cyan-300 font-medium">Dieux</span> et transformé par le <span class="text-cyan-300 font-medium">Chaos d'Ogrest</span>. Un monde où vos actions ont un impact réel sur l'environnement.
+        <!-- Sous-titre avec effet glassmorphism -->
+        <div class="p-6">
+          <p class="text-xl text-white/90 leading-relaxed">
+            Découvrez les Quêtes, Donjons et Classes qui composent l'univers de Wakfu. Chaque élément est conçu pour vous plonger dans une aventure unique et immersive.
           </p>
-        
-        <!-- Bouton avec effet glassmorphism amélioré -->
-        <div class="mt-6 flex justify-center">
-          <a 
-            href="https://www.wakfu.com/fr/mmorpg/decouvrir/univers" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="glass-button bg-cyan-500/80 hover:bg-cyan-400/80 text-white px-6 py-2 rounded-md flex items-center justify-center transition-all duration-300 text-base font-medium"
-          >
-            En savoir plus
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-          </a>
         </div>
+    <!-- Cartes du Lore -->
+    <div class="flex flex-col md:flex-row gap-6 justify-center px-4 py-8">
+      <!-- Carte 1: Les Origines -->
+      <div class="glass-card bg-blue-700/7 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-1 group w-full md:w-1/3">
+        <div class="text-3xl text-cyan-400 mb-3 group-hover:scale-110 transition-transform">🌍</div>
+        <h3 class="text-xl font-semibold mb-2 text-white">Les Origines</h3>
+        <p class="text-white/80">Le monde de Wakfu est né après le sacrifice d'Ogrest, qui a plongé le monde dans une ère chaotique connue sous le nom d'Ère du Wakfu, où la magie est omniprésente.</p>
       </div>
       
-      <!-- Cartes informatives avec glassmorphism moderne et amélioré -->
-      <div class="flex flex-wrap justify-center gap-8 mt-16 w-full">
-        <!-- Carte 1 : Le Chaos d'Ogrest -->
-        <div class="glass-card bg-gradient-to-b from-white/10 to-white/5 border border-white/20 rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1 flex flex-col flex-1 min-w-[300px] max-w-[400px]">
-          <!-- En-tête de carte avec icône flottante -->
-          <div class="relative pt-10 px-6 text-center">
-            <!-- Icône flottante avec animation -->
-            <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500/30 to-blue-500/30 backdrop-blur-md flex items-center justify-center text-2xl border border-white/30 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-cyan-500/10 animate-pulse-slow">
-              🌊
-            </div>
-            
-            <h3 class="text-xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-cyan-400">Le Chaos d'Ogrest</h3>
-            <p class="text-white/80 text-sm mb-5 leading-relaxed">
-              Le monde a été transformé par les larmes d'Ogrest, un puissant ogre qui a provoqué un déluge mondial changeant à jamais la géographie du monde.
-            </p>
-          </div>
-          
-          <!-- Pied de carte avec effet de surlignage au survol -->
-          <div class="mt-auto">
-            <div class="p-4 bg-gradient-to-t from-cyan-500/10 to-transparent border-t border-white/10 group-hover:bg-cyan-500/15 transition-all duration-300">
-              <a href="/quetes" class="text-cyan-300 text-sm font-medium flex items-center justify-center group-hover:text-cyan-200 transition-colors">
-                Plus d'informations
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
+      <!-- Carte 2: Les Nations -->
+      <div class="glass-card bg-blue-700/7 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-1 group w-full md:w-1/3">
+        <div class="text-3xl text-cyan-400 mb-3 group-hover:scale-110 transition-transform">🏰</div>
+        <h3 class="text-xl font-semibold mb-2 text-white">Les Nations</h3>
+        <p class="text-white/80">Quatre nations principales se partagent le Monde des Douze: Amakna, Bonta, Brakmar et Sufokia, chacune avec sa propre culture, politique et relation avec les divinités.</p>
+      </div>
+      
+      <!-- Carte 3: Les Dieux -->
+      <div class="glass-card bg-blue-700/7 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-1 group w-full md:w-1/3">
+        <div class="text-3xl text-cyan-400 mb-3 group-hover:scale-110 transition-transform">✨</div>
+        <h3 class="text-xl font-semibold mb-2 text-white">Les Douze</h3>
+        <p class="text-white/80">Le monde est sous la protection des Douze Dieux, chacun représentant une classe jouable. Leurs disciples parcourent le monde, propageant leurs philosophies et leurs pouvoirs.</p>
+      </div>
+    </div>
         
-        <!-- Carte 2 : L'Énergie du Wakfu -->
-        <div class="glass-card bg-gradient-to-b from-white/10 to-white/5 border border-white/20 rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1 flex flex-col flex-1 min-w-[300px] max-w-[400px]">
-          <!-- En-tête de carte avec icône flottante -->
-          <div class="relative pt-10 px-6 text-center">
-            <!-- Icône flottante avec animation -->
-            <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 rounded-full bg-gradient-to-br from-purple-500/30 to-indigo-500/30 backdrop-blur-md flex items-center justify-center text-2xl border border-white/30 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-purple-500/10 animate-pulse-slow" style="animation-delay: 0.5s;">
-              ✨
-            </div>
-            
-            <h3 class="text-xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-indigo-400">L'Énergie du Wakfu</h3>
-            <p class="text-white/80 text-sm mb-5 leading-relaxed">
-              Le Wakfu est l'énergie créatrice qui anime le monde. Chaque être vivant en possède et peut l'utiliser pour façonner son environnement.
-            </p>
-          </div>
-          
-          <!-- Pied de carte avec effet de surlignage au survol -->
-          <div class="mt-auto">
-            <div class="p-4 bg-gradient-to-t from-purple-500/10 to-transparent border-t border-white/10 group-hover:bg-purple-500/15 transition-all duration-300">
-              <a href="/classe" class="text-purple-300 text-sm font-medium flex items-center justify-center group-hover:text-purple-200 transition-colors">
-                Découvrir les classes
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Carte 3 : Un Monde Vivant -->
-        <div class="glass-card bg-gradient-to-b from-white/10 to-white/5 border border-white/20 rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 flex flex-col flex-1 min-w-[300px] max-w-[400px]">
-          <!-- En-tête de carte avec icône flottante -->
-          <div class="relative pt-10 px-6 text-center">
-            <!-- Icône flottante avec animation -->
-            <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 rounded-full bg-gradient-to-br from-blue-500/30 to-indigo-500/30 backdrop-blur-md flex items-center justify-center text-2xl border border-white/30 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-blue-500/10 animate-pulse-slow" style="animation-delay: 1s;">
-              🌿
-            </div>
-            
-            <h3 class="text-xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-indigo-400">Un Monde Vivant</h3>
-            <p class="text-white/80 text-sm mb-5 leading-relaxed">
-              Dans Wakfu, l'écosystème est dynamique et réagit à vos actions. Plantez des arbres, récoltez des ressources et voyez le monde évoluer.
-            </p>
-          </div>
-          
-          <!-- Pied de carte avec effet de surlignage au survol -->
-          <div class="mt-auto">
-            <div class="p-4 bg-gradient-to-t from-blue-500/10 to-transparent border-t border-white/10 group-hover:bg-blue-500/15 transition-all duration-300">
-              <a href="/donjon" class="text-blue-300 text-sm font-medium flex items-center justify-center group-hover:text-blue-200 transition-colors">
-                Explorer les donjons
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                </svg>
-              </a>
-            </div>
+              </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+      
+
             
       <!-- Formes géométriques pour la profondeur -->
     
     <div class="py-32 relative overflow-hidden z-10 flex flex-col ">
       <!-- En-tête moderne avec glassmorphism -->
-      <div class=" w-1/2 mx-auto bg-gradient-to-b from-white/10 to-white/5 border border-white/20 rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 flex flex-col flex-1 min-w-[300px] max-w-[500px]text-center mb-16 ">
+      <div class=" w-1/2 p-6 mx-auto bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md  rounded-lg backdrop-blur-md group transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 flex flex-col flex-1 min-w-[300px] max-w-[500px]text-center mb-16 ">
         <!-- Titre principal avec effet glassmorphism subtil -->
-        <div class="inline-block glass-card bg-white/5 px-8 py-3 mb-4">
+        <div class="inline-block glass-card  px-8 py-3 mb-4">
           <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
             Les <span class="text-cyan-400">Classes</span> de Wakfu
           </h2>
         </div>
         
         <!-- Sous-titre avec effet glassmorphism -->
-        <div class="glass-card bg-white/5 max-w-2xl mx-auto p-5 mb-8">
+        <div class="glass-card  max-w-2xl mx-auto p-5 mb-8">
           <p class="text-xl text-white/90 leading-relaxed">
             Découvrez les 18 classes uniques du monde de Wakfu, chacune avec ses propres compétences et stratégies.
           </p>
@@ -303,7 +226,7 @@ const features = [
         
         <!-- Bouton d'action -->
         <a href="/classe" class="glass-button glass-cyan group inline-flex">
-          <span class="p-4 bg-gradient-to-t from-blue-500/10 to-transparent border-t border-white/10 group-hover:bg-blue-500/15 transition-all duration-300 mx-auto rounded-lg min-w-[300px] max-w-[400px]">Voir Toutes Les Classes 
+          <span class="p-4 bg-gradient-to-t from-blue-500/10 to-transparent border-t text-white border-white/10 group-hover:bg-blue-500/15 transition-all duration-300 mx-auto rounded-lg min-w-[300px] max-w-[400px]">Voir Toutes Les Classes 
                   </span>
                 </a>
               </div>
@@ -326,7 +249,7 @@ const features = [
     
     <div class="container mx-auto px-6 flex flex-col items-center">
       <!-- Carte CTA principale avec glassmorphism amélioré -->
-      <div class="glass-card bg-white/10 max-w-4xl mx-auto relative overflow-hidden w-full flex flex-col items-center">
+      <div class="glass-card rounded-lg bg-blue-900/7 max-w-4xl mx-auto relative overflow-hidden w-full flex flex-col items-center">
         <!-- Élément décoratif supérieur -->
         <div class="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-cyan-400/10 blur-2xl"></div>
         <!-- Élément décoratif inférieur -->
@@ -349,24 +272,15 @@ const features = [
           <!-- Boutons d'action -->
           <div class="flex flex-col sm:flex-row gap-6 justify-center w-full max-w-2xl">
             <!-- Bouton principal -->
-            <a href="https://www.wakfu.com/fr/mmorpg/telecharger" class="glass-button glass-primary group inline-flex">
+            <A href="https://www.wakfu.com/fr/mmorpg/telecharger">
               <span class="relative z-10 flex items-center">
                 Télécharger Wakfu 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-y-1 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </span>
-            </a>
+            </A>
             
-            <!-- Bouton secondaire -->
-            <a href="/donjons" class="glass-button glass-secondary group inline-flex">
-              <span class="relative z-10 flex items-center">
-                Explorer les Donjons
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </span>
-            </a>
           </div>
         </div>
       </div>

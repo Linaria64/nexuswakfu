@@ -6,10 +6,7 @@ function Container({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card"
-      className={cn(
-        " text-card-foreground flex flex-col w-full mx-auto  rounded-xl  py-6 shadow-sm",
-        className
-      )}
+      className={cn("  flex flex-col w-full mx-auto", className)}
       {...props}
     />
   );

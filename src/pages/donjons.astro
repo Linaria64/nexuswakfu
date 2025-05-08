@@ -89,7 +89,7 @@ declare global {
       >
         {
           sortedDungeons.map((donjon) => (
-            <div class="glass-card hover:scale-105 transition-transform duration-300  rounded-lg bg-blue-400/10 shadow-lg">
+            <div class="bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md">
               {donjon.data.image ? (
                 <img
                   src={donjon.data.image.src}
@@ -122,7 +122,7 @@ declare global {
                   {donjon.data.description}
                 </p>
                 <button
-                  class="glass-button w-full"
+                  class="p-4 bg-blue-700/7 rounded-md text-white mx-auto w-full"
                   onclick={`window.openModal('${donjon.data.name}')`}
                 >
                   En savoir plus

@@ -100,9 +100,8 @@ const artifacts: Artifact[] = [
 <div class="min-h-screen py-20 " >
     <!-- Header avec effet glassmorphism -->
         <div class="relative mb-12">
-            <div class="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-teal-500/10 rounded-xl backdrop-blur-md -z-10"></div>
-            <div class="border border-white/10 rounded-xl p-8 shadow-lg bg-white/5">
-                <h1 class="text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-200">
+            <div class=" w-1/2  mx-auto rounded-xl p-8 ">
+                <h1 class="text-5xl font-bold text-center bg-clip-text p-4 text-transparent bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-200">
                     Artefacts Légendaires
                 </h1>
                 <p class="text-center text-gray-300 mt-4 max-w-2xl mx-auto">
@@ -114,9 +113,8 @@ const artifacts: Artifact[] = [
         <!-- Artefacts Carousel - Version glassmorphism modernisée -->
         <section class="mb-16">
             <!-- Carousel container -->            
-            <div class="carousel-container relative overflow-hidden rounded-xl artifact-carousel">
+            <div class="carousel-container relative overflow-hidden rounded-xl artifact-carousel mx-auto w-full max-w-4xl  bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md">
                 <!-- Background glassmorphism effect -->
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20 backdrop-blur-md z-0 border border-white/10 shadow-xl"></div>
                 
                 <!-- Carousel track -->
                 <div class="carousel-track flex transition-transform duration-500 ease-out">
@@ -153,32 +151,11 @@ const artifacts: Artifact[] = [
                                         </div>
                                     </div>
 
-                                    <div class="mt-4 text-center pt-2 border-t border-white/10 p-3">
-                                        <span class="inline-flex items-center justify-center text-sm px-4 py-2 bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-600/40 hover:to-indigo-600/40 rounded-full text-blue-200 hover:text-blue-100 backdrop-blur-sm border border-white/10 shadow-sm transition-all duration-300 group-hover:shadow-[0_0_10px_rgba(59,130,246,0.3)]">
-                                            Voir guide Method Wakfu
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                        </span>
-                                    </div>
                                 </div>
                             </a>
                         </div>
                     ))}
                 </div>
-                
-                <!-- Carousel controls avec style glassmorphism -->
-                <button class="carousel-button prev absolute top-1/2 left-4 transform -translate-y-1/2 backdrop-blur-md bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-500/40 hover:to-indigo-500/40 text-white z-10 rounded-full p-3 border border-white/10 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                
-                <button class="carousel-button next absolute top-1/2 right-4 transform -translate-y-1/2 backdrop-blur-md bg-gradient-to-r from-blue-600/30 to-indigo-600/30 hover:from-blue-500/40 hover:to-indigo-500/40 text-white z-10 rounded-full p-3 border border-white/10 shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
                 
                 <!-- Carousel indicators avec effet glassmorphism -->
                 <div class="carousel-indicators flex justify-center mt-4 space-x-2 absolute bottom-6 left-0 right-0 px-4 py-2">

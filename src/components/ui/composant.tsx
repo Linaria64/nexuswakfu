@@ -7,7 +7,7 @@ function Titleh1({ className, ...props }: React.ComponentProps<"h1">) {
     <h1
       data-slot="title"
       className={cn(
-        " font-bold text-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100/20 bg-white/10 px-6 py-3 rounded-xl shadow-lg mt-4 text-center ",
+        " text-white  border border-gray-100/20 bg-white/10 p-4 rounded-md text-center ",
         className
       )}
       {...props}
@@ -46,7 +46,7 @@ function P({ className, ...props }: React.ComponentProps<"p">) {
     <p
       data-slot="small-title"
       className={cn(
-        " font-bold text-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100/20 bg-white/10 px-6 py-3 rounded-xl shadow-lg mt-4 text-center ",
+        "border border-gray-100/20 bg-white/10 p-4 rounded-md mt-4 text-center ",
         className
       )}
       {...props}
@@ -71,7 +71,7 @@ function A({ href, ...props }: React.ComponentProps<"a">) {
       href={href}
       data-slot="small-title"
       className={cn(
-        " font-bold text-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100/20 bg-white/10 px-6 py-3 rounded-xl shadow-lg mt-4 text-center "
+        " font-bold text-white  border border-gray-100/20 bg-white/10 p-2 rounded-xl shadow-lg mt-4 text-center "
       )}
       {...props}
     />

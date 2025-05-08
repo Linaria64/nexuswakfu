@@ -3,6 +3,7 @@ import Layout from "../layouts/layout.astro";
 import { getCollection } from "astro:content";
 import ClassModal from "../layouts/classmodal.astro";
 import type { CollectionEntry } from "astro:content";
+import { Button } from "@/components/ui/button";
 
 // Récupérer toutes les classes
 const classes = await getCollection("classes");
@@ -150,7 +151,7 @@ function processClassData(classItem: CollectionEntry<"classes">) {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           classes.map((classItem) => (
-            <div class="glass-card hover:scale-105 transition-transform duration-300  rounded-lg bg-blue-400/10 shadow-lg">
+            <div class="bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md">
               <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4 text-cyan-400">
                   {classItem.data.name}
@@ -168,9 +169,9 @@ function processClassData(classItem: CollectionEntry<"classes">) {
                   ))}
                 </div>
               </div>
-              <div class="p-4 border-t border-white/10 bg-white/5">
+              <div class="p-4 flex justify-center items-center w-full">
                 <button
-                  class="glass-button glass-cyan w-full text-center"
+                  class=" p-4 bg-blue-700/7 rounded-md text-white"
                   onclick={`window.openModal('${classItem.data.name}')`}
                 >
                   En savoir plus
