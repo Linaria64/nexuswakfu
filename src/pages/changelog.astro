@@ -1,4 +1,52 @@
-<h1>
-  Ici vous retrouverez toutes les idées que j'ai et que la commu ma donnée et
-  petit a petit sur quoi je travail
-</h1>
+---
+import Layout from "../layouts/layout.astro";
+import "../styles/global.css";
+---
+
+  <!-- Section Lore avec glassmorphism moderne et épuré -->
+  <Layout class="py-32 relative overflow-hidden z-10 flex flex-col ">
+    <div class="py-32 relative overflow-hidden z-10 flex flex-col ">
+      <!-- En-tête moderne avec glassmorphism -->
+      <div class=" w-1/2 mx-auto bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md  overflow-hidden group transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 flex flex-col flex-1 min-w-[300px] max-w-[500px]text-center mb-16 ">
+        <!-- Titre principal avec effet glassmorphism subtil -->
+        <div class="inline-block px-8 py-3 mb-4 ">
+          <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
+             <span class="text-cyan-400">les idées Pour le site</span>
+          </h2>
+        </div>
+        
+        <!-- Sous-titre avec effet glassmorphism -->
+        <div class="p-6">
+          <p class="text-xl text-white/90 leading-relaxed">
+            Découvrez les idées pour le site.
+          </p>
+        </div>
+    <!-- Cartes du Lore -->
+    <div class="flex flex-col md:flex-row gap-6 justify-center px-4 py-8">
+      <!-- Carte 1: Les Origines -->
+      <div class="glass-card bg-blue-700/7 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-1 group w-full md:w-1/3">
+        <div class="text-3xl text-cyan-400 mb-3 group-hover:scale-110 transition-transform"></div>
+        <h3 class="text-xl font-semibold mb-2 text-white">Les idées</h3>
+        <ul>
+          <li>Redesigner les modals des pages classe et donjon</li>
+          <li>Verifier le Contenu des pages classe et donjon</li>
+          <li>ajouter jusqu'a la tranche 50 tous les donjons du jeux</li>
+          <li>Ajouter tranche par tranche les donjons</li>
+        </ul>
+
+      </div>
+      
+      <!-- Carte 2: Les Nations -->
+      <div class="glass-card bg-blue-700/7 backdrop-blur-sm border border-white/10 rounded-xl p-5 hover:border-cyan-400/30 transition-all duration-300 hover:transform hover:-translate-y-1 group w-full md:w-1/3">
+        <div class="text-3xl text-cyan-400 mb-3 group-hover:scale-110 transition-transform"></div>
+        <h3 class="text-xl font-semibold mb-2 text-white">En cours de Dev</h3>
+        <ul>
+          <li> </li>
+        </ul>      </div>
+      
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
