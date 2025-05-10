@@ -25,8 +25,8 @@ portrait:
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Sadida"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "L'écologiste"
+  description: "Joue a la poupée avec des arbres et du poison"
 
 # Aptitudes spécifiques de la classe
 abilities:

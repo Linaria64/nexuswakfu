@@ -17,7 +17,7 @@ portrait:
   alt: "Portrait d'un personnage Cra"
 uniquePassive:
   name: "Furie du Cra"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  description: "A faire"
 abilities:
   - type: "dps"
     name: "Distance : Spécialistes du combat à distance, les Crâs sont efficaces tant qu'ils ne se laissent pas approcher. Ils disposent pour cela de plusieurs moyens d'échapper à leurs attaquants."

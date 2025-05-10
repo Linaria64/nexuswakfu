@@ -43,8 +43,8 @@ Polyvalents, les Iops sont adeptes des combats rapprochés, surtout s'ils sont e
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Iop"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: ""
+  description: "Gagne 1 Pm passif "
 
 
 ---
