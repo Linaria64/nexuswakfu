@@ -70,7 +70,9 @@ const progressionLevels = Object.keys(progression)
     <div
       class="sticky top-0 z-20 flex items-center justify-between p-6 border-b border-white/10 bg-black/50 backdrop-blur-md"
     >
-      <h2 class="text-3xl font-bold text-cyan-400">{classData.data.name}</h2>
+      <h2 class="text-3xl font-bold mx-auto text-cyan-400">
+        {classData.data.name}
+      </h2>
       <button
         onclick={onClose}
         class="p-2 text-white/60 hover:text-white transition-colors"
@@ -94,18 +96,18 @@ const progressionLevels = Object.keys(progression)
     <!-- Content -->
     <div class="p-6 space-y-8">
       <!-- Description -->
-      <div class="glass-card bg-white/5 p-6">
+      <div class="rounded-md bg-[#333] w-1/2 mx-auto p-6">
         <p class="text-lg text-white/90">{classData.data.description}</p>
       </div>
 
       <!-- Abilities -->
       {
         classData.data.abilities && (
-          <div class="space-y-4">
-            <h3 class="text-2xl font-semibold text-white">Rôles</h3>
+          <div class="space-y-4 w-1/2 mx-auto">
+            <h3 class="text-2xl font-semibold  text-white">Rôles</h3>
             <div class="flex flex-wrap gap-4">
               {classData.data.abilities.map((ability) => (
-                <div class="glass-card bg-white/5 p-4 flex items-center gap-3">
+                <div class="glass-card bg-white/5 p-4 flex items-center rounded-md gap-3">
                   <img
                     src={ability.image.src}
                     alt={ability.image.alt}
@@ -122,10 +124,10 @@ const progressionLevels = Object.keys(progression)
       <!-- Unique Passive -->
       {
         classData.data.uniquePassive && (
-          <div class="space-y-4">
-            <h3 class="text-2xl font-semibold text-white">Passif Unique</h3>
-            <div class="glass-card bg-white/5 p-6">
-              <div class="flex items-center gap-4 mb-4">
+          <div class="space-y-4 w-1/2 mx-auto">
+            <h3 class="text-2xl  font-semibold text-white">Passif Unique</h3>
+            <div class="glass-card bg-white/5 p-6 rounded-md">
+              <div class="flex items-center gap-4 mb-4 ">
                 {classData.data.uniquePassive.image && (
                   <img
                     src={classData.data.uniquePassive.image.src}
@@ -133,11 +135,11 @@ const progressionLevels = Object.keys(progression)
                     class="w-12 h-12 rounded-lg bg-white/10 p-1"
                   />
                 )}
-                <h4 class="text-xl font-semibold text-cyan-400">
+                <h4 class="text-xl font-semibold text-cyan-400 ">
                   {classData.data.uniquePassive.name}
                 </h4>
               </div>
-              <p class="text-white/90">
+              <p class="text-white/90 ">
                 {classData.data.uniquePassive.description}
               </p>
             </div>
@@ -149,7 +151,7 @@ const progressionLevels = Object.keys(progression)
       {
         classData.data.passiveSpells && (
           <div class="space-y-4">
-            <h3 class="text-2xl font-semibold text-white">Sorts Passifs</h3>
+            <h3 class="text-2xl font-semibold text-white" />
             <div class="grid gap-4 md:grid-cols-2">
               {classData.data.passiveSpells.map((spell) => (
                 <div class="glass-card bg-white/5 p-6">
@@ -176,7 +178,7 @@ const progressionLevels = Object.keys(progression)
       <!-- Progression par niveau -->
       {
         progressionLevels.length > 0 && (
-          <div class="mb-8">
+          <div class="mb-8 w-full flex flex-col items-center">
             <h3 class="text-2xl font-semibold text-cyan-400 mb-4">
               Progression
             </h3>
