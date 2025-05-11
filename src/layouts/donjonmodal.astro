@@ -376,7 +376,15 @@ const { donjonData, isOpen, onClose } = Astro.props;
                           <p class="text-white/90 mb-2">{reward.description}</p>
                           <div class="flex justify-end mt-2">
                             <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
-                              Taux de drop : {reward.dropRate}%
+                              Taux de drop :{" "}
+                              <span class="base-drop">{reward.dropRate}</span>%
+                              <span class="text-green-400 ml-1 adjusted-drop-container">
+                                →{" "}
+                                <span class="adjusted-drop">
+                                  {reward.dropRate}
+                                </span>
+                                %
+                              </span>
                             </span>
                           </div>
                         </div>
@@ -425,7 +433,15 @@ const { donjonData, isOpen, onClose } = Astro.props;
                           <p class="text-white/90 mb-2">{reward.description}</p>
                           <div class="flex justify-end mt-2">
                             <span class="text-sm text-cyan-400 font-medium px-3 py-1 glass-card">
-                              Taux de drop : {reward.dropRate}%
+                              Taux de drop :{" "}
+                              <span class="base-drop">{reward.dropRate}</span>%
+                              <span class="text-green-400 ml-1 adjusted-drop-container">
+                                →{" "}
+                                <span class="adjusted-drop">
+                                  {reward.dropRate}
+                                </span>
+                                %
+                              </span>
                             </span>
                           </div>
                         </div>
@@ -497,12 +513,38 @@ const { donjonData, isOpen, onClose } = Astro.props;
       9: 150,
       10: 160,
     };
+    const drop = {
+      1: -30, // Base HP (no increase)
+      2: 0, // 50% increase
+      3: -30, // 100% increase (double HP)
+      4: 0,
+      5: 0,
+      6: 0,
+      7: 500,
+      8: 560,
+      9: 780,
+      10: 1000,
+    };
+    const dropModu = {
+      1: -30, // Base HP (no increase)
+      2: 0, // 50% increase
+      3: 400, // 100% increase (double HP)
+      4: 500,
+      5: 600,
+      6: 700,
+      7: 800,
+      8: 900,
+      9: 1100,
+      10: 1500,
+    };
 
     // Fonction pour mettre à jour les HP basée sur la difficulté
     function updateHpBasedOnDifficulty(difficulty) {
       // Vérifier si la modulation est activée
       const modulationToggle = document.querySelector("#modulation-toggle");
-      if (modulationToggle && !modulationToggle.checked) {
+      const isModulated = modulationToggle && modulationToggle.checked;
+
+      if (!isModulated) {
         resetHpToBase();
         return; // Ne pas continuer si la modulation est désactivée
       }
@@ -573,6 +615,80 @@ const { donjonData, isOpen, onClose } = Astro.props;
           }
         }
       });
+
+      // Mise à jour des taux de drop en fonction de la difficulté
+      updateDropRates(difficulty, isModulated);
+    }
+
+    // Fonction pour mettre à jour les taux de drop des items
+    function updateDropRates(difficulty, isModulated) {
+      console.log(
+        "Updating drop rates for difficulty:",
+        difficulty,
+        "modulated:",
+        isModulated
+      );
+
+      const baseDropElements = document.querySelectorAll(".base-drop");
+      const adjustedDropElements = document.querySelectorAll(".adjusted-drop");
+      const adjustedDropContainers = document.querySelectorAll(
+        ".adjusted-drop-container"
+      );
+
+      console.log(
+        "Found drop elements:",
+        baseDropElements.length,
+        adjustedDropElements.length
+      );
+
+      // Déterminer quelle table d'augmentation utiliser en fonction du statut de modulation
+      const increaseTable = isModulated ? dropModu : drop;
+
+      baseDropElements.forEach((baseDropEl, index) => {
+        if (adjustedDropElements[index]) {
+          const baseDropText = baseDropEl.textContent
+            .trim()
+            .replace(/,/g, "")
+            .replace(/%/g, "");
+          const baseDropRate = parseFloat(baseDropText);
+          const increasePercentage = increaseTable[difficulty];
+
+          console.log(
+            `Item ${index}: base rate = ${baseDropRate}, increase = ${increasePercentage}%`
+          );
+
+          if (!isNaN(baseDropRate)) {
+            // Calculer le nouveau taux de drop (avec limite à 100%)
+            let adjustedDropRate = baseDropRate;
+            if (increasePercentage !== undefined) {
+              adjustedDropRate = Math.min(
+                100,
+                baseDropRate * (1 + increasePercentage / 100)
+              );
+            }
+
+            // Arrondir au dixième près
+            adjustedDropRate = Math.round(adjustedDropRate * 10) / 10;
+
+            console.log(`Item ${index}: adjusted rate = ${adjustedDropRate}`);
+
+            // Mettre à jour l'affichage
+            adjustedDropElements[index].textContent =
+              adjustedDropRate.toLocaleString();
+
+            // Afficher ou masquer l'indicateur d'ajustement
+            if (adjustedDropContainers[index]) {
+              if (Math.abs(baseDropRate - adjustedDropRate) < 0.1) {
+                adjustedDropContainers[index].style.display = "none";
+              } else {
+                adjustedDropContainers[index].style.display = "inline";
+              }
+            }
+          } else {
+            console.error("Invalid drop rate:", baseDropEl.textContent);
+          }
+        }
+      });
     }
 
     // Fonction pour réinitialiser les HP et maîtrises aux valeurs de base
@@ -597,14 +713,128 @@ const { donjonData, isOpen, onClose } = Astro.props;
             baseMasteryEl.textContent;
         }
       });
+
+      // Réinitialiser les taux de drop et masquer les ajustements
+      resetDropRates();
+    }
+
+    // Fonction pour réinitialiser les taux de drop
+    function resetDropRates() {
+      const baseDropElements = document.querySelectorAll(".base-drop");
+      const adjustedDropElements = document.querySelectorAll(".adjusted-drop");
+      const adjustedDropContainers = document.querySelectorAll(
+        ".adjusted-drop-container"
+      );
+
+      baseDropElements.forEach((baseDropEl, index) => {
+        if (adjustedDropElements[index]) {
+          adjustedDropElements[index].textContent = baseDropEl.textContent;
+        }
+
+        if (adjustedDropContainers[index]) {
+          adjustedDropContainers[index].style.display = "none";
+        }
+      });
+    }
+
+    // Fonction pour mettre à jour l'état du slider en fonction de la case à cocher
+    function updateSliderState(isEnabled) {
+      const difficultySlider = document.querySelector("#difficulty-slider");
+      const difficultyValue = document.querySelector("#difficulty-value");
+      const toggleSwitch = document.querySelector(".toggle-switch");
+      const toggleKnob = document.querySelector(".toggle-knob");
+
+      if (difficultySlider && difficultyValue) {
+        // Correction: Ne pas désactiver le slider, juste changer son apparence
+        // difficultySlider.disabled = !isEnabled;
+
+        if (isEnabled) {
+          // Activer le slider
+          difficultySlider.classList.remove("opacity-50", "cursor-not-allowed");
+          difficultySlider.classList.add("cursor-pointer");
+          difficultyValue.classList.remove("text-white/50");
+          difficultyValue.classList.add("text-cyan-400");
+
+          // Mettre à jour le style du switch
+          if (toggleSwitch) {
+            toggleSwitch.classList.add("bg-cyan-400/30");
+            toggleSwitch.classList.remove("bg-white/10");
+          }
+
+          if (toggleKnob) {
+            toggleKnob.classList.add("translate-x-6");
+          }
+
+          // Calculer les HP ajustés
+          updateHpBasedOnDifficulty(parseInt(difficultySlider.value));
+        } else {
+          // Désactiver visuellement le slider mais le garder fonctionnel
+          difficultySlider.classList.add("opacity-50", "cursor-not-allowed");
+          difficultySlider.classList.remove("cursor-pointer");
+          difficultyValue.classList.add("text-white/50");
+          difficultyValue.classList.remove("text-cyan-400");
+
+          // Mettre à jour le style du switch
+          if (toggleSwitch) {
+            toggleSwitch.classList.remove("bg-cyan-400/30");
+            toggleSwitch.classList.add("bg-white/10");
+          }
+
+          if (toggleKnob) {
+            toggleKnob.classList.remove("translate-x-6");
+          }
+
+          // Réinitialiser les HP aux valeurs de base
+          resetHpToBase();
+        }
+      }
     }
 
     // Gestion du slider de difficulté - utilisation de DOMContentLoaded et window.onload pour s'assurer que le DOM est chargé
     function initializeDifficultySliders() {
       console.log("Initializing difficulty sliders");
       const difficultySliders = document.querySelectorAll("#difficulty-slider");
-      console.log("Found sliders:", difficultySliders.length);
+      const modulationToggles = document.querySelectorAll("#modulation-toggle");
 
+      console.log("Found sliders:", difficultySliders.length);
+      console.log("Found toggles:", modulationToggles.length);
+
+      // Initialiser les toggles de modulation
+      modulationToggles.forEach((toggle) => {
+        if (toggle) {
+          // Supprimer les anciens écouteurs pour éviter les doublons
+          toggle.removeEventListener("change", handleModulationToggle);
+          toggle.addEventListener("change", handleModulationToggle);
+
+          // S'assurer que le CSS initial du toggle reflète son état
+          toggle.checked = true;
+          const toggleSwitch = toggle.nextElementSibling;
+          if (
+            toggleSwitch &&
+            toggleSwitch.classList.contains("toggle-switch")
+          ) {
+            toggleSwitch.classList.add("bg-cyan-400/30");
+            const toggleKnob = toggleSwitch.querySelector(".toggle-knob");
+            if (toggleKnob) {
+              toggleKnob.classList.add("translate-x-6");
+            }
+          }
+
+          // Déclencher une fois pour initialiser correctement l'UI
+          setTimeout(() => {
+            updateSliderState(toggle.checked);
+            // Calculer les taux ajustés initiaux
+            const slider = document.querySelector("#difficulty-slider");
+            if (slider) {
+              const difficulty = parseInt(slider.value || "1");
+              updateHpBasedOnDifficulty(difficulty);
+              updateDropRates(difficulty, toggle.checked);
+            }
+          }, 150);
+        }
+      });
+
+      // Initialiser les sliders
       difficultySliders.forEach((slider) => {
         if (slider) {
           console.log("Setting up slider:", slider);
@@ -628,6 +858,19 @@ const { donjonData, isOpen, onClose } = Astro.props;
           slider.style.background = `linear-gradient(to right, #22d3ee ${gradientPercent}%, rgba(255, 255, 255, 0.1) ${gradientPercent}%)`;
         }
       });
+    }
+
+    function handleModulationToggle() {
+      console.log("Modulation toggle changed:", this.checked);
+      updateSliderState(this.checked);
+
+      // Si la modulation est activée, recalculer les valeurs avec le niveau de difficulté actuel
+      if (this.checked) {
+        const slider = document.querySelector("#difficulty-slider");
+        if (slider) {
+          updateHpBasedOnDifficulty(parseInt(slider.value));
+        }
+      }
     }
 
     function handleSliderInput() {
@@ -707,5 +950,27 @@ const { donjonData, isOpen, onClose } = Astro.props;
     cursor: pointer;
     border: 2px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Styles pour le toggle switch */
+  .toggle-switch {
+    transition: background-color 0.3s;
+  }
+
+  .toggle-knob {
+    transition: transform 0.3s;
+  }
+
+  input[type="checkbox"]:checked + .toggle-switch {
+    background-color: rgba(34, 211, 238, 0.3); /* cyan-400 avec opacité */
+  }
+
+  input[type="checkbox"]:checked + .toggle-switch .toggle-knob {
+    transform: translateX(24px);
+  }
+
+  /* Style pour les taux de drop ajustés */
+  .adjusted-drop-container {
+    display: none; /* Caché par défaut */
   }
 </style>
