@@ -19,48 +19,105 @@ import { Button } from "../components/ui/button";
       <A href="/donjons">Donjons</A>
     </nav>
 
-    <!-- Mobile menu button -->
-    <Button
-      variant={"glassmorphism"}
-      type="button"
-      className="md:hidden text-gray-500 hover:text-gray-700"
-      id="mobile-menu-button"
-      aria-label="Toggle menu"
+    <!-- Mobile navigation - fixed at bottom for mobile -->
+    <div
+      id="mobile-menu"
+      class="md:hidden fixed bottom-4 left-0 right-0 mx-auto w-[80%] max-w-sm py-2 px-4 bg-gradient-to-r from-[#0f0c29]/80 via-[#302b63]/80 to-[#24243e]/80 rounded-full backdrop-blur-md shadow-lg z-50"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <!-- Mobile navigation - hidden by default -->
-        <div id="mobile-menu" class="hidden md:hidden py-4">
-          <nav class="flex flex-col gap-4">
-            <A
-              href="/"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              >Home</A
-            >
-            <A
-              href="/about"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              >About</A
-            >
-            <A
-              href="/services"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              >Services</A
-            >
-            <A
-              href="/contact"
-              className="text-sm font-medium transition-colors hover:text-primary"
-              >Contact</A
-            >
-          </nav>
-        </div>
-      </svg>
-    </Button>
+      <nav class="flex items-center justify-around relative">
+        <!-- Quetes Icon -->
+        <A href="/quetes" className="flex flex-col items-center p-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            ></path>
+          </svg>
+        </A>
+
+        <!-- Classes Icon -->
+        <A href="/classes" className="flex flex-col items-center p-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+            ></path>
+          </svg>
+        </A>
+
+        <!-- Home Button - Larger and elevated -->
+        <A
+          href="/"
+          className="flex items-center justify-center bg-primary text-white rounded-full h-14 w-14 -mt-8 shadow-lg border-4 border-[#24243e]/80"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            ></path>
+          </svg>
+        </A>
+
+        <!-- Donjons Icon -->
+        <A href="/donjons" className="flex flex-col items-center p-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+            ></path>
+          </svg>
+        </A>
+
+        <!-- Menu Icon - You can add additional menu functionality if needed -->
+        <A href="/menu" className="flex flex-col items-center p-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </A>
+      </nav>
+    </div>
 
     <script>
       // Toggle mobile menu visibility

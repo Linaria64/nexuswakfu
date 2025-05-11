@@ -1,6 +1,5 @@
 ---
-import { A, P, Titleh1 } from '@/components/ui/composant';
-import { Container } from '@/components/ui/container';
+import { A } from '@/components/ui/composant';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/layout.astro';
 import '../styles/global.css';
@@ -38,17 +37,6 @@ const features = [
 <Layout title="Accueil">
 
 
-<Container>
-  <Titleh1 className='w-1/2 mx-auto bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md'>
-    Bienvenue sur ce Fan Site 
-    <br/>
-    <P> Il permet de Centraliser les informations ( Gdoc ) est de Centraliser les Fan site déjà existant en un seul endroit ( Method wakfu , Zenith Builder ) <br/>
-    <P> Ce site est en constante évolution, n'hésitez pas à me faire part de vos retours ! Ceci est encore en développement.</P> <br>
-    <P >C'est un fan site pour la communauté donc vos retours et vos idées sont precieux Vous pouvez donc me donner vos idées  via mp : </P> <br>
-    <A  href='/changelog'>Vous pouvez Voir les étapes de développement du site en cliquant ici</A>
-   
-  </Titleh1>
-</Container>
 
 
 <div class="min-h-screen flex flex-col">
