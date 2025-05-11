@@ -3,8 +3,8 @@ id: "tofu"
 name: "tofu"
 level: 12
 image:
-  src: "/images/donjons/abraknyde/banner.jpg"
-  alt: "Bannière du donjon Abraknyde"
+  src: "https://vertylo.github.io/wakassets/items/1010245.png"
+  alt: "boss tofu"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
 players: "group"

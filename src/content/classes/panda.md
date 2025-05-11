@@ -25,10 +25,6 @@ portrait:
   src: "/images/classes/pandaa.png"
   alt: "Portrait d'un personnage Panda"
 
-# Passif unique de la classe
-uniquePassive:
-  name: "Furie du Panda"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
 
 # Aptitudes spécifiques de la classe
 abilities:
