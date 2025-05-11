@@ -223,7 +223,22 @@ const { donjonData, isOpen, onClose } = Astro.props;
                             <li class="text-white">
                               {element.charAt(0).toUpperCase() +
                                 element.slice(1)}
-                              : {value}
+                              :{" "}
+                              <span
+                                class={`base-mastery ${value > 0 ? "mastery-" + element : ""}`}
+                              >
+                                {value}
+                              </span>
+                              {value > 0 && (
+                                <span class="text-cyan-400 ml-2">
+                                  →{" "}
+                                  <span
+                                    class={`adjusted-mastery mastery-${element}`}
+                                  >
+                                    {value}
+                                  </span>
+                                </span>
+                              )}
                             </li>
                           )
                         )}
@@ -470,10 +485,27 @@ const { donjonData, isOpen, onClose } = Astro.props;
       9: 780,
       10: 1000,
     };
+    const dpsIncreaseByDifficulty = {
+      1: -20, // Base HP (no increase)
+      2: 0,
+      3: 30, // 100% increase (double HP)
+      4: 60,
+      5: 100,
+      6: 120,
+      7: 130,
+      8: 140,
+      9: 150,
+      10: 160,
+    };
 
     // Fonction pour mettre à jour les HP basée sur la difficulté
     function updateHpBasedOnDifficulty(difficulty) {
-      console.log("Updating HP for difficulty:", difficulty);
+      // Vérifier si la modulation est activée
+      const modulationToggle = document.querySelector("#modulation-toggle");
+      if (modulationToggle && !modulationToggle.checked) {
+        resetHpToBase();
+        return; // Ne pas continuer si la modulation est désactivée
+      }
 
       // Mise à jour de l'affichage du niveau de difficulté
       const difficultyValues = document.querySelectorAll("#difficulty-value");
@@ -491,27 +523,78 @@ const { donjonData, isOpen, onClose } = Astro.props;
       const baseHpElements = document.querySelectorAll(".base-hp");
       const adjustedHpElements = document.querySelectorAll(".adjusted-hp");
 
-      console.log("Found base HP elements:", baseHpElements.length);
-      console.log("Found adjusted HP elements:", adjustedHpElements.length);
-
       baseHpElements.forEach((baseHpEl, index) => {
         if (adjustedHpElements[index]) {
           const baseHpText = baseHpEl.textContent.replace(/,/g, "");
           const baseHp = parseInt(baseHpText);
           const increasePercentage = hpIncreaseByDifficulty[difficulty];
 
-          console.log("Base HP:", baseHp);
-          console.log("Increase percentage:", increasePercentage);
-
           if (!isNaN(baseHp)) {
             const adjustedHp = Math.round(
               baseHp * (1 + increasePercentage / 100)
             );
-            console.log("Adjusted HP:", adjustedHp);
             adjustedHpElements[index].textContent = adjustedHp.toLocaleString();
           } else {
             console.error("Invalid base HP:", baseHpEl.textContent);
           }
+        }
+      });
+
+      // Calcul des maîtrises ajustées pour chaque boss (uniquement les valeurs non nulles)
+      const baseMasteryElements = document.querySelectorAll(
+        ".base-mastery[class*='mastery-']"
+      );
+
+      baseMasteryElements.forEach((baseMasteryEl) => {
+        // Obtenir le type d'élément (eau, feu, terre, air) depuis la classe
+        const elementClasses = Array.from(baseMasteryEl.classList).find((cls) =>
+          cls.startsWith("mastery-")
+        );
+
+        if (elementClasses) {
+          const elementType = elementClasses.replace("mastery-", "");
+          // Trouver l'élément ajusté correspondant
+          const adjustedMasteryEl = document.querySelector(
+            `.adjusted-mastery.mastery-${elementType}`
+          );
+
+          if (adjustedMasteryEl) {
+            const baseMasteryText = baseMasteryEl.textContent.replace(/,/g, "");
+            const baseMastery = parseInt(baseMasteryText);
+            // Utiliser dpsIncreaseByDifficulty pour les maîtrises (dégâts)
+            const increasePercentage = dpsIncreaseByDifficulty[difficulty];
+
+            if (!isNaN(baseMastery)) {
+              const adjustedMastery = Math.round(
+                baseMastery * (1 + increasePercentage / 100)
+              );
+              adjustedMasteryEl.textContent = adjustedMastery.toLocaleString();
+            }
+          }
+        }
+      });
+    }
+
+    // Fonction pour réinitialiser les HP et maîtrises aux valeurs de base
+    function resetHpToBase() {
+      const baseHpElements = document.querySelectorAll(".base-hp");
+      const adjustedHpElements = document.querySelectorAll(".adjusted-hp");
+
+      baseHpElements.forEach((baseHpEl, index) => {
+        if (adjustedHpElements[index]) {
+          adjustedHpElements[index].textContent = baseHpEl.textContent;
+        }
+      });
+
+      // Réinitialiser également les maîtrises
+      const baseMasteryElements = document.querySelectorAll(".base-mastery");
+      const adjustedMasteryElements =
+        document.querySelectorAll(".adjusted-mastery");
+
+      baseMasteryElements.forEach((baseMasteryEl, index) => {
+        if (adjustedMasteryElements[index]) {
+          adjustedMasteryElements[index].textContent =
+            baseMasteryEl.textContent;
         }
       });
     }
