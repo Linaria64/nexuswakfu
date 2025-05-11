@@ -3,7 +3,7 @@ id: "arakne"
 name: "arakne"
 level: 20
 image:
-  src: "/images/donjons/abraknyde/banner.jpg"
+  src: "../public/images/boss/arakne.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

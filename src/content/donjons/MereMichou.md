@@ -3,7 +3,7 @@ id: "mere michou"
 name: "mere michou"
 level: 10
 image:
-  src: "/images/donjons/abraknyde/banner.jpg"
+  src: "../public/images/boss/maynecoon.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

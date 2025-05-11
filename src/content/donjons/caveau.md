@@ -3,7 +3,7 @@ id: "caveau relevé"
 name: "caveau relevé"
 level: 20
 image:
-  src: "/images/donjons/abraknyde/banner.jpg"
+  src: "../public/images/boss/morfor.png"
   alt: "Bannière du donjon Abraknyde"
 description: "un cimetière habité par d'éffrayent squelette et une monstre hum "
 difficulty: "easy"

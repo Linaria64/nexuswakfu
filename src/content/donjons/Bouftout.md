@@ -3,7 +3,7 @@ id: "bouftout"
 name: "Bouftout"
 level: 12
 image:
-  src: "/images/donjons/abraknyde/banner.jpg"
+  src: "../public/images/boss/bouftout.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Donjon des bouftouts de joli animaux ! "
 difficulty: "easy"
