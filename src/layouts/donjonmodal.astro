@@ -66,6 +66,20 @@ interface Props {
 }
 
 const { donjonData, isOpen, onClose } = Astro.props;
+
+// HP increase percentages by difficulty level (50% increase per level)
+const hpIncreaseByDifficulty = {
+  1: 0, // Base HP (no increase)
+  2: 50, // 50% increase
+  3: 100, // 100% increase (double HP)
+  4: 150, // 150% increase
+  5: 200, // 200% increase (triple HP)
+  6: 250, // 250% increase
+  7: 300, // 300% increase (quadruple HP)
+  8: 350, // 350% increase
+  9: 400, // 400% increase (quintuple HP)
+  10: 450, // 450% increase (5.5x base HP)
+};
 ---
 
 <div
@@ -97,6 +111,38 @@ const { donjonData, isOpen, onClose } = Astro.props;
       <!-- Description -->
       <div class="mb-8">
         <p class="text-white/90">{donjonData.data.description}</p>
+      </div>
+
+      <!-- Difficulté Slider -->
+      <div
+        class="mb-8 glass-card p-4 bg-gradient-to-br from-[#1e2225]/50 to-[#2E1437]/50"
+      >
+        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">
+          Niveau de difficulté
+        </h3>
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <span class="text-white/80">1</span>
+            <span id="difficulty-value" class="text-xl font-bold text-cyan-400"
+              >1</span
+            >
+            <span class="text-white/80">10</span>
+          </div>
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value="1"
+            class="w-full appearance-none h-3 rounded-lg bg-white/10 outline-none cursor-pointer slider-difficulty"
+            id="difficulty-slider"
+          />
+        </div>
+        <div class="mt-4">
+          <p class="text-white/80 text-sm">
+            Le niveau de difficulté affecte les PV des boss et la qualité des
+            récompenses.
+          </p>
+        </div>
       </div>
 
       <!-- Caractéristiques -->
@@ -145,6 +191,19 @@ const { donjonData, isOpen, onClose } = Astro.props;
 
                   <div class="grid grid-cols-2 gap-4">
                     <div>
+                      <h5 class="text-white/60 mb-2">PV de base</h5>
+                      <p class="text-white text-xl font-bold">
+                        <span class="base-hp">{boss.hp}</span>
+                      </p>
+                      <h5 class="text-white/60 mt-4 mb-2">
+                        PV ajustés (difficulté:{" "}
+                        <span class="diff-level">1</span>)
+                      </h5>
+                      <p class="text-white text-xl font-bold">
+                        <span class="adjusted-hp">{boss.hp}</span>
+                      </p>
+                    </div>
+                    <div>
                       <h5 class="text-white/60 mb-2">Maîtrises</h5>
                       <ul class="space-y-1">
                         {Object.entries(boss.masteries).map(
@@ -158,20 +217,19 @@ const { donjonData, isOpen, onClose } = Astro.props;
                         )}
                       </ul>
                     </div>
-                    <div>
-                      <h5 class="text-white/60 mb-2">Résistances</h5>
-                      <ul class="space-y-1">
-                        {Object.entries(boss.resistances).map(
-                          ([element, value]) => (
-                            <li class="text-white">
-                              {element.charAt(0).toUpperCase() +
-                                element.slice(1)}
-                              : {value}%
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <h5 class="text-white/60 mb-2">Résistances</h5>
+                    <ul class="grid grid-cols-2 gap-2">
+                      {Object.entries(boss.resistances).map(
+                        ([element, value]) => (
+                          <li class="text-white">
+                            {element.charAt(0).toUpperCase() + element.slice(1)}
+                            : {value}%
+                          </li>
+                        )
+                      )}
+                    </ul>
                   </div>
                 </div>
               ))}
@@ -386,30 +444,173 @@ const { donjonData, isOpen, onClose } = Astro.props;
         modal.classList.add("hidden");
       }
     };
-  }
 
-  // Observer pour gérer le scroll du body
-  document.addEventListener("astro:page-load", () => {
-    const modals = document.querySelectorAll(".modal-container");
+    // Définir les pourcentages d'augmentation de HP par niveau de difficulté
+    const hpIncreaseByDifficulty = {
+      1: -30, // Base HP (no increase)
+      2: 0, // 50% increase
+      3: 40, // 100% increase (double HP)
+      4: 110, // 150% increase
+      5: 210, // 200% increase (triple HP)
+      6: 340, // 250% increase
+      7: 500, // 300% increase (quadruple HP)
+      8: 560, // 350% increase
+      9: 780, // 400% increase (quintuple HP)
+      10: 1000, // 450% increase (5.5x base HP)
+    };
 
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          const modal = mutation.target;
-          const isVisible = modal.classList.contains("flex");
-          document.body.style.overflow = isVisible ? "hidden" : "";
+    // Fonction pour mettre à jour les HP basée sur la difficulté
+    function updateHpBasedOnDifficulty(difficulty) {
+      console.log("Updating HP for difficulty:", difficulty);
+
+      // Mise à jour de l'affichage du niveau de difficulté
+      const difficultyValues = document.querySelectorAll("#difficulty-value");
+      const diffLevelElements = document.querySelectorAll(".diff-level");
+
+      difficultyValues.forEach((el) => {
+        el.textContent = difficulty;
+      });
+
+      diffLevelElements.forEach((el) => {
+        el.textContent = difficulty;
+      });
+
+      // Calcul des HP ajustés pour chaque boss
+      const baseHpElements = document.querySelectorAll(".base-hp");
+      const adjustedHpElements = document.querySelectorAll(".adjusted-hp");
+
+      console.log("Found base HP elements:", baseHpElements.length);
+      console.log("Found adjusted HP elements:", adjustedHpElements.length);
+
+      baseHpElements.forEach((baseHpEl, index) => {
+        if (adjustedHpElements[index]) {
+          const baseHpText = baseHpEl.textContent.replace(/,/g, "");
+          const baseHp = parseInt(baseHpText);
+          const increasePercentage = hpIncreaseByDifficulty[difficulty];
+
+          console.log("Base HP:", baseHp);
+          console.log("Increase percentage:", increasePercentage);
+
+          if (!isNaN(baseHp)) {
+            const adjustedHp = Math.round(
+              baseHp * (1 + increasePercentage / 100)
+            );
+            console.log("Adjusted HP:", adjustedHp);
+            adjustedHpElements[index].textContent = adjustedHp.toLocaleString();
+          } else {
+            console.error("Invalid base HP:", baseHpEl.textContent);
+          }
         }
       });
-    });
+    }
 
-    modals.forEach((modal) => {
-      observer.observe(modal, { attributes: true });
-    });
+    // Gestion du slider de difficulté - utilisation de DOMContentLoaded et window.onload pour s'assurer que le DOM est chargé
+    function initializeDifficultySliders() {
+      console.log("Initializing difficulty sliders");
+      const difficultySliders = document.querySelectorAll("#difficulty-slider");
+      console.log("Found sliders:", difficultySliders.length);
 
-    // Empêcher la propagation du clic sur les modals
-    const glassCards = document.querySelectorAll(".glass-card");
-    glassCards.forEach((card) => {
-      card.addEventListener("click", (e) => e.stopPropagation());
+      difficultySliders.forEach((slider) => {
+        if (slider) {
+          console.log("Setting up slider:", slider);
+
+          // Supprimer les anciens écouteurs pour éviter les doublons
+          slider.removeEventListener("input", handleSliderInput);
+          slider.addEventListener("input", handleSliderInput);
+
+          // Initialisation du style du slider
+          slider.style.background =
+            "linear-gradient(to right, #22d3ee 0%, rgba(255, 255, 255, 0.1) 0%)";
+
+          // Définir la valeur initiale à 1
+          slider.value = 1;
+
+          // Déclencher manuellement l'événement input pour initialiser les valeurs
+          updateHpBasedOnDifficulty(1);
+
+          // Mettre à jour le style du slider
+          const gradientPercent = 0; // 0% pour difficulté 1
+          slider.style.background = `linear-gradient(to right, #22d3ee ${gradientPercent}%, rgba(255, 255, 255, 0.1) ${gradientPercent}%)`;
+        }
+      });
+    }
+
+    function handleSliderInput() {
+      const difficulty = parseInt(this.value);
+      console.log("Slider moved to difficulty:", difficulty);
+
+      updateHpBasedOnDifficulty(difficulty);
+
+      // Mise à jour du style du slider pour afficher la progression
+      const gradientPercent = ((difficulty - 1) / 9) * 100;
+      this.style.background = `linear-gradient(to right, #22d3ee ${gradientPercent}%, rgba(255, 255, 255, 0.1) ${gradientPercent}%)`;
+    }
+
+    // Initialiser les sliders dès que possible
+    document.addEventListener("DOMContentLoaded", initializeDifficultySliders);
+    window.addEventListener("load", initializeDifficultySliders);
+    document.addEventListener("astro:page-load", initializeDifficultySliders);
+
+    // Réinitialiser les sliders lorsque le modal est ouvert
+    document.addEventListener("astro:page-load", () => {
+      const modals = document.querySelectorAll(".modal-container");
+
+      modals.forEach((modal) => {
+        // Observer les changements de classe pour détecter quand un modal s'ouvre
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.attributeName === "class") {
+              const isVisible = modal.classList.contains("flex");
+              if (isVisible) {
+                console.log("Modal opened, reinitializing sliders");
+                setTimeout(initializeDifficultySliders, 100); // Petit délai pour s'assurer que le DOM est stable
+              }
+              document.body.style.overflow = isVisible ? "hidden" : "";
+            }
+          });
+        });
+
+        observer.observe(modal, { attributes: true });
+      });
+
+      // Empêcher la propagation du clic sur les modals
+      const glassCards = document.querySelectorAll(".glass-card");
+      glassCards.forEach((card) => {
+        card.addEventListener("click", (e) => e.stopPropagation());
+      });
     });
-  });
+  }
 </script>
+
+<style>
+  /* Style du slider personnalisé */
+  .slider-difficulty {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    outline: none;
+  }
+
+  .slider-difficulty::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #22d3ee;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .slider-difficulty::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #22d3ee;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+</style>
