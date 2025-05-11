@@ -12,6 +12,7 @@ interface Props {
       players: "solo" | "group" | "both";
       region: string;
       boss: string;
+      modulated?: boolean; // Propriété pour indiquer si le donjon peut être modulé
       bosses?: Array<{
         name: string;
         description: string;
@@ -66,20 +67,6 @@ interface Props {
 }
 
 const { donjonData, isOpen, onClose } = Astro.props;
-
-// HP increase percentages by difficulty level (50% increase per level)
-const hpIncreaseByDifficulty = {
-  1: 0, // Base HP (no increase)
-  2: 50, // 50% increase
-  3: 100, // 100% increase (double HP)
-  4: 150, // 150% increase
-  5: 200, // 200% increase (triple HP)
-  6: 250, // 250% increase
-  7: 300, // 300% increase (quadruple HP)
-  8: 350, // 350% increase
-  9: 400, // 400% increase (quintuple HP)
-  10: 450, // 450% increase (5.5x base HP)
-};
 ---
 
 <div
@@ -113,13 +100,31 @@ const hpIncreaseByDifficulty = {
         <p class="text-white/90">{donjonData.data.description}</p>
       </div>
 
-      <!-- Difficulté Slider -->
+      <!-- Difficulté Slider - affiché pour tous les donjons -->
       <div
         class="mb-8 glass-card p-4 bg-gradient-to-br from-[#1e2225]/50 to-[#2E1437]/50"
       >
-        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">
-          Niveau de difficulté
-        </h3>
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-2xl font-semibold text-cyan-400">
+            Niveau de difficulté
+          </h3>
+          <label class="flex items-center cursor-pointer">
+            <span class="text-white/80 mr-2">Modulé</span>
+            <input
+              type="checkbox"
+              id="modulation-toggle"
+              class="hidden"
+              checked
+            />
+            <span
+              class="toggle-switch relative inline-block w-12 h-6 bg-white/10 rounded-full transition-colors"
+            >
+              <span
+                class="toggle-knob absolute left-1 top-1 w-4 h-4 bg-cyan-400 rounded-full transition-transform"
+              ></span>
+            </span>
+          </label>
+        </div>
         <div class="flex flex-col gap-2">
           <div class="flex items-center justify-between">
             <span class="text-white/80">1</span>
@@ -171,6 +176,13 @@ const hpIncreaseByDifficulty = {
                     ? "3-6"
                     : donjonData.data.players
               }
+            </p>
+          </div>
+          {/* Indicateur si le donjon est modulé ou non */}
+          <div class="glass-card p-4">
+            <p class="text-white/60">Modulé</p>
+            <p class="text-white font-semibold">
+              {donjonData.data.modulated ? "Oui" : "Non"}
             </p>
           </div>
         </div>
@@ -450,13 +462,13 @@ const hpIncreaseByDifficulty = {
       1: -30, // Base HP (no increase)
       2: 0, // 50% increase
       3: 40, // 100% increase (double HP)
-      4: 110, // 150% increase
-      5: 210, // 200% increase (triple HP)
-      6: 340, // 250% increase
-      7: 500, // 300% increase (quadruple HP)
-      8: 560, // 350% increase
-      9: 780, // 400% increase (quintuple HP)
-      10: 1000, // 450% increase (5.5x base HP)
+      4: 110,
+      5: 210,
+      6: 340,
+      7: 500,
+      8: 560,
+      9: 780,
+      10: 1000,
     };
 
     // Fonction pour mettre à jour les HP basée sur la difficulté

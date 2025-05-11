@@ -10,6 +10,7 @@ difficulty: "easy"
 players: "group"
 region: "Astrub"
 boss: "Mère Michou"
+modulated: true
 bosses:
   - name: "abraknelle"
     description: ""
