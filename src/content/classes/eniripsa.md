@@ -25,8 +25,8 @@ portrait:
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Eniripsa"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "Soigneur"
+  description: "En début de combat l'éniripsa débloque Contre-nature lapino répulsion en fin de tour 1pw 2pw si > 80% pv bonus de grâce +10 niv a chaque soin réalisé propagateur boost de pv pour toutes l'équipe 200% du niveau de l'eniripsa"
 
 # Aptitudes spécifiques de la classe
 abilities:

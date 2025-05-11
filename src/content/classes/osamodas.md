@@ -43,6 +43,6 @@ abilities:
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Osamodas"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "Invocateur animal"
+  description: "en début de combat débloque invocation forme draconique et gobgob il partage ses pws avec ses invocations en fin de tours +1 pw"
 ---

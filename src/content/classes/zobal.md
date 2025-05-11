@@ -8,7 +8,9 @@ role: "DPT mêlée"
 specialty: "Combat rapproché et dégâts bruts"
 gameplayDescription: "Les zobals sont principalements des supports, qui peuvent placer, shield, heal (Attention a privilégier un gameplay et pas tenter de tout faire), ils ont une enorme mobilité et peuvent invoquer un double avec les mêmes sorts)"
 
-
+uniquePassive:
+  name: "Guerrier lunatique"
+  description: " En début de combat il gagne masque de psychopathe masque du pleutre masque de classe il regagne 3pw si il porte aucun masque en fin de tours"
 
 # Images
 icon:
@@ -21,12 +23,6 @@ portrait:
   src: "/images/classes/zobal.png"
   alt: "Portrait d'un personnage Zobal aux cheveux rouges"
 
-
-# Passif unique de la classe
-uniquePassive:
-  name: "Furie du Zobal"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
-
 # Aptitudes spécifiques de la classe
 abilities:
   - type: "transformation"
@@ -38,11 +34,10 @@ abilities:
     name: "Disposant de plusieurs sorts de soin et de protection, les Zobals aident leurs alliés un par un, et peuvent même les ressusciter."
     image:
       src: "/images/ability/health.png"
-      alt: "Polyvalence" 
+      alt: "Polyvalence"
   - type: "dps"
     name: "Se battant globalement à mi-distance, les Zobals ont plusieurs styles de combat, selon qu’ils souhaitent attirer l’attention sur eux ou rester à l’écart."
     image:
       src: "/images/ability/dps.png"
       alt: "DPS"
-      
 ---

@@ -8,6 +8,11 @@ Les Pandawas sont des Guerriers porteurs qui savent faire des folies de leurs co
 role: "DPT distance"
 specialty: "Combat distance et dégâts bruts"
 
+# Passif unique de la classe
+uniquePassive:
+  name: "imbibé"
+  description: "rework en cours"
+
 
 # Image
 icon:

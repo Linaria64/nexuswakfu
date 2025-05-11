@@ -21,6 +21,10 @@ portrait:
   src: "/images/classes/hupper.png"
   alt: "Portrait d'un personnage Huppermage aux cheveux rouges"
 
+uniquePassive:
+  name: "Guerrier élémentaire"
+  description: "en début de combat, l'huppermage débloque Coeur de lumière feu follet et cycle élémentaire l'huppermage génère des runes élémentaire lorsqu'il lance un sort élémentaire il gagne 1 pa en générant des runes dans la limite de 1x par tour et par rune il converties chaque pw en 75 de BQ il gagne 100 BQ si il n'est pas en coeur de lumière il stocke 75 BQ en fin de tours s'il est en Coeur de lumière"
+
 
 # Aptitudes spécifiques de la classe
 abilities:
@@ -41,8 +45,4 @@ Les Huppermages sont polyvalents en combat, capables de frapper dans tous les é
       src: "/images/ability/control.png"
       alt: "Maîtrise"
 
-# Passif unique de la classe
-uniquePassive:
-  name: "Furie du Huppermage"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
 ---

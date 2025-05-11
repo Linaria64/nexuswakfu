@@ -43,8 +43,8 @@ Polyvalents, les Iops sont adeptes des combats rapprochés, surtout s'ils sont e
 
 # Passif unique de la classe
 uniquePassive:
-  name: ""
-  description: "Gagne 1 Pm passif "
+  name: "Guerrier"
+  description: "bonus de 1 pm naturel chaque coups génère de la concentration et de la puissance il peut faire des combos aves ses sorts airs "
 
 
 ---

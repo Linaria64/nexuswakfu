@@ -24,8 +24,8 @@ portrait:
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Sacrieur"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "Berserker"
+  description: "0.5 % de di par point de fureur bonus naturel de 200% du niveau en pv en début de combat il gagne chatiment osé et sanguin en début de tours si le sacrieur a subi des dommages d'au moins un enemi ou 20 % de ses pv par des alliès ou retour de flamme il gagne 2 pw "
 
 # Aptitudes spécifiques de la classe
 abilities:

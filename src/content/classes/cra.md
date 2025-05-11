@@ -16,8 +16,8 @@ portrait:
   src: "/images/classes/cra.png"
   alt: "Portrait d'un personnage Cra"
 uniquePassive:
-  name: "Furie du Cra"
-  description: "A faire"
+  name: "Archer"
+  description: "bonus de 1 po chaque sort élémentaire donne + 10 en affutage et précision  la précision se stack a 300 au maximum et permet au lancement du sort tir precis de donner des effets secondaire au sort tous les 100 affutages le cra gagne 40% de di stackable 3 fois en Début de tours on proc insaisissable level 30 ( 30% de di ) maximum level 50 (50% de di ) on gagne 10 insaisissable si on termine son tour sans enemis a 3 po du cra "
 abilities:
   - type: "dps"
     name: "Distance : Spécialistes du combat à distance, les Crâs sont efficaces tant qu'ils ne se laissent pas approcher. Ils disposent pour cela de plusieurs moyens d'échapper à leurs attaquants."

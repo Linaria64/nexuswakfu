@@ -25,8 +25,8 @@ portrait:
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Steamer"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "maitre saboteur"
+  description: "Début du combat la moitié de ses pw sont convertie en ps il débloque microbot tourelle steamerator et canonnier il regagne 1 pw a la fin de son tours et 1 ps chaque fois que sa tourelle touche un enemi quand il regagne 1 ps et que sa jauge de ps est pleine il gagne 1 pw a la place le sort de la tourelle tape dans l'élément du dernier sort utilisé par le steamer"
 
 # Aptitudes spécifiques de la classe
 abilities:

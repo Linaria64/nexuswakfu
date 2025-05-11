@@ -25,8 +25,8 @@ portrait:
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Enutrof"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "chasseur de trésor"
+  description: "en début de combat débloque excavation dette appel du compagnon phorzerker le phorreur est invoqué automatique en début de combat face à l'énutrof en début de tours l'énutrof proc 4 gisement dans un rayon de 5 tours de l'énutrof il sont consommée si on marche dessus ( alliés only ) il gagne des trésors quand ils sont consomé en fin de tours un bourse apparait au emplacement des gisement et il regagne 1pw"
 
 # Aptitudes spécifiques de la classe
 abilities:

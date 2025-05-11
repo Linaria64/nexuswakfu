@@ -44,6 +44,6 @@ Les Bombes sont l’arme de prédilection des Roublards. Elles explosent sur com
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Roublard"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "Maitre de la diversion "
+  description: "Gagne en début de combat détonation dynamite ruse et roublabot le roublard commence le combat en mode fuyard il peut passer en mode fourbe grâce a ruse en début de tour les bombes double leur niveau et le roublard gange 5 de poudre  la poudre permet au roublard d'invoquer des bombes en fin de tours il gagne 1pw  "
 ---

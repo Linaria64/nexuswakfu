@@ -24,8 +24,8 @@ portrait:
 
 # Passif unique de la classe
 uniquePassive:
-  name: "La veine D'Ecaflip"
-  description: "Tous les 100 de Veines double l'effet de la carte."
+  name: "Guerrier joueur"
+  description: "En début de combat l'écaflip gagne 2 sort bond du félin qui coûte 1 pa et vous téléporte sur la case il peut ciblé l'arbre a chat et la relance qui coûte 2 pa ca permet de défausse ses carte et en tiré 3 par carte défaussée 15% de cc ( 2 tours ) jouer une carte donne 7 de Veine Passif : au dessus de 100 cc ca donne des di  en fin de tours l'écaflip gagne 1 pw et 20 de veine toutes les 100 veine cela double l'effêt de la carte"
 
 # Aptitudes spécifiques de la classe
 abilities:

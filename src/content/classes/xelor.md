@@ -44,6 +44,6 @@ abilities:
 
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Xelor"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "Mage temporel"
+  description: "En début de combat il gagne cadran vol du temps et distorsion en fin de tours + 1 pw + 1 pw par pa non dépensé Toutes les téléportations causé par le xelor peuvent provoquer un échange de position si la case d'arrivée est occupée "
 ---

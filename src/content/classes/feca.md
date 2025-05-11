@@ -8,8 +8,6 @@ role: "DPT mêlée"
 specialty: "Combat rapproché et dégâts bruts"
 gameplayDescription: "Les fécas sont des supports qui mettent de l'armure aux alliés, tout en pouvant les rendre plus résistants."
 
-
-
 # Images
 icon:
   src: "/images/classes/feca.png"
@@ -21,11 +19,10 @@ portrait:
   src: "/images/classes/feca.png"
   alt: "Portrait d'un personnage Iop aux cheveux rouges"
 
-
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Feca"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "Protecteur"
+  description: "en début de combat débloque armure de la paix il peut régénérer des points de wakfu via paix interieur"
 
 # Aptitudes spécifiques de la classe
 abilities:
@@ -38,11 +35,10 @@ abilities:
     name: "Générant des armures et même de l’invulnérabilité, les Fécas protègent leurs alliés aussi efficacement qu’eux-mêmes"
     image:
       src: "/images/ability/soutien.png"
-      alt: "Contrôle" 
+      alt: "Contrôle"
   - type: "dps"
     name: "En posant au sol différents types de glyphes, les Fécas contraignent leurs adversaires à éviter certaines zones, ou à en subir les conséquences"
     image:
       src: "/images/ability/control.png"
       alt: "DPS"
-      
 ---

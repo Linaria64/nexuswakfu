@@ -8,8 +8,6 @@ role: "DPT mêlée"
 specialty: "Combat rapproché et dégâts bruts"
 gameplayDescription: "Les Eliotropes manipulent les portails dimensionnels. Ils peuvent ouvrir des portails pour se déplacer ou déplacer leurs alliés sur le champ de bataille, et peuvent aussi amplifier leurs sorts en les faisant passer plusieurs fois à travers ces portails."
 
-
-
 # Images
 icon:
   src: "/images/classes/elio.png"
@@ -21,11 +19,10 @@ portrait:
   src: "/images/classes/elio.png"
   alt: "Portrait d'un personnage Eliotrope aux cheveux rouges"
 
-
 # Passif unique de la classe
 uniquePassive:
-  name: "Furie du Eliotrope"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
+  name: "Guerrier mobile  "
+  description: "en début de combatil convertit 2po en 1 pm et  il débloque portail exaltation portail celeste il commence en étant serein"
 
 # Aptitudes spécifiques de la classe
 abilities:
@@ -38,11 +35,10 @@ abilities:
     name: "Outre l'utilisation de Portails, les Eliotropes contrôlent le terrain par des sorts de protection ou d'entrave."
     image:
       src: "/images/ability/control.png"
-      alt: "Placement" 
+      alt: "Placement"
   - type: "specialite"
     name: "Les Eliotropes sont capables de se déchaîner, s'ils préfèrent adopter un style de combat basé sur les dégâts plutôt que sur le contrôle, au détriment de leur résistance."
     image:
       src: "/images/ability/dps.png"
       alt: "Spécialité"
-      
 ---

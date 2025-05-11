@@ -10,6 +10,11 @@ specialty: "Combat rapproché et dégâts bruts"
 gameplayDescription: "Les srams sont des assassins qui veulent attrapper le dos de l'ennemi pour faire des dégats, et peuvent se rendre invisible."
 
 
+# Passif unique de la classe
+uniquePassive:
+  name: "Rework incomming"
+  description: "on attend le rework"
+
 
 # Images
 icon:
@@ -23,10 +28,6 @@ portrait:
   alt: "Portrait d'un personnage Sram aux cheveux rouges"
 
 
-# Passif unique de la classe
-uniquePassive:
-  name: "Furie du Sram"
-  description: "Chaque coup critique augmente vos dégâts de 5% pour 2 tours. Cumulable jusqu'à 3 fois."
 
 # Aptitudes spécifiques de la classe
 abilities:
