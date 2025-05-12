@@ -123,23 +123,34 @@ const features = [
           <div class=" inset-0 bg-gradient-to-tr from-cyan-500/0 via-white/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
           
           <div class="flex flex-row flex-wrap justify-around items-stretch">
-            {stats.map((stat, index) => (
-              <div class="flex-1 p-4 min-w-[250px] max-h-[250px] group bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md">
-                <div class="flex flex-col items-center justify-center p-4 h-full rounded-xl bg-gradient-to-b from-white/5 to-white/0 group-hover:from-white/10 group-hover:to-white/5 transition-all duration-300 transform group-hover:-translate-y-1 border border-white/10 group-hover:border-white/20 shadow-lg">
-                  <!-- Icône avec animation -->
-                  <div class="text-5xl md:text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300 text-cyan-300 group-hover:text-cyan-200">{stat.icon}</div>
-                  
-                  <!-- Valeur avec animation de compteur -->
-                  <div class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300 mb-3">{stat.value}</div>
-                  
-                  <!-- Label avec effet de surlignage au survol -->
-                  <div class="text-base md:text-lg font-medium text-white/70 group-hover:text-white/90 uppercase tracking-wider relative inline-block">
-                    {stat.label}
-                    <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400/50 group-hover:w-full transition-all duration-300"></div>
+            {stats.map((stat, index) => {
+              // Determine the link based on the stat label
+              const link = stat.label === "Classes" ? "/classes" : stat.label === "Donjons" ? "/donjons" : "#";
+              
+              return (
+                <a href={link} class="flex-1 p-4 min-w-[250px] max-h-[250px] group no-underline">
+                  <div class="h-full bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md transition-transform duration-300 hover:-translate-y-1">
+                    <div class="flex flex-col items-center justify-center p-4 h-full rounded-xl bg-gradient-to-b from-white/5 to-white/0 group-hover:from-white/10 group-hover:to-white/5 transition-all duration-300 border border-white/10 group-hover:border-white/20 shadow-lg">
+                      <!-- Icône avec animation -->
+                      <div class="text-5xl md:text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300 text-cyan-300 group-hover:text-cyan-200">{stat.icon}</div>
+                      
+                      <!-- Valeur avec animation de compteur -->
+                      <div class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300 mb-3">{stat.value}</div>
+                      
+                      <!-- Label avec effet de surlignage au survol -->
+                      <div class="text-base md:text-lg font-medium text-white/70 group-hover:text-white/90 uppercase tracking-wider relative inline-block">
+                        {stat.label}
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400/50 group-hover:w-full transition-all duration-300"></div>
+                      </div>
+                    </div>
                   </div>
+                </a>
+              );
+            })}
+          </div>
                 </div>
               </div>
-            ))}
+          
           </div>
         </div>
       </div>

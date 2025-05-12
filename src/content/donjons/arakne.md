@@ -34,7 +34,7 @@ rewards:
     description: "Le meilleurs anneau lvl 20"
     dropRate: 0.8
     image:
-      src: "/placeholder.svg"
+      src: "https://www.wakfu.com/fr/mmorpg/encyclopedie/armures/20666-anneau-satisfaction"
       alt: "Amulette Michou"
     icon:
       src: "/icons/equipment.svg"
