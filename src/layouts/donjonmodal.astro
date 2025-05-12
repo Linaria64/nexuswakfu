@@ -1,17 +1,18 @@
 ---
 import ItemModal from "./itemmodal.astro";
 
+
 interface Props {
   donjonData: {
     id: string;
-    data: {
-      name: string;
+    data: {      name: string;
       description: string;
       level: number;
       difficulty: "easy" | "medium" | "hard" | "extreme";
       players: "solo" | "group" | "both";
       region: string;
       boss: string;
+      linka: string; // Lien externe vers la page de drops
       modulated?: boolean; // Propriété pour indiquer si le donjon peut être modulé
       bosses?: Array<{
         name: string;
@@ -47,16 +48,14 @@ interface Props {
           src: string;
           alt: string;
         };
-        stats?: Array<string>;
-      }>;
+        stats?: Array<string>;      }>;
       strategy?: {
         phases: Array<{
           title: string;
           description: string;
         }>;
         tips: Array<string>;
-      };
-      steles?: Array<{
+      };      steles?: Array<{
         name: string;
         description: string;
       }>;
@@ -386,9 +385,23 @@ const { donjonData, isOpen, onClose } = Astro.props;
                                 %
                               </span>
                             </span>
+                                                    <div class="mt-6 text-center relative z-10">
+                          <a 
+                            href={"https://www.wakfu.com/fr/mmorpg/encyclopedie/monstres/" + donjonData.data.id}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-600/50 hover:bg-cyan-500/50 text-white rounded-lg transition-colors shadow-md relative z-10"
+                          >
+                            <span>Voir tous les drops</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        </div>
+
                           </div>
                         </div>
-                      ))}
+                        ))}                        <!-- Bouton "Voir tous les drops" -->
                   </div>
                 </div>
 

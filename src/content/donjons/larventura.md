@@ -1,5 +1,5 @@
 ---
-id: "larventura"
+id: "2157-shin-larve"
 name: "larventura"
 level: 12
 image:

@@ -1,5 +1,5 @@
 ---
-id: "tofu"
+id: "1259-tofu-royal"
 name: "tofu"
 level: 12
 image:
