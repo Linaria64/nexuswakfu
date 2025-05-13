@@ -24,6 +24,10 @@ bosses:
       earth: 10
       air: 48
       fire: 35
+salleImage:
+  src: "images/salledj/sdj1.png"
+  alt: "iofhois"
+
 mechanics:
   - name: ""
     description: "2 éme donjon du jeux c'est simplement une grosse larve un peu d'insectiside et pouf !! "

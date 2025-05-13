@@ -24,6 +24,10 @@ bosses:
       earth: 51
       air: 51
       fire: 51
+salleImage:
+  src: "images/salledj/sdj1.png"
+  alt: "iofhois"
+
 mechanics:
   - name: ""
     description: "mécanique spéficique de l'état d'âme liée faite attention a vos débuf cela peut être un one shot pur et dur sinon rien de bien compliqué si on a un gros dpt eau dans la team"

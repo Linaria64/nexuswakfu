@@ -25,30 +25,24 @@ bosses:
       earth: 19
       air: 0
       fire: -20
+salleImage:
+  src: "images/salledj/sdj1.png"
+  alt: "iofhois"
+
 mechanics:
   - name: ""
     description: "le donjon est pas compliqué mais l'on voit le 1 er donjon avec une petite mécanique elle gagne 30 % de réduction de dégats de face et de coté  et 30 % de dégats infligé si on la tape dans le dos donc mettez lui un maximum de dégâts feu de dos et elle disparaitras "
 rewards:
-  - name: "Anneau de satisfaction "
+  - name: ""
     type: "equipment"
-    description: "Le meilleurs anneau lvl 20"
-    dropRate: 0.8
+    description: ""
+    dropRate: 0
     image:
-      src: "https://www.wakfu.com/fr/mmorpg/encyclopedie/armures/20666-anneau-satisfaction"
-      alt: "Amulette Michou"
+      src: ""
+      alt: ""
     icon:
-      src: "/icons/equipment.svg"
-      alt: "Icône Équipement"
-  - name: "Pierre d'équilibre"
-    type: "resource"
-    description: "Une pierre rare utilisée pour l'artisanat avancé"
-    dropRate: 0.025
-    image:
-      src: "/placeholder.svg"
-      alt: "Pierre d'équilibre"
-    icon:
-      src: "/icons/resources.svg"
-      alt: "Icône Ressource"
+      src: ""
+      alt: ""
 steles:
   - name: ""
     description: ""

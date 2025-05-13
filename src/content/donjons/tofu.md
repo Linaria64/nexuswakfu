@@ -24,6 +24,10 @@ bosses:
       earth: 19
       air: 59
       fire: 35
+salleImage:
+  src: "images/salledj/sdj1.png"
+  alt: "iofhois"
+
 mechanics:
   - name: ""
     description: "Le tofu royal a beaucoups de pm il tape en zone assez fort autours de lui les tofunes invoque des petit tofu il faut les tuer en priorité "

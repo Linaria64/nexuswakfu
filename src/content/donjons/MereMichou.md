@@ -24,6 +24,10 @@ bosses:
       earth: 35
       air: 41
       fire: 46
+salleImage:
+  src: "images/salledj/sdj1.png"
+  alt: "iofhois"
+
 mechanics:
   - name: ""
     description: "1 er donjon du jeux donc stratégie basique juste attention a pas donner votre dos et attention au case sur les cotés de la maps"

@@ -116,6 +116,7 @@ const donjonCollection = defineCollection({
         })
       )
       .optional(),
+    salleImage: imageSchema.optional(), // Simplified direct image reference
     strategy: z
       .object({
         phases: z.array(
