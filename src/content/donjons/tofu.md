@@ -3,7 +3,7 @@ id: "1259-tofu-royal"
 name: "tofu"
 level: 12
 image:
-  src: "../public/images/boss/tofu.png"
+  src: "images/boss/tofu.png"
   alt: "boss tofu"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

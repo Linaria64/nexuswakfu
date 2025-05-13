@@ -3,7 +3,7 @@ id: "2157-shin-larve"
 name: "larventura"
 level: 12
 image:
-  src: "../public/images/boss/shinlarve.png"
+  src: "images/boss/shinlarve.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
