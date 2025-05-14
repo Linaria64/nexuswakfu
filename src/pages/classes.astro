@@ -129,6 +129,47 @@ function processClassData(classItem: CollectionEntry<"classes">) {
     },
   };
 }
+
+// Questions du questionnaire
+const questions = [
+  {
+    id: "role",
+    text: "Quel rôle préférez-vous jouer ?",
+    options: [
+      { value: "tank", text: "Tank - Encaisser les dégâts" },
+      { value: "healer", text: "Soigneur - Soutenir l'équipe" },
+      { value: "damage", text: "DPS - Infliger des dégâts" },
+      { value: "support", text: "Support - Contrôler le combat" },
+    ],
+  },
+  {
+    id: "distance",
+    text: "Préférez-vous combattre...",
+    options: [
+      { value: "melee", text: "Au corps à corps" },
+      { value: "range", text: "À distance" },
+      { value: "both", text: "Les deux me conviennent" },
+    ],
+  },
+  {
+    id: "playstyle",
+    text: "Quel style de jeu vous attire le plus ?",
+    options: [
+      { value: "aggressive", text: "Agressif et direct" },
+      { value: "tactical", text: "Tactique et posé" },
+      { value: "versatile", text: "Polyvalent et adaptable" },
+    ],
+  },
+  {
+    id: "complexity",
+    text: "Quelle complexité de gameplay recherchez-vous ?",
+    options: [
+      { value: "simple", text: "Simple à prendre en main" },
+      { value: "moderate", text: "Moyennement complexe" },
+      { value: "complex", text: "Complexe avec beaucoup de capacités" },
+    ],
+  },
+];
 ---
 
 <Layout title="Classes">
@@ -140,46 +181,166 @@ function processClassData(classItem: CollectionEntry<"classes">) {
           <span class="text-white"> de Wakfu</span>
         </h1>
         <div class="max-w-2xl mx-auto p-6">
-          <p class="text-lg text-white/90 leading-relaxed">
+          <p class="text-lg text-white/90 leading-relaxed mb-8">
             Découvrez les 18 classes uniques de Wakfu, leurs spécialités et
             leurs rôles dans le combat.
           </p>
+          <button
+            id="start-questionnaire"
+            class="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors shadow-lg"
+          >
+            Trouver ma classe idéale
+          </button>
         </div>
       </div>
 
-      <!-- Grille des classes -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {
-          classes.map((classItem) => (
-            <div class="bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md">
-              <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4 text-cyan-400">
-                  {classItem.data.name}
-                </h2>
-                <p class="text-white/80 mb-4">{classItem.data.description}</p>
-                <div class="flex gap-2">
-                  {classItem.data.abilities?.map((ability) => (
-                    <div class="relative group" title={ability.name}>
-                      <img
-                        src={ability.image?.src}
-                        alt={ability.image?.alt || ability.name}
-                        class="w-8 h-8 rounded-full bg-white/10 p-1"
-                      />
-                    </div>
+      <!-- Questionnaire -->
+      <div
+        id="questionnaire-section"
+        class="max-w-3xl mx-auto p-6 mb-16 hidden"
+      >
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-cyan-400 mb-4">Questionnaire</h2>
+          <p class="text-white/80">
+            Répondez aux questions pour découvrir les classes qui vous
+            correspondent le mieux
+          </p>
+        </div>
+
+        <div id="questions-container">
+          {
+            questions.map((question, index) => (
+              <div
+                class="question-item mb-12 hidden"
+                data-question-id={question.id}
+                data-question-index={index}
+              >
+                <h3 class="text-2xl text-white mb-6">{question.text}</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {question.options.map((option) => (
+                    <button
+                      class="question-option p-4 bg-[#302b63]/50 hover:bg-[#302b63]/70 text-white rounded-lg transition-all border border-transparent hover:border-cyan-400"
+                      data-value={option.value}
+                    >
+                      {option.text}
+                    </button>
                   ))}
                 </div>
+                <div class="mt-8 flex justify-between">
+                  <button
+                    class="prev-question px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
+                    style={index === 0 ? "visibility: hidden" : ""}
+                  >
+                    Précédent
+                  </button>
+                  <div class="text-white">
+                    {index + 1} / {questions.length}
+                  </div>
+                  <button
+                    class="next-question px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors"
+                    disabled
+                  >
+                    Suivant
+                  </button>
+                </div>
               </div>
-              <div class="p-4 flex justify-center items-center w-full">
-                <button
-                  class=" p-4 bg-blue-700/7 rounded-md text-white"
-                  onclick={`window.openModal('${classItem.data.name}')`}
-                >
-                  En savoir plus
-                </button>
-              </div>
+            ))
+          }
+
+          <!-- Résultats du questionnaire -->
+          <div id="results-section" class="hidden">
+            <h3 class="text-2xl text-cyan-400 mb-6">
+              Classes recommandées pour vous
+            </h3>
+            <div
+              id="recommended-classes"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
+            >
             </div>
-          ))
-        }
+            <div class="text-center mt-8">
+              <button
+                id="show-all-classes"
+                class="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors shadow-lg"
+              >
+                Voir toutes les classes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Affichage des classes -->
+      <div id="all-classes-grid">
+        <!-- Barre d'icônes des classes -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          {
+            classes.map((classItem) => (
+              <div
+                class="class-icon p-2 rounded-lg cursor-pointer hover:bg-[#302b63]/70 transition-colors border-2 border-transparent"
+                data-class-id={classItem.data.id}
+                data-class-role={classItem.data.role}
+                onClick={`selectClass('${classItem.data.id}')`}
+              >
+                <img
+                  src={classItem.data.icon?.src || classItem.data.image?.src}
+                  alt={classItem.data.name}
+                  class="w-16 h-16 rounded-full"
+                  title={classItem.data.name}
+                />
+                <div class="text-center text-xs mt-1 text-white">
+                  {classItem.data.name}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Zone d'affichage des détails de la classe sélectionnée -->
+        <div
+          id="class-details-container"
+          class="bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 rounded-lg p-6 mt-4 hidden"
+        >
+          <div id="class-details-content" class="animate-fadeIn"></div>
+        </div>
+
+        <!-- Classes cards pour le contenu (caché mais utilisé pour les données) -->
+        <div class="hidden">
+          {
+            classes.map((classItem) => (
+              <div
+                class="class-card bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 shadow-md p-3 rounded-lg backdrop-blur-md"
+                data-class-role={classItem.data.role}
+                data-class-id={classItem.data.id}
+              >
+                <div class="p-6">
+                  <h2 class="text-2xl font-bold mb-4 text-cyan-400">
+                    {classItem.data.name}
+                  </h2>
+                  <p class="text-white/80 mb-4">{classItem.data.description}</p>
+                  <div class="flex gap-2">
+                    {classItem.data.abilities?.map((ability) => (
+                      <div class="relative group" title={ability.name}>
+                        <img
+                          src={ability.image?.src}
+                          alt={ability.image?.alt || ability.name}
+                          class="w-8 h-8 rounded-full bg-white/10 p-1"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div class="p-4 flex justify-center items-center w-full">
+                  <button
+                    class="p-4 bg-blue-700/70 hover:bg-blue-700/90 rounded-md text-white transition-colors"
+                    onclick={`window.openModal('${classItem.data.name}')`}
+                  >
+                    En savoir plus
+                  </button>
+                </div>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
   </main>
@@ -215,6 +376,234 @@ function processClassData(classItem: CollectionEntry<"classes">) {
       document.body.style.overflow = "";
     }
   };
+
+  // Fonction pour afficher les détails de classe sous les icônes
+  window.selectClass = function (classId) {
+    // Montrer le conteneur de détails
+    const detailsContainer = document.getElementById("class-details-container");
+    detailsContainer.classList.remove("hidden");
+    
+    // Trouver la carte de classe correspondante
+    const classCard = document.querySelector(`.class-card[data-class-id="${classId}"]`);
+    if (!classCard) return;
+    
+    // Remplir le conteneur de détails avec le contenu de la carte
+    const detailsContent = document.getElementById("class-details-content");
+    detailsContent.innerHTML = classCard.innerHTML;
+    
+    // Mettre en évidence l'icône de classe sélectionnée
+    document.querySelectorAll(".class-icon").forEach((icon) => {
+      if (icon.dataset.classId === classId) {
+        icon.classList.add("border-cyan-400", "bg-[#302b63]/70");
+      } else {
+        icon.classList.remove("border-cyan-400", "bg-[#302b63]/70");
+        icon.classList.add("border-transparent");
+      }
+    });
+  };
+
+  // Gestion du questionnaire
+  document.addEventListener("DOMContentLoaded", () => {
+    const startBtn = document.getElementById("start-questionnaire");
+    const questionnaireSection = document.getElementById(
+      "questionnaire-section"
+    );
+    const allClassesGrid = document.getElementById("all-classes-grid");
+    const resultsSection = document.getElementById("results-section");
+    const recommendedClasses = document.getElementById("recommended-classes");
+    const showAllClassesBtn = document.getElementById("show-all-classes");
+    const questionItems = document.querySelectorAll(".question-item");
+
+    let currentQuestionIndex = 0;
+    const userAnswers = {};
+
+    // Démarrer le questionnaire
+    startBtn.addEventListener("click", () => {
+      questionnaireSection.classList.remove("hidden");
+      allClassesGrid.classList.add("hidden");
+      showQuestion(0);
+    });
+
+    // Afficher une question spécifique
+    function showQuestion(index) {
+      questionItems.forEach((item, i) => {
+        if (i === index) {
+          item.classList.remove("hidden");
+        } else {
+          item.classList.add("hidden");
+        }
+      });
+      currentQuestionIndex = index;
+    }
+
+    // Gérer la sélection des options
+    document.querySelectorAll(".question-option").forEach((option) => {
+      option.addEventListener("click", () => {
+        const questionId = option.closest(".question-item").dataset.questionId;
+        const value = option.dataset.value;
+
+        // Marquer l'option sélectionnée
+        option
+          .closest(".question-item")
+          .querySelectorAll(".question-option")
+          .forEach((opt) => {
+            opt.classList.remove("border-cyan-400", "bg-[#302b63]/70");
+            opt.classList.add("border-transparent");
+          });
+        option.classList.add("border-cyan-400", "bg-[#302b63]/70");
+        option.classList.remove("border-transparent");
+
+        // Enregistrer la réponse
+        userAnswers[questionId] = value;
+
+        // Activer le bouton suivant
+        const nextBtn = option
+          .closest(".question-item")
+          .querySelector(".next-question");
+        nextBtn.disabled = false;
+      });
+    });
+
+    // Navigation entre les questions
+    document.querySelectorAll(".next-question").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (currentQuestionIndex < questionItems.length - 1) {
+          showQuestion(currentQuestionIndex + 1);
+        } else {
+          showResults();
+        }
+      });
+    });
+
+    document.querySelectorAll(".prev-question").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (currentQuestionIndex > 0) {
+          showQuestion(currentQuestionIndex - 1);
+        }
+      });
+    });
+
+    // Afficher les résultats
+    function showResults() {
+      // Cacher les questions
+      questionItems.forEach((item) => item.classList.add("hidden"));
+
+      // Logique de recommandation basée sur les réponses
+      const recommendedClassProps = getRecommendedClasses(userAnswers);
+
+      // Récupérer toutes les cartes de classes disponibles
+      const classCards = document.querySelectorAll(".class-card");
+      let recommendedCardsHTML = [];
+
+      // Tester si nous avons des recommandations correspondantes
+      let matchFound = false;
+
+      // Filtrer les classes selon les propriétés recommandées
+      classCards.forEach((card) => {
+        const classRole = card.getAttribute("data-class-role");
+        const classId = card.getAttribute("data-class-id");
+
+        // Vérifier si la classe correspond aux critères de recommandation
+        if (
+          recommendedClassProps.roles.includes(classRole) ||
+          recommendedClassProps.roles.includes("any") ||
+          recommendedClassProps.ids.includes(classId) ||
+          recommendedClassProps.ids.includes("any")
+        ) {
+          recommendedCardsHTML.push(card.outerHTML);
+          matchFound = true;
+        }
+      });
+
+      // Si aucune correspondance n'est trouvée, afficher 3 classes aléatoires
+      if (!matchFound || recommendedCardsHTML.length === 0) {
+        console.log(
+          "Aucune classe correspondante trouvée, affichage de classes aléatoires"
+        );
+        const allCards = Array.from(classCards);
+        // Mélanger les cartes
+        const shuffled = allCards.sort(() => 0.5 - Math.random());
+        // Prendre les 3 premières cartes
+        recommendedCardsHTML = shuffled
+          .slice(0, 3)
+          .map((card) => card.outerHTML);
+      }
+
+      // Afficher les classes recommandées
+      recommendedClasses.innerHTML = recommendedCardsHTML.join("");
+      resultsSection.classList.remove("hidden");
+
+      // Debug: afficher le nombre de classes recommandées
+      console.log(`${recommendedCardsHTML.length} classes recommandées`);
+    }
+
+    // Afficher toutes les classes
+    showAllClassesBtn.addEventListener("click", () => {
+      questionnaireSection.classList.add("hidden");
+      allClassesGrid.classList.remove("hidden");
+    });
+
+    // Fonction améliorée de recommandation
+    function getRecommendedClasses(answers) {
+      // Structure pour stocker les rôles et IDs recommandés
+      const recommendation = {
+        roles: [],
+        ids: [],
+      };
+
+      // Log des réponses pour débogage
+      console.log("Réponses du questionnaire:", answers);
+
+      // Recommandations basées sur le rôle
+      if (answers.role === "tank") {
+        recommendation.roles.push("tank");
+      } else if (answers.role === "healer") {
+        recommendation.roles.push("healer");
+      } else if (answers.role === "damage") {
+        recommendation.roles.push("dps");
+      } else if (answers.role === "support") {
+        recommendation.roles.push("support");
+      }
+
+      // Recommandations plus spécifiques basées sur la combinaison des réponses
+      if (answers.role === "tank" && answers.playstyle === "aggressive") {
+        recommendation.ids.push("sacrieur", "feca");
+      } else if (answers.role === "healer" && answers.distance === "range") {
+        recommendation.ids.push("eniripsa", "osamodas");
+      } else if (answers.role === "damage" && answers.distance === "melee") {
+        recommendation.ids.push("iop", "sacrieur", "sram");
+      } else if (answers.role === "damage" && answers.distance === "range") {
+        recommendation.ids.push("cra", "xelor", "eliotrope");
+      } else if (answers.role === "support") {
+        recommendation.ids.push("enutrof", "sram", "sadida", "xelor");
+      }
+
+      // Ajustements basés sur la complexité
+      if (answers.complexity === "complex") {
+        recommendation.ids.push("xelor", "eliotrope", "osamodas");
+      } else if (answers.complexity === "simple") {
+        recommendation.ids.push("iop", "cra", "feca");
+      }
+
+      // Ajustements basés sur le style de jeu
+      if (answers.playstyle === "tactical") {
+        recommendation.ids.push("xelor", "sram", "enutrof");
+      } else if (answers.playstyle === "aggressive") {
+        recommendation.ids.push("iop", "sacrieur", "pandawa");
+      } else if (answers.playstyle === "versatile") {
+        recommendation.ids.push("pandawa", "enutrof", "sadida");
+      }
+
+      // Si aucune recommandation spécifique, ajouter des options par défaut
+      if (recommendation.roles.length === 0) recommendation.roles.push("any");
+      if (recommendation.ids.length === 0) recommendation.ids.push("any");
+
+      // Log des recommandations pour débogage
+      console.log("Classes recommandées basées sur:", recommendation);
+
+      return recommendation;
+    }
+  });
 </script>
 
 <script>
