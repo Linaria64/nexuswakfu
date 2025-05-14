@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Pandawa"
+id: "pandaa"
 name: "Pandawa"
 description: "Pandawa use des boissons fermentées, elle y puise force et philosophie.
 Les Pandawas sont des Guerriers porteurs qui savent faire des folies de leurs corps ! Ils pourront même en faire avec le corps des autres."

@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "eliotrope"
+id: "elio"
 name: "Eliotrope"
 description: "Apparus par accident, les Eliotropes sont des reflets de leur créateur, le Roi-Dieu. Ils se déplacent à la vitesse de l'éclair, disparaissant en un clin d'œil pour réapparaître plus loin. Tout comme les Eliatropes, ils connaissent les secrets du Wakfu."
 

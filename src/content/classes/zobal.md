@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Zobal"
+id: "zobal"
 name: "Zobal"
 description: "Les Zobals sont des guerriers lunatiques s'adaptant à toutes les situations. Parfois pleutres, parfois psychopathes, souvent classes, leurs capacités en combat changent du tout au tout selon les masques dont ils s'équipent."
 

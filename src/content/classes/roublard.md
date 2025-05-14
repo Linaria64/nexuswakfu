@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Roublard"
+id: "roublard"
 name: "Roublard"
 description: "Les Roublards sont intelligents et patients, ils ne se jettent pas dans la mêlée comme un Iop mais préparent ingénieusement leur piège de bombes pour faire un maximum de ravages.
 Ils n'hésitent pas à se servir de leur pistolet et à fuir quand la situation devient trop épineuse"

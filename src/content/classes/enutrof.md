@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Enutrof"
+id: "enu"
 name: "Enutrof"
 description: "Enutrof tire gloire et puissance des trésors qu'il amasse.
 Les Enutrofs sont des chasseurs de trésors invétérés. Ils sont intéressés par toute denrée, tout objet, ou toute créature dont ils pourraient tirer des kamas."

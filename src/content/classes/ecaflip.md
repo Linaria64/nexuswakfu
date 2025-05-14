@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "ecaflip"
+id: "eca"
 name: "Ecaflip"
 description: "Ecaflip vit de l'amour du jeu. Pour lui, chaque jour est placé sous le signe de la chance.
 Les Ecaflips sont des Guerriers joueurs qui jouent leurs vies sur un lancer de dés pour gagner un combat."

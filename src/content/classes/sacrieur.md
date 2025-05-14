@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Sacrieur"
+id: "sacrieur"
 name: "Sacrieur"
 description: "Le don de soi et l'esprit de sacrifice de Sacrieur honorent ses alliés.
 Les Sacrieurs sont des Berzerkers qui décuplent leurs forces dès qu'ils sont frappés ! N'ayant pas peur de recevoir des coups, ni de s'exposer aux blessures, ils seront souvent en première ligne."

@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Feca"
+id: "feca"
 name: "Feca"
 description: "Protecteurs nés, les Fécas ont érigé leur magie au rang d'art et de science. Leur bouclier fait partie d'eux-mêmes, à tel point que certains pensent qu'il est vivant !"
 

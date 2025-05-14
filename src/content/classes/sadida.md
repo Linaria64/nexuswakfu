@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Sadida"
+id: "sadida"
 name: "Sadida"
 description: "Sadida utilise les végétaux et donne vie à des poupées de guerre.
 Les Sadidas sont des invocateurs qui fabriquent des onguents et des poisons redoutables."

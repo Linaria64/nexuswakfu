@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Xelor"
+id: "xelor"
 name: "Xelor"
 description: "Xélor détourne le temps pour qu'il serve ses desseins.
 Les Xélors sont des mages qui maîtrisent le temps et l'espace, afin d'augmenter son propre potentiel ou celui de ses alliés, tout en réduisant celui de ses ennemis."

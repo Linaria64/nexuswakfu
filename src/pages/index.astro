@@ -336,41 +336,22 @@ const features = [
             <!-- Card content with glassmorphism -->
             <div class="relative w-full h-full bg-gradient-to-b from-blue-900/40 to-indigo-900/40 border border-white/20 backdrop-blur-sm">
               <!-- Class image with gradient overlay -->
-              <div class="relative h-3/5 overflow-hidden">
+              <div class="relative h-4/5 overflow-hidden">
                 <img 
-            src={classe.data.image || `/images/classes/${classe.slug}.webp`} 
+            src={`/images/classes/${classe.id.replace('.md', '')}.png`} 
             alt={classe.data.name} 
             class="w-full h-full object-cover object-center scale-105 group-hover:scale-110 transition-transform duration-700"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent"></div>
               </div>
               
-              <!-- Class info section -->
-              <div class="relative p-6 flex flex-col h-2/5">
-                <!-- Class emblem -->
-                <div class="absolute -top-10 left-6 w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-700 p-1 shadow-lg transform group-hover:-translate-y-2 transition-transform duration-500">
-            <div class="w-full h-full rounded-full bg-gradient-to-br from-blue-800 to-indigo-900 flex items-center justify-center">
-              <span class="text-2xl">{classe.data.emoji || "✨"}</span>
-            </div>
-                </div>
                 
                 <!-- Class name with gradient text -->
                 <h3 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300 mt-6 mb-3">
             {classe.data.name}
                 </h3>
                 
-                <!-- Brief description -->
-                <p class="text-sm text-white/80 line-clamp-3">
-            {classe.data.shortDescription || "Découvrez cette classe unique de l'univers Wakfu."}
-                </p>
                 
-                <!-- "Découvrir" indicator -->
-                <div class="absolute bottom-6 right-6 flex items-center text-sm text-cyan-300 opacity-0 transform translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
-            <span>Découvrir</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-                </div>
                 
                 <!-- 3D floating effects -->
                 <div class="absolute top-0 right-0 w-20 h-20 bg-cyan-500/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -473,7 +454,7 @@ const features = [
                                         <!-- Niveau requis -->
                                         <div class="backdrop-blur-sm bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-full inline-flex items-center mb-3 border border-white/10 shadow-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-400" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd" />
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                             </svg>
                                             Niveau {artifact.questLevel}
                                         </div>
@@ -800,5 +781,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
-          
+
 

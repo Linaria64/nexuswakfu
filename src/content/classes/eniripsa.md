@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Eniripsa"
+id: "eni"
 name: "Eniripsa"
 description: "À chaque seconde, les connaissances médicinales d'Eniripsa sauvent des vies.
 Les Eniripsas sont des soigneurs qui guérissent d'un simple Mot ! Ils les utilisent surtout pour soigner leurs alliés, mais parfois aussi pour blesser leurs ennemis."

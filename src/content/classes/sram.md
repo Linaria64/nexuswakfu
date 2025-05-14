@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Sram"
+id: "sram"
 name: "Sram"
 description: "Sram a dompté l'ombre, et le monde invisible est son allié.
 Les Srams sont des Assassins qui aiment les bourses, rebondies de préférence."

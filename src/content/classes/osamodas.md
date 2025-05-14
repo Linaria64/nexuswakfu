@@ -1,7 +1,7 @@
 ---
 # Informations de base de la classe
-id: "Osamodas"
-name: "Osamodas"
+id: "osa"
+name: "osa"
 description: "Les Osamodas sont des invocateurs nés !
 Ils ont le pouvoir d'invoquer des créatures de combat et sont de remarquables dresseurs"
 

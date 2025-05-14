@@ -1,6 +1,6 @@
 ---
 # Informations de base de la classe
-id: "Huppermage"
+id: "hupper"
 name: "Huppermage"
 description: "Maîtres des runes élémentaires, les Huppermages combinent les éléments Eau, Feu, Air et Terre pour créer des sorts d'une puissance à couper le souffle. Mus par leur soif de connaissance, ils étudient inlassablement les moyens de rétablir l'équilibre de la Balance Krosmique."
 
