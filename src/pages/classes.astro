@@ -133,40 +133,106 @@ function processClassData(classItem: CollectionEntry<"classes">) {
 // Questions du questionnaire
 const questions = [
   {
-    id: "role",
-    text: "Quel rôle préférez-vous jouer ?",
+    id: "morality",
+    text: "Face à un dilemme moral dans le Krosmoz, quelle serait votre réaction ?",
     options: [
-      { value: "tank", text: "Tank - Encaisser les dégâts" },
-      { value: "healer", text: "Soigneur - Soutenir l'équipe" },
-      { value: "damage", text: "DPS - Infliger des dégâts" },
-      { value: "support", text: "Support - Contrôler le combat" },
+      {
+        value: "justice",
+        text: "Défendre la justice, quelles qu'en soient les conséquences",
+      },
+      {
+        value: "harmony",
+        text: "Chercher l'équilibre et l'harmonie entre les parties",
+      },
+      {
+        value: "personal",
+        text: "Protéger mes proches et mes intérêts avant tout",
+      },
+      {
+        value: "pragmatic",
+        text: "Choisir la solution la plus pratique, sans idéalisme",
+      },
     ],
   },
   {
-    id: "distance",
-    text: "Préférez-vous combattre...",
+    id: "conflict",
+    text: "Comment réagissez-vous face à l'adversité et au danger ?",
     options: [
-      { value: "melee", text: "Au corps à corps" },
-      { value: "range", text: "À distance" },
-      { value: "both", text: "Les deux me conviennent" },
+      {
+        value: "charge",
+        text: "Je fonce au cœur du danger pour protéger les autres",
+      },
+      {
+        value: "strategy",
+        text: "J'analyse la situation et élabore une stratégie",
+      },
+      {
+        value: "avoid",
+        text: "J'évite le conflit quand c'est possible et attaque par surprise",
+      },
+      {
+        value: "team",
+        text: "Je coordonne les efforts du groupe pour surmonter l'obstacle",
+      },
     ],
   },
   {
-    id: "playstyle",
-    text: "Quel style de jeu vous attire le plus ?",
+    id: "power",
+    text: "Si vous pouviez maîtriser une seule forme de pouvoir dans le Krosmoz, ce serait...",
     options: [
-      { value: "aggressive", text: "Agressif et direct" },
-      { value: "tactical", text: "Tactique et posé" },
-      { value: "versatile", text: "Polyvalent et adaptable" },
+      {
+        value: "elements",
+        text: "La magie élémentaire pour façonner le monde",
+      },
+      { value: "time", text: "La manipulation du temps et de l'espace" },
+      { value: "life", text: "Le contrôle de la vie et de la nature" },
+      { value: "mind", text: "L'influence sur les esprits et les émotions" },
     ],
   },
   {
-    id: "complexity",
-    text: "Quelle complexité de gameplay recherchez-vous ?",
+    id: "confirmation1",
+    text: "Êtes-vous sûr de votre première réponse ? Cela définira votre approche morale.",
     options: [
-      { value: "simple", text: "Simple à prendre en main" },
-      { value: "moderate", text: "Moyennement complexe" },
-      { value: "complex", text: "Complexe avec beaucoup de capacités" },
+      { value: "yes", text: "Oui, je maintiens mon choix" },
+      { value: "no", text: "Non, je préfère reconsidérer" },
+    ],
+  },
+  {
+    id: "sacrifice",
+    text: "Seriez-vous prêt à sacrifier...",
+    options: [
+      {
+        value: "nothing",
+        text: "Rien ni personne, il y a toujours une autre solution",
+      },
+      { value: "self", text: "Vous-même pour sauver ceux qui vous sont chers" },
+      { value: "few", text: "Quelques-uns pour le bien du plus grand nombre" },
+      {
+        value: "principles",
+        text: "Vos principes si la situation l'exige vraiment",
+      },
+    ],
+  },
+  {
+    id: "motivation",
+    text: "Qu'est-ce qui vous pousse réellement à vous aventurer dans le monde de Wakfu ?",
+    options: [
+      { value: "glory", text: "La gloire et la reconnaissance des autres" },
+      { value: "knowledge", text: "La quête de savoir et de compréhension" },
+      { value: "wealth", text: "La richesse et les trésors à découvrir" },
+      { value: "purpose", text: "Trouver un sens et un but à mon existence" },
+    ],
+  },
+  {
+    id: "confirmation2",
+    text: "Après réflexion sur vos choix, pensez-vous qu'ils reflètent vraiment qui vous êtes ?",
+    options: [
+      { value: "yes", text: "Oui, ces réponses me définissent parfaitement" },
+      {
+        value: "partially",
+        text: "Partiellement, je suis plus complexe que cela",
+      },
+      { value: "no", text: "Non, mais je joue un rôle qui m'intéresse" },
     ],
   },
 ];
@@ -382,15 +448,17 @@ const questions = [
     // Montrer le conteneur de détails
     const detailsContainer = document.getElementById("class-details-container");
     detailsContainer.classList.remove("hidden");
-    
+
     // Trouver la carte de classe correspondante
-    const classCard = document.querySelector(`.class-card[data-class-id="${classId}"]`);
+    const classCard = document.querySelector(
+      `.class-card[data-class-id="${classId}"]`
+    );
     if (!classCard) return;
-    
+
     // Remplir le conteneur de détails avec le contenu de la carte
     const detailsContent = document.getElementById("class-details-content");
     detailsContent.innerHTML = classCard.innerHTML;
-    
+
     // Mettre en évidence l'icône de classe sélectionnée
     document.querySelectorAll(".class-icon").forEach((icon) => {
       if (icon.dataset.classId === classId) {
@@ -493,48 +561,50 @@ const questions = [
 
       // Récupérer toutes les cartes de classes disponibles
       const classCards = document.querySelectorAll(".class-card");
-      let recommendedCardsHTML = [];
-
-      // Tester si nous avons des recommandations correspondantes
-      let matchFound = false;
+      let recommendedCards = [];
 
       // Filtrer les classes selon les propriétés recommandées
       classCards.forEach((card) => {
-        const classRole = card.getAttribute("data-class-role");
         const classId = card.getAttribute("data-class-id");
 
-        // Vérifier si la classe correspond aux critères de recommandation
-        if (
-          recommendedClassProps.roles.includes(classRole) ||
-          recommendedClassProps.roles.includes("any") ||
-          recommendedClassProps.ids.includes(classId) ||
-          recommendedClassProps.ids.includes("any")
-        ) {
-          recommendedCardsHTML.push(card.outerHTML);
-          matchFound = true;
+        // Vérifier si la classe fait partie des IDs recommandés (limité à 6 max)
+        if (recommendedClassProps.ids.includes(classId)) {
+          recommendedCards.push(card);
         }
       });
 
-      // Si aucune correspondance n'est trouvée, afficher 3 classes aléatoires
-      if (!matchFound || recommendedCardsHTML.length === 0) {
-        console.log(
-          "Aucune classe correspondante trouvée, affichage de classes aléatoires"
-        );
-        const allCards = Array.from(classCards);
-        // Mélanger les cartes
-        const shuffled = allCards.sort(() => 0.5 - Math.random());
-        // Prendre les 3 premières cartes
-        recommendedCardsHTML = shuffled
-          .slice(0, 3)
-          .map((card) => card.outerHTML);
+      // S'assurer que nous avons au plus 6 cartes
+      if (recommendedCards.length > 6) {
+        recommendedCards = recommendedCards.slice(0, 6);
       }
+
+      // Si nous avons moins de 3 cartes, ajouter des classes aléatoires
+      if (recommendedCards.length < 3) {
+        console.log(
+          "Pas assez de recommandations, ajout de classes aléatoires"
+        );
+        const remainingCards = Array.from(classCards).filter(
+          (card) => !recommendedCards.includes(card)
+        );
+        // Mélanger les cartes restantes
+        const shuffled = remainingCards.sort(() => 0.5 - Math.random());
+        // Ajouter des cartes jusqu'à avoir au moins 3 et au plus 6
+        while (recommendedCards.length < 3 && shuffled.length > 0) {
+          recommendedCards.push(shuffled.pop());
+        }
+      }
+
+      // Convertir les cartes en HTML
+      const recommendedCardsHTML = recommendedCards.map(
+        (card) => card.outerHTML
+      );
 
       // Afficher les classes recommandées
       recommendedClasses.innerHTML = recommendedCardsHTML.join("");
       resultsSection.classList.remove("hidden");
 
       // Debug: afficher le nombre de classes recommandées
-      console.log(`${recommendedCardsHTML.length} classes recommandées`);
+      console.log(`${recommendedCards.length} classes recommandées affichées`);
     }
 
     // Afficher toutes les classes
@@ -554,54 +624,109 @@ const questions = [
       // Log des réponses pour débogage
       console.log("Réponses du questionnaire:", answers);
 
-      // Recommandations basées sur le rôle
-      if (answers.role === "tank") {
+      // Recommandations basées sur la moralité
+      if (answers.morality === "justice") {
+        recommendation.ids.push("iop", "feca", "cra");
+      } else if (answers.morality === "harmony") {
+        recommendation.ids.push("eniripsa", "sadida", "pandawa");
+      } else if (answers.morality === "personal") {
+        recommendation.ids.push("ecaflip", "enutrof", "sacrieur");
+      } else if (answers.morality === "pragmatic") {
+        recommendation.ids.push("sram", "xelor", "roublard");
+      }
+
+      // Recommandations basées sur l'approche du conflit
+      if (answers.conflict === "charge") {
+        recommendation.ids.push("iop", "sacrieur", "steamamer");
         recommendation.roles.push("tank");
-      } else if (answers.role === "healer") {
-        recommendation.roles.push("healer");
-      } else if (answers.role === "damage") {
-        recommendation.roles.push("dps");
-      } else if (answers.role === "support") {
-        recommendation.roles.push("support");
-      }
-
-      // Recommandations plus spécifiques basées sur la combinaison des réponses
-      if (answers.role === "tank" && answers.playstyle === "aggressive") {
-        recommendation.ids.push("sacrieur", "feca");
-      } else if (answers.role === "healer" && answers.distance === "range") {
-        recommendation.ids.push("eniripsa", "osamodas");
-      } else if (answers.role === "damage" && answers.distance === "melee") {
-        recommendation.ids.push("iop", "sacrieur", "sram");
-      } else if (answers.role === "damage" && answers.distance === "range") {
-        recommendation.ids.push("cra", "xelor", "eliotrope");
-      } else if (answers.role === "support") {
-        recommendation.ids.push("enutrof", "sram", "sadida", "xelor");
-      }
-
-      // Ajustements basés sur la complexité
-      if (answers.complexity === "complex") {
+      } else if (answers.conflict === "strategy") {
         recommendation.ids.push("xelor", "eliotrope", "osamodas");
-      } else if (answers.complexity === "simple") {
-        recommendation.ids.push("iop", "cra", "feca");
+        recommendation.roles.push("support", "dps");
+      } else if (answers.conflict === "avoid") {
+        recommendation.ids.push("sram", "roublard", "ouginak");
+        recommendation.roles.push("dps");
+      } else if (answers.conflict === "team") {
+        recommendation.ids.push("eniripsa", "sadida", "feca");
+        recommendation.roles.push("support", "healer");
       }
 
-      // Ajustements basés sur le style de jeu
-      if (answers.playstyle === "tactical") {
-        recommendation.ids.push("xelor", "sram", "enutrof");
-      } else if (answers.playstyle === "aggressive") {
-        recommendation.ids.push("iop", "sacrieur", "pandawa");
-      } else if (answers.playstyle === "versatile") {
-        recommendation.ids.push("pandawa", "enutrof", "sadida");
+      // Recommandations basées sur le pouvoir préféré
+      if (answers.power === "elements") {
+        recommendation.ids.push("cra", "feca", "enutrof");
+      } else if (answers.power === "time") {
+        recommendation.ids.push("xelor", "eliotrope", "huppermage");
+      } else if (answers.power === "life") {
+        recommendation.ids.push("sadida", "eniripsa", "osamodas");
+      } else if (answers.power === "mind") {
+        recommendation.ids.push("zobal", "sacrieur", "pandawa");
       }
 
-      // Si aucune recommandation spécifique, ajouter des options par défaut
-      if (recommendation.roles.length === 0) recommendation.roles.push("any");
-      if (recommendation.ids.length === 0) recommendation.ids.push("any");
+      // Recommandations basées sur le sacrifice
+      if (answers.sacrifice === "nothing") {
+        recommendation.ids.push("enutrof", "ecaflip", "osamodas");
+      } else if (answers.sacrifice === "self") {
+        recommendation.ids.push("iop", "sacrieur", "feca");
+      } else if (answers.sacrifice === "few") {
+        recommendation.ids.push("sadida", "xelor", "eliotrope");
+      } else if (answers.sacrifice === "principles") {
+        recommendation.ids.push("sram", "roublard", "zobal");
+      }
 
-      // Log des recommandations pour débogage
-      console.log("Classes recommandées basées sur:", recommendation);
+      // Recommandations basées sur la motivation
+      if (answers.motivation === "glory") {
+        recommendation.ids.push("iop", "ecaflip", "steamamer");
+      } else if (answers.motivation === "knowledge") {
+        recommendation.ids.push("xelor", "eliotrope", "huppermage");
+      } else if (answers.motivation === "wealth") {
+        recommendation.ids.push("enutrof", "roublard", "ecaflip");
+      } else if (answers.motivation === "purpose") {
+        recommendation.ids.push("sadida", "feca", "pandawa");
+      }
 
-      return recommendation;
+      // Compter la fréquence de chaque classe recommandée
+      const classFrequency = {};
+      recommendation.ids.forEach((id) => {
+        if (!classFrequency[id]) classFrequency[id] = 0;
+        classFrequency[id]++;
+      });
+
+      // Trier les classes par fréquence (les plus recommandées en premier)
+      const sortedRecommendations = Object.keys(classFrequency).sort(
+        (a, b) => classFrequency[b] - classFrequency[a]
+      );
+
+      // Prendre au maximum 6 classes les plus recommandées
+      recommendation.ids = sortedRecommendations.slice(0, 6);
+
+      // Si nous avons moins de 3 recommandations, ajouter des options par défaut
+      if (recommendation.ids.length < 3) {
+        const defaults = [
+          "iop",
+          "cra",
+          "eniripsa",
+          "sadida",
+          "sram",
+          "ecaflip",
+        ];
+
+        // Ajouter des classes par défaut qui ne sont pas déjà recommandées
+        for (const defaultClass of defaults) {
+          if (
+            !recommendation.ids.includes(defaultClass) &&
+            recommendation.ids.length < 6
+          ) {
+            recommendation.ids.push(defaultClass);
+          }
+        }
+      }
+
+      // Log des recommandations finales
+      console.log("Classes recommandées (max 6):", recommendation.ids);
+
+      return {
+        roles: recommendation.roles.slice(0, 3), // Limiter les rôles également
+        ids: recommendation.ids,
+      };
     }
   });
 </script>
