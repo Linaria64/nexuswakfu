@@ -6,44 +6,61 @@ import Layout from "../layouts/layout.astro";
 ---
 
 <Layout
-  class="flex flex-col w-full rounded-none border-none min-h-screen bg-gradient-to-br from-[#333] to-[#13099e]"
+  class="flex flex-col items-center justify-center w-full rounded-none border-none min-h-screen relative overflow-hidden"
 >
-  <Button className="border border-amber-400">je test un nouveau boutton</Button
-  >
-
-  <Button variant="glassmorphism">je test un nouveau boutton</Button>
+  <!-- Background image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="/images/troll-face.webp"
+      alt="Troll Face Background"
+      class="w-full h-full object-cover opacity-15"
+    />
+  </div>
 
   <!-- Fond avec effet glassmorphism -->
   <Container
-    className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-cyan-500/20 z-0"
+    className="absolute inset-0 bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-red-500/30 z-1"
   />
-  <Container className="absolute inset-0 backdrop-blur-3xl z-0" />
+  <Container className="absolute inset-0 backdrop-blur-md z-1" />
 
   <!-- Contenu -->
   <Container
     className="glass-card p-8 md:p-12 max-w-2xl w-full relative z-10 text-center transform hover:scale-105 transition-all duration-300"
   >
+    <img
+      src="/images/nozadah.png"
+      alt="Troll Face"
+      class="w-32 h-32 mx-auto mb-4 animate-bounce"
+    />
+
     <Titleh1 className="text-6xl md:text-8xl font-bold text-white mb-6">
-      <Button variant={"glassmorphism"} className="border border-amber-400"
-        >404</Button
-      >
       <Span className="text-cyan-400 animate-pulse inline-block">404</Span>
     </Titleh1>
 
-    <P className="text-2xl md:text-3xl text-white/90 mb-8 font-bold">
-      T'ES PERDU SALE MERDE ?!
+    <P
+      className="text-2xl md:text-3xl text-white/90 mb-8 font-bold animate-pulse"
+    >
+      PROBLÈME TECHNIQUE... LOL C'EST FAUX !
     </P>
 
     <Container className="flex flex-col items-center gap-6">
-      <P className="text-xl text-white/80 italic mb-8 animate-bounce">
-        ↓ Clique ici et retourne d'où tu viens, Sokiro ↓
+      <P className="text-xl text-white/80 italic mb-8">
+        Tu t'es fait troller ! Cette page n'existe pas !
       </P>
 
-      <A href="/"> DÉGAGE D'ICI ! </A>
+      <Button
+        variant="glassmorphism"
+        className="border border-amber-400 animate-bounce hover:bg-amber-400/20 transition-all"
+        onClick="window.location.href='/';"
+      >
+        CLIQUE ICI POUR T'ENFUIR !
+      </Button>
+
+      <A href="/" className="mt-4 text-sm text-white/50 hover:text-white/80">
+        ou retourne à l'accueil comme une personne normale...
+      </A>
     </Container>
   </Container>
-
-  <Span>salut</Span>
 
   <!-- Éléments décoratifs flottants -->
   <Container
@@ -55,4 +72,36 @@ import Layout from "../layouts/layout.astro";
   <Container
     className="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-500/20 rounded-full blur-xl animate-pulse delay-300"
   />
+
+  <!-- Extra troll elements that move around -->
+  <div
+    class="absolute z-20 animate-ping duration-1000"
+    style="top: 15%; left: 80%;"
+  >
+    <span class="text-4xl">🤪</span>
+  </div>
+  <div
+    class="absolute z-20 animate-ping duration-700 delay-300"
+    style="top: 75%; left: 15%;"
+  >
+    <span class="text-4xl">😂</span>
+  </div>
 </Layout>
+
+<style>
+  @keyframes float {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+    }
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+</style>
