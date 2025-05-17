@@ -345,7 +345,7 @@ const questions = [
                 class="class-icon p-2 rounded-lg cursor-pointer hover:bg-[#302b63]/70 transition-colors border-2 border-transparent"
                 data-class-id={classItem.data.id}
                 data-class-role={classItem.data.role}
-                onClick={`selectClass('${classItem.data.id}')`}
+                onClick={`window.openModal('${classItem.data.name}')`}
               >
                 <img
                   src={classItem.data.icon?.src || classItem.data.image?.src}
