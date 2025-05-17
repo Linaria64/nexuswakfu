@@ -11,7 +11,7 @@ players: "group"
 region: "Astrub"
 boss: "Tofu royal"
 bosses:
-  - name: "Tofu Royal"
+  - name: ""
     description: ""
     hp: 630
     masteries:

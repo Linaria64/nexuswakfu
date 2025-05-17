@@ -11,7 +11,7 @@ players: "group"
 region: "Astrub"
 boss: ""
 bosses:
-  - name: "shin larve"
+  - name: ""
     description: ""
     hp: 444
     masteries:

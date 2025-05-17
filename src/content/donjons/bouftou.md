@@ -11,7 +11,7 @@ players: "group"
 region: "Astrub"
 boss: "Mère Michou"
 bosses:
-  - name: "Mayne cooyne"
+  - name: ""
     description: ""
     hp: 130
     masteries:

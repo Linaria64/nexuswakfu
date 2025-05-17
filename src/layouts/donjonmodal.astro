@@ -151,7 +151,12 @@ const { donjonData, isOpen, onClose } = Astro.props;
 
                     <div class="grid grid-cols-2 gap-4">
                       <div>
-                        <h5 class="text-white/60 mb-2">PV de base</h5>
+                        <h5 class="text-white/60 mb-2 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                          </svg>
+                          PV de base
+                        </h5>
                         <p class="text-white text-xl font-bold">
                           <span class="base-hp">{boss.hp}</span>
                         </p>
@@ -238,7 +243,7 @@ const { donjonData, isOpen, onClose } = Astro.props;
                           <h4 class="text-lg font-semibold text-cyan-400 mb-2">
                             {mechanic.name}
                           </h4>
-                          <p class="text-white/90">{mechanic.description}</p>
+                          <p class="text-white/90 leading-relaxed px-3 py-2 bg-black/20 rounded-md shadow-inner my-2 max-h-[300px] overflow-y-auto custom-scrollbar">{mechanic.description}</p>
                         </div>
                       ))}
                     </div>

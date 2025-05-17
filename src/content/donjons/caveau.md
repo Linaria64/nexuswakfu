@@ -11,7 +11,7 @@ players: "group"
 region: "Astrub"
 boss: "Mère Michou"
 bosses:
-  - name: "Morfor"
+  - name: ""
     description: " "
     hp: 1226
     masteries:

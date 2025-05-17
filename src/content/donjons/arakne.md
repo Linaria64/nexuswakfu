@@ -12,7 +12,7 @@ region: "Astrub"
 boss: "Mère Michou"
 modulated: true
 bosses:
-  - name: "abraknelle"
+  - name: ""
     description: ""
     hp: 1568
     masteries:
