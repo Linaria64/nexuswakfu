@@ -2,6 +2,7 @@
 // src/layouts/Layout.astro
 import { A } from "@/components/ui/composant";
 import { Container } from "@/components/ui/container";
+import Analytics from "@vercel/analytics/astro";
 import Navigation from "../layouts/navigation.astro";
 import "../styles/global.css";
 
@@ -39,6 +40,7 @@ const footerLinks = [
       class="flex flex-col w-full rounded-none border-none min-h-screen bg-black/"
     >
       <slot />
+      <Analytics />
     </main>
 
     <footer>
