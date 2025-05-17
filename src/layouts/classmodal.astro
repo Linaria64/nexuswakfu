@@ -56,7 +56,7 @@ const progressionLevels = Object.keys(progression)
 ---
 
 <div
-  class={`fixed inset-0 z-50 ${isOpen ? "flex" : "hidden"} items-center justify-center modal-container  `}
+  class={`fixed inset-0 z-50 bottom-0 ${isOpen ? "flex" : "hidden"} items-center justify-center modal-container  `}
   data-modal={classData.data.name}
 >
   <!-- Overlay - Ajout de onclick pour fermer en cliquant sur le fond -->
@@ -64,12 +64,10 @@ const progressionLevels = Object.keys(progression)
 
   <!-- Modal -->
   <div
-    class="relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 backdrop-blur-md shadow-md m-4"
+    class="relative z-10 w-full max-h-[50vh] bottom-0 overflow-y-auto bg-gradient-to-b from-[#0f0c29]/50 via-[#302b63]/50 to-[#24243e]/50 backdrop-blur-md shadow-md mt-auto mb-2 mx-4"
   >
     <!-- Header -->
-    <div
-      class="sticky top-0 z-20 flex items-center justify-between p-6 border-b border-white/10 bg-black/50 backdrop-blur-md"
-    >
+    <div class="sticky top-0 z-20 flex items-center justify-between p-6">
       <h2 class="text-3xl font-bold mx-auto text-cyan-400">
         {classData.data.name}
       </h2>
