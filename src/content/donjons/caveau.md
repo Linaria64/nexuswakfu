@@ -1,7 +1,7 @@
 ---
 id: "3216-morfor"
 name: "caveau relevé"
-level: 20
+level: 35
 image:
   src: "images/boss/morfor.png"
   alt: "Bannière du donjon Abraknyde"

@@ -25,7 +25,7 @@ bosses:
       air: 41
       fire: 46
 salleImage:
-  src: "images/salledj/sdj1.png"
+  src: "images/salledj/SalleDeKON.png"
   alt: "iofhois"
 
 mechanics:
