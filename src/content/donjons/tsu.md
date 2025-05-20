@@ -1,15 +1,15 @@
 ---
 id: "4107-abraknelle        "
-name: "Bwork"
-level: 65
+name: "Palais du Tsu"
+level: 80
 image:
-  src: "images/boss/bwork.png"
+  src: "images/boss/skoual.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Bwork"
+boss: "Tsar Tsu Tsu"
 modulated: true
 bosses:
   - name: ""

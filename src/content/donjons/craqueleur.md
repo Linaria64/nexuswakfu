@@ -1,6 +1,6 @@
 ---
 id: "4107-abraknelle"
-name: "craqueleur"
+name: "La Montagne Adezieu"
 level: 50
 image:
   src: "images/boss/craqueleursoki.png"

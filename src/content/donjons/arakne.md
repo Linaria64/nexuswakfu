@@ -1,15 +1,15 @@
 ---
 id: "4107-abraknelle        "
-name: "arakne"
-level: 20
+name: "Donjon Arakne"
+level: 80
 image:
-  src: "images/boss/arakne.png"
+  src: "images/boss/skoual.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Mère Michou"
+boss: "Veuve Noire"
 modulated: true
 bosses:
   - name: ""

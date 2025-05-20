@@ -1,6 +1,6 @@
 ---
 id: "4107-abraknelle"
-name: "Poulpe"
+name: "Equipage du Poulpe"
 level: 50
 image:
   src: "images/boss/poulpesoki.png"

@@ -1,6 +1,6 @@
 ---
 id: "4107-abraknelle        "
-name: "Skoual Seche"
+name: "La Skouale Sèche"
 level: 65
 image:
   src: "images/boss/skoual.png"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Mère Michou"
+boss: "Skouale Royal"
 modulated: true
 bosses:
   - name: ""

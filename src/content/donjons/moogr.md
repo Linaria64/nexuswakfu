@@ -1,6 +1,6 @@
 ---
 id: "4107-abraknelle"
-name: "moogr"
+name: "Le Papaturage Royal"
 level: 50
 image:
   src: "images/boss/moogrr.png"

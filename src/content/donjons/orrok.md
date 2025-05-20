@@ -1,30 +1,30 @@
 ---
-id: "4107-abraknelle"
-name: "Les Champs Pourchan"
-level: 50
+id: "4107-abraknelle        "
+name: "Temple du Grand Orrok"
+level: 80
 image:
-  src: "images/boss/plantecarnivoresoki.png"
+  src: "images/boss/skoual.png"
   alt: "Bannière du donjon Abraknyde"
-description: ""
+description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "moogrr Royale"
+boss: "Le Grand Orrok"
 modulated: true
 bosses:
   - name: ""
     description: ""
-    hp: 1850
+    hp: 1568
     masteries:
-      water: 0
-      earth: 644
+      water: 496
+      earth: 0
       air: 0
       fire: 0
     resistances:
-      water: 22
-      earth: 38
-      air: 22
-      fire: 14
+      water: 0
+      earth: 19
+      air: 0
+      fire: -20
 salleImage:
   src: "images/salledj/sdj1.png"
   alt: "iofhois"

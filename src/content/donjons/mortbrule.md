@@ -1,6 +1,6 @@
 ---
 id: "4107-abraknelle"
-name: "mortbrule"
+name: "Donjon Mort-Brûlés"
 level: 50
 image:
   src: "images/boss/mortbrulesoki.png"
