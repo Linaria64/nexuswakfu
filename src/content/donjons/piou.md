@@ -1,6 +1,6 @@
 ---
-id: "4107-abraknelle"
-name: "piousoki"
+id: "1187-piou-royal"
+name: "Piou"
 level: 35
 image:
   src: "images/boss/piousoki.png"

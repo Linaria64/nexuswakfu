@@ -1,6 +1,6 @@
 ---
-id: "4107-abraknelle        "
-name: "L'aréne Dansante"
+id: "2363-lady-glagla"
+name: "Le Glaglacier Cornu"
 level: 110
 image:
   src: "images/boss/skoual.png"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "La Bilby Queen"
+boss: "Lady Glagla"
 modulated: true
 bosses:
   - name: ""

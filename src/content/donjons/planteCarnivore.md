@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle"
+id: "1726-plante-carnivore"
 name: "Les Champs Pourchan"
 level: 50
 image:
@@ -9,7 +9,7 @@ description: ""
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "moogrr Royale"
+boss: "Plante Carnivore"
 modulated: true
 bosses:
   - name: ""

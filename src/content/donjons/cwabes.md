@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle        "
+id: "4754-cwabe-royal"
 name: "Château des Cwabes"
 level: 65
 image:

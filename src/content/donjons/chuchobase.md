@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle        "
+id: "2100-maitre-chuchoku"
 name: "Chuchobase"
 level: 110
 image:

@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
-name: "Donjon Abraknyde"
-level: 140
+id: "4060-grande-pretresse-sydonia"
+name: "Vignoble Ignoble"
+level: 155
 image:
   src: "images/boss/skoual.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Chêne Mou"
+boss: "Grande Prétresse Sydonia"
 modulated: true
 bosses:
   - name: ""

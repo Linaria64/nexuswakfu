@@ -1,6 +1,6 @@
 ---
-id: "4107-abraknelle        "
-name: "Donjon Abraknyde"
+id: "5471-potofeu-grand-maitre-culinaire"
+name: "Compost du Grand Potofeu"
 level: 140
 image:
   src: "images/boss/skoual.png"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Chêne Mou"
+boss: "Potofeu"
 modulated: true
 bosses:
   - name: ""

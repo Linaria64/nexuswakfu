@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
-name: "La pichine"
-level: 125
+id: "2570-gwand-viziw-wabbit"
+name: "Jawdin de la Weine"
+level: 140
 image:
   src: "images/boss/skoual.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Zespadon noir"
+boss: "Gwand ViziW Wabbit"
 modulated: true
 bosses:
   - name: ""

@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle        "
+id: "4727-zespadon-noir"
 name: "La pichine"
 level: 125
 image:

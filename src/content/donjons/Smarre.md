@@ -1,6 +1,6 @@
 ---
-id: "4107-abraknelle        "
-name: "Donjon Cacterre "
+id: "4231-smarillion"
+name: "Caverne Smarrante"
 level: 125
 image:
   src: "images/boss/skoual.png"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Piktus"
+boss: "Smarillion"
 modulated: true
 bosses:
   - name: ""

@@ -1,6 +1,6 @@
 ---
-id: "4107-abraknelle        "
-name: "Château du Wa Wabbit"
+id: "2605-gwand-wabbit-gm"
+name: "Laboratoire de Womewo"
 level: 155
 image:
   src: "images/boss/skoual.png"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Wa Wabbit"
+boss: "Gwand Wabbit GM"
 modulated: true
 bosses:
   - name: ""

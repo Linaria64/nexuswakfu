@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle        "
+id: "4739-chaferfu-roi-chafer"
 name: "Nécropoil de Morbax"
 level: 95
 image:

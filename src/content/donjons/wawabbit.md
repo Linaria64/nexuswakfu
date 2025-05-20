@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle        "
+id: "2582-wa-wabbit"
 name: "Château du Wa Wabbit"
 level: 155
 image:

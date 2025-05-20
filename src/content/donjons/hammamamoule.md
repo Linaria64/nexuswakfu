@@ -1,6 +1,6 @@
 ---
-id: "4107-abraknelle        "
-name: "Chateau de Wagnar"
+id: "2464-bilbymoule-nacree"
+name: "Le Hammamamoule"
 level: 95
 image:
   src: "images/boss/skoual.png"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Vampyro"
+boss: "Bilbymoule Nacrée"
 modulated: true
 bosses:
   - name: ""

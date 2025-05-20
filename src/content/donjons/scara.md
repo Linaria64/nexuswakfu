@@ -1,6 +1,6 @@
 ---
-id: "4107-abraknelle        "
-name: "Cavernes des Slekymoses"
+id: "4909-scaraboss"
+name: "Scarrière Abandonnée"
 level: 95
 image:
   src: "images/boss/skoual.png"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "Reine Slek"
+boss: "Scaraboss"
 modulated: true
 bosses:
   - name: ""

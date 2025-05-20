@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle        "
+id: "4520-chapo-magik"
 name: "Repaire des Magics Riktus"
 level: 110
 image:

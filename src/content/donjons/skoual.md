@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle        "
+id: "4244-royal-skouale"
 name: "La Skouale Sèche"
 level: 65
 image:

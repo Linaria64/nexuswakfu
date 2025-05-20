@@ -1,5 +1,5 @@
 ---
-id: "4107-abraknelle        "
+id: "4240-kralaboss"
 name: "Donjon Mollusky"
 level: 65
 image:
