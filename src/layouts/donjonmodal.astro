@@ -207,10 +207,10 @@ const { donjonData, isOpen, onClose } = Astro.props;
             <ol class="space-y-2 pl-1">
               {mechanic.description.split(/(?:\. |\.\n|\\n)/g)
             .filter(step => step.trim().length > 0)
-            .map((step, index) => (
+            .map((step, ) => (
               <li class="text-slate-300 text-xs sm:text-sm flex items-start gap-2 leading-relaxed">
                 <span class="bg-sky-500/20 text-sky-300 rounded-full flex items-center justify-center h-5 w-5 mt-0.5 flex-shrink-0 font-medium text-xs">
-              {index + 1}
+              {}
                 </span>
                 <span>{step.trim()}{!step.trim().endsWith('.') ? '.' : ''}</span>
               </li>

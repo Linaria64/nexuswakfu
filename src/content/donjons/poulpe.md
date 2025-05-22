@@ -31,7 +31,20 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "le donjon est pas compliqué mais l'on voit le 1 er donjon avec une petite mécanique elle gagne 30 % de réduction de dégats de face et de coté  et 30 % de dégats infligé si on la tape dans le dos donc mettez lui un maximum de dégâts feu de dos et elle disparaitras "
+    description: "Pohl le Poulpe n'est pas invulnérable mais :
+
+    Pohl tape sans ligne de vue, 3 fois par tour en retirant de la portée. Essayez de retourner vos supports pour qu’ils soient ciblés en priorité par Pohl !
+
+    Pohl gagne des DI chaque tour qu’il passe sous l’eau. Pour le faire surgir, il faut tuer les tentacules. Astuce : dans la salle du boss elles sont des « Invocations », Enutrof ou Osamodas sont donc géniaux pour les tuer.
+
+    Au bout de 2 tours, Pohl s’enfonce dans l’eau, vous laissant du répit. 3 tentacules vont surgir sur une des zones prévues.
+
+    Les Filibustier sont dangereux, ils tapent très fort, sur toute une ligne et à distance. Les Sœurs vous attirent mais ne sont pas dangereuses. Les Bataillard ont un mode berserk sous 50 % HP qui leur permet de taper 2 fois, fort en vol de vie.
+
+    Les tentacules tapent en zone colère de 2.
+
+    Tous les monstres tapent dans l’élément Stasis, ils tapent donc avec leur meilleur élément, et dans votre résistance la plus basse.
+ "
 rewards:
   - name: ""
     type: "equipment"
@@ -44,8 +57,17 @@ rewards:
       src: ""
       alt: ""
 steles:
-  - name: ""
-    description: ""
+  - name: "Stèle d’intervention : Cire Momore (Modulation obligatoire)"
+    description: "
+
+    Cette stèle fait apparaître un 2ème boss.
+
+    Cire Momore n’a pas beaucoup de PM.
+
+    Il a un sort de zone autour de lui qui augmente les dégâts reçus permanent.
+
+    Il a un sort monocible à distance.
+"
     icon:
       src: "/icons/resources.svg"
       alt: "Icône Stèle"

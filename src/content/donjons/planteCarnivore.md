@@ -31,7 +31,18 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "le donjon est pas compliqué mais l'on voit le 1 er donjon avec une petite mécanique elle gagne 30 % de réduction de dégats de face et de coté  et 30 % de dégats infligé si on la tape dans le dos donc mettez lui un maximum de dégâts feu de dos et elle disparaitras "
+    description: "Plante Carnivore : tentez de la garder à distance, sa Morsure au corps-à-corps est douloureuse.
+
+    Le linceul de fleurs laissé par les monstres à leur mort peut vite envahir la salle. Lancez des invocations pour nettoyer les lieux à votre place ou soyez assuré de vos déplacements en ne laissant pas le malus de résistances se cumuler d’un tour à l’autre.
+
+    Tous les monstres du donjon disposent du passif caché Linceul de fleurs :
+
+        Linceul de fleurs (passif caché) : À la mort du porteur, celui-ci laisse derrière lui une zone croix diagonale de 2 cases pour une durée infinie. Ces cases se déclenchent et disparaissent en marchant dessus en appliquant Linceul de fleurs.
+
+        Linceul de fleurs (état) : Retire 50 de résistance élémentaire, cumulable jusqu’à 300. L’état disparaît à la fin du prochain tour du porteur s’il n’est pas réappliqué.
+
+    Il y a un mini-boss dont on drop la graine sur le boss. Il faut être paysan niveau 35 pour pouvoir la planter dans le petit carré de terre de la première salle. Pas de mécanique particulière.
+ "
 rewards:
   - name: ""
     type: "equipment"

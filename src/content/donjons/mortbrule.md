@@ -31,7 +31,18 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "le donjon est pas compliqué mais l'on voit le 1 er donjon avec une petite mécanique elle gagne 30 % de réduction de dégats de face et de coté  et 30 % de dégats infligé si on la tape dans le dos donc mettez lui un maximum de dégâts feu de dos et elle disparaitras "
+    description: " 
+    Cases Malédiction : Un monstre sur la case gagne 200 de résistance. Marcher sur les cases les enlève mais vous applique un état « Maudit ».
+    État Maudit : -10 % d’armure reçue, -10 % soin reçu et -25 res par état. Niveau 5 maximum (jusqu’à -50 % armure/soin reçu et -125 res max).
+
+    Lorsqu’un monstre meurt, une case malédiction apparaît sous eux. Une croix de taille 1 pour les Défunéraires. Au début de leur tour, les monstres font apparaître une croix de case malédiction sous eux.
+
+    Au début de son tour, Hark-Saniss tape autour de lui en zone colère de 4, et pose des cases malédictions partout autour de lui. Il possède -200 de résistances dos, tape en étoile de 1 à distance.
+
+    Si vous êtes dans son dos, il vous téléporte aléatoirement face à lui en vous infligeant énormément de dégâts.
+
+    Hark-Saniss a 2 phases : la première de 100 % à 50 %, la seconde de 50 % à 0 %. Il n’y a aucune différence de stratégie entre les deux phases, simplement qu’il réinvoque 3 monstres à son tour de jeu et ne peut pas être tué avant son tour de jeu.
+"
 rewards:
   - name: ""
     type: "equipment"
@@ -44,8 +55,17 @@ rewards:
       src: ""
       alt: ""
 steles:
-  - name: ""
-    description: ""
+  - name: "Stèle d’intervention : Cire Momore (Modulation obligatoire)"
+    description: "
+
+    Cette stèle fait apparaître un 2ème boss.
+
+    Cire Momore n’a pas beaucoup de PM.
+
+    Il a un sort de zone autour de lui qui augmente les dégâts reçus en permanence.
+
+    Il a un sort monocible à distance.
+"
     icon:
       src: "/icons/resources.svg"
       alt: "Icône Stèle"
