@@ -31,7 +31,18 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "le donjon est pas compliqué mais l'on voit le 1 er donjon avec une petite mécanique elle gagne 30 % de réduction de dégats de face et de coté  et 30 % de dégats infligé si on la tape dans le dos donc mettez lui un maximum de dégâts feu de dos et elle disparaitras "
+    description: "Le Craqueleur Royal n'est pas invulnérable mais :
+
+Conseil : Un soigneur ou un donneur de bouclier sont conseillés.
+
+    Le Craqueleur Royal possède le passif : Cotte de granit : Possède 10 niveaux. Le craqueleur gagne passivement 400 résistances élémentaires. Chaque attaque en mêlée et collision retire 1 niveau et 25 résistances élémentaires. Au niveau 0, déclenche Rage Sismique et invoque une caillasse autour de lui.
+
+    La stratégie du Craqueleur Royal est donc d’utiliser des sorts peu coûteux en PA en mêlée afin de réduire sa Cotte de Granit. Une fois la Cotte de Granit très basse ou disparue, utilisez vos sorts les plus puissants afin de réduire significativement sa vie.
+
+    Plus le Craqueleur Royal perd de la vie, plus il gagne en puissance.
+
+    Les cases en bordures de terrain invoquent une caillasse.
+ "
 rewards:
   - name: ""
     type: "equipment"
