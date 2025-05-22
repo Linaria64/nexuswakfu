@@ -117,4 +117,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Custom gradient background for body */
+  .gradient-bg {
+    background: linear-gradient(to bottom right, #360033, #0b8793);
+  }
 }

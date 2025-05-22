@@ -13,13 +13,13 @@ gameplayDescription: "Les sacrieurs sont des attaquants qui jouent avec la mort,
 
 # Images
 icon:
-  src: "/images/classes/sacrieur.png"
+  src: "/images/classes/sacri.png"
   alt: "Icône de la classe Sacrieur"
 image:
-  src: "/images/classes/sacrieur.png"
+  src: "/images/classes/sacri.png"
   alt: "Bannière de la classe Sacrieur"
 portrait:
-  src: "/images/classes/sacrieur.png"
+  src: "/images/classes/sacri.png"
   alt: "Portrait d'un personnage Iop aux cheveux rouges"
 
 # Passif unique de la classe

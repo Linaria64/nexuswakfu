@@ -16,13 +16,13 @@ uniquePassive:
 
 # Image
 icon:
-  src: "/images/classes/pandaa.png"
+  src: "/images/classes/panda.png"
   alt: "Icône de la classe Panda"
 image:
-  src: "/images/classes/pandaa.png"
+  src: "/images/classes/panda.png"
   alt: "Bannière de la classe Panda"
 portrait:
-  src: "/images/classes/pandaa.png"
+  src: "/images/classes/panda.png"
   alt: "Portrait d'un personnage Panda"
 
 
