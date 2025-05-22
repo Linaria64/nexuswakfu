@@ -31,7 +31,20 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "le donjon est pas compliqué mais l'on voit le 1 er donjon avec une petite mécanique elle gagne 30 % de réduction de dégats de face et de coté  et 30 % de dégats infligé si on la tape dans le dos donc mettez lui un maximum de dégâts feu de dos et elle disparaitras "
+    description: "Le Moogrr Royal n'est pas invulnérable mais :
+
+    Moogrr Royal gagne 1 PW en début de tour et 1 à chaque ennemi tué, à son maximum elle fait exploser toutes les bouses infligeant de lourds dégâts.
+
+    La gestion des boubouzes et/ou le placement seront très importants pour ne pas subir trop de dégâts du sort « Bombouzeument en chaîne », qui se débloque lorsque le Moogrr Royal a 5 PW. Il en gagne un à chaque début de tour et à chaque fois qu’un monstre est mis K.O (invocations comprises).
+
+    L’état Phéromones est appliqué uniquement par les Moomouches, et permet aux autres monstres de vous retirer des résistances Terre.
+
+    Les glyphes vous appliqueront un débuff de Résistance Terre (max. -100) via l’état Nauséabond et augmenteront les Résistances élémentaires des monstres (max. +100). Pour enlever ces glyphes, il vous faudra marcher sur la boubouze au centre du glyphe, au prix d’un malus de -100 PM pendant un tour.
+
+    Il est conseillé d’utiliser des invocations pour marcher les boubouzes afin de limiter le retrait PM.
+
+    Favoriser un focus Moomouche pour simplifier le combat.
+ "
 rewards:
   - name: ""
     type: "equipment"

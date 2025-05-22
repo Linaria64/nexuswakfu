@@ -197,28 +197,40 @@ const { donjonData, isOpen, onClose } = Astro.props;
         <section aria-labelledby="strategy-heading">
           <h3 id="strategy-heading" class="text-lg sm:text-xl font-semibold text-sky-300 mb-3 sm:mb-4">Stratégie & Mécaniques</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {donjonData.data.mechanics && donjonData.data.mechanics.length > 0 && (
-              <div class="space-y-3">
-                <h4 class="text-md sm:text-lg font-semibold text-sky-400">Mécaniques</h4>
-                {donjonData.data.mechanics.map((mechanic) => (
-                  <div class="bg-slate-700/50 p-3 rounded-md">
-                    <h5 class="text-sm sm:text-md font-semibold text-sky-300 mb-1">{mechanic.name}</h5>
-                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">{mechanic.description}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-            {donjonData.data.steles && donjonData.data.steles.length > 0 && (
-              <div class="space-y-3">
-                <h4 class="text-md sm:text-lg font-semibold text-sky-400">Stèles</h4>
-                {donjonData.data.steles.map((stele) => (
-                  <div class="bg-slate-700/50 p-3 rounded-md hover:bg-slate-700 transition-colors">
-                    <h5 class="text-sm sm:text-md font-semibold text-sky-300 mb-1">{stele.name}</h5>
-                    <p class="text-slate-300 text-xs sm:text-sm">{stele.description}</p>
-                  </div>
-                ))}
-              </div>
-            )}
+        {donjonData.data.mechanics && donjonData.data.mechanics.length > 0 && (
+          <div class="space-y-3">
+            <h4 class="text-md sm:text-lg font-semibold text-sky-400">Mécaniques</h4>
+            {donjonData.data.mechanics.map((mechanic) => (
+          <div class="bg-slate-700/50 p-3 rounded-md">
+            <h5 class="text-sm sm:text-md font-semibold text-sky-300 mb-2">{mechanic.name}</h5>
+            {/* Split description by periods and line breaks to create steps */}
+            <ol class="space-y-2 pl-1">
+              {mechanic.description.split(/(?:\. |\.\n|\\n)/g)
+            .filter(step => step.trim().length > 0)
+            .map((step, index) => (
+              <li class="text-slate-300 text-xs sm:text-sm flex items-start gap-2 leading-relaxed">
+                <span class="bg-sky-500/20 text-sky-300 rounded-full flex items-center justify-center h-5 w-5 mt-0.5 flex-shrink-0 font-medium text-xs">
+              {index + 1}
+                </span>
+                <span>{step.trim()}{!step.trim().endsWith('.') ? '.' : ''}</span>
+              </li>
+              ))}
+            </ol>
+          </div>
+            ))}
+          </div>
+        )}
+        {donjonData.data.steles && donjonData.data.steles.length > 0 && (
+          <div class="space-y-3">
+            <h4 class="text-md sm:text-lg font-semibold text-sky-400">Stèles</h4>
+            {donjonData.data.steles.map((stele) => (
+          <div class="bg-slate-700/50 p-3 rounded-md hover:bg-slate-700 transition-colors">
+            <h5 class="text-sm sm:text-md font-semibold text-sky-300 mb-1">{stele.name}</h5>
+            <p class="text-slate-300 text-xs sm:text-sm">{stele.description}</p>
+          </div>
+            ))}
+          </div>
+        )}
           </div>
         </section>
       ) : null}
