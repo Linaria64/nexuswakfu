@@ -3,7 +3,7 @@ id: "2768-grand-bouftou-sauvage"
 name: "L'Antre Oubliée"
 level: 65
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/antreoublie.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

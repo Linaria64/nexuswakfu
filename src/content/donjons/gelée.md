@@ -3,7 +3,7 @@ id: "1345-empereur-gelax"
 name: "Donjon Gelée"
 level: 110
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/geler.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

@@ -3,7 +3,7 @@ id: "2343-hagen-glass"
 name: "Le Pot d'Hagën-Glass "
 level: 125
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/hagenglass.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

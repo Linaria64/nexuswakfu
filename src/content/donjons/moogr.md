@@ -3,7 +3,7 @@ id: "4758-moogrr-royale"
 name: "Le Papaturage Royal"
 level: 50
 image:
-  src: "images/boss/moogrr.png"
+  src: "images/boss/moogr.png"
   alt: "Bannière du donjon Abraknyde"
 description: ""
 difficulty: "easy"

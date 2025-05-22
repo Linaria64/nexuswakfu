@@ -3,8 +3,8 @@ id: "2348-kya-missiz-frizz"
 name: "L'aile de l'ambassadrice "
 level: 125
 image:
-  src: "images/boss/skoual.png"
-  alt: "Bannière du donjon Abraknyde"
+  src: "images/boss/ailedelambasadrice.png"
+  alt: "Bannière du donjon L'aile de l'ambassadrice"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
 players: "group"

@@ -3,7 +3,7 @@ id: "4519-craqueleur-royal"
 name: "La Montagne Adezieu"
 level: 50
 image:
-  src: "images/boss/craqueleursoki.png"
+  src: "images/boss/craqueleur.png"
   alt: "Bannière du donjon Abraknyde"
 description: ""
 difficulty: "easy"

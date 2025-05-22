@@ -3,7 +3,7 @@ id: "5471-potofeu-grand-maitre-culinaire"
 name: "Compost du Grand Potofeu"
 level: 140
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/potofeu.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

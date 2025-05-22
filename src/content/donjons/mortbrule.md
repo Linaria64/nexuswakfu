@@ -3,7 +3,7 @@ id: "5382-hark-saniss-dernier-geant"
 name: "Donjon Mort-Brûlés"
 level: 50
 image:
-  src: "images/boss/mortbrulesoki.png"
+  src: "images/boss/mortbrule.png"
   alt: "Bannière du donjon Abraknyde"
 description: ""
 difficulty: "easy"

@@ -3,7 +3,7 @@ id: "2368-yech-ti-wawa"
 name: "Le Yech'ti'Wawa"
 level: 110
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/yechti.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

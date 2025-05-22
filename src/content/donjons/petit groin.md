@@ -3,7 +3,7 @@ id: "4763-gligli-royal"
 name: "Domaine du Petit Groin"
 level: 80
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/petitgroin.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

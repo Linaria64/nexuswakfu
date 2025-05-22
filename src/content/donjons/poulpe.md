@@ -3,7 +3,7 @@ id: "5376-pohl-poulpe"
 name: "Equipage du Poulpe"
 level: 50
 image:
-  src: "images/boss/poulpesoki.png"
+  src: "images/boss/poulpe.png"
   alt: "Bannière du donjon Abraknyde"
 description: ""
 difficulty: "easy"

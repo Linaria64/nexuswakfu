@@ -3,7 +3,7 @@ id: "1187-piou-royal"
 name: "Piou"
 level: 35
 image:
-  src: "images/boss/piousoki.png"
+  src: "images/boss/piou.png"
   alt: "Bannière du donjon Abraknyde"
 description: ""
 difficulty: "easy"

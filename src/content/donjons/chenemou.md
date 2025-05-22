@@ -3,7 +3,7 @@ id: "4874-chene-mou"
 name: "Donjon Abraknyde"
 level: 140
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/chenemou.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

@@ -3,8 +3,8 @@ id: "3696-korbot-k-800"
 name: "Le Corbeau-Cave"
 level: 80
 image:
-  src: "images/boss/skoual.png"
-  alt: "Bannière du donjon Abraknyde"
+  src: "images/boss/corbeaucave.png"
+  alt: "Bannière du donjon Le Corbeau-Cave"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
 players: "group"

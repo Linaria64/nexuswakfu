@@ -3,7 +3,7 @@ id: "5040-bulbrute"
 name: "Donjon Source du Mal"
 level: 155
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/sourcedumal.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

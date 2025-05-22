@@ -3,7 +3,7 @@ id: "1726-plante-carnivore"
 name: "Les Champs Pourchan"
 level: 50
 image:
-  src: "images/boss/plantecarnivoresoki.png"
+  src: "images/boss/champspourchan.png"
   alt: "Bannière du donjon Abraknyde"
 description: ""
 difficulty: "easy"

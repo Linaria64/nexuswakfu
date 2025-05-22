@@ -3,7 +3,7 @@ id: "2464-bilbymoule-nacree"
 name: "Le Hammamamoule"
 level: 95
 image:
-  src: "images/boss/skoual.png"
+  src: "images/boss/hammamoule.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"

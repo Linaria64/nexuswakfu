@@ -3,7 +3,7 @@ id: "44-bouftou-royal"
 name: "Bouftou royal"
 level: 10
 image:
-  src: "images/boss/bouftout.png"
+  src: "images/boss/bouftou.png"
   alt: "Bannière du donjon Abraknyde"
 description: "de joli mouton"
 difficulty: "easy"
