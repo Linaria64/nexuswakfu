@@ -7,7 +7,7 @@ image:
   alt: "Bannière du donjon L'aile de l'ambassadrice"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
 boss: "Kya, Missiz Frizz"
 modulated: true

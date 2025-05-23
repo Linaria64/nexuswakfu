@@ -8,7 +8,7 @@ image:
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
 players: "group"
-region: "Astrub"
+region: "both"
 boss: "Lune Géante"
 modulated: true
 bosses:

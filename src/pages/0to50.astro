@@ -10,61 +10,25 @@ const tiersData = [
     id: "palier1",
     nom: "Palier 1-10",
     descriptionNiveau: "Niveaux 1 à 10",
-    seuilXPNextPalier: 70, // Pourcentage pour passer au palier suivant
+    seuilXPNextPalier: 100, // Pourcentage pour passer au palier suivant
     missions: [
       {
-        id: "m1-1",
-        titre: "Premiers pas",
-        image: "https://via.placeholder.com/150/FF0000/FFFFFF?Text=Mission1",
-        resumeCourt: "Apprenez les bases du jeu.",
-        resumeComplet:
-          "Ceci est le résumé complet de la mission 'Premiers pas'. Votre aventure commence ici ! Explorez la zone de départ pittoresque, découvrez ses secrets cachés et interagissez avec les habitants. Vous devrez parler à au moins trois personnages non-joueurs (PNJ) pour recueillir des informations cruciales. Prenez le temps de vous familiariser avec l'interface utilisateur : ouvrez votre inventaire, consultez la carte du monde et apprenez à utiliser vos premières compétences. N'oubliez pas de consulter le tutoriel initial accessible via le menu d'aide ; il regorge d'astuces supplémentaires pour bien démarrer votre épopée dans NexusWakfu. Accomplir cette mission vous préparera pour les défis à venir.",
-        xp: 20,
+      id: "m1-1",
+      titre: "Tutoriel sur l'île de Ri",
+      image: "https://via.placeholder.com/150/FF6B35/FFFFFF?Text=IleRi",
+      resumeCourt: "Complétez le tutoriel complet sur l'île de Ri.",
+      resumeComplet:
+        "Votre aventure commence sur l'île mystérieuse de Ri ! Cette mission obligatoire vous fera découvrir tous les mécanismes de base de NexusWakfu. Apprenez à vous déplacer, à attaquer, à utiliser vos sorts et à interagir avec l'environnement. Suivez attentivement les instructions du guide tutoriel, explorez chaque zone de l'île et accomplissez toutes les tâches demandées. Vous découvrirez comment récolter des ressources, combattre vos premiers monstres et comprendre l'interface de jeu. À la fin de ce tutoriel complet, vous atteindrez le niveau 6 et serez prêt à rejoindre le continent principal. Cette étape est essentielle pour maîtriser les bases avant de vous aventurer dans le vaste monde de NexusWakfu.",
+      xp: 50,
       },
       {
-        id: "m1-2",
-        titre: "Chasse initiatique",
-        image: "https://via.placeholder.com/150/00FF00/FFFFFF?Text=Mission2",
-        resumeCourt: "Affrontez vos premiers monstres.",
-        resumeComplet:
-          "Dirigez-vous vers la forêt luxuriante au nord du village. Votre objectif est de vaincre 5 monstres de type 'Boufton Sauvage'. Faites attention à leurs attaques et utilisez vos compétences à bon escient. Ces créatures peuvent sembler inoffensives, mais en groupe, elles représentent un défi pour les nouveaux aventuriers. Pensez à utiliser des potions si nécessaire.",
-        xp: 30,
-      },
-      {
-        id: "m1-3",
-        titre: "Découverte d'un métier",
-        image: "https://via.placeholder.com/150/0000FF/FFFFFF?Text=Mission3",
-        resumeCourt: "Essayez-vous à l'artisanat.",
-        resumeComplet:
-          "Trouvez l'atelier des artisans dans la ville principale. Parlez au maître artisan pour apprendre les rudiments de la récolte et de la fabrication. Essayez de fabriquer votre premier objet simple, comme une 'Potion de Soin Mineure' ou un 'Anneau Agilesque'. L'artisanat est une partie importante de l'économie du jeu et peut vous fournir des équipements puissants.",
-        xp: 25,
-      },
-      {
-        id: "m1-4",
-        titre: "Exploration de crypte",
-        image: "https://via.placeholder.com/150/CCCCCC/000000?Text=Mission4",
-        resumeCourt: "Visitez la crypte locale.",
-        resumeComplet:
-          "La vieille crypte à l'est du village renferme des secrets et des trésors oubliés. Aventurez-vous à l'intérieur et trouvez un artefact ancien. Attention aux pièges dissimulés et aux créatures squelettiques qui y rodent. Une torche pourrait être utile pour éclairer les recoins sombres.",
-        xp: 20,
-      },
-      {
-        id: "m1-5",
-        titre: "Quête de livraison",
-        image: "https://via.placeholder.com/150/9966CC/FFFFFF?Text=Mission5",
-        resumeCourt: "Aidez un marchand.",
-        resumeComplet:
-          "Un marchand local a besoin d'aide pour livrer un colis important à un village voisin. Le chemin peut être dangereux, parsemé de bandits ou de bêtes sauvages, alors soyez prudent et préparez-vous au combat. La récompense en vaut la peine.",
-        xp: 15,
-      },
-      {
-        id: "m1-6",
-        titre: "Entraînement au combat",
-        image: "https://via.placeholder.com/150/FF9900/FFFFFF?Text=Mission6",
-        resumeCourt: "Améliorez vos techniques.",
-        resumeComplet:
-          "Rendez-vous au camp d'entraînement et parlez au maître d'armes. Complétez une série d'épreuves pour parfaire vos compétences de combat, apprendre de nouvelles techniques et comprendre les combos dévastateurs de votre classe.",
-        xp: 30,
+      id: "m1-2",
+      titre: "Quête de Pépé Pale jusqu'au Prologue",
+      image: "https://via.placeholder.com/150/4ECDC4/FFFFFF?Text=PepePale",
+      resumeCourt: "Suivez Pépé Pale à Astrub jusqu'au Prologue.",
+      resumeComplet:
+        "Une fois arrivé à Astrub depuis l'île de Ri, votre première priorité est de retrouver le mystérieux Pépé Pale. Ce personnage emblématique vous guidera à travers une série de quêtes captivantes qui vous feront découvrir la ville d'Astrub et ses environs. Explorez les différents quartiers, rencontrez les habitants locaux et accomplissez les tâches que Pépé Pale vous confie. Cette chaîne de quêtes vous mènera progressivement vers le Prologue, une étape cruciale de votre parcours. Vous apprendrez les spécificités de votre classe, découvrirez l'histoire du monde et développerez vos premières stratégies de combat. En complétant cette série de quêtes obligatoires, vous atteindrez le niveau 10 et serez officiellement initié aux mystères de NexusWakfu.",
+      xp: 50,
       },
     ],
   },
@@ -72,61 +36,43 @@ const tiersData = [
     id: "palier2", // ID corrigé pour être unique
     nom: "Palier 11-20", // Nom ajusté pour refléter un nouveau palier
     descriptionNiveau: "Niveaux 11 à 20",
-    seuilXPNextPalier: 70,
+    seuilXPNextPalier: 90,
     missions: [
       {
-        id: "m2-1", // ID corrigé pour éviter les doublons
-        titre: "Premiers pas",
-        image: "https://via.placeholder.com/150/FF0000/FFFFFF?Text=Mission1",
-        resumeCourt: "Apprenez les bases du jeu.",
+        id: "m2-1",
+        titre: "Découverte des quêtes environnementales d'Astrub",
+        image: "https://via.placeholder.com/150/32CD32/FFFFFF?Text=QuestesEnviro",
+        resumeCourt: "Explorez les quêtes environnementales pour obtenir des Sioupières Glou.",
         resumeComplet:
-          "Ceci est le résumé complet de la mission 'Premiers pas'. Votre aventure commence ici ! Explorez la zone de départ pittoresque, découvrez ses secrets cachés et interagissez avec les habitants. Vous devrez parler à au moins trois personnages non-joueurs (PNJ) pour recueillir des informations cruciales. Prenez le temps de vous familiariser avec l'interface utilisateur : ouvrez votre inventaire, consultez la carte du monde et apprenez à utiliser vos premières compétences. N'oubliez pas de consulter le tutoriel initial accessible via le menu d'aide ; il regorge d'astuces supplémentaires pour bien démarrer votre épopée dans NexusWakfu. Accomplir cette mission vous préparera pour les défis à venir.",
-        xp: 20,
+          "Partez à la découverte des différentes zones environnementales d'Astrub ! Ces quêtes spéciales vous permettront de récolter des Sioupières Glou, des objets de valeur très recherchés par les joueurs expérimentés. Explorez les plaines, les forêts et les zones marécageuses autour d'Astrub. Chaque environnement propose des défis uniques et des récompenses spécifiques. Les Sioupières Glou que vous obtiendrez peuvent être vendues à bon prix sur le marché, vous permettant de financer vos futurs équipements. Cette activité vous familiarisera également avec l'écosystème complexe de NexusWakfu et l'importance de la préservation environnementale dans le jeu.",
+        xp: 40,
       },
       {
         id: "m2-2",
-        titre: "Chasse initiatique",
-        image: "https://via.placeholder.com/150/00FF00/FFFFFF?Text=Mission2",
-        resumeCourt: "Affrontez vos premiers monstres.",
+        titre: "Découverte des métiers de récolte",
+        image: "https://via.placeholder.com/150/8B4513/FFFFFF?Text=Recolte",
+        resumeCourt: "Initiez-vous aux métiers de récolte pour devenir autonome.",
         resumeComplet:
-          "Dirigez-vous vers la forêt luxuriante au nord du village. Votre objectif est de vaincre 5 monstres de type 'Boufton Sauvage'. Faites attention à leurs attaques et utilisez vos compétences à bon escient. Ces créatures peuvent sembler inoffensives, mais en groupe, elles représentent un défi pour les nouveaux aventuriers. Pensez à utiliser des potions si nécessaire.",
-        xp: 30,
-      },
-      {
-        id: "m2-3",
-        titre: "Découverte d'un métier",
-        image: "https://via.placeholder.com/150/0000FF/FFFFFF?Text=Mission3",
-        resumeCourt: "Essayez-vous à l'artisanat.",
-        resumeComplet:
-          "Trouvez l'atelier des artisans dans la ville principale. Parlez au maître artisan pour apprendre les rudiments de la récolte et de la fabrication. Essayez de fabriquer votre premier objet simple, comme une 'Potion de Soin Mineure' ou un 'Anneau Agilesque'. L'artisanat est une partie importante de l'économie du jeu et peut vous fournir des équipements puissants.",
-        xp: 25,
-      },
-      {
-        id: "m2-4",
-        titre: "Exploration de crypte",
-        image: "https://via.placeholder.com/150/CCCCCC/000000?Text=Mission4",
-        resumeCourt: "Visitez la crypte locale.",
-        resumeComplet:
-          "La vieille crypte à l'est du village renferme des secrets et des trésors oubliés. Aventurez-vous à l'intérieur et trouvez un artefact ancien. Attention aux pièges dissimulés et aux créatures squelettiques qui y rodent. Une torche pourrait être utile pour éclairer les recoins sombres.",
+          "Il est temps d'apprendre les métiers de base qui vous rendront autonome dans NexusWakfu ! Dirigez-vous vers les différentes zones de récolte autour d'Astrub et initiez-vous aux métiers fondamentaux : Bûcheron pour couper du bois, Mineur pour extraire des minerais, Paysan pour cultiver des céréales, et Pêcheur pour attraper des poissons. Chaque métier a ses propres outils et techniques. Commencez par récolter des ressources de niveau 1 à 20 pour vous familiariser avec les mécaniques. Ces ressources vous serviront plus tard pour l'artisanat et vous permettront de générer des revenus réguliers. Prenez le temps de comprendre les cycles de repousse des ressources et les meilleures zones de récolte.",
         xp: 20,
       },
       {
-        id: "m2-5",
-        titre: "Quête de livraison",
-        image: "https://via.placeholder.com/150/9966CC/FFFFFF?Text=Mission5",
-        resumeCourt: "Aidez un marchand.",
+        id: "m2-3",
+        titre: "Chasse aux groupes de Bouftout",
+        image: "https://via.placeholder.com/150/FF6347/FFFFFF?Text=Bouftout",
+        resumeCourt: "Chassez des petits groupes de Bouftout pour vous équiper.",
         resumeComplet:
-          "Un marchand local a besoin d'aide pour livrer un colis important à un village voisin. Le chemin peut être dangereux, parsemé de bandits ou de bêtes sauvages, alors soyez prudent et préparez-vous au combat. La récompense en vaut la peine.",
-        xp: 15,
+          "Les Bouftout sont d'excellentes créatures pour s'entraîner au combat en groupe et obtenir des équipements de qualité ! Formez des groupes de 2 à 4 joueurs et partez chasser ces créatures dans les plaines d'Astrub. Les Bouftout se déplacent souvent en petits troupeaux, ce qui vous permettra de vous exercer aux tactiques de groupe et à la coordination. Leurs drops incluent de la laine précieuse, de la viande nutritive et parfois des équipements utiles pour votre niveau. Variez vos cibles entre Bouftout Blanc, Bouftout Noir et Bouftout Sauvage pour découvrir leurs différentes récompenses. Cette chasse vous préparera aux défis plus importants qui vous attendent.",
+        xp: 30,
       },
       {
-        id: "m2-6",
-        titre: "Entraînement au combat",
-        image: "https://via.placeholder.com/150/FF9900/FFFFFF?Text=Mission6",
-        resumeCourt: "Améliorez vos techniques.",
+        id: "m2-4",
+        titre: "Donjon du Bouftout Royal en Stasis 1",
+        image: "https://via.placeholder.com/150/DAA520/FFFFFF?Text=BouftoutRoyal",
+        resumeCourt: "Affrontez le Bouftout Royal dans son donjon en difficulté Stasis 1.",
         resumeComplet:
-          "Rendez-vous au camp d'entraînement et parlez au maître d'armes. Complétez une série d'épreuves pour parfaire vos compétences de combat, apprendre de nouvelles techniques et comprendre les combos dévastateurs de votre classe.",
-        xp: 30,
+          "Le moment est venu d'affronter votre premier véritable défi : le Donjon du Bouftout Royal en Stasis 1 ! Ce donjon emblématique d'Astrub vous confrontera au majestueux Bouftout Royal et à sa garde rapprochée. Formez une équipe équilibrée de 3 à 6 joueurs avec différentes classes pour maximiser vos chances de succès. Le Bouftout Royal possède des attaques puissantes et des sorts de zone, vous devrez donc coordonner vos actions et utiliser des stratégies de positionnement. La difficulté Stasis 1 est parfaite pour votre niveau et vous récompensera avec des équipements de qualité supérieure, des kamas et de l'expérience précieuse. N'oubliez pas d'apporter des potions de soin et de préparer vos sorts avant le combat !",
+        xp: 10,
       },
     ],
   },
@@ -135,25 +81,34 @@ const tiersData = [
     id: "palier3", // Ajout d'un palier intermédiaire pour tester la progression
     nom: "Palier 21-30",
     descriptionNiveau: "Niveaux 21 à 30",
-    seuilXPNextPalier: 70,
+    seuilXPNextPalier: 80,
     missions: [
       {
-        id: "m3-1",
-        titre: "Maîtrise intermédiaire",
-        image: "https://via.placeholder.com/150/FFAA00/FFFFFF?Text=Mission31",
-        resumeCourt: "Perfectionnez vos compétences.",
-        resumeComplet:
-          "Apprenez à maîtriser des techniques plus avancées et combinez-les efficacement dans des situations de combat variées.",
-        xp: 40,
+      id: "m3-1",
+      titre: "Quêtes de Nation - Chapitre 1",
+      image: "https://via.placeholder.com/150/9932CC/FFFFFF?Text=Nation1",
+      resumeCourt: "Commencez votre parcours citoyen en rejoignant une nation.",
+      resumeComplet:
+        "Il est temps de choisir votre camp et de devenir citoyen d'une des grandes nations de NexusWakfu ! Rendez-vous dans les capitales (Bonta, Brâkmar ou Sufokia) et entamez les quêtes de citoyenneté. Ces missions vous feront découvrir l'histoire, les valeurs et les traditions de votre nation choisie. Vous devrez prouver votre loyauté en accomplissant diverses tâches : aider les citoyens locaux, défendre les intérêts de votre nation et participer aux activités communautaires. Le Chapitre 1 vous initiera aux mécaniques politiques et vous donnera accès aux premiers avantages citoyens, notamment l'accès aux zones réservées et aux quêtes spéciales de votre nation.",
+      xp: 40,
       },
       {
-        id: "m3-2",
-        titre: "Exploration des ruines",
-        image: "https://via.placeholder.com/150/BBAA00/FFFFFF?Text=Mission32",
-        resumeCourt: "Découvrez des ruines anciennes.",
-        resumeComplet:
-          "Explorez les ruines oubliées de la civilisation perdue et découvrez leurs secrets bien gardés.",
-        xp: 50,
+      id: "m3-2",
+      titre: "Quêtes de Nation - Chapitre 2",
+      image: "https://via.placeholder.com/150/DC143C/FFFFFF?Text=Nation2",
+      resumeCourt: "Approfondissez votre engagement citoyen et grimpez en grade.",
+      resumeComplet:
+        "Poursuivez votre ascension dans la hiérarchie de votre nation en complétant le Chapitre 2 des quêtes nationales ! Ces missions plus complexes vous demanderont de participer activement à la vie politique et militaire de votre nation. Vous devrez peut-être mener des missions d'espionnage, participer à des batailles contre les nations rivales, ou négocier des alliances diplomatiques. Ce chapitre vous révélera des secrets d'État et vous donnera accès à des équipements et sorts exclusifs à votre nation. Votre grade citoyen augmentera, vous offrant plus de privilèges et de responsabilités au sein de votre communauté nationale.",
+      xp: 40,
+      },
+      {
+      id: "m3-3",
+      titre: "Découverte d'Amakna",
+      image: "https://via.placeholder.com/150/228B22/FFFFFF?Text=Amakna",
+      resumeCourt: "Explorez le continent sauvage d'Amakna et ses mystères.",
+      resumeComplet:
+        "Partez à la découverte d'Amakna, le continent principal de NexusWakfu ! Cette vaste terre regorge de biomes variés, de créatures fascinantes et de trésors cachés. Explorez les forêts enchantées, les plaines verdoyantes, les marécages mystérieux et les montagnes escarpées. Chaque région d'Amakna a ses propres spécificités : ressources uniques, monstres particuliers et quêtes locales. Découvrez les villages pittoresques comme Kelba, les donjons légendaires et les zones de ressources de haut niveau. Cette exploration vous permettra de cartographier le continent, de débloquer de nouveaux zaaps (points de téléportation) et de vous familiariser avec la géographie complexe qui sera cruciale pour vos futures aventures.",
+      xp: 20,
       },
     ],
   },
@@ -161,25 +116,43 @@ const tiersData = [
     id: "palier4", // Ajout d'un palier intermédiaire pour tester la progression
     nom: "Palier 31-40",
     descriptionNiveau: "Niveaux 31 à 40",
-    seuilXPNextPalier: 70,
+    seuilXPNextPalier: 90,
     missions: [
       {
-        id: "m4-1",
-        titre: "Quête de l'artefact",
-        image: "https://via.placeholder.com/150/AA5500/FFFFFF?Text=Mission41",
-        resumeCourt: "Retrouvez un artefact légendaire.",
-        resumeComplet:
-          "Partez à la recherche d'un puissant artefact capable de changer le cours de l'histoire.",
-        xp: 60,
+      id: "m4-1",
+      titre: "Quêtes de Nation - Chapitre 3 Bonta",
+      image: "https://via.placeholder.com/150/4169E1/FFFFFF?Text=BontaCh3",
+      resumeCourt: "Poursuivez votre parcours citoyen à Bonta avec le Chapitre 3.",
+      resumeComplet:
+        "Continuez votre ascension dans la hiérarchie de Bonta en complétant le Chapitre 3 des quêtes nationales. Ces missions avancées vous plongeront au cœur des intrigues politiques de la cité blanche. Vous devrez peut-être infiltrer des réseaux d'espions, protéger des dignitaires ou mener des opérations diplomatiques délicates. Ce chapitre révèle les secrets les mieux gardés de Bonta et vous prépare aux responsabilités de haut rang. Votre loyauté sera mise à l'épreuve et vos décisions auront un impact sur l'avenir de la nation. En récompense, vous débloquerez des équipements exclusifs et des sorts puissants réservés aux citoyens d'élite de Bonta.",
+      xp: 30,
       },
       {
-        id: "m4-2",
-        titre: "Alliance stratégique",
-        image: "https://via.placeholder.com/150/55AA00/FFFFFF?Text=Mission42",
-        resumeCourt: "Formez une alliance avec une faction.",
-        resumeComplet:
-          "Négociez une alliance avec l'une des factions influentes du monde pour préparer les défis à venir.",
-        xp: 70,
+      id: "m4-2",
+      titre: "Quêtes de Nation - Chapitre 4 Brâkmar",
+      image: "https://via.placeholder.com/150/8B0000/FFFFFF?Text=BrakmarCh4",
+      resumeCourt: "Explorez les mystères sombres de Brâkmar au Chapitre 4.",
+      resumeComplet:
+        "Plongez dans les profondeurs de Brâkmar et découvrez les secrets les plus sombres de cette nation mystérieuse. Le Chapitre 4 vous confrontera aux aspects les plus dangereux de la politique brâkmarienne : complots d'assassinat, magie interdite et alliances occultes. Vous devrez naviguer dans un monde d'ombres et de trahisons où chaque décision peut être fatale. Ces missions vous donneront accès aux techniques de combat les plus redoutables et aux sorts les plus puissants de Brâkmar. Votre rang dans la hiérarchie brâkmarienne atteindra des sommets, vous octroyant des privilèges exceptionnels et l'accès aux zones les plus secrètes de la cité noire.",
+      xp: 30,
+      },
+      {
+      id: "m4-3",
+      titre: "Optimisation d'équipement : Moogr et Craqueleur",
+      image: "https://via.placeholder.com/150/FF8C00/FFFFFF?Text=Equipment",
+      resumeCourt: "Équipez-vous selon votre style de combat : Moogr pour la distance, Craqueleur pour le mélée.",
+      resumeComplet:
+        "Il est temps d'optimiser votre équipement selon votre style de jeu ! Pour les combattants à distance, concentrez-vous sur l'ensemble Moogr qui offre d'excellents bonus de portée et de dommages à distance. Recherchez les bottes, la coiffe et la cape Moogr qui améliorent significativement vos capacités de frappe à longue portée. Pour les guerriers de mélée, l'équipement Craqueleur est idéal avec ses bonus de résistance et de dommages au corps à corps. Farmez les différentes pièces de ces sets en chassant les monstres appropriés ou en les achetant à l'hôtel de vente. Un bon équipement adapté à votre classe fera toute la différence dans les combats à venir !",
+      xp: 10,
+      },
+      {
+      id: "m4-4",
+      titre: "Donjon de la Mort Brûlée en Stasis 3",
+      image: "https://via.placeholder.com/150/DC143C/FFFFFF?Text=MortBrulee",
+      resumeCourt: "Affrontez le donjon de la Mort Brûlée en groupe pour farmer les Bottes de Koko et espérer le drop de Kyou Aile.",
+      resumeComplet:
+        "Préparez-vous pour l'un des défis les plus intenses de votre parcours : le Donjon de la Mort Brûlée en difficulté Stasis 3 ! Ce donjon redoutable demande une équipe expérimentée de 4 à 6 joueurs parfaitement coordonnés. Votre objectif principal est de farmer les précieuses Bottes de Koko, un équipement très recherché pour leurs excellentes statistiques. Mais le véritable trésor serait de voir apparaître la légendaire Kyou Aile, un drop extrêmement rare qui fera de vous l'envie de tous les joueurs. La difficulté Stasis 3 augmente considérablement les statistiques des monstres, mais aussi les chances de drops rares. Préparez vos meilleures stratégies, vos potions les plus puissantes et armez-vous de patience pour ce farm intensif !",
+      xp: 30,
       },
     ],
   },
@@ -187,53 +160,16 @@ const tiersData = [
     id: "palierFinal",
     nom: "Palier 41-50",
     descriptionNiveau: "Niveaux 41 à 50",
-    seuilXPNextPalier: 70,
+    seuilXPNextPalier: 100,
     missions: [
       {
-        id: "mf-1",
-        titre: "Maîtrise du combat",
-        image: "https://via.placeholder.com/150/00FFFF/000000?Text=MissionFin1",
-        resumeCourt: "Prouvez votre valeur.",
-        resumeComplet:
-          "Venez à bout d'un boss de haut niveau, comme le Dragon Cochon, pour montrer votre maîtrise des arcanes du combat et votre préparation pour les défis ultimes. Ce combat exigera une parfaite connaissance de votre classe et une bonne coordination si vous êtes en groupe.",
-        xp: 100,
-      },
-      // Correction des IDs dupliqués
-      {
-        id: "mf-2",
-        titre: "Quête épique",
-        image: "https://via.placeholder.com/150/FF6600/FFFFFF?Text=MissionFin2",
-        resumeCourt: "Terminez la quête finale.",
-        resumeComplet:
-          "Participez à la quête finale de l'extension actuelle. Cette quête vous plongera dans une histoire riche et vous mettra face à des choix cruciaux. Vos décisions influenceront le monde de NexusWakfu et détermineront votre place dans l'histoire.",
-        xp: 50,
-      },
-      {
-        id: "mf-3", // ID corrigé
-        titre: "Le choix ultime",
-        image: "https://via.placeholder.com/150/FF6600/FFFFFF?Text=MissionFin3",
-        resumeCourt: "Prenez une décision qui changera tout.",
-        resumeComplet:
-          "Faites face à un dilemme moral qui aura des conséquences majeures sur le monde de NexusWakfu. Votre choix définira l'avenir de nombreuses factions.",
-        xp: 50,
-      },
-      {
-        id: "mf-4", // ID corrigé
-        titre: "L'héritage des anciens",
-        image: "https://via.placeholder.com/150/FF6600/FFFFFF?Text=MissionFin4",
-        resumeCourt: "Découvrez le secret des anciens.",
-        resumeComplet:
-          "Percez le mystère des anciens bâtisseurs et intégrez leur savoir à votre arsenal pour devenir une légende vivante.",
-        xp: 50,
-      },
-      {
-        id: "mf-5", // ID corrigé
-        titre: "L'ultime défi",
-        image: "https://via.placeholder.com/150/FF6600/FFFFFF?Text=MissionFin5",
-        resumeCourt: "Affrontez le boss final.",
-        resumeComplet:
-          "Confrontez-vous à l'entité la plus puissante du jeu. Cette bataille mettra vos compétences à rude épreuve et marquera l'aboutissement de votre parcours.",
-        xp: 50,
+      id: "mf-1",
+      titre: "Quêtes de Nation - Chapitre Final Sufokia",
+      image: "https://via.placeholder.com/150/FF8C00/FFFFFF?Text=SufokiaFinal",
+      resumeCourt: "Complétez le dernier chapitre des quêtes nationales de Sufokia.",
+      resumeComplet:
+        "Terminez votre parcours citoyen de Sufokia avec le chapitre final de cette nation maritime. Plongez dans les mystères des profondeurs océaniques et découvrez les secrets ancestraux des Sufokiens. Vous devrez naviguer entre les intrigues des marchands, les légendes des pirates et les mystères des créatures des abysses. Ce chapitre final vous révélera l'histoire cachée de Sufokia et vous donnera accès aux plus grands trésors de cette nation aquatique. Votre rang de citoyen atteindra son apogée, vous octroyant des privilèges uniques et l'accès aux zones les plus secrètes des cités sous-marines sufokiennes.",
+      xp: 100,
       },
     ],
   },
@@ -243,7 +179,9 @@ const tiersData = [
 <Layout title="Guide de Progression NexusWakfu">
   <div class="guide-nexuswakfu">
     <h1>Guide de Progression Interactif</h1>
-
+    <div style="text-align: center; margin-bottom: 20px;">
+      <a href="/" class="btn-accueil">← Retour à l'accueil</a>
+    </div>
     <div id="paliers-container">
       <!-- Les paliers seront injectés ici par JavaScript -->
     </div>

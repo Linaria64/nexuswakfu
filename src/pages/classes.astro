@@ -559,52 +559,52 @@ const questions = [
       // Logique de recommandation basée sur les réponses
       const recommendedClassProps = getRecommendedClasses(userAnswers);
 
-      // Récupérer toutes les cartes de classes disponibles
-      const classCards = document.querySelectorAll(".class-card");
-      let recommendedCards = [];
+      // Récupérer toutes les icônes de classes disponibles
+      const classIcons = document.querySelectorAll(".class-icon");
+      let recommendedIcons = [];
 
       // Filtrer les classes selon les propriétés recommandées
-      classCards.forEach((card) => {
-        const classId = card.getAttribute("data-class-id");
+      classIcons.forEach((icon) => {
+      const classId = icon.getAttribute("data-class-id");
 
-        // Vérifier si la classe fait partie des IDs recommandés (limité à 6 max)
-        if (recommendedClassProps.ids.includes(classId)) {
-          recommendedCards.push(card);
-        }
+      // Vérifier si la classe fait partie des IDs recommandés (limité à 6 max)
+      if (recommendedClassProps.ids.includes(classId)) {
+        recommendedIcons.push(icon);
+      }
       });
 
-      // S'assurer que nous avons au plus 6 cartes
-      if (recommendedCards.length > 6) {
-        recommendedCards = recommendedCards.slice(0, 6);
+      // S'assurer que nous avons au plus 6 icônes
+      if (recommendedIcons.length > 6) {
+      recommendedIcons = recommendedIcons.slice(0, 6);
       }
 
-      // Si nous avons moins de 3 cartes, ajouter des classes aléatoires
-      if (recommendedCards.length < 3) {
-        console.log(
-          "Pas assez de recommandations, ajout de classes aléatoires"
-        );
-        const remainingCards = Array.from(classCards).filter(
-          (card) => !recommendedCards.includes(card)
-        );
-        // Mélanger les cartes restantes
-        const shuffled = remainingCards.sort(() => 0.5 - Math.random());
-        // Ajouter des cartes jusqu'à avoir au moins 3 et au plus 6
-        while (recommendedCards.length < 3 && shuffled.length > 0) {
-          recommendedCards.push(shuffled.pop());
-        }
+      // Si nous avons moins de 3 icônes, ajouter des classes aléatoires
+      if (recommendedIcons.length < 3) {
+      console.log(
+        "Pas assez de recommandations, ajout de classes aléatoires"
+      );
+      const remainingIcons = Array.from(classIcons).filter(
+        (icon) => !recommendedIcons.includes(icon)
+      );
+      // Mélanger les icônes restantes
+      const shuffled = remainingIcons.sort(() => 0.5 - Math.random());
+      // Ajouter des icônes jusqu'à avoir au moins 3 et au plus 6
+      while (recommendedIcons.length < 3 && shuffled.length > 0) {
+        recommendedIcons.push(shuffled.pop());
+      }
       }
 
-      // Convertir les cartes en HTML
-      const recommendedCardsHTML = recommendedCards.map(
-        (card) => card.outerHTML
+      // Convertir les icônes en HTML
+      const recommendedIconsHTML = recommendedIcons.map(
+      (icon) => icon.outerHTML
       );
 
-      // Afficher les classes recommandées
-      recommendedClasses.innerHTML = recommendedCardsHTML.join("");
+      // Afficher les icônes des classes recommandées
+      recommendedClasses.innerHTML = recommendedIconsHTML.join("");
       resultsSection.classList.remove("hidden");
 
       // Debug: afficher le nombre de classes recommandées
-      console.log(`${recommendedCards.length} classes recommandées affichées`);
+      console.log(`${recommendedIcons.length} classes recommandées affichées`);
     }
 
     // Afficher toutes les classes

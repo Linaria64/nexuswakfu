@@ -7,7 +7,7 @@ image:
   alt: "Bannière du donjon Abraknyde"
 description: "un cimetière habité par d'éffrayent squelette et une monstre hum "
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
 boss: "Mère Michou"
 bosses:

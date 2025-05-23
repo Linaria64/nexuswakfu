@@ -7,7 +7,7 @@ image:
   alt: "Bannière du donjon Abraknyde"
 description: "de joli mouton"
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
 boss: "Mère Michou"
 bosses:
