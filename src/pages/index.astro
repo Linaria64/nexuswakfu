@@ -224,7 +224,7 @@ const features = [
           <!-- Effet de brillance subtil -->
           <div class=" inset-0 bg-gradient-to-tr from-cyan-500/0 via-white/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
           
-          <div class="flex flex-row flex-wrap justify-around text-white items-stretch">
+          <div class="flex flex-row flex-wrap justify-around  items-stretch">
             {stats.map((stat, index) => {
               // Determine the link based on the stat label
               const link = stat.label === "Classes" ? "/classes" : stat.label === "Donjons" ? "/donjons" : "#";
@@ -237,7 +237,7 @@ const features = [
                       <div class="text-5xl md:text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300 text-cyan-300 group-hover:text-cyan-200">{stat.icon}</div>
                       
                       <!-- Valeur avec animation de compteur -->
-                      <div class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300 mb-3">{stat.value}</div>
+                      <div class="text-5xl md:text-6xl font-bold bg-clip-text text-white bg-gradient-to-r from-cyan-300 to-blue-300 mb-3">{stat.value}</div>
                       
                       <!-- Label avec effet de surlignage au survol -->
                       <div class="text-base md:text-lg font-medium text-white/70 group-hover:text-white/90 uppercase tracking-wider relative inline-block">
