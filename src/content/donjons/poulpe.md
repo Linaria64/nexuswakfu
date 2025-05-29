@@ -7,7 +7,7 @@ image:
   alt: "Bannière du donjon Abraknyde"
 description: ""
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
 boss: "Pohl le poulpe"
 modulated: true

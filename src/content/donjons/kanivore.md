@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "kanivore"
-level: 300
+id: "3866-grozepine"
+name: "Donjon des Kannivores"
+level: 185
 image:
   src: "images/boss/kanivore.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
-region: "Astrub"
-boss: "kanivore"
+players: "both"
+region: "ile de moon"
+boss: "Grozépine"
 modulated: true
 bosses:
   - name: ""

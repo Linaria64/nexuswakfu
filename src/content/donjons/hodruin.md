@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "hodruin"
-level: 300
+id: "4327-sor-hon-seigneur-flamme"
+name: "Volcan de Or'Hodruin"
+level: 200
 image:
   src: "images/boss/hodruin.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "hodruin"
+boss: "Sor'Hon, Seigneur de la Flamme "
 modulated: true
 bosses:
   - name: ""

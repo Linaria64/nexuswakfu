@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "tundrazor"
-level: 300
+id: "5188-bufflamboyant"
+name: "Donjon Toudrasoirs"
+level: 215
 image:
   src: "images/boss/tundrazor.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "tundrazor"
+boss: "Bufflamboyant"
 modulated: true
 bosses:
   - name: ""

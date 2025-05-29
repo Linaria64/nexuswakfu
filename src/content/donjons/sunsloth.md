@@ -1,7 +1,7 @@
 ---
-id: "2977-telob-champmane"
-name: "sunsloth"
-level: 300
+id: "5176-scorpietineur"
+name: "Donjon Cagnardeurs"
+level: 215
 image:
   src: "images/boss/sunsloth.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: " sunsloth"
+boss: " Scorpiétineur"
 modulated: true
 bosses:
   - name: ""

@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "shadofang"
-level: 300
+id: "4770-ombrage"
+name: "Dimension Objet D'Ombrage"
+level: 200
 image:
   src: "images/boss/shadofang.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: " shadofang"
+boss: " Ombrage"
 modulated: true
 bosses:
   - name: ""

@@ -1,7 +1,7 @@
 ---
-id: "2977-telob-champmane"
+id: "4651-agonie-deterree"
 name: "tourmineral"
-level: 300
+level: 50
 image:
   src: "images/boss/tourmineral.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "tourmineral"
+boss: "Agonie la déterrée"
 modulated: true
 bosses:
   - name: ""

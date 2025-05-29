@@ -1,15 +1,15 @@
 ---
 id: "4107-abraknelle        "
-name: "croco"
-level: 300
+name: "Donjon des Crocodailles"
+level: 185
 image:
   src: "images/boss/croco.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "croco"
+boss: "Roi Dunîl"
 modulated: true
 bosses:
   - name: ""

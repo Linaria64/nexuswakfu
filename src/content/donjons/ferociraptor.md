@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "ferociraptor"
-level: 300
+id: "5626-fulgurosaure"
+name: "Les Férociraptors"
+level: 245
 image:
   src: "images/boss/ferociraptor.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "ferociraptor"
+boss: "Fulgurosaure"
 modulated: true
 bosses:
   - name: ""

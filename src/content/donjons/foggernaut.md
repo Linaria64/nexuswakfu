@@ -1,14 +1,14 @@
 ---
-id: "4107-abraknelle        "
-name: "foggernaut"
-level: 300
+id: "5400-sir-comte-flex"
+name: "Steamer"
+level: 230
 image:
   src: "images/boss/foggernaut.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
-region: "Astrub"
+players: "both"
+region: "Nouvelle mine de Sufokia"
 boss: "foggernaut"
 modulated: true
 bosses:

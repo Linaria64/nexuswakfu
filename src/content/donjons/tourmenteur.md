@@ -1,7 +1,7 @@
 ---
-id: "2977-telob-champmane"
+id: "2827-spectrex-tourmenteur"
 name: "tourmenteur"
-level: 300
+level: 125
 image:
   src: "images/boss/tourmenteur.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "tourmenteur"
+boss: "Spectrex le Tourmenteur "
 modulated: true
 bosses:
   - name: ""

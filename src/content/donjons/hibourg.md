@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "hibourg"
-level: 300
+id: "5137-granduk-hibourg"
+name: "Usine Hibourg"
+level: 200
 image:
-  src: "images/boss/hibourg.png"
+  src: "images/boss/ebou.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "hibourg"
+boss: "Granduk Hibourg "
 modulated: true
 bosses:
   - name: ""

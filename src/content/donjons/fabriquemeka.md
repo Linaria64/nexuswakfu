@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "fabriquemeka"
-level: 300
+id: "3398-vertox-intemporel"
+name: "Fabrique Meka"
+level: 170
 image:
   src: "images/boss/fabriquemeka.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "fabriquemeka"
+boss: "Vertox l'Intemporel"
 modulated: true
 bosses:
   - name: ""

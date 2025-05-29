@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "stalagmotel"
-level: 300
+id: "4923-mamapoutre"
+name: "La Patapoutrerie"
+level: 170
 image:
   src: "images/boss/stalagmotel.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: " stalagmotel"
+boss: " Mamapoutre"
 modulated: true
 bosses:
   - name: ""

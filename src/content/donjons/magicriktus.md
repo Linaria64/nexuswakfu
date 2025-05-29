@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "magicriktus"
-level: 300
+id: "4520-chapo-magik"
+name: "Repaire des Magik Riktus"
+level: 110
 image:
   src: "images/boss/magicriktus.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
-region: "Astrub"
-boss: "magicriktus"
+players: "both"
+region: "Amakna Plaine des Riktus"
+boss: "Chapo Magik"
 modulated: true
 bosses:
   - name: ""
@@ -31,7 +31,10 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "le donjon est pas compliqué mais l'on voit le 1 er donjon avec une petite mécanique elle gagne 30 % de réduction de dégats de face et de coté  et 30 % de dégats infligé si on la tape dans le dos donc mettez lui un maximum de dégâts feu de dos et elle disparaitras "
+    description: "Le chapo magif est invulnérable, Pour le délock il doit être frappé par 3 entité de dos 
+    Ils invoquent alors 3 chapeau qui invoquent des Riktus au bout de 2 tours 
+    tips : les dégats indirects passent à travers l'invulnérabilité
+    "
 rewards:
   - name: ""
     type: "equipment"

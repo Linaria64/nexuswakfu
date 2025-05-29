@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
+id: "5394-raeliss"
 name: "Donjon des abysses"
-level: 300
+level: 230
 image:
   src: "images/boss/abyssal.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "both"
 region: "Astrub"
-boss: "Abysses"
+boss: "Raeliss"
 modulated: true
 bosses:
   - name: ""

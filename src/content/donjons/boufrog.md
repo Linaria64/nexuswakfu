@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
+id: "42-magmog-boufrog"
 name: "Boss ultime boufrog"
-level: 300
+level: 50
 image:
   src: "images/boss/boufrog.png"
   alt: "Bannière du donjon Abraknyde"

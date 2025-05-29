@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "ebou"
-level: 300
+id: "3399-raipiode-infrequencable"
+name: "Raipiode l'Infréquençable "
+level: 170
 image:
-  src: "images/boss/ebou.png"
+  src: "images/boss/hibourg.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "ebou"
+boss: "Raipiode l'Infréquençable "
 modulated: true
 bosses:
   - name: ""

@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "citeperdu"
-level: 300
+id: "5046-pandore"
+name: "cité Interdite"
+level: 185
 image:
   src: "images/boss/citeperdu.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "citeperdu"
+boss: "Pandore"
 modulated: true
 bosses:
   - name: ""

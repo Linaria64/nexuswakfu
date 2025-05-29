@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "plantiguard"
-level: 300
+id: "5241-casse-cours"
+name: "Donjon Plantigardes"
+level: 215
 image:
   src: "images/boss/plantiguard.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: " plantiguard"
+boss: " Casse-Cours"
 modulated: true
 bosses:
   - name: ""

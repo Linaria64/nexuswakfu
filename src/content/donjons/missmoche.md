@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "missmoche"
-level: 300
+id: "5445-lela"
+name: "Tour Miss Moche"
+level: 65
 image:
   src: "images/boss/missmoche.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "missmoche"
+boss: "Lela Erpel Eenca Ydalipe"
 modulated: true
 bosses:
   - name: ""

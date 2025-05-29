@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "topofgianttotem"
-level: 300
+id: "3870-foul-moon"
+name: "Cime du Grand Totem"
+level: 185
 image:
   src: "images/boss/topofgianttotem.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "topofgianttotem"
+boss: "Foul Moon"
 modulated: true
 bosses:
   - name: ""

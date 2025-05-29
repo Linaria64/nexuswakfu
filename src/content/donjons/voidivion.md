@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "voidivion"
-level: 300
+id: "5283-ar-nan-augure-neant"
+name: "Vidéant"
+level: 230
 image:
   src: "images/boss/voidivion.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "voidivion"
+boss: " Ar'Nan, Augure du néant "
 modulated: true
 bosses:
   - name: ""

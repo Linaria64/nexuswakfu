@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
+id: "4538-riktus-masque"
 name: "riktuselite"
-level: 300
+level: 170
 image:
   src: "images/boss/riktuselite.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: " riktuselite"
+boss: " Le Riktus Masqué"
 modulated: true
 bosses:
   - name: ""

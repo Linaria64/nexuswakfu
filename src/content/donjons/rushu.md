@@ -1,5 +1,5 @@
 ---
-id: "2977-telob-champmane"
+id: "5306-rushu"
 name: "rushu"
 level: 300
 image:

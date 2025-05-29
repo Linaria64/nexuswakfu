@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
+id: "5182-crustacerebro"
 name: "crabstacean"
-level: 300
+level: 215
 image:
   src: "images/boss/crabstacean.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "crabstacean"
+boss: "Crustacérébro"
 modulated: true
 bosses:
   - name: ""

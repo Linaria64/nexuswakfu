@@ -1,7 +1,7 @@
 ---
-id: "2977-telob-champmane"
-name: "trool"
-level: 300
+id: "2443-pochito"
+name: "Academie trool"
+level: 95
 image:
   src: "images/boss/trool.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "trool"
+boss: "El Pochito"
 modulated: true
 bosses:
   - name: ""

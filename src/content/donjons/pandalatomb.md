@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: " pandalatomb"
-level: 300
+id: "5059-fantome-tanukoui-san"
+name: "Tombeau de Pandala"
+level: 200
 image:
   src: "images/boss/pandalatomb.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: " pandalatomb"
+boss: "Fantôme Tanukouï-San "
 modulated: true
 bosses:
   - name: ""

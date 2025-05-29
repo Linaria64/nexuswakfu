@@ -1,13 +1,13 @@
 ---
-id: "4107-abraknelle        "
-name: "kali"
-level: 300
+id: "4217-kali"
+name: "Le repaire de Kali"
+level: 170
 image:
   src: "images/boss/kali.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
 boss: "kali"
 modulated: true

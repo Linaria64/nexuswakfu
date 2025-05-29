@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "meulou"
-level: 300
+id: "1987-milkar-meulou"
+name: "Antre du Meulou"
+level: 95
 image:
   src: "images/boss/meulou.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "meulou"
+boss: "Milkar le Meulou"
 modulated: true
 bosses:
   - name: ""

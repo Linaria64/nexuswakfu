@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
+id: "4400-oeuf-antique"
 name: "dragon"
-level: 300
+level: 200
 image:
   src: "images/boss/dragon.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "dragon"
+boss: "Oeuf Antique "
 modulated: true
 bosses:
   - name: ""

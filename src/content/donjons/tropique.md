@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "tropique"
-level: 300
+id: "3865-koko-nutt"
+name: "Donjon des Tropikes"
+level: 185
 image:
   src: "images/boss/tropique.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "tropique"
+boss: "Koko le Nutt"
 modulated: true
 bosses:
   - name: ""

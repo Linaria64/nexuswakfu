@@ -1,7 +1,7 @@
 ---
-id: "2977-telob-champmane"
-name: "vandalophrenic"
-level: 300
+id: "5170-phacochemar"
+name: "Donjon Vandaliénés"
+level: 215
 image:
   src: "images/boss/vandalopĥrenic.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "vandalophrenic"
+boss: "Phacochemar"
 modulated: true
 bosses:
   - name: ""

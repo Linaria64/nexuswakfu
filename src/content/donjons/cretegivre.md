@@ -1,13 +1,13 @@
 ---
-id: "4107-abraknelle        "
+id: "4260-cendragon"
 name: "cretegivre"
-level: 300
+level: 200
 image:
   src: "images/boss/cretegivre.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
 boss: "cretegivre"
 modulated: true

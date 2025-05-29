@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "necroworld"
-level: 300
+id: "5589-toross-mordal"
+name: "Necromonde"
+level: 230
 image:
   src: "images/boss/necroworld.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "necroworld"
+boss: "Toross Mordal"
 modulated: true
 bosses:
   - name: ""

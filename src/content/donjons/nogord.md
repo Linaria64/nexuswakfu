@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "nogord"
+id: "3433-nogord-ezarele"
+name: "Antre de Nogord l'Ezarélé"
 level: 300
 image:
   src: "images/boss/nogord.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "nogord"
+boss: "Nogord Ezarele"
 modulated: true
 bosses:
   - name: ""

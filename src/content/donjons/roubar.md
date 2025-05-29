@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "roubar"
-level: 300
+id: "2018-remington-smisse"
+name: "Roub'Bar"
+level: 170
 image:
   src: "images/boss/roubar.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "Both"
 region: "Astrub"
-boss: " roubar"
+boss: " Remington Smisse"
 modulated: true
 bosses:
   - name: ""

@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "kanniboul"
-level: 300
+id: "3864-kannistere"
+name: "Donjon des Kanniboul"
+level: 185
 image:
   src: "images/boss/kanniboul.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "kanniboul"
+boss: "Kannistère"
 modulated: true
 bosses:
   - name: ""

@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
+id: "1986-excarnus"
 name: "excarnus"
-level: 300
+level: 80
 image:
   src: "images/boss/excarnus.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "excarnus"
+boss: "Excarnus"
 modulated: true
 bosses:
   - name: ""

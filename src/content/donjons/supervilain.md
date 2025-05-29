@@ -1,7 +1,7 @@
 ---
-id: "2977-telob-champmane"
-name: "supervilain"
-level: 300
+id: "2714-lardevil"
+name: "Repaire des Super-Vilains"
+level: 95
 image:
   src: "images/boss/supervilain.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: " supervilain"
+boss: "Kralaman Mégathon Merkator Lardevil"
 modulated: true
 bosses:
   - name: ""

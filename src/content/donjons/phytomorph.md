@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: " phytomorph"
-level: 300
+id: "5277-vaal-enthia-reine-demone"
+name: "Phytomorphe"
+level: 230
 image:
   src: "images/boss/phytomorph.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: " phytomorph"
+boss: " Vaal'Enthia, Reine-démone "
 modulated: true
 bosses:
   - name: ""

@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "gerbouille"
-level: 300
+id: "5131-maman-gerbouille"
+name: "Gerbouille"
+level: 185
 image:
   src: "images/boss/gerbouille.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "gerbouille"
+boss: "Maman Gerbouille"
 modulated: true
 bosses:
   - name: ""

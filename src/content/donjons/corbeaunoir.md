@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
+id: "1988-corbeau-noir"
 name: "corbeaunoir"
-level: 300
+level: 110
 image:
   src: "images/boss/corbeaunoir.png"
   alt: "Bannière du donjon Abraknyde"

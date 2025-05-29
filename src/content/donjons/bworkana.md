@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
+id: "5644-zulnara-cheffe-guerre"
 name: "Bworkana"
-level: 300
+level: 245
 image:
   src: "images/boss/bworkana.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "both"
 region: "Astrub"
-boss: "Boufrog"
+boss: "Zulnara, cheffe de guerre"
 modulated: true
 bosses:
   - name: ""

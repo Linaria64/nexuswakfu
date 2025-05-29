@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "windplateau"
-level: 300
+id: "3582-serre-acier"
+name: "Plateau des Hauts-Vents"
+level: 170
 image:
   src: "images/boss/windplateau.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "windplateau"
+boss: "Serre d'acier"
 modulated: true
 bosses:
   - name: ""

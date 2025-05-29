@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "nox"
-level: 300
+id: "/"
+name: "Théâtre intemporel"
+level: 245
 image:
   src: "images/boss/nox.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "nox"
+boss: "Nox"
 modulated: true
 bosses:
   - name: ""

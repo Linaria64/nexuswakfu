@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
-name: "fleopard"
-level: 300
+id: "5052-fleogre"
+name: "Canyon des Fléopards"
+level: 200
 image:
   src: "images/boss/fleopard.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "fleopard"
+boss: "Fleogre"
 modulated: true
 bosses:
   - name: ""

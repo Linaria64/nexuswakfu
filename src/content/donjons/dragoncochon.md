@@ -1,7 +1,7 @@
 ---
-id: "4107-abraknelle        "
+id: "2430-dragon-cochon"
 name: "dragoncochon"
-level: 300
+level: 125
 image:
   src: "images/boss/dragoncochon.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "dragoncochon"
+boss: "Dragon-Cochon"
 modulated: true
 bosses:
   - name: ""

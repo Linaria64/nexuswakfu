@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "streye"
-level: 300
+id: "5295-dh"
+name: "égaré"
+level: 245
 image:
   src: "images/boss/streye.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: " streye"
+boss: " !@#dh`~ "
 modulated: true
 bosses:
   - name: ""

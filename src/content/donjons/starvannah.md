@@ -1,15 +1,15 @@
 ---
-id: "2977-telob-champmane"
-name: "starvannah"
-level: 300
+id: "5638-timoe-possede"
+name: "Savanastraux"
+level: 245
 image:
   src: "images/boss/starvannah.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: " starvannah"
+boss: " Timo le possédé"
 modulated: true
 bosses:
   - name: ""

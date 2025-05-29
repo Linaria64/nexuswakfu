@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
+id: "5301-k-abah-gardien-route-morts"
 name: "destroyer"
-level: 300
+level: 230
 image:
   src: "images/boss/destroyer.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "destroyer"
+boss: "K'abah'al, Gardien de la route des morts "
 modulated: true
 bosses:
   - name: ""

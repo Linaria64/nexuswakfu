@@ -9,7 +9,7 @@ description: "un cimetière habité par d'éffrayent squelette et une monstre hu
 difficulty: "easy"
 players: "both"
 region: "Astrub"
-boss: "Mère Michou"
+boss: "morfor"
 bosses:
   - name: ""
     description: " "

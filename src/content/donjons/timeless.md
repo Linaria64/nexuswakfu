@@ -1,7 +1,7 @@
 ---
 id: "2977-telob-champmane"
-name: "timeless"
-level: 300
+name: "Théâtre Intemporel"
+level: 245
 image:
   src: "images/boss/timeless.png"
   alt: "Bannière du donjon Abraknyde"
@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "group"
 region: "Astrub"
-boss: "timeless"
+boss: "Nox"
 modulated: true
 bosses:
   - name: ""

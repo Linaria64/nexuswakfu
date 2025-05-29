@@ -1,15 +1,15 @@
 ---
-id: "4107-abraknelle        "
-name: "horridemon"
-level: 300
+id: "5289-crateros-bourreau-fin"
+name: "Démhorrible"
+level: 230
 image:
   src: "images/boss/horridemon.png"
   alt: "Bannière du donjon Abraknyde"
 description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affrontez des Chachas et leur maîtresse dans une maison envahie par les félins."
 difficulty: "easy"
-players: "group"
+players: "both"
 region: "Astrub"
-boss: "horridemon"
+boss: "Cratéros, Bourreau de la fin"
 modulated: true
 bosses:
   - name: ""
