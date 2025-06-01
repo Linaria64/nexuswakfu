@@ -31,7 +31,7 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "le donjon est pas compliqué mais l'on voit le 1 er donjon avec une petite mécanique elle gagne 30 % de réduction de dégats de face et de coté  et 30 % de dégats infligé si on la tape dans le dos donc mettez lui un maximum de dégâts feu de dos et elle disparaitras "
+    description: "Missiz Frizz est invulnérable qu'en deuxième phase : - Mécanique du donjon : Terminer sur un glyphe tête de mort, tue. Réanimation automatique après 2 tours, le soin fait des dégâts. Seul les personnages ayant été réanimés de cette manière peuvent taper les monstres invulnérables. Salle 1 : - 3 monstres invulnérables. - Les monstres posent l'état Congélation faisant perdre PA et PM, au niveau 5 de l'état Transformation en glaçon, taper ses alliés avec des dégâts feu fait diminuer l'état. - Attention, les monstres KO se réaniment au bout de certains tours, bien penser à désincarner. Missiz Frizz a deux phases : - La première n'a pas de mécanique particulière, elle pose des glyphes/ - À 20% de vie elle passe en phase 2 et devient invulnérable/ - Pour la deuxième, il faut que les personnages qui tapent, soient mort par les glyphes de Missiz Frizz au préalable. - La brute du nord gagne en % crit à chaque coup critique effectué par l'équipe de joueurs, en cas de coup critique il retire 100 résistances (cumulables) pour la durée du combat. - L'assassin du nord possède un sort à distance très puissant infligeant 25% pv max de la cible et le téléportant dans son dos, pour l'éviter il suffit de lui présenter son dos."
 rewards:
   - name: ""
     type: "equipment"

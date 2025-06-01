@@ -123,7 +123,7 @@ declare global {
                 </p>
                 <button
                   class="p-4 bg-blue-700/7 rounded-md text-white mx-auto w-full"
-                  onclick={`window.openModal('${donjon.data.name}')`}
+                  onclick={`window.openModal('${donjon.data.name.replace(/'/g, "\\'")}')`}
                 >
                   En savoir plus
                 </button>
@@ -140,7 +140,7 @@ declare global {
       <DonjonModal
         donjonData={donjon}
         isOpen={false}
-        onClose={`window.closeModal('${donjon.data.name}')`}
+        onClose={`window.closeModal('${donjon.data.name.replace(/'/g, "\\'")}')`}
       />
     ))
   }
@@ -165,18 +165,31 @@ declare global {
       document.body.style.overflow = "";
     }
   };
+
+  // Close all modals function
+  window.closeAllModals = function () {
+    const openModals = document.querySelectorAll('[data-modal].flex');
+    openModals.forEach(modal => {
+      modal.classList.remove("flex");
+      modal.classList.add("hidden");
+    });
+    document.body.style.overflow = "";
+  };
 </script>
 
 <script>
   document.addEventListener("astro:page-load", () => {
     // Close modal with Escape key
-    document.addEventListener("keydown", (e: KeyboardEvent) => {
+    document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        const openModal = document.querySelector(".modal-container.flex");
-        if (openModal) {
-          const name = openModal.getAttribute("data-modal");
-          if (name) window.closeModal(name);
-        }
+        window.closeAllModals();
+      }
+    });
+
+    // Close modal when clicking outside
+    document.addEventListener("click", (e) => {
+      if (e.target && e.target.classList && e.target.classList.contains("modal-backdrop")) {
+        window.closeAllModals();
       }
     });
   });
