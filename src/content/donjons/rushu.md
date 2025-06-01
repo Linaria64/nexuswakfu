@@ -1,7 +1,7 @@
 ---
 id: "5306-rushu"
 name: "rushu"
-level: 300
+level: 200
 image:
   src: "images/boss/rushu.png"
   alt: "Bannière du donjon Abraknyde"

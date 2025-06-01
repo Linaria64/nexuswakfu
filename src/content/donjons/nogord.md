@@ -1,7 +1,7 @@
 ---
 id: "3433-nogord-ezarele"
 name: "Antre de Nogord l'Ezarélé"
-level: 300
+level: 200
 image:
   src: "images/boss/nogord.png"
   alt: "Bannière du donjon Abraknyde"
