@@ -25,92 +25,149 @@ import { Button } from "../components/ui/button";
       class="md:hidden fixed bottom-4 left-0 right-0 mx-auto w-[80%] max-w-sm py-2 px-4 bg-gradient-to-r from-[#0f0c29]/80 via-[#302b63]/80 to-[#24243e]/80 rounded-full backdrop-blur-md shadow-lg z-50"
     >
       <nav class="flex items-center justify-around relative">
-        <!-- Quetes Icon -->
-        <A href="/guides" className="flex flex-col items-center p-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-            ></path>
-          </svg>
-        </A>
-
-        <!-- Classes Icon -->
-        <A href="/classes" className="flex flex-col items-center p-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-            ></path>
-          </svg>
-        </A>
-
-        <!-- Home Button - Larger and elevated -->
-        <A
-          href="/"
-          className="flex items-center justify-center bg-primary text-white rounded-full h-14 w-14 -mt-8 shadow-lg border-4 border-[#24243e]/80"
+      <!-- Guides Icon -->
+      <A href="/guides" className="nav-icon flex flex-col items-center p-2 transition-all duration-300 hover:scale-110" data-page="guides">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 transition-all duration-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            ></path>
-          </svg>
-        </A>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        ></path>
+        </svg>
+        <span class="text-xs mt-1 opacity-0 transition-opacity duration-300">Guides</span>
+      </A>
 
-        <!-- Donjons Icon -->
-        <A href="/donjons" className="flex flex-col items-center p-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-            ></path>
-          </svg>
-        </A>
+      <!-- Classes Icon -->
+      <A href="/classes" className="nav-icon flex flex-col items-center p-2 transition-all duration-300 hover:scale-110" data-page="classes">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 transition-all duration-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+        ></path>
+        </svg>
+        <span class="text-xs mt-1 opacity-0 transition-opacity duration-300">Classes</span>
+      </A>
+
+      <!-- Home Button (central, larger) -->
+      <A
+        href="/"
+        className="nav-icon home-icon flex items-center justify-center bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white rounded-full w-14 h-14 transition-all duration-300 hover:scale-110 shadow-lg"
+        data-page="home"
+      >
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-8 w-8 transition-all duration-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+        ></path>
+        </svg>
+      </A>
+
+      <!-- Donjons Icon -->
+      <A href="/donjons" className="nav-icon flex flex-col items-center p-2 transition-all duration-300 hover:scale-110" data-page="donjons">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 transition-all duration-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+        ></path>
+        </svg>
+        <span class="text-xs mt-1 opacity-0 transition-opacity duration-300">Donjons</span>
+      </A>
       </nav>
     </div>
 
-    <script>
-      // Toggle mobile menu visibility
-      document.addEventListener("DOMContentLoaded", () => {
-        const menuButton = document.getElementById("mobile-menu-button");
-        const mobileMenu = document.getElementById("mobile-menu");
+    <style>
+      .nav-icon {
+      position: relative;
+      border-radius: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      }
+      
+      .nav-icon.active {
+      transform: translateY(-8px);
+      color: #667eea;
+      background: rgba(102, 126, 234, 0.1);
+      border: 2px solid rgba(102, 126, 234, 0.3);
+      }
+      
+      .nav-icon.active svg {
+      color: #667eea;
+      filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.5));
+      }
+      
+      .nav-icon.active span {
+      opacity: 1;
+      color: #667eea;
+      font-weight: 600;
+      }
+      
+      .home-icon.active {
+      transform: translateY(-12px) scale(1.2);
+      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      }
+      
+      .home-icon.active svg {
+      color: white;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      }
 
-        menuButton?.addEventListener("click", () => {
-          mobileMenu?.classList.toggle("hidden");
-        });
+      /* Animation pour les icônes non actives */
+      .nav-icon:not(.active):hover {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.05);
+      }
+    </style>
+
+    <script>
+      // Set active icon based on current page
+      document.addEventListener("DOMContentLoaded", () => {
+      const currentPath = window.location.pathname;
+      const navIcons = document.querySelectorAll('.nav-icon');
+      
+      navIcons.forEach(icon => {
+        icon.classList.remove('active');
+        const page = icon.getAttribute('data-page');
+        
+        if (
+        (currentPath === '/' && page === 'home') ||
+        (currentPath.includes('/guides') && page === 'guides') ||
+        (currentPath.includes('/classes') && page === 'classes') ||
+        (currentPath.includes('/donjons') && page === 'donjons')
+        ) {
+        icon.classList.add('active');
+        }
+      });
       });
     </script>
   </Container>
