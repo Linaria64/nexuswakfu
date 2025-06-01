@@ -9,7 +9,7 @@ description: "Premier donjon d'Astrub, idéal pour débuter l'aventure. Affronte
 difficulty: "easy"
 players: "both"
 region: "Astrub"
-boss: " Remington Smisse"
+boss: "Remington Smisse"
 modulated: true
 bosses:
   - name: ""
