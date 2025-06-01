@@ -30,7 +30,7 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "Le tofu royal a beaucoups de pm il tape en zone assez fort autours de lui les tofunes invoque des petit tofu il faut les tuer en priorité "
+    description: "Stratégie en cours d'écriture"
 rewards:
   - name: "Amulette Michou"
     type: "equipment"

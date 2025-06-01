@@ -30,7 +30,7 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "1 er donjon du jeux donc stratégie basique juste attention a pas donner votre dos et attention au case sur les cotés de la maps"
+    description: "Stratégie en cours d'écriture"
 rewards:
   - name: "Amulette Michou"
     type: "equipment"

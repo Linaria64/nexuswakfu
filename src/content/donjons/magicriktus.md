@@ -31,10 +31,7 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "Le chapo magif est invulnérable, Pour le délock il doit être frappé par 3 entité de dos 
-    Ils invoquent alors 3 chapeau qui invoquent des Riktus au bout de 2 tours 
-    tips : les dégats indirects passent à travers l'invulnérabilité
-    "
+    description: "Stratégie en cours d'écriture"
 rewards:
   - name: ""
     type: "equipment"

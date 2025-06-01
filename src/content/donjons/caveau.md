@@ -30,7 +30,7 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "mécanique spéficique de l'état d'âme liée faite attention a vos débuf cela peut être un one shot pur et dur sinon rien de bien compliqué si on a un gros dpt eau dans la team"
+    description: "Stratégie en cours d'écriture"
 rewards:
   - name: "Amulette Michou"
     type: "equipment"

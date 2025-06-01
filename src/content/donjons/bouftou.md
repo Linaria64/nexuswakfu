@@ -30,7 +30,7 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "chef de guerre et boss stun en chargant droit devant de 4 case le os peut arriver très vite le boss tape fort en ligne de 3 devant lui "
+    description: "Stratégie en cours d'écriture"
 rewards:
   - name: "Amulette Michou"
     type: "equipment"

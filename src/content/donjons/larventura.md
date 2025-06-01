@@ -30,7 +30,7 @@ salleImage:
 
 mechanics:
   - name: ""
-    description: "2 éme donjon du jeux c'est simplement une grosse larve un peu d'insectiside et pouf !! "
+    description: "Stratégie en cours d'écriture"
 rewards:
   - name: "Amulette Michou"
     type: "equipment"
